@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Celsior — Modernize critical systems. Operationalize AI. Run with confidence." />
+  <title>Celsior — Modernize. Operate. Innovate.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* ══════════════════════════════════════════════════════
+       TOKENS & RESET
+    ══════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:      #ffffff;
+      --bg:         #f5f6fa;
+      --ink:        #0d1127;
+      --ink-mid:    #3a4060;
+      --muted:      #7b82a0;
+      --border:     rgba(15,20,50,0.09);
+      --border-md:  rgba(15,20,50,0.15);
+      --accent:     #2254f4;
+      --accent-lt:  rgba(34,84,244,0.09);
+      --nav-h:      68px;
+      --font-head:  'Poppins',    sans-serif;
+      --font-body:  'Montserrat', sans-serif;
+      --ease-expo:  cubic-bezier(0.16,1,0.3,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* lock scroll when mobile menu open */
+    body.menu-open { overflow: hidden; }
+
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #f0f0f5; }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+
+    /* ══════════════════════════════════════════════════════
+       NAVBAR
+    ══════════════════════════════════════════════════════ */
+    #navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      padding: 0 52px;
+      transition: background 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    #navbar.scrolled {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 28px rgba(15,20,80,0.07);
+    }
+
+    /* ── Logo ──────────────────────────────────────────── */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      margin-right: 44px;
+    }
+
+    .logo-img {
+      height: 28px;
+      width: auto;
+      display: block;
+      /* SVG is white → keep white over dark video */
+      filter: brightness(0) invert(1);
+      transition: filter 0.4s ease;
+    }
+    /* On white scrolled navbar → turn it black */
+    #navbar.scrolled .logo-img {
+      filter: brightness(0);
+    }
+
+    /* ── Desktop nav links ─────────────────────────────── */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+    }
+
+    .nav-item { position: static; }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 13px;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+      color: rgba(255,255,255,0.82);
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-link:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+    .nav-item.active > .nav-link { color: var(--white); background: rgba(255,255,255,0.13); }
+
+    #navbar.scrolled .nav-link { color: var(--ink-mid); }
+    #navbar.scrolled .nav-link:hover { color: var(--accent); background: var(--accent-lt); }
+    #navbar.scrolled .nav-item.active > .nav-link { color: var(--accent); background: var(--accent-lt); }
+
+    .chevron {
+      width: 11px; height: 11px;
+      opacity: 0.5;
+      transition: transform 0.25s var(--ease-expo), opacity 0.2s;
+      flex-shrink: 0;
+    }
+    .nav-item.active > .nav-link .chevron { transform: rotate(180deg); opacity: 1; }
+
+    /* ── Desktop CTA ───────────────────────────────────── */
+    .nav-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .btn-nav-solid {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 22px;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      cursor: pointer;
+      background: transparent;
+      color: var(--white);
+      transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.22s var(--ease-expo), box-shadow 0.22s;
+    }
+    .btn-nav-solid:hover {
+      background: var(--white);
+      color: var(--ink);
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+    #navbar.scrolled .btn-nav-solid {
+      background: var(--accent);
+      color: var(--white);
+      border-color: var(--accent);
+    }
+    #navbar.scrolled .btn-nav-solid:hover {
+      background: #1a43d4;
+      box-shadow: 0 8px 28px rgba(34,84,244,0.32);
+    }
+
+    /* ── Hamburger button (mobile/tablet) ──────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      margin-left: auto;
+      width: 38px;
+      height: 38px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .nav-hamburger:hover { background: rgba(255,255,255,0.1); }
+    #navbar.scrolled .nav-hamburger:hover { background: var(--accent-lt); }
+
+    .ham-line {
+      width: 100%;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: background 0.4s, transform 0.3s, opacity 0.3s;
+      transform-origin: center;
+    }
+    #navbar.scrolled .ham-line { background: var(--ink); }
+
+    /* animated X state */
+    .nav-hamburger.open .ham-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open .ham-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open .ham-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ══════════════════════════════════════════════════════
+       MOBILE DRAWER
+    ══════════════════════════════════════════════════════ */
+    .mobile-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      pointer-events: none;
+    }
+
+    .drawer-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(7,9,20,0.55);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .drawer-panel {
+      position: absolute;
+      top: 0; right: 0;
+      width: min(360px, 88vw);
+      height: 100%;
+      background: var(--white);
+      box-shadow: -20px 0 60px rgba(15,20,80,0.18);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.4s var(--ease-expo);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .mobile-drawer.open {
+      pointer-events: auto;
+    }
+    .mobile-drawer.open .drawer-backdrop { opacity: 1; }
+    .mobile-drawer.open .drawer-panel { transform: translateX(0); }
+
+    /* Drawer header */
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .drawer-logo {
+      height: 24px;
+      width: auto;
+      filter: brightness(0);
+    }
+
+    .drawer-close {
+      width: 34px; height: 34px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      color: var(--ink-mid);
+      transition: background 0.2s, color 0.2s;
+    }
+    .drawer-close:hover { background: var(--accent-lt); color: var(--accent); }
+
+    /* Drawer nav items */
+    .drawer-nav {
+      flex: 1;
+      padding: 12px 0;
+    }
+
+    .drawer-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .drawer-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 24px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+      cursor: pointer;
+      transition: color 0.15s, background 0.15s;
+      user-select: none;
+    }
+    .drawer-link:hover { color: var(--accent); background: var(--accent-lt); }
+    .drawer-link.active { color: var(--accent); }
+
+    .drawer-chevron {
+      width: 16px; height: 16px;
+      color: var(--muted);
+      transition: transform 0.25s var(--ease-expo), color 0.2s;
+      flex-shrink: 0;
+    }
+    .drawer-link.active .drawer-chevron { transform: rotate(180deg); color: var(--accent); }
+
+    /* Drawer submenu */
+    .drawer-sub {
+      display: none;
+      background: var(--bg);
+      padding: 8px 0;
+    }
+    .drawer-sub.open { display: block; }
+
+    .drawer-sub-group {
+      padding: 10px 24px 4px;
+    }
+
+    .drawer-sub-head {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+      padding-left: 10px;
+      border-left: 2px solid var(--accent);
+    }
+
+    .drawer-sub a {
+      display: block;
+      padding: 6px 24px 6px 34px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink-mid);
+      transition: color 0.15s;
+    }
+    .drawer-sub a:hover { color: var(--accent); }
+
+    /* Drawer CTA */
+    .drawer-cta {
+      padding: 20px 24px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .drawer-cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 700;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .drawer-cta-btn:hover { background: #1a43d4; transform: translateY(-1px); }
+
+    /* ══════════════════════════════════════════════════════
+       MEGA BACKDROP + PANELS (desktop)
+    ══════════════════════════════════════════════════════ */
+    #mega-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 800;
+      background: transparent;
+      pointer-events: none;
+      transition: background 0.3s;
+    }
+    #mega-backdrop.on { background: rgba(7,9,20,0.45); pointer-events: auto; }
+
+    .mega-root {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      z-index: 850;
+      pointer-events: none;
+    }
+
+    .mega-panel {
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 100%;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(15,20,80,0.12);
+      padding: 36px 52px 44px;
+      display: none;
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+    }
+    .mega-panel.open { display: flex; pointer-events: auto; }
+
+    .mega-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+    }
+
+    .mega-label {
+      font-family: var(--font-head);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .mega-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .mega-col {
+      flex: 1;
+      padding-right: 28px;
+      border-right: 1px solid var(--border);
+      margin-right: 28px;
+    }
+    .mega-col:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+
+    .mega-col-head {
+      font-family: var(--font-head);
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .mega-group { margin-bottom: 20px; }
+
+    .mega-group-title {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+      padding-left: 10px;
+      border-left: 2px solid var(--accent);
+    }
+
+    .mega-links { display: flex; flex-direction: column; gap: 1px; }
+    .mega-links a {
+      display: block;
+      padding: 5px 10px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--muted);
+      border-radius: 5px;
+      transition: color 0.15s, background 0.15s, padding-left 0.18s;
+    }
+    .mega-links a:hover { color: var(--accent); background: var(--accent-lt); padding-left: 15px; }
+
+    .mega-featured {
+      width: 226px;
+      flex-shrink: 0;
+      padding-left: 28px;
+      border-left: 1px solid var(--border);
+    }
+
+    .feat-tag {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .feat-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .feat-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(34,84,244,0.1); }
+    .feat-card-title { font-family: var(--font-head); font-size: 0.82rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; line-height: 1.35; }
+    .feat-card-desc { font-size: 0.73rem; color: var(--muted); line-height: 1.55; }
+
+    .partner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 16px; }
+    .partner-pill {
+      display: flex; align-items: center; gap: 7px;
+      padding: 7px 10px; border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 0.75rem; font-weight: 600; color: var(--ink-mid);
+      background: var(--white); cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, box-shadow 0.15s;
+    }
+    .partner-pill:hover { border-color: var(--accent); color: var(--accent); box-shadow: 0 2px 12px rgba(34,84,244,0.1); }
+    .p-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+    .about-links { display: flex; flex-direction: column; gap: 4px; }
+    .about-link { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: background 0.15s; }
+    .about-link:hover { background: var(--bg); }
+    .about-icon { width: 34px; height: 34px; background: var(--bg); border-radius: 8px; display: grid; place-items: center; font-size: 1rem; flex-shrink: 0; border: 1px solid var(--border); }
+    .about-link-text { font-size: 0.82rem; font-weight: 600; color: var(--ink-mid); transition: color 0.15s; }
+    .about-link:hover .about-link-text { color: var(--accent); }
+
+    /* ══════════════════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100dvh;           /* dvh for mobile (handles address bar) */
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hero-video-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.7) saturate(0.9);
+    }
+
+    .ov-top {
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 240px;
+      z-index: 2;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.52) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .ov-bottom {
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 82%;
+      z-index: 2;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.80) 0%,
+        rgba(0,0,0,0.50) 28%,
+        rgba(0,0,0,0.16) 58%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      padding: 0 60px 80px;
+      text-align: center;
+    }
+
+    .hero-headline {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 5vw, 5.4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: 36px;
+    }
+
+    .hl-bright { color: #ffffff; }
+    .hl-faded  { color: rgba(255,255,255,0.36); }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      opacity: 0;
+    }
+
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: var(--white);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.24s var(--ease-expo), box-shadow 0.24s;
+    }
+    .cta-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(255,255,255,0.28); }
+    .cta-primary svg { width: 15px; height: 15px; transition: transform 0.2s; }
+    .cta-primary:hover svg { transform: translateX(4px); }
+
+    .cta-secondary {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 32px;
+      background: transparent;
+      color: rgba(255,255,255,0.88);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 1.5px solid rgba(255,255,255,0.34);
+      transition: all 0.2s;
+    }
+    .cta-secondary:hover { border-color: rgba(255,255,255,0.72); color: var(--white); background: rgba(255,255,255,0.08); }
+
+    /* Scroll cue */
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 60px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+    }
+
+    .scroll-track {
+      width: 1px; height: 48px;
+      background: rgba(255,255,255,0.2);
+      position: relative; overflow: hidden; border-radius: 2px;
+    }
+    .scroll-thumb {
+      position: absolute; top: -100%; left: 0; right: 0; height: 100%;
+      background: var(--white); border-radius: 2px;
+      animation: sDown 2.2s ease-in-out infinite;
+    }
+    @keyframes sDown { 0%{top:-100%} 65%{top:100%} 100%{top:100%} }
+
+    .scroll-label {
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+      writing-mode: vertical-rl; transform: rotate(180deg);
+    }
+
+    /* ══════════════════════════════════════════════════════
+       BELOW HERO
+    ══════════════════════════════════════════════════════ */
+    .section-next {
+      background: var(--white);
+      padding: 120px 52px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* ══════════════════════════════════════════════════════
+       RESPONSIVE — TABLET  (≤1024px)
+    ══════════════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      #navbar { padding: 0 32px; }
+      .nav-links { display: none; }         /* hide desktop links */
+      .nav-right  { display: none; }        /* hide desktop CTA */
+      .nav-hamburger { display: flex; }     /* show hamburger */
+      .mega-root { display: none; }         /* mega menus off */
+
+      .hero-content { padding: 0 40px 70px; }
+      .hero-scroll  { left: 40px; }
+
+      .section-next { padding: 80px 32px; }
+    }
+
+    /* ══════════════════════════════════════════════════════
+       RESPONSIVE — MOBILE  (≤640px)
+    ══════════════════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      :root { --nav-h: 60px; }
+
+      #navbar { padding: 0 20px; }
+
+      .logo-img { height: 22px; }
+
+      .hero-content { padding: 0 20px 56px; text-align: center; }
+
+      .hero-headline {
+        font-size: clamp(1.7rem, 7.5vw, 2.6rem);
+        letter-spacing: -0.02em;
+        margin-bottom: 28px;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .cta-primary,
+      .cta-secondary {
+        justify-content: center;
+        padding: 14px 20px;
+        font-size: 0.85rem;
+      }
+
+      .hero-scroll { display: none; }
+
+      .section-next { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     MEGA BACKDROP (desktop only)
+══════════════════════════════════════════════════════════ -->
+<div id="mega-backdrop"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════════ -->
+<nav id="navbar">
+
+  <a href="/" class="nav-logo">
+    <img
+      src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
+      alt="Celsior"
+      class="logo-img"
+    />
+  </a>
+
+  <!-- Desktop links -->
+  <ul class="nav-links" id="navLinks">
+    <li class="nav-item" data-menu="solve">
+      <span class="nav-link">What we Solve <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </li>
+    <li class="nav-item" data-menu="how">
+      <span class="nav-link">How we Do it <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </li>
+    <li class="nav-item" data-menu="deliver">
+      <span class="nav-link">How we Deliver <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </li>
+    <li class="nav-item" data-menu="ai">
+      <span class="nav-link">AI & Innovation <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </li>
+    <li class="nav-item" data-menu="industries">
+      <span class="nav-link">Industries <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </li>
+    <li class="nav-item" data-menu="partners">
+      <span class="nav-link">Partner Ecosystem <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </li>
+    <li class="nav-item" data-menu="about">
+      <span class="nav-link">About <svg class="chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </li>
+  </ul>
+
+  <!-- Desktop CTA -->
+  <div class="nav-right">
+    <a href="#contact" class="btn-nav-solid">
+      Contact us
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+        <path d="M2.5 7H11.5M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Hamburger (tablet/mobile) -->
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span class="ham-line"></span>
+    <span class="ham-line"></span>
+    <span class="ham-line"></span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════
+     MOBILE DRAWER
+══════════════════════════════════════════════════════════ -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <div class="drawer-panel">
+
+    <div class="drawer-header">
+      <img
+        src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
+        alt="Celsior"
+        class="drawer-logo"
+      />
+      <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 3L13 13M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="drawer-nav">
+
+      <!-- What we Solve -->
+      <div class="drawer-item">
+        <div class="drawer-link" data-drawer-toggle="d-solve">
+          What we Solve
+          <svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="drawer-sub" id="d-solve">
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Core & Legacy Modernization</div>
+            <a href="#">Technical Debt Reduction</a>
+            <a href="#">Cloud Transformation</a>
+            <a href="#">Continuous Modernization</a>
+          </div>
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Risk & Compliance</div>
+            <a href="#">Regulatory Readiness</a>
+            <a href="#">Audit Readiness</a>
+            <a href="#">Risk & Controls Modernization</a>
+          </div>
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">AI Adoption</div>
+            <a href="#">AI Readiness Assessment</a>
+            <a href="#">Responsible AI</a>
+            <a href="#">Enterprise AI Enablement</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- How we Do it -->
+      <div class="drawer-item">
+        <div class="drawer-link" data-drawer-toggle="d-how">
+          How we Do it
+          <svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="drawer-sub" id="d-how">
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Application & Platform</div>
+            <a href="#">Application Engineering</a>
+            <a href="#">Platform Engineering</a>
+            <a href="#">API & Integration Engineering</a>
+          </div>
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Cloud & Infrastructure</div>
+            <a href="#">Cloud Engineering & Migration</a>
+            <a href="#">DevOps & SRE</a>
+            <a href="#">Infrastructure Automation</a>
+          </div>
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Data & AI Engineering</div>
+            <a href="#">Data Engineering</a>
+            <a href="#">AI/ML Engineering</a>
+            <a href="#">Intelligent Automation</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- How we Deliver -->
+      <div class="drawer-item">
+        <div class="drawer-link" data-drawer-toggle="d-deliver">
+          How we Deliver
+          <svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="drawer-sub" id="d-deliver">
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Global Delivery</div>
+            <a href="#">GCC Build & Operate</a>
+            <a href="#">BOT Model</a>
+            <a href="#">Mexico & LATAM Nearshore</a>
+          </div>
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Teams-as-a-Service</div>
+            <a href="#">Dedicated Engineering Pods</a>
+            <a href="#">Skills-Based Teams</a>
+            <a href="#">Hire-Train-Deploy</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI & Innovation -->
+      <div class="drawer-item">
+        <div class="drawer-link" data-drawer-toggle="d-ai">
+          AI & Innovation
+          <svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="drawer-sub" id="d-ai">
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Celsior AI Lab</div>
+            <a href="#">Enterprise AI Pilots</a>
+            <a href="#">AI Copilots</a>
+            <a href="#">Agentic Workflows</a>
+            <a href="#">GenAI Accelerators</a>
+          </div>
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Frameworks</div>
+            <a href="#">CAFE Framework</a>
+            <a href="#">HALO Framework</a>
+            <a href="#">InSightX</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Industries -->
+      <div class="drawer-item">
+        <div class="drawer-link" data-drawer-toggle="d-ind">
+          Industries
+          <svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="drawer-sub" id="d-ind">
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Banking & Financial Services</div>
+            <a href="#">Core Banking Modernization</a>
+            <a href="#">Digital Lending Platforms</a>
+          </div>
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Insurance</div>
+            <a href="#">Policy Admin Modernization</a>
+            <a href="#">Claims Automation</a>
+          </div>
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Healthcare</div>
+            <a href="#">Interoperability</a>
+            <a href="#">Revenue Cycle Optimization</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Partners -->
+      <div class="drawer-item">
+        <div class="drawer-link" data-drawer-toggle="d-part">
+          Partner Ecosystem
+          <svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="drawer-sub" id="d-part">
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Platforms</div>
+            <a href="#">ServiceNow</a>
+            <a href="#">Guidewire</a>
+            <a href="#">AWS · Azure · Google Cloud</a>
+          </div>
+          <div class="drawer-sub-group">
+            <div class="drawer-sub-head">Data & Automation</div>
+            <a href="#">Snowflake</a>
+            <a href="#">UiPath · Boomi · Dynatrace</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="drawer-item">
+        <div class="drawer-link" data-drawer-toggle="d-about">
+          About
+          <svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="drawer-sub" id="d-about">
+          <div class="drawer-sub-group">
+            <a href="#">Who we are</a>
+            <a href="#">Our Leadership</a>
+            <a href="#">AI-first Philosophy</a>
+            <a href="#">Success Stories</a>
+            <a href="#">Newsroom</a>
+            <a href="#">Events</a>
+          </div>
+        </div>
+      </div>
+
+    </nav>
+
+    <div class="drawer-cta">
+      <a href="#contact" class="drawer-cta-btn">
+        Contact us
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2.5 7H11.5M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     MEGA PANELS (desktop)
+══════════════════════════════════════════════════════════ -->
+<div class="mega-root" id="megaRoot">
+
+  <!-- WHAT WE SOLVE -->
+  <div class="mega-panel" id="menu-solve">
+    <div class="mega-inner">
+      <div class="mega-col">
+        <div class="mega-label">What we Solve</div>
+        <div class="mega-col-head">Modernization</div>
+        <div class="mega-group">
+          <div class="mega-group-title">Core & Legacy Modernization</div>
+          <ul class="mega-links">
+            <li><a href="#">Technical Debt Reduction</a></li>
+            <li><a href="#">Cloud Transformation</a></li>
+            <li><a href="#">Continuous Modernization</a></li>
+          </ul>
+        </div>
+        <div class="mega-group">
+          <div class="mega-group-title">Digital Experience</div>
+          <ul class="mega-links">
+            <li><a href="#">Omnichannel Transformation</a></li>
+            <li><a href="#">Digital Product Engineering</a></li>
+            <li><a href="#">Customer Experience Modernization</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Risk & Compliance</div>
+        <div class="mega-group">
+          <div class="mega-group-title">Operational Resilience</div>
+          <ul class="mega-links">
+            <li><a href="#">Regulatory Readiness</a></li>
+            <li><a href="#">Audit Readiness</a></li>
+            <li><a href="#">Risk & Controls Modernization</a></li>
+          </ul>
+        </div>
+        <div class="mega-group">
+          <div class="mega-group-title">Cost & Efficiency</div>
+          <ul class="mega-links">
+            <li><a href="#">IT Cost Optimization</a></li>
+            <li><a href="#">Cloud FinOps</a></li>
+            <li><a href="#">Platform Consolidation</a></li>
+            <li><a href="#">Productivity Engineering</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">AI Adoption</div>
+        <div class="mega-group">
+          <div class="mega-group-title">Enterprise Readiness</div>
+          <ul class="mega-links">
+            <li><a href="#">AI Readiness Assessment</a></li>
+            <li><a href="#">Responsible AI</a></li>
+            <li><a href="#">Enterprise AI Enablement</a></li>
+            <li><a href="#">Intelligent Automation</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-featured">
+        <div class="feat-tag">Free Assessment</div>
+        <div class="feat-card"><div class="feat-card-title">Modernization Diagnostic</div><div class="feat-card-desc">2-week assessment of your legacy landscape with a prioritized roadmap.</div></div>
+        <div class="feat-card"><div class="feat-card-title">AI Readiness Index</div><div class="feat-card-desc">Benchmark your AI maturity against industry peers.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW WE DO IT -->
+  <div class="mega-panel" id="menu-how">
+    <div class="mega-inner">
+      <div class="mega-col">
+        <div class="mega-label">How we Do it</div>
+        <div class="mega-col-head">Engineering</div>
+        <div class="mega-group">
+          <div class="mega-group-title">Application & Platform</div>
+          <ul class="mega-links">
+            <li><a href="#">Application Engineering</a></li>
+            <li><a href="#">Platform Engineering</a></li>
+            <li><a href="#">API & Integration Engineering</a></li>
+            <li><a href="#">Microservices & Modern Architectures</a></li>
+          </ul>
+        </div>
+        <div class="mega-group">
+          <div class="mega-group-title">Cloud & Infrastructure</div>
+          <ul class="mega-links">
+            <li><a href="#">Cloud Engineering & Migration</a></li>
+            <li><a href="#">DevOps & SRE</a></li>
+            <li><a href="#">Observability & Reliability</a></li>
+            <li><a href="#">Infrastructure Automation</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Data & Intelligence</div>
+        <div class="mega-group">
+          <div class="mega-group-title">Data & AI Engineering</div>
+          <ul class="mega-links">
+            <li><a href="#">Data Engineering</a></li>
+            <li><a href="#">Data Platforms & Warehousing</a></li>
+            <li><a href="#">AI/ML Engineering</a></li>
+            <li><a href="#">Intelligent Automation</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Operations & Security</div>
+        <div class="mega-group">
+          <div class="mega-group-title">Enterprise ITSM</div>
+          <ul class="mega-links">
+            <li><a href="#">IT Service Management</a></li>
+            <li><a href="#">Incident & Change Management</a></li>
+            <li><a href="#">Service Operations Automation</a></li>
+          </ul>
+        </div>
+        <div class="mega-group">
+          <div class="mega-group-title">Security & Governance</div>
+          <ul class="mega-links">
+            <li><a href="#">Security Engineering</a></li>
+            <li><a href="#">Compliance Engineering</a></li>
+            <li><a href="#">Identity & Access Integration</a></li>
+            <li><a href="#">Governance Automation</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-featured">
+        <div class="feat-tag">Spotlight</div>
+        <div class="feat-card"><div class="feat-card-title">Platform Engineering at Scale</div><div class="feat-card-desc">Golden paths for 3 global banks with 200+ engineering teams.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW WE DELIVER -->
+  <div class="mega-panel" id="menu-deliver">
+    <div class="mega-inner">
+      <div class="mega-col">
+        <div class="mega-label">How we Deliver</div>
+        <div class="mega-col-head">Consulting</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="#">Strategy-to-Execution Programs</a></li>
+            <li><a href="#">Architecture & Transformation Consulting</a></li>
+            <li><a href="#">Platform Implementation</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Global Delivery</div>
+        <div class="mega-group">
+          <div class="mega-group-title">GCC & Nearshore</div>
+          <ul class="mega-links">
+            <li><a href="#">GCC Build & Operate</a></li>
+            <li><a href="#">BOT Model</a></li>
+            <li><a href="#">Mexico & LATAM Nearshore</a></li>
+          </ul>
+        </div>
+        <div class="mega-group">
+          <div class="mega-group-title">Teams-as-a-Service</div>
+          <ul class="mega-links">
+            <li><a href="#">Dedicated Engineering Pods</a></li>
+            <li><a href="#">Skills-Based Teams</a></li>
+            <li><a href="#">Workforce Orchestration (Hoonr)</a></li>
+            <li><a href="#">Hire-Train-Deploy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Managed Programs</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="#">Managed Platform Operations</a></li>
+            <li><a href="#">Continuous Modernization Factory</a></li>
+            <li><a href="#">Managed ServiceNow Operations</a></li>
+            <li><a href="#">Managed Support Services</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-featured">
+        <div class="feat-tag">Compare Models</div>
+        <div class="feat-card"><div class="feat-card-title">GCC vs. BOT vs. Teams-as-a-Service</div><div class="feat-card-desc">Find the right operating model for your scale and goals.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI & INNOVATION -->
+  <div class="mega-panel" id="menu-ai">
+    <div class="mega-inner">
+      <div class="mega-col">
+        <div class="mega-label">AI & Innovation</div>
+        <div class="mega-col-head">Celsior AI Lab</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="#">Enterprise AI Pilots</a></li>
+            <li><a href="#">AI Copilots</a></li>
+            <li><a href="#">Agentic Workflows</a></li>
+            <li><a href="#">GenAI Accelerators</a></li>
+          </ul>
+        </div>
+        <div class="mega-group">
+          <div class="mega-group-title">Design Lab</div>
+          <ul class="mega-links">
+            <li><a href="#">CX Journey Design</a></li>
+            <li><a href="#">Service Blueprinting</a></li>
+            <li><a href="#">Digital Product Prototyping</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Centers of Excellence</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="#">ServiceNow CoE</a></li>
+            <li><a href="#">Guidewire CoE</a></li>
+            <li><a href="#">Data & AI CoE</a></li>
+            <li><a href="#">Cloud & DevOps CoE</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Frameworks & Accelerators</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="#">CAFE Framework</a></li>
+            <li><a href="#">HALO Framework</a></li>
+            <li><a href="#">DPS</a></li>
+            <li><a href="#">InSightX</a></li>
+            <li><a href="#">EvalueX</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-featured">
+        <div class="feat-tag">Live in Production</div>
+        <div class="feat-card"><div class="feat-card-title">Agentic AI for Core Banking</div><div class="feat-card-desc">Autonomous reconciliation agents cutting ops cost by 60%.</div></div>
+        <div class="feat-card"><div class="feat-card-title">CAFE Framework</div><div class="feat-card-desc">AI-first modernization for regulated industries.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDUSTRIES -->
+  <div class="mega-panel" id="menu-industries">
+    <div class="mega-inner">
+      <div class="mega-col">
+        <div class="mega-label">Industries</div>
+        <div class="mega-col-head">Banking & Financial Services</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="#">Core Banking Modernization</a></li>
+            <li><a href="#">Regulatory Automation</a></li>
+            <li><a href="#">ITSM & Change Control</a></li>
+            <li><a href="#">Digital Lending Platforms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Insurance</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="#">Policy Admin Modernization</a></li>
+            <li><a href="#">Claims Automation</a></li>
+            <li><a href="#">Underwriting AI</a></li>
+            <li><a href="#">Guidewire Acceleration</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Healthcare</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="#">Interoperability</a></li>
+            <li><a href="#">HIPAA Compliance</a></li>
+            <li><a href="#">Revenue Cycle Optimization</a></li>
+            <li><a href="#">Intelligent Care Workflows</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mega-featured">
+        <div class="feat-tag">Case Studies</div>
+        <div class="feat-card"><div class="feat-card-title">Top 10 US Bank: Core Modernization</div><div class="feat-card-desc">COBOL to cloud-native in 18 months — zero downtime.</div></div>
+        <div class="feat-card"><div class="feat-card-title">Insurance Claims at 83% STP</div><div class="feat-card-desc">Straight-through processing with Guidewire + AI.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTNERS -->
+  <div class="mega-panel" id="menu-partners">
+    <div class="mega-inner">
+      <div class="mega-col">
+        <div class="mega-label">Partner Ecosystem</div>
+        <div class="mega-col-head">Enterprise Platforms</div>
+        <div class="partner-grid">
+          <a href="#" class="partner-pill"><span class="p-dot" style="background:#61b8ff"></span>ServiceNow</a>
+          <a href="#" class="partner-pill"><span class="p-dot" style="background:#5cb85c"></span>Guidewire</a>
+          <a href="#" class="partner-pill"><span class="p-dot" style="background:#f0a500"></span>Jack Henry</a>
+        </div>
+      </div>
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Cloud Platforms</div>
+        <div class="partner-grid">
+          <a href="#" class="partner-pill"><span class="p-dot" style="background:#ff9900"></span>AWS</a>
+          <a href="#" class="partner-pill"><span class="p-dot" style="background:#0078d4"></span>Azure</a>
+          <a href="#" class="partner-pill"><span class="p-dot" style="background:#4285f4"></span>Google Cloud</a>
+        </div>
+      </div>
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Data & Automation</div>
+        <div class="partner-grid">
+          <a href="#" class="partner-pill"><span class="p-dot" style="background:#29b5e8"></span>Snowflake</a>
+          <a href="#" class="partner-pill"><span class="p-dot" style="background:#fa4616"></span>UiPath</a>
+          <a href="#" class="partner-pill"><span class="p-dot" style="background:#00b388"></span>Boomi</a>
+          <a href="#" class="partner-pill"><span class="p-dot" style="background:#1595d3"></span>Dynatrace</a>
+          <a href="#" class="partner-pill"><span class="p-dot" style="background:#326ce5"></span>Kubernetes</a>
+        </div>
+      </div>
+      <div class="mega-featured">
+        <div class="feat-tag">Partnership</div>
+        <div class="feat-card"><div class="feat-card-title">Become a Partner</div><div class="feat-card-desc">Join our technology and implementation partner ecosystem.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="mega-panel" id="menu-about">
+    <div class="mega-inner" style="max-width:900px">
+      <div class="mega-col" style="flex:1.2">
+        <div class="mega-label">About Celsior</div>
+        <div class="about-links">
+          <a href="#" class="about-link"><div class="about-icon">🏢</div><span class="about-link-text">Who we are</span></a>
+          <a href="#" class="about-link"><div class="about-icon">👥</div><span class="about-link-text">Our Leadership</span></a>
+          <a href="#" class="about-link"><div class="about-icon">🤖</div><span class="about-link-text">AI-first Philosophy</span></a>
+          <a href="#" class="about-link"><div class="about-icon">⭐</div><span class="about-link-text">Success Stories</span></a>
+        </div>
+      </div>
+      <div class="mega-col" style="flex:1.2">
+        <div class="mega-col-head" style="margin-top:26px">Resources</div>
+        <div class="about-links">
+          <a href="#" class="about-link"><div class="about-icon">📚</div><span class="about-link-text">Resources & Insights</span></a>
+          <a href="#" class="about-link"><div class="about-icon">📰</div><span class="about-link-text">Newsroom</span></a>
+          <a href="#" class="about-link"><div class="about-icon">📅</div><span class="about-link-text">Events</span></a>
+        </div>
+      </div>
+      <div class="mega-featured" style="flex:1.3">
+        <div class="feat-tag">Latest News</div>
+        <div class="feat-card"><div class="feat-card-title">Celsior Named in Gartner Market Guide</div><div class="feat-card-desc">Recognized for AI-first core banking modernization.</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /mega-root -->
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════ -->
+<section id="hero">
+
+  <div class="hero-video-wrap">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="https://res.cloudinary.com/dden4hawr/video/upload/v1771847921/OONEX_BR_10_fha2ir.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <div class="ov-top"></div>
+  <div class="ov-bottom"></div>
+
+  <div class="hero-scroll" id="heroScroll">
+    <div class="scroll-track"><div class="scroll-thumb"></div></div>
+    <span class="scroll-label">Scroll</span>
+  </div>
+
+  <div class="hero-content">
+    <h1 class="hero-headline">
+      <span class="hl-bright" id="hlBright">Modernize critical systems.<br/>Operationalize AI.</span><span class="hl-faded" id="hlFaded"> Run with confidence.</span>
+    </h1>
+
+    <div class="hero-ctas" id="heroCtas">
+      <a href="#contact" class="cta-primary">
+        Talk to an Expert
+        <svg viewBox="0 0 14 14" fill="none">
+          <path d="M2.5 7H11.5M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#capabilities" class="cta-secondary">
+        Explore Capabilities
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     NEXT SECTION
+══════════════════════════════════════════════════════════ -->
+<div class="section-next">
+  ↓ Next sections — Capabilities, Social Proof, Industries, etc.
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════════════════ -->
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── Navbar scroll state ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', scrollY > 40);
+  }, { passive: true });
+
+  /* ── Desktop mega menu ── */
+  const navItems = document.querySelectorAll('.nav-item[data-menu]');
+  const backdrop = document.getElementById('mega-backdrop');
+  const megaRoot = document.getElementById('megaRoot');
+  let active = null, timer = null;
+
+  function openPanel(id) {
+    clearTimeout(timer);
+    if (active === id) return;
+    if (active) killPanel(active, true);
+    active = id;
+    navItems.forEach(li => li.classList.toggle('active', li.dataset.menu === id));
+    const panel = document.getElementById('menu-' + id);
+    panel.classList.add('open');
+    backdrop.classList.add('on');
+    gsap.killTweensOf(panel);
+    gsap.to(panel, { opacity: 1, y: 0, duration: 0.36, ease: 'power3.out' });
+    gsap.from(
+      panel.querySelectorAll('.mega-links a, .partner-pill, .about-link, .feat-card'),
+      { opacity: 0, y: 7, duration: 0.26, stagger: 0.018, ease: 'power2.out', delay: 0.06, clearProps: 'opacity,y' }
+    );
+  }
+
+  function killPanel(id, fast) {
+    const panel = document.getElementById('menu-' + id);
+    if (!panel) return;
+    gsap.killTweensOf(panel);
+    gsap.to(panel, {
+      opacity: 0, y: -8,
+      duration: fast ? 0.14 : 0.24, ease: 'power2.in',
+      onComplete: () => panel.classList.remove('open')
+    });
+    navItems.forEach(li => li.classList.remove('active'));
+    backdrop.classList.remove('on');
+    active = null;
+  }
+
+  const sched  = () => { timer = setTimeout(() => active && killPanel(active), 150); };
+  const cancel = () => clearTimeout(timer);
+
+  navItems.forEach(li => {
+    li.addEventListener('mouseenter', () => openPanel(li.dataset.menu));
+    li.addEventListener('mouseleave', sched);
+  });
+  megaRoot.addEventListener('mouseenter', cancel);
+  megaRoot.addEventListener('mouseleave', sched);
+  backdrop.addEventListener('click', () => active && killPanel(active));
+  document.addEventListener('keydown', e => e.key === 'Escape' && active && killPanel(active));
+
+  /* ── Mobile drawer ── */
+  const hamburger    = document.getElementById('hamburger');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const drawerClose  = document.getElementById('drawerClose');
+  const drawerBack   = document.getElementById('drawerBackdrop');
+
+  function openDrawer() {
+    mobileDrawer.classList.add('open');
+    hamburger.classList.add('open');
+    document.body.classList.add('menu-open');
+  }
+
+  function closeDrawer() {
+    mobileDrawer.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.classList.remove('menu-open');
+  }
+
+  hamburger.addEventListener('click', () =>
+    mobileDrawer.classList.contains('open') ? closeDrawer() : openDrawer()
+  );
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerBack.addEventListener('click', closeDrawer);
+
+  /* Drawer accordion submenus */
+  document.querySelectorAll('[data-drawer-toggle]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.drawerToggle;
+      const sub = document.getElementById(targetId);
+      const isOpen = sub.classList.contains('open');
+
+      /* close all others */
+      document.querySelectorAll('.drawer-sub.open').forEach(el => el.classList.remove('open'));
+      document.querySelectorAll('.drawer-link.active').forEach(el => el.classList.remove('active'));
+
+      if (!isOpen) {
+        sub.classList.add('open');
+        btn.classList.add('active');
+      }
+    });
+  });
+
+  /* Close drawer on link click */
+  mobileDrawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+
+  /* ── Hero entrance ── */
+  const tl = gsap.timeline({ delay: 0.5 });
+  tl.from('#hlBright', { opacity: 0, y: 70, duration: 1.1, ease: 'power4.out' })
+    .from('#hlFaded',  { opacity: 0, y: 70, duration: 1.1, ease: 'power4.out' }, '-=0.72')
+    .to('#heroCtas',   { opacity: 1, duration: 0.7, ease: 'power3.out' }, '-=0.55')
+    .from('#heroCtas', { y: 26, duration: 0.7, ease: 'power3.out' }, '<')
+    .to('#heroScroll', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.3')
+    .from('#heroScroll',{ x: -14, duration: 0.6, ease: 'power2.out' }, '<');
+</script>
+</body>
+</html>
