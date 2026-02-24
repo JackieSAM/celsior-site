@@ -13,6 +13,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <style>
     /* ══════════════════════════════════════════════════════
@@ -945,6 +946,498 @@
 </script>
 
 <!-- ══════════════════════════════════════════════════════════
+     PARTICLE / DIGITAL TRANSFORMATION SECTION – SCOPED STYLES
+══════════════════════════════════════════════════════════ -->
+<style>
+/* ── Wrapper: contains everything, dark bg ── */
+#celsior-wrapper {
+  position: relative;
+  background: #0F131A;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  /* NO overflow:hidden — breaks position:sticky and isn't needed with fixed canvas */
+}
+
+/* ── Fixed canvas: covers viewport; clip-path set by JS to wrapper bounds ── */
+#cw-webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;            /* below all page content */
+  display: block;        /* always rendered; clip-path handles visible area */
+  visibility: hidden;    /* JS sets visible when wrapper is on-screen */
+  pointer-events: none;
+  clip-path: inset(0px 0px 100% 0px); /* fully hidden until first scroll tick */
+}
+
+/* ── Sections container ── */
+#celsior-wrapper .page-sections {
+  position: relative;
+  z-index: 2;        /* above the fixed canvas */
+}
+
+/* ── All sections inside wrapper ── */
+#celsior-wrapper .page-sections section {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: transparent;
+}
+
+/* ── Section 1: HERO ── */
+#celsior-wrapper #sec-hero {
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+#celsior-wrapper .hero-title {
+  font-size: clamp(40px, 6vw, 86px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+  color: #fff;
+}
+#celsior-wrapper .hero-scroll-hint {
+  margin-top: 48px;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ── Section 2: LAYERS ── */
+#celsior-wrapper #sec-layers {
+  align-items: center;
+  padding: 80px 60px;
+}
+#celsior-wrapper .layers-inner { max-width: 500px; }
+
+#celsior-wrapper .sec-eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  margin-bottom: 22px;
+}
+#celsior-wrapper .sec-heading {
+  font-size: clamp(28px, 3.4vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.024em;
+  line-height: 1.13;
+  margin-bottom: 32px;
+  color: #fff;
+}
+#celsior-wrapper .sec-heading .cw-blue { color: #8AB4FC; }
+#celsior-wrapper .body-text {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.58);
+  margin-bottom: 14px;
+}
+#celsior-wrapper .legend {
+  margin-top: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+#celsior-wrapper .legend-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+}
+#celsior-wrapper .leg-line { width: 72px; height: 1.5px; flex-shrink: 0; }
+#celsior-wrapper .leg-line.cw-blue  { background: #8AB4FC; }
+#celsior-wrapper .leg-line.cw-tan   { background: #C8B896; }
+#celsior-wrapper .leg-dot {
+  width: 72px;
+  height: 0;
+  flex-shrink: 0;
+  border-bottom: 2px dotted rgba(255,255,255,0.35);
+}
+
+/* ── Section 3: ALD ── */
+#celsior-wrapper #sec-ald {
+  padding: 80px 60px;
+  align-items: center;
+}
+#celsior-wrapper .ald-heading {
+  font-size: clamp(38px, 5.8vw, 84px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  color: rgba(255,255,255,0.9);
+  max-width: 900px;
+}
+
+/* ── Section 4: TWO GASES ── */
+#celsior-wrapper #sec-two-gases {
+  padding: 80px 60px;
+  align-items: flex-start;
+  padding-top: 140px;
+}
+#celsior-wrapper .tg-inner { max-width: 500px; }
+#celsior-wrapper .tg-heading {
+  font-size: clamp(26px, 3vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+  margin-bottom: 28px;
+  color: #fff;
+}
+#celsior-wrapper .pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+#celsior-wrapper .pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.8);
+}
+#celsior-wrapper .pill-dot { width: 6px; height: 6px; border-radius: 50%; }
+#celsior-wrapper .pill-dot.cw-blue  { background: #8AB4FC; }
+#celsior-wrapper .pill-dot.cw-green { background: #CDFAAC; }
+#celsior-wrapper .tg-body {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 40px;
+}
+#celsior-wrapper .stats {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+#celsior-wrapper .stat-val {
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 5px;
+  color: #fff;
+}
+#celsior-wrapper .stat-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.42);
+  line-height: 1.5;
+}
+
+/* ── Section 5: WHAT ENTERPRISES FIX ── */
+#celsior-wrapper #sec-fix {
+  padding: 80px 60px;
+  align-items: center;
+}
+#celsior-wrapper .fix-inner { max-width: 560px; }
+#celsior-wrapper .fix-list {
+  margin-top: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+#celsior-wrapper .fix-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  cursor: default;
+  overflow: hidden;
+}
+#celsior-wrapper .fix-item:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+#celsior-wrapper .fix-item-label {
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  color: rgba(255,255,255,0.75);
+  transition: color 0.25s ease;
+}
+#celsior-wrapper .fix-item:hover .fix-item-label { color: #fff; }
+#celsior-wrapper .fix-arrows {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 24px;
+}
+#celsior-wrapper .fix-arrow {
+  width: 28px;
+  height: 2px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 1px;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.22s ease, transform 0.22s ease, background 0.22s ease;
+}
+#celsior-wrapper .fix-arrow::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 6px solid rgba(255,255,255,0.2);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  transition: border-left-color 0.22s ease;
+}
+#celsior-wrapper .fix-item:hover .fix-arrow { opacity: 1; transform: translateX(0); background: #8AB4FC; }
+#celsior-wrapper .fix-item:hover .fix-arrow::after { border-left-color: #8AB4FC; }
+#celsior-wrapper .fix-item:hover .fix-arrow:nth-child(1) { transition-delay: 0s; }
+#celsior-wrapper .fix-item:hover .fix-arrow:nth-child(2) { transition-delay: 0.06s; }
+#celsior-wrapper .fix-item:hover .fix-arrow:nth-child(3) { transition-delay: 0.12s; }
+
+/* ── HUD: progress bar + scroll hint ── */
+#celsior-wrapper .cw-hud {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  pointer-events: none;
+  display: none;          /* JS sets to flex when wrapper is on-screen */
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 28px;
+  gap: 10px;
+}
+#celsior-wrapper .cw-tech-labels {
+  display: flex;
+  gap: 44px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  white-space: nowrap;
+  margin-bottom: 4px;
+}
+#celsior-wrapper .cw-tech-labels.visible { opacity: 1; }
+#celsior-wrapper .cw-label-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+#celsior-wrapper .cw-label-dot { width: 7px; height: 7px; border-radius: 50%; }
+#celsior-wrapper .cw-label-dot.cw-blue  { background: #8AB4FC; }
+#celsior-wrapper .cw-label-dot.cw-green { background: #CDFAAC; }
+#celsior-wrapper .cw-label-text {
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+#celsior-wrapper .cw-progress-bar {
+  width: 200px;
+  height: 2px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 1px;
+  overflow: hidden;
+}
+#celsior-wrapper .cw-progress-fill {
+  height: 100%;
+  background: rgba(255,255,255,0.55);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.08s linear;
+  border-radius: 1px;
+}
+#celsior-wrapper .cw-scroll-hint {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  transition: opacity 0.4s;
+}
+
+/* ── GSAP initial states (scoped) ── */
+#celsior-wrapper .anim-up   { opacity: 0; transform: translateY(44px); }
+#celsior-wrapper .anim-left { opacity: 0; transform: translateX(-52px); }
+
+  /* ══════════════════════════════════════════════════════
+     MOBILE RESPONSIVENESS — Tablet (≤ 768px)
+  ══════════════════════════════════════════════════════ */
+  @media (max-width: 768px) {
+    #celsior-wrapper #sec-layers,
+    #celsior-wrapper #sec-two-gases,
+    #celsior-wrapper #sec-fix { padding: 60px 32px; }
+    #celsior-wrapper #sec-two-gases { padding-top: 80px; }
+    #celsior-wrapper #sec-ald { padding: 60px 32px; }
+    #celsior-wrapper .layers-inner,
+    #celsior-wrapper .tg-inner,
+    #celsior-wrapper .fix-inner { max-width: 100%; }
+    #celsior-wrapper .hero-title { font-size: clamp(32px, 8vw, 56px); }
+    #celsior-wrapper .ald-heading { font-size: clamp(28px, 7vw, 52px); }
+    #celsior-wrapper .tg-heading { font-size: clamp(22px, 5vw, 36px); }
+    #celsior-wrapper .sec-heading { font-size: clamp(24px, 6vw, 40px); }
+    #celsior-wrapper .legend { margin-top: 32px; gap: 12px; }
+  }
+
+  /* ══════════════════════════════════════════════════════
+     MOBILE RESPONSIVENESS — Phone (≤ 480px)
+  ══════════════════════════════════════════════════════ */
+  @media (max-width: 480px) {
+    #celsior-wrapper #sec-hero { padding: 0 24px; }
+    #celsior-wrapper #sec-layers,
+    #celsior-wrapper #sec-two-gases,
+    #celsior-wrapper #sec-fix,
+    #celsior-wrapper #sec-ald { padding: 48px 24px; }
+    #celsior-wrapper #sec-two-gases { padding-top: 60px; }
+    #celsior-wrapper .hero-title { font-size: clamp(28px, 10vw, 44px); }
+    #celsior-wrapper .hero-scroll-hint { margin-top: 32px; font-size: 9px; }
+    #celsior-wrapper .ald-heading { font-size: clamp(24px, 8vw, 38px); }
+    #celsior-wrapper .sec-heading { font-size: clamp(20px, 7vw, 32px); margin-bottom: 20px; }
+    #celsior-wrapper .tg-heading { font-size: clamp(20px, 7vw, 28px); margin-bottom: 18px; }
+    #celsior-wrapper .body-text { font-size: 13px; line-height: 1.7; }
+    #celsior-wrapper .tg-body { font-size: 13px; line-height: 1.7; margin-bottom: 28px; }
+    #celsior-wrapper .sec-eyebrow { font-size: 9.5px; }
+    #celsior-wrapper .pills { gap: 8px; }
+    #celsior-wrapper .pill { padding: 5px 12px; font-size: 11.5px; }
+    #celsior-wrapper .stats { gap: 20px; }
+    #celsior-wrapper .stat-val { font-size: clamp(18px, 6vw, 26px); }
+    #celsior-wrapper .fix-item-label { font-size: clamp(15px, 4.5vw, 20px); }
+    #celsior-wrapper .fix-item { padding: 16px 0; }
+    #celsior-wrapper .fix-arrow { width: 20px; }
+    #celsior-wrapper .fix-arrows { margin-left: 12px; }
+    #celsior-wrapper .legend { margin-top: 24px; gap: 10px; }
+    #celsior-wrapper .leg-line,
+    #celsior-wrapper .leg-dot { width: 48px; }
+    #celsior-wrapper .legend-row { font-size: 11.5px; gap: 10px; }
+    #celsior-wrapper .cw-hud { padding-bottom: 18px; }
+    #celsior-wrapper .cw-tech-labels { gap: 24px; }
+    #celsior-wrapper .cw-label-text { font-size: 9px; }
+    #celsior-wrapper .cw-progress-bar { width: 140px; }
+    #celsior-wrapper .cw-scroll-hint { font-size: 8.5px; }
+  }
+</style>
+
+<!-- ══════════════════════════════════════════════════════════
+     PARTICLE / DIGITAL TRANSFORMATION SECTION – HTML
+══════════════════════════════════════════════════════════ -->
+<div id="celsior-wrapper">
+
+  <!-- Sticky WebGL canvas (scoped to wrapper) -->
+  <canvas id="cw-webgl"></canvas>
+
+  <!-- Scrollable content sections -->
+  <div class="page-sections">
+
+    <!-- 1. HERO -->
+    <section id="sec-hero">
+      <h1 class="hero-title">Innovate.<br>Accelerate. Elevate.</h1>
+      <p class="hero-scroll-hint">Scroll to explore</p>
+    </section>
+
+    <!-- 2. LAYERS / DISPERSION COATINGS -->
+    <section id="sec-layers">
+      <div class="layers-inner">
+        <p class="sec-eyebrow anim-up">Digital Transformation</p>
+        <h2 class="sec-heading anim-up">
+          <span class="cw-blue">data-driven</span><br>
+          transformation<br>
+          for the modern<br>
+          enterprise
+        </h2>
+        <p class="body-text anim-up">A highly integrated approach designed to modernize organizations at every layer of the technology stack.</p>
+        <p class="body-text anim-up">We use data, AI, and digital engineering to unlock insights, optimize operations, and drive exceptional customer experiences — keeping your business agile, scalable, and future-ready.</p>
+        <div class="legend">
+          <div class="legend-row anim-up"><div class="leg-line cw-blue"></div><span>Data &amp; AI</span></div>
+          <div class="legend-row anim-up"><div class="leg-line cw-tan"></div><span>Digital Solutions &amp; Automation</span></div>
+          <div class="legend-row anim-up"><div class="leg-dot"></div><span>Digital Operations</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ALD -->
+    <section id="sec-ald">
+      <h2 class="ald-heading">
+        <span class="anim-left" style="display:block">With decades of experience</span>
+        <span class="anim-left" style="display:block">across nine industries</span>
+        <span class="anim-left" style="display:block">we propel growth</span>
+      </h2>
+    </section>
+
+    <!-- 4. TWO GASES -->
+    <section id="sec-two-gases">
+      <div class="tg-inner">
+        <h2 class="tg-heading anim-up">Transformation Powered<br>by Data &amp; Digital</h2>
+        <div class="pills anim-up">
+          <div class="pill"><div class="pill-dot cw-blue"></div>Data &amp; AI</div>
+          <div class="pill"><div class="pill-dot cw-green"></div>Digital Solutions</div>
+        </div>
+        <p class="tg-body anim-up">Our end-to-end digital transformation services span Data &amp; AI, Digital Solutions, Automation, and Digital Operations. We help you implement a common, integrated data view, transform customer experiences through application modernization, and automate operations with AI and intelligent platforms — driving measurable results at every level of your organization.</p>
+        <div class="stats">
+          <div class="anim-up">
+            <div class="stat-val">15+ Services</div>
+            <div class="stat-label">Spanning Data &amp; AI, Digital Solutions, Automation, and Digital Operations</div>
+          </div>
+          <div class="anim-up">
+            <div class="stat-val">9 Industries</div>
+            <div class="stat-label">Aviation, Banking, Healthcare, Insurance, Life Sciences, and more</div>
+          </div>
+          <div class="anim-up">
+            <div class="stat-val">End-to-End</div>
+            <div class="stat-label">From strategy and engineering to managed operations and user support</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. WHAT ENTERPRISES ARE TRYING TO FIX -->
+    <section id="sec-fix">
+      <div class="fix-inner">
+        <p class="sec-eyebrow anim-up">The Challenge</p>
+        <h2 class="sec-heading anim-up">What Enterprises<br>Are Trying <span class="cw-blue">To Fix</span></h2>
+        <div class="fix-list">
+          <div class="fix-item anim-up">
+            <span class="fix-item-label">Modernize core platforms</span>
+            <div class="fix-arrows"><div class="fix-arrow"></div><div class="fix-arrow"></div><div class="fix-arrow"></div></div>
+          </div>
+          <div class="fix-item anim-up">
+            <span class="fix-item-label">Adopt AI safely</span>
+            <div class="fix-arrows"><div class="fix-arrow"></div><div class="fix-arrow"></div><div class="fix-arrow"></div></div>
+          </div>
+          <div class="fix-item anim-up">
+            <span class="fix-item-label">Reduce operational risk</span>
+            <div class="fix-arrows"><div class="fix-arrow"></div><div class="fix-arrow"></div><div class="fix-arrow"></div></div>
+          </div>
+          <div class="fix-item anim-up">
+            <span class="fix-item-label">Control IT costs</span>
+            <div class="fix-arrows"><div class="fix-arrow"></div><div class="fix-arrow"></div><div class="fix-arrow"></div></div>
+          </div>
+          <div class="fix-item anim-up">
+            <span class="fix-item-label">Improve digital experience</span>
+            <div class="fix-arrows"><div class="fix-arrow"></div><div class="fix-arrow"></div><div class="fix-arrow"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- end .page-sections -->
+
+  <!-- HUD: progress bar + labels (sticky to wrapper bottom) -->
+  <div class="cw-hud">
+    <div class="cw-tech-labels" id="cwTechLabels">
+      <div class="cw-label-item">
+        <div class="cw-label-dot cw-blue"></div>
+        <div class="cw-label-text">Data &amp; AI</div>
+      </div>
+      <div class="cw-label-item">
+        <div class="cw-label-dot cw-green"></div>
+        <div class="cw-label-text">Digital Solutions</div>
+      </div>
+    </div>
+    <div class="cw-progress-bar"><div class="cw-progress-fill" id="cwProgressFill"></div></div>
+    <div class="cw-scroll-hint" id="cwScrollHint">Scroll to explore</div>
+  </div>
+
+</div><!-- end #celsior-wrapper -->
+
+<!-- ══════════════════════════════════════════════════════════
      ORBIT SECTION
 ══════════════════════════════════════════════════════════ -->
 <section class="orbit-wrap" id="orbitWrap">
@@ -1034,6 +1527,8 @@
 })();
 </script>
 
+
+
 <!-- ══════════════════════════════════════════════════════════
      FAQ ACCORDION
 ══════════════════════════════════════════════════════════ -->
@@ -1083,6 +1578,437 @@
   items.forEach(item=>{ item.querySelector('.faq-trigger').addEventListener('click',()=>{ if(item===openItem){closeItem();}else{closeItem(()=>openItemFn(item));} }); });
   gsap.from('.faq-header',{opacity:0,y:24,duration:0.9,ease:'power3.out',scrollTrigger:{trigger:'#faqSection',start:'top 80%',once:true}});
   gsap.from('.faq-item',{opacity:0,y:20,duration:0.65,ease:'power3.out',stagger:0.09,scrollTrigger:{trigger:'#faqSection',start:'top 76%',once:true}});
+})();
+</script>
+
+<!-- ══════════════════════════════════════════════════════════
+     ENGAGEMENT MODELS SECTION
+══════════════════════════════════════════════════════════ -->
+<section class="em-section" id="emSection">
+
+  <!-- LEFT: Sticky panel -->
+  <div class="em-left">
+    <div class="em-left-inner">
+      <span class="em-pill">How We Deliver</span>
+      <h2 class="em-heading">Engagement Models Designed For Regulated Enterprises</h2>
+      <p class="em-desc">Flexible, enterprise-grade delivery models built for the compliance, scale and operational demands of regulated industries.</p>
+      <a href="#contact" class="em-cta">Get Started <svg viewBox="0 0 16 16" fill="none"><line x1="2" y1="14" x2="14" y2="2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><polyline points="6,2 14,2 14,10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+
+  <!-- RIGHT: Scrollable cards -->
+  <div class="em-right">
+
+    <!-- Card 01: Consulting & Engineering -->
+    <div class="em-card" data-index="01">
+      <div class="em-bracket em-bracket--tl"></div>
+      <div class="em-bracket em-bracket--br"></div>
+      <div class="em-icon-wrap">
+        <svg class="em-icon" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" overflow="hidden">
+          <!-- Wireframe Globe — rotate the group, not the SVG root -->
+          <g style="transform-origin:45px 45px; animation: emGlobeRotate 12s linear infinite;">
+            <ellipse cx="45" cy="45" rx="30" ry="30" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+            <ellipse cx="45" cy="45" rx="18" ry="30" stroke="currentColor" stroke-width="1.2" opacity="0.65"/>
+            <ellipse cx="45" cy="45" rx="6"  ry="30" stroke="currentColor" stroke-width="1.2" opacity="0.85"/>
+            <ellipse cx="45" cy="45" rx="30" ry="10" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>
+            <ellipse cx="45" cy="45" rx="30" ry="20" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+            <line x1="15" y1="45" x2="75" y2="45" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+            <line x1="45" y1="15" x2="45" y2="75" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
+          </g>
+        </svg>
+      </div>
+      <span class="em-num">01</span>
+      <h3 class="em-card-title">Consulting &amp; Engineering</h3>
+      <p class="em-card-desc">Strategic advisory and hands-on engineering to accelerate modernization, reduce technical debt, and build future-ready platforms.</p>
+    </div>
+
+    <!-- Card 02: GCC & Nearshore -->
+    <div class="em-card" data-index="02">
+      <div class="em-bracket em-bracket--tl"></div>
+      <div class="em-bracket em-bracket--br"></div>
+      <div class="em-icon-wrap">
+        <svg class="em-icon" id="emIconBars" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Equalizer bars -->
+          <g class="em-bars-group">
+            <rect class="em-bar" x="10" y="25" width="6" height="40" rx="1" fill="currentColor" opacity="0.9"/>
+            <rect class="em-bar" x="20" y="35" width="6" height="30" rx="1" fill="currentColor" opacity="0.8"/>
+            <rect class="em-bar" x="30" y="18" width="6" height="47" rx="1" fill="currentColor" opacity="0.9"/>
+            <rect class="em-bar" x="40" y="30" width="6" height="35" rx="1" fill="currentColor" opacity="0.7"/>
+            <rect class="em-bar" x="50" y="22" width="6" height="43" rx="1" fill="currentColor" opacity="0.9"/>
+            <rect class="em-bar" x="60" y="32" width="6" height="28" rx="1" fill="currentColor" opacity="0.8"/>
+            <rect class="em-bar" x="70" y="20" width="6" height="45" rx="1" fill="currentColor" opacity="0.75"/>
+          </g>
+        </svg>
+      </div>
+      <span class="em-num">02</span>
+      <h3 class="em-card-title">GCC &amp; Nearshore</h3>
+      <p class="em-card-desc">Build your own Global Capability Centre or leverage our nearshore hubs in Mexico and India for cost-efficient, high-quality delivery.</p>
+    </div>
+
+    <!-- Card 03: Teams-as-a-Service -->
+    <div class="em-card" data-index="03">
+      <div class="em-bracket em-bracket--tl"></div>
+      <div class="em-bracket em-bracket--br"></div>
+      <div class="em-icon-wrap">
+        <svg class="em-icon" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Double bracket/chevron pulse -->
+          <g class="em-chevron-group">
+            <path d="M28 25 L14 45 L28 65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>
+            <path d="M42 25 L28 45 L42 65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.6"/>
+            <path d="M52 35 L62 45 L52 55" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>
+            <path d="M64 30 L76 45 L64 60" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.55"/>
+          </g>
+        </svg>
+      </div>
+      <span class="em-num">03</span>
+      <h3 class="em-card-title">Teams-as-a-Service</h3>
+      <p class="em-card-desc">Fully managed engineering pods embedded in your delivery cycle — scrum-ready, domain-trained, and outcomes-focused.</p>
+    </div>
+
+    <!-- Card 04: Hire-Train-Deploy -->
+    <div class="em-card" data-index="04">
+      <div class="em-bracket em-bracket--tl"></div>
+      <div class="em-bracket em-bracket--br"></div>
+      <div class="em-icon-wrap">
+        <svg class="em-icon" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 3D Spiral / Helix -->
+          <ellipse cx="45" cy="30" rx="22" ry="8" stroke="currentColor" stroke-width="1.5" opacity="0.9" fill="none"/>
+          <ellipse cx="45" cy="42" rx="22" ry="8" stroke="currentColor" stroke-width="1.5" opacity="0.75" fill="none"/>
+          <ellipse cx="45" cy="54" rx="22" ry="8" stroke="currentColor" stroke-width="1.5" opacity="0.6" fill="none"/>
+          <ellipse cx="45" cy="66" rx="22" ry="8" stroke="currentColor" stroke-width="1.5" opacity="0.4" fill="none"/>
+          <line x1="23" y1="30" x2="23" y2="66" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+          <line x1="67" y1="30" x2="67" y2="66" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+          <animateTransform attributeName="transform" type="scale" values="1 1;1.04 0.96;1 1" dur="2.5s" repeatCount="indefinite" additive="sum"/>
+        </svg>
+      </div>
+      <span class="em-num">04</span>
+      <h3 class="em-card-title">Hire-Train-Deploy</h3>
+      <p class="em-card-desc">We source, domain-train, and deploy engineering talent tailored to your stack, industry, and regulatory context — reducing ramp time dramatically.</p>
+    </div>
+
+    <!-- Card 05: Managed Programs -->
+    <div class="em-card" data-index="05">
+      <div class="em-bracket em-bracket--tl"></div>
+      <div class="em-bracket em-bracket--br"></div>
+      <div class="em-icon-wrap">
+        <svg class="em-icon" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Fingerprint -->
+          <g class="em-fp-group">
+            <path d="M45 72 C26 72 14 60 14 45 C14 30 26 18 45 18 C64 18 76 30 76 45" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.9"/>
+            <path d="M45 64 C31 64 22 55 22 45 C22 35 31 26 45 26 C59 26 68 35 68 45" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.8"/>
+            <path d="M45 56 C36 56 30 51 30 45 C30 39 36 34 45 34 C54 34 60 39 60 45" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.75"/>
+            <path d="M45 48 C41 48 38 47 38 45 C38 43 41 42 45 42 C49 42 52 43 52 45" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/>
+            <line x1="45" y1="18" x2="45" y2="72" stroke="currentColor" stroke-width="1" stroke-dasharray="2 4" opacity="0.3" stroke-linecap="round">
+              <animate attributeName="y1" values="18;72;18" dur="2.8s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.2;0.7;0.2" dur="2.8s" repeatCount="indefinite"/>
+            </line>
+          </g>
+        </svg>
+      </div>
+      <span class="em-num">05</span>
+      <h3 class="em-card-title">Managed Programs</h3>
+      <p class="em-card-desc">End-to-end program ownership — from architecture to delivery to operations — with SLA-backed accountability across the full engagement lifecycle.</p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ══════════════════════════════════════════════════════
+   ENGAGEMENT MODELS SECTION
+══════════════════════════════════════════════════════ */
+.em-section {
+  display: flex;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: #f7f8fc;
+  border-top: 1px solid rgba(13,17,39,0.08);
+  position: relative;
+  z-index: 2;
+  /* NO overflow:hidden — it kills position:sticky */
+}
+
+/* ── LEFT sticky panel ── */
+.em-left {
+  position: sticky;
+  top: 0;
+  width: 50%;
+  flex-shrink: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #0d1b4b 0%, #1a2f8a 45%, #2254f4 100%);
+  overflow: hidden;
+}
+
+/* Subtle noise texture overlay */
+.em-left::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Decorative grid lines */
+.em-left::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.em-left-inner {
+  position: relative;
+  z-index: 1;
+  padding: 60px 8% 60px 8%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.em-pill {
+  display: inline-block;
+  width: fit-content;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 3px;
+  padding: 5px 13px;
+  background: rgba(255,255,255,0.07);
+}
+
+.em-heading {
+  font-family: var(--font-head);
+  font-size: clamp(1.6rem, 2.6vw, 2.5rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.035em;
+  line-height: 1.13;
+}
+
+.em-desc {
+  font-size: clamp(0.82rem, 1vw, 0.92rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.62);
+  line-height: 1.78;
+  max-width: 380px;
+}
+
+.em-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 24px;
+  border: 1.5px dashed rgba(255,255,255,0.4);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-decoration: none;
+  width: fit-content;
+  transition: background 0.25s, border-color 0.25s, transform 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+.em-cta svg { width: 14px; height: 14px; flex-shrink: 0; }
+.em-cta:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.7);
+  transform: translateY(-2px);
+}
+
+/* ── RIGHT scrollable area ── */
+.em-right {
+  flex: 1;
+  width: 50%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Feature cards — divider style like reference ── */
+.em-card {
+  position: relative;
+  padding: 48px 8% 44px 52px;
+  border-bottom: 1px solid rgba(13,17,39,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #ffffff;
+  transition: background 0.3s ease;
+}
+.em-card:first-child { border-top: 1px solid rgba(13,17,39,0.1); }
+.em-card:hover { background: rgba(34,84,244,0.025); }
+
+/* L-bracket corners */
+.em-bracket {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+}
+.em-bracket--tl {
+  top: 14px; left: 14px;
+  border-top: 1.5px solid #2254f4;
+  border-left: 1.5px solid #2254f4;
+}
+.em-bracket--br {
+  bottom: 14px; right: 14px;
+  border-bottom: 1.5px solid #2254f4;
+  border-right: 1.5px solid #2254f4;
+}
+
+/* Icon wrap — contained, no overflow */
+.em-icon-wrap {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  color: #0d1127;
+  overflow: hidden;
+}
+.em-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: #0d1127;
+  overflow: hidden;
+}
+
+/* Globe CSS animation — safe, contained */
+@keyframes emGlobeRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Card number */
+.em-num {
+  font-family: 'SF Mono', 'Fira Mono', 'Courier New', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #2254f4;
+  display: block;
+}
+
+/* Card title */
+.em-card-title {
+  font-family: 'SF Mono', 'Fira Mono', 'Courier New', monospace;
+  font-size: clamp(0.88rem, 1.1vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0d1127;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* Card description */
+.em-card-desc {
+  font-size: clamp(0.82rem, 0.95vw, 0.9rem);
+  font-weight: 400;
+  color: #6b7280;
+  line-height: 1.75;
+  max-width: 440px;
+  margin: 0;
+}
+
+/* ── Equalizer bar animation ── */
+.em-bar {
+  transform-origin: bottom center;
+  animation: emBarWave 1.8s ease-in-out infinite;
+}
+.em-bars-group rect:nth-child(1) { animation-delay: 0s;    animation-duration: 1.6s; }
+.em-bars-group rect:nth-child(2) { animation-delay: 0.18s; animation-duration: 2.0s; }
+.em-bars-group rect:nth-child(3) { animation-delay: 0.08s; animation-duration: 1.4s; }
+.em-bars-group rect:nth-child(4) { animation-delay: 0.35s; animation-duration: 1.9s; }
+.em-bars-group rect:nth-child(5) { animation-delay: 0.12s; animation-duration: 1.5s; }
+.em-bars-group rect:nth-child(6) { animation-delay: 0.28s; animation-duration: 2.1s; }
+.em-bars-group rect:nth-child(7) { animation-delay: 0.05s; animation-duration: 1.7s; }
+
+@keyframes emBarWave {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(0.3); }
+}
+
+/* ── Chevron pulse animation ── */
+.em-chevron-group {
+  animation: emChevronPulse 2.2s ease-in-out infinite;
+}
+@keyframes emChevronPulse {
+  0%, 100% { transform: translateX(0);    opacity: 1; }
+  50%       { transform: translateX(-5px); opacity: 0.65; }
+}
+
+@media (max-width: 1024px) {
+  .em-left { width: 50%; }
+  .em-left-inner { padding: 48px 6% 48px 6%; }
+  .em-right { width: 50%; }
+  .em-card { padding: 40px 6% 36px 40px; }
+}
+
+@media (max-width: 820px) {
+  .em-section { flex-direction: column; }
+  .em-left {
+    position: relative;
+    top: auto;
+    width: 100%;
+    height: auto;
+    min-height: 340px;
+  }
+  .em-left-inner { padding: 56px 8%; }
+  .em-right { width: 100%; padding: 0; gap: 0; }
+  .em-card { padding: 36px 6% 32px 6%; }
+}
+
+@media (max-width: 640px) {
+  .em-left-inner { padding: 48px 6%; }
+  .em-heading { font-size: clamp(1.4rem, 6vw, 1.9rem); }
+  .em-card { padding: 28px 5% 24px 5%; }
+  .em-icon-wrap { width: 64px; height: 64px; }
+}
+</style>
+
+<script>
+(function () {
+  /* Scroll entrance for cards */
+  gsap.from('.em-left-inner > *', {
+    opacity: 0, y: 24, duration: 0.85, ease: 'power3.out', stagger: 0.12,
+    scrollTrigger: { trigger: '#emSection', start: 'top 80%', once: true }
+  });
+
+  gsap.from('.em-card', {
+    opacity: 0, x: 36, duration: 0.75, ease: 'power3.out', stagger: 0.14,
+    scrollTrigger: { trigger: '.em-right', start: 'top 85%', once: true }
+  });
+
+  /* Icon micro-animations via GSAP for cards that need it */
+  /* Globe card - already has SVG animateTransform */
+  /* Helix card - subtle pulse */
+  document.querySelectorAll('.em-card').forEach((card, i) => {
+    const iconWrap = card.querySelector('.em-icon-wrap');
+    if (!iconWrap) return;
+    gsap.to(iconWrap, {
+      y: -4,
+      duration: 2.5 + i * 0.3,
+      ease: 'sine.inOut',
+      yoyo: true,
+      repeat: -1,
+      delay: i * 0.4
+    });
+  });
 })();
 </script>
 
@@ -2207,6 +3133,487 @@
     gsap.from('.fl-bottom',               { opacity:0, y:8, duration:.55, ease:'power2.out', scrollTrigger: stBot });
   })();
 </script>
+<!-- ══════════════════════════════════════════════════════════
+     PARTICLE SECTION SCRIPT (IIFE – no global variable conflicts)
+══════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  // ── Only run once THREE is ready ──
+  if (typeof THREE === 'undefined') {
+    console.warn('Celsior particle section: THREE.js not loaded');
+    return;
+  }
+
+  // ═══════════════════════════════════════════
+  // VERTEX SHADER
+  // ═══════════════════════════════════════════
+  const vertexShader = `
+#define TWO_PI 6.28318530718
+attribute vec3 targetPosition;
+attribute vec4 random;
+uniform float uTime;
+uniform float uIdleTime;
+uniform float uSize;
+uniform vec2 uSpread;
+uniform float uNoiseFrequency;
+uniform float uNoiseStrength;
+uniform float uDelay;
+uniform float uProgress;
+uniform vec2 uIdleRadius;
+uniform float uIdleSpeed;
+varying vec4 vRandom;
+varying float vIsValid;
+varying float vFadeAlpha;
+vec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}
+vec4 mod289(vec4 x){return x-floor(x*(1./289.))*289.;}
+vec4 permute(vec4 x){return mod289(((x*34.)+1.)*x);}
+vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
+float snoise(vec3 v){
+  const vec2 C=vec2(1./6.,1./3.);const vec4 D=vec4(0.,.5,1.,2.);
+  vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);
+  vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.-g;
+  vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);
+  vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;
+  i=mod289(i);
+  vec4 p=permute(permute(permute(i.z+vec4(0.,i1.z,i2.z,1.))+i.y+vec4(0.,i1.y,i2.y,1.))+i.x+vec4(0.,i1.x,i2.x,1.));
+  float n_=.142857142857;vec3 ns=n_*D.wyz-D.xzx;
+  vec4 j=p-49.*floor(p*ns.z*ns.z);vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.*x_);
+  vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.-abs(x)-abs(y);
+  vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);
+  vec4 s0=floor(b0)*2.+1.;vec4 s1=floor(b1)*2.+1.;vec4 sh=-step(h,vec4(0.));
+  vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+  vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);
+  vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+  p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
+  vec4 m=max(.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.);m=m*m;
+  return 42.*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
+}
+void main(){
+  vRandom=random;
+  float isStartZero=(1.-step(.00001,abs(position.x)))*(1.-step(.00001,abs(position.y)))*(1.-step(.00001,abs(position.z)));
+  float isEndZero=(1.-step(.00001,abs(targetPosition.x)))*(1.-step(.00001,abs(targetPosition.y)))*(1.-step(.00001,abs(targetPosition.z)));
+  vIsValid=1.-(isStartZero*isEndZero);
+  vec3 startPos=mix(position,vec3(.5,.5,.5),isStartZero);
+  vec3 endPos=mix(targetPosition,vec3(.5,.5,.5),isEndZero);
+  float noiseStart=snoise(startPos*uNoiseFrequency);
+  float noiseTarget=snoise(endPos*uNoiseFrequency);
+  float noise=smoothstep(-1.,1.,mix(noiseStart,noiseTarget,uProgress));
+  float duration=1.-uDelay;float start=(1.-duration)*noise;float end=duration+start;
+  float progress=smoothstep(start,end,uProgress);
+  if(isStartZero>.5){vFadeAlpha=progress;}
+  else if(isEndZero>.5){float remapped=clamp((progress-0.)/(0.5-0.),0.,1.);vFadeAlpha=mix(1.,0.,remapped);}
+  else{vFadeAlpha=1.;}
+  vec3 mixedPosition=mix(startPos,endPos,progress);
+  mixedPosition=mix(mixedPosition,mixedPosition+((random.xyz*(noise*2.-1.))*uNoiseStrength),1.-abs(uProgress*2.-1.));
+  vec3 pos=mixedPosition*2.-1.;
+  vec4 mvPosition=modelViewMatrix*vec4(pos,1.);
+  vec3 spreadFactor=random.xwz*2.-1.;
+  mvPosition.x+=mix(uSpread.x,uSpread.y,spreadFactor.x);
+  mvPosition.y+=mix(uSpread.x,uSpread.y,spreadFactor.y);
+  mvPosition.z+=mix(uSpread.x,uSpread.y,spreadFactor.z);
+  float t=uIdleTime*uIdleSpeed;
+  float radius=mix(uIdleRadius.x,uIdleRadius.y,random.x);
+  mvPosition.x+=sin(t*random.z+TWO_PI*random.w)*radius;
+  mvPosition.y+=cos(t*random.y+TWO_PI*random.x)*radius;
+  gl_PointSize=vIsValid<.5?0.:max(2.,uSize/length(mvPosition.xyz)*(random.x+0.1));
+  gl_Position=projectionMatrix*mvPosition;
+}`;
+
+  const fragmentShader = `
+precision highp float;
+uniform float uTime;
+uniform vec3 uBaseColor;
+uniform float uAlpha;
+varying vec4 vRandom;
+varying float vIsValid;
+varying float vFadeAlpha;
+void main(){
+  if(vIsValid<.5)discard;
+  vec2 uv=gl_PointCoord.xy;
+  float circle=smoothstep(0.5,0.4,length(uv-0.5))*0.8;
+  gl_FragColor.rgb=uBaseColor;
+  gl_FragColor.a=circle*vFadeAlpha*uAlpha;
+}`;
+
+  // ═══════════════════════════════════════════
+  // PARTICLE SHAPES
+  // ═══════════════════════════════════════════
+  const CW_PARTICLE_COUNT = 60000;
+
+  function makeSpherePositions(count, radius){
+    radius = radius || 0.45;
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const phi = Math.acos(1 - 2 * (i + .5) / count);
+      const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+      const r = radius * Math.cbrt(Math.random());
+      pos[i*3]   = r * Math.sin(phi) * Math.cos(theta) + .5;
+      pos[i*3+1] = r * Math.sin(phi) * Math.sin(theta) + .5;
+      pos[i*3+2] = r * Math.cos(phi) + .5;
+    }
+    return pos;
+  }
+  function makeFlatDiskPositions(count, radius, thickness) {
+    radius = radius || 0.45; thickness = thickness || 0.04;
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const r = radius * Math.sqrt(Math.random());
+      const theta = Math.random() * Math.PI * 2;
+      pos[i*3]   = r * Math.cos(theta) + .5;
+      pos[i*3+1] = (Math.random() - .5) * thickness + .5;
+      pos[i*3+2] = r * Math.sin(theta) + .5;
+    }
+    return pos;
+  }
+  function makeLargeCloudPositions(count) {
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) { pos[i*3] = Math.random(); pos[i*3+1] = Math.random(); pos[i*3+2] = Math.random(); }
+    return pos;
+  }
+  function makeVerticalDiscPositions(count, radius, thickness) {
+    radius = radius || 0.45; thickness = thickness || 0.02;
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const r = radius * Math.sqrt(Math.random());
+      const theta = Math.random() * Math.PI * 2;
+      pos[i*3]   = (Math.random() - .5) * thickness + .5;
+      pos[i*3+1] = r * Math.cos(theta) + .5;
+      pos[i*3+2] = r * Math.sin(theta) + .5;
+    }
+    return pos;
+  }
+
+  const cwParticleShapes = [
+    makeSpherePositions(CW_PARTICLE_COUNT),
+    makeFlatDiskPositions(CW_PARTICLE_COUNT),
+    makeLargeCloudPositions(CW_PARTICLE_COUNT),
+    makeSpherePositions(CW_PARTICLE_COUNT, 0.48),
+    makeVerticalDiscPositions(CW_PARTICLE_COUNT),
+  ];
+
+  // ═══════════════════════════════════════════
+  // PARTICLE CONFIGS
+  // ═══════════════════════════════════════════
+  const cwParticleAConfig = {
+    shaderDefaults: {
+      uSize: 3, uSpread: [0,0], uNoiseFrequency: 8,
+      uNoiseStrength: 0.25, uDelay: 0.3,
+      uBaseColor: new THREE.Color('#ffffff')
+    },
+    steps: [
+      { position: new THREE.Vector3(0, 0, 2.5),      rotation: new THREE.Euler(0, 0, 0),            scale: 1   },
+      { position: new THREE.Vector3(0, -0.3, 1),      rotation: new THREE.Euler(1.57, 0, 0),         scale: 1   },
+      { position: new THREE.Vector3(8, -1.2, -8.3),   rotation: new THREE.Euler(0.16, -0.91, -0.16), scale: 7   },
+      { position: new THREE.Vector3(0, 0, -0.7),      rotation: new THREE.Euler(0, 0, 0),            scale: 5.3 },
+      { position: new THREE.Vector3(1.8, 0.25, 0.1),  rotation: new THREE.Euler(0, 1.57, 0.6),       scale: 1, color: new THREE.Color('#8AB4FC') }
+    ]
+  };
+  const cwParticleBConfig = {
+    shaderDefaults: {
+      uSize: 3, uSpread: [0,0], uNoiseFrequency: 8,
+      uNoiseStrength: 0.25, uDelay: 0.3,
+      uBaseColor: new THREE.Color('#CDFAAC'), uAlpha: 0
+    },
+    steps: [
+      { position: new THREE.Vector3(1.8, 0.25, 0.1),   rotation: new THREE.Euler(0, 0, 0.6),     scale: 5 },
+      { position: new THREE.Vector3(1.8, -0.25, -0.2),  rotation: new THREE.Euler(0, 1.57, 0.6),  scale: 1 }
+    ]
+  };
+
+  // ═══════════════════════════════════════════
+  // THREE.JS SETUP
+  // ═══════════════════════════════════════════
+  const cwCanvas   = document.getElementById('cw-webgl');
+  const cwRenderer = new THREE.WebGLRenderer({ canvas: cwCanvas, antialias: false, alpha: false });
+  cwRenderer.setClearColor(0x0F131A);
+  cwRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const cwScene  = new THREE.Scene();
+  const cwCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  cwCamera.position.set(0, 0, 3.5);
+
+  function cwCreateParticleSystem(config, idx0, idx1) {
+    const count = CW_PARTICLE_COUNT;
+    const rnd   = new Float32Array(count * 4);
+    for (let i = 0; i < count * 4; i++) rnd[i] = Math.random();
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position',       new THREE.BufferAttribute(cwParticleShapes[idx0].slice(), 3));
+    geo.setAttribute('targetPosition', new THREE.BufferAttribute(cwParticleShapes[idx1].slice(), 3));
+    geo.setAttribute('random',         new THREE.BufferAttribute(rnd, 4));
+    const s0 = config.steps[0], s1 = config.steps[1] || config.steps[0];
+    const u = {
+      uTime:           { value: 0 },
+      uIdleTime:       { value: 0 },
+      uSize:           { value: config.shaderDefaults.uSize },
+      uSpread:         { value: new THREE.Vector2(...config.shaderDefaults.uSpread) },
+      uNoiseFrequency: { value: config.shaderDefaults.uNoiseFrequency },
+      uNoiseStrength:  { value: config.shaderDefaults.uNoiseStrength },
+      uDelay:          { value: config.shaderDefaults.uDelay },
+      uProgress:       { value: 0 },
+      uBaseColor:      { value: config.shaderDefaults.uBaseColor.clone() },
+      uAlpha:          { value: config.shaderDefaults.uAlpha !== undefined ? config.shaderDefaults.uAlpha : 1 },
+      uIdleRadius:     { value: new THREE.Vector2(0.01, 0.05) },
+      uIdleSpeed:      { value: 0.8 },
+    };
+    const mat = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms: u, transparent: true, depthTest: false, blending: THREE.AdditiveBlending });
+    const pts = new THREE.Points(geo, mat);
+    pts.rotation.x = -Math.PI / 2;
+    pts.scale.setScalar(s0.scale);
+    pts.position.copy(s0.position);
+    return {
+      points: pts, uniforms: u, geometry: geo, config,
+      state: {
+        currentIndex:  0,
+        startPosition: s0.position.clone(), endPosition: s1.position.clone(),
+        startScale:    s0.scale,             endScale:    s1.scale || s0.scale,
+        startRotation: s0.rotation.clone(),  endRotation: s1.rotation.clone(),
+      }
+    };
+  }
+
+  const cwParticleA = cwCreateParticleSystem(cwParticleAConfig, 0, 1);
+  cwScene.add(cwParticleA.points);
+  const cwParticleB = cwCreateParticleSystem(cwParticleBConfig, 0, 4);
+  cwParticleB.points.visible = false;
+  cwScene.add(cwParticleB.points);
+
+  // ─── Wireframe layers ───
+  const CW_LAYERS_CONFIG = {
+    position: new THREE.Vector3(8, -0.1, -8.3),
+    rotation: new THREE.Euler(0.16, -0.91, -0.16),
+    width: 8.5, height: 0.8, depth: 14,
+  };
+  const cwLayersGroup = new THREE.Group();
+  cwLayersGroup.position.copy(CW_LAYERS_CONFIG.position);
+  cwLayersGroup.rotation.copy(CW_LAYERS_CONFIG.rotation);
+  const cwBoxMat = new THREE.LineBasicMaterial({ color: 0x4f4f4f, transparent: true, opacity: 0 });
+  cwLayersGroup.add(new THREE.LineSegments(
+    new THREE.EdgesGeometry(new THREE.BoxGeometry(CW_LAYERS_CONFIG.width, CW_LAYERS_CONFIG.height, CW_LAYERS_CONFIG.depth)), cwBoxMat
+  ));
+  const CW_PLANE_GAP = 0.375;
+  const cwPlaneYPos = [
+    CW_LAYERS_CONFIG.height/2 + 2*CW_PLANE_GAP,
+    -(CW_LAYERS_CONFIG.height/2 + CW_PLANE_GAP),
+    -(CW_LAYERS_CONFIG.height/2 + 3*CW_PLANE_GAP)
+  ];
+  const cwPlaneMeshes = cwPlaneYPos.map(y => {
+    const mat  = new THREE.LineBasicMaterial({ color: 0x8AB4FC, transparent: true, opacity: 0, blending: THREE.AdditiveBlending });
+    const mesh = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(CW_LAYERS_CONFIG.width, 0.02, CW_LAYERS_CONFIG.depth)), mat);
+    mesh.position.y = y;
+    cwLayersGroup.add(mesh);
+    return mesh;
+  });
+  cwScene.add(cwLayersGroup);
+
+  // ═══════════════════════════════════════════
+  // CANVAS CLIP — pixel-clamp canvas to exactly where
+  // #celsior-wrapper is visible in the viewport so it
+  // never bleeds into adjacent sections.
+  // ═══════════════════════════════════════════
+  const cwWrapper = document.getElementById('celsior-wrapper');
+  const cwHud     = document.querySelector('#celsior-wrapper .cw-hud');
+
+  // Show canvas (clip-path controls what's actually visible)
+  cwCanvas.style.display = 'block';
+
+  // Height the HUD occupies at viewport bottom (labels + bar + hint + padding)
+  var CW_HUD_H = 90;
+
+  function cwUpdateClip() {
+    var rect        = cwWrapper.getBoundingClientRect();
+    var vh          = window.innerHeight;
+    var insetTop    = Math.max(0, Math.min(vh, rect.top));
+    var insetBottom = Math.max(0, Math.min(vh, vh - rect.bottom));
+    var visible     = rect.bottom > 0 && rect.top < vh;
+
+    cwCanvas.style.visibility = visible ? 'visible' : 'hidden';
+    cwCanvas.style.clipPath   = 'inset(' + insetTop + 'px 0px ' + insetBottom + 'px 0px)';
+
+    // Hide HUD when wrapper bottom is within HUD_H of viewport bottom,
+    // so the progress bar never overlaps the section below.
+    var hudVisible = visible && rect.bottom > (vh - CW_HUD_H + 28);
+    if (cwHud) cwHud.style.display = hudVisible ? 'flex' : 'none';
+  }
+
+  window.addEventListener('scroll', cwUpdateClip, { passive: true });
+  window.addEventListener('resize', cwUpdateClip);
+  cwUpdateClip();
+
+  // ═══════════════════════════════════════════
+  // SCROLL — drives particles across the section
+  // ═══════════════════════════════════════════
+  const CW_TRANSITION_COUNT = 4;
+  let cwCameraOffset = { x: 0, y: 0 };
+  let cwIdleTime = 0;
+
+  function cwShowLayers() {
+    gsap.to([cwBoxMat, ...cwPlaneMeshes.map(p => p.material)], { opacity: 1, duration: 0.8, stagger: 0.1 });
+  }
+  function cwHideLayers() {
+    gsap.to([cwBoxMat, ...cwPlaneMeshes.map(p => p.material)], { opacity: 0, duration: 0.5 });
+  }
+
+  function cwOnScrollComplete(index, direction) {
+    const aSteps = cwParticleAConfig.steps;
+    if (direction === 1) {
+      const prevIdx = index;
+      const nextIdx = Math.min(index + 1, aSteps.length - 1);
+      if (nextIdx < cwParticleShapes.length) {
+        cwParticleA.geometry.setAttribute('position',       new THREE.BufferAttribute(cwParticleShapes[prevIdx].slice(), 3));
+        cwParticleA.geometry.setAttribute('targetPosition', new THREE.BufferAttribute(cwParticleShapes[nextIdx].slice(), 3));
+        cwParticleA.geometry.attributes.position.needsUpdate = true;
+        cwParticleA.geometry.attributes.targetPosition.needsUpdate = true;
+      }
+      if (prevIdx < aSteps.length && nextIdx < aSteps.length) {
+        cwParticleA.state.startPosition = aSteps[prevIdx].position.clone();
+        cwParticleA.state.endPosition   = aSteps[nextIdx].position.clone();
+        cwParticleA.state.startScale    = aSteps[prevIdx].scale;
+        cwParticleA.state.endScale      = aSteps[nextIdx].scale || aSteps[prevIdx].scale;
+        cwParticleA.state.startRotation = aSteps[prevIdx].rotation.clone();
+        cwParticleA.state.endRotation   = aSteps[nextIdx].rotation.clone();
+      }
+      cwParticleA.uniforms.uProgress.value = 0;
+      if (index+1 === 1) cwShowLayers();
+      if (index+1 === 3) cwHideLayers();
+      if (index+1 === 3) cwParticleB.points.visible = true;
+    } else {
+      const nextIdx = Math.max(index, 0);
+      const prevIdx = Math.max(index - 1, 0);
+      if (nextIdx < cwParticleShapes.length) {
+        cwParticleA.geometry.setAttribute('position',       new THREE.BufferAttribute(cwParticleShapes[prevIdx].slice(), 3));
+        cwParticleA.geometry.setAttribute('targetPosition', new THREE.BufferAttribute(cwParticleShapes[nextIdx].slice(), 3));
+        cwParticleA.geometry.attributes.position.needsUpdate = true;
+        cwParticleA.geometry.attributes.targetPosition.needsUpdate = true;
+      }
+      if (prevIdx < aSteps.length && nextIdx < aSteps.length) {
+        cwParticleA.state.startPosition = aSteps[prevIdx].position.clone();
+        cwParticleA.state.endPosition   = aSteps[nextIdx].position.clone();
+        cwParticleA.state.startScale    = aSteps[prevIdx].scale;
+        cwParticleA.state.endScale      = aSteps[nextIdx].scale || aSteps[prevIdx].scale;
+        cwParticleA.state.startRotation = aSteps[prevIdx].rotation.clone();
+        cwParticleA.state.endRotation   = aSteps[nextIdx].rotation.clone();
+      }
+      cwParticleA.uniforms.uProgress.value = 0;
+      if (index === 3) cwParticleB.points.visible = false;
+      if (index === 1) cwShowLayers();
+      if (index === 1 && direction === -1) cwHideLayers();
+    }
+  }
+
+  // Single timeline scrubbed across the section scroll
+  const cwTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.page-sections',
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: true,
+    }
+  });
+
+  for (let i = 0; i < CW_TRANSITION_COUNT; i++) {
+    const proxy    = { x: 0 };
+    const duration = (i === 0 || i === CW_TRANSITION_COUNT - 1) ? 1.5 : 1;
+    cwTl.to(proxy, {
+      x: 1, duration, ease: 'sine.inOut',
+      onUpdate() {
+        const p = proxy.x;
+        cwParticleA.uniforms.uProgress.value = p;
+
+        cwParticleA.points.position.lerpVectors(cwParticleA.state.startPosition, cwParticleA.state.endPosition, p);
+        cwParticleA.points.scale.setScalar(cwParticleA.state.startScale + (cwParticleA.state.endScale - cwParticleA.state.startScale) * p);
+        cwParticleA.points.rotation.x = cwParticleA.state.startRotation.x + (cwParticleA.state.endRotation.x - cwParticleA.state.startRotation.x) * p - Math.PI / 2;
+        cwParticleA.points.rotation.y = cwParticleA.state.startRotation.y + (cwParticleA.state.endRotation.y - cwParticleA.state.startRotation.y) * p;
+        cwParticleA.points.rotation.z = cwParticleA.state.startRotation.z + (cwParticleA.state.endRotation.z - cwParticleA.state.startRotation.z) * p;
+
+        if (cwParticleB.points.visible) {
+          cwParticleB.uniforms.uAlpha.value    = Math.max(0, Math.min(1, p / 0.3));
+          cwParticleB.uniforms.uProgress.value = p;
+          cwParticleB.points.position.lerpVectors(cwParticleBConfig.steps[0].position, cwParticleBConfig.steps[1].position, p);
+          cwParticleB.points.scale.setScalar(cwParticleBConfig.steps[0].scale + (cwParticleBConfig.steps[1].scale - cwParticleBConfig.steps[0].scale) * p);
+        }
+
+        if (i === CW_TRANSITION_COUNT - 1) {
+          const blueT = Math.max(0, Math.min(1, p / 0.3));
+          cwParticleA.uniforms.uBaseColor.value.lerpColors(new THREE.Color('#ffffff'), new THREE.Color('#8AB4FC'), blueT);
+        }
+
+        const overall = (i + p) / CW_TRANSITION_COUNT;
+        cwCameraOffset.x = -0.3 * overall;
+        cwCameraOffset.y = -0.2 * overall;
+
+        document.getElementById('cwProgressFill').style.transform = `scaleX(${overall})`;
+        document.getElementById('cwTechLabels').classList.toggle('visible', overall > 0.85);
+        document.getElementById('cwScrollHint').style.opacity = Math.max(0, 1 - overall * 8);
+      },
+      onComplete()        { cwOnScrollComplete(i + 1,  1); },
+      onReverseComplete() { cwOnScrollComplete(i,      -1); }
+    }, '>');
+  }
+
+  // ═══════════════════════════════════════════
+  // GSAP CONTENT ANIMATIONS
+  // ═══════════════════════════════════════════
+  gsap.utils.toArray('#celsior-wrapper .anim-up').forEach(function(el, i) {
+    gsap.to(el, {
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 90%',
+        toggleActions: 'play none none reverse',
+      },
+      opacity: 1, y: 0,
+      duration: 0.85,
+      delay: (i % 6) * 0.07,
+      ease: 'power3.out',
+    });
+  });
+
+  gsap.utils.toArray('#celsior-wrapper .anim-left').forEach(function(el, i) {
+    gsap.to(el, {
+      scrollTrigger: {
+        trigger: '#sec-ald',
+        start: 'top 82%',
+        toggleActions: 'play none none reverse',
+      },
+      opacity: 1, x: 0,
+      duration: 1.0,
+      delay: i * 0.14,
+      ease: 'power3.out',
+    });
+  });
+
+  // ═══════════════════════════════════════════
+  // RESIZE + RENDER LOOP
+  // ═══════════════════════════════════════════
+  function cwResize() {
+    cwRenderer.setSize(window.innerWidth, window.innerHeight);
+    cwCamera.aspect = window.innerWidth / window.innerHeight;
+    cwCamera.updateProjectionMatrix();
+  }
+  cwResize();
+  window.addEventListener('resize', cwResize);
+
+  let cwLastTime = 0;
+  function cwAnimate(time) {
+    requestAnimationFrame(cwAnimate);
+    const dt = (time - cwLastTime) * 0.001;
+    cwLastTime = time;
+    cwIdleTime += dt;
+    cwParticleA.uniforms.uTime.value     = time * 0.001;
+    cwParticleA.uniforms.uIdleTime.value = cwIdleTime;
+    cwParticleB.uniforms.uTime.value     = time * 0.001;
+    cwParticleB.uniforms.uIdleTime.value = cwIdleTime;
+    cwCamera.position.x += (cwCameraOffset.x - cwCamera.position.x) * 0.05;
+    cwCamera.position.y += (cwCameraOffset.y - cwCamera.position.y) * 0.05;
+    cwCamera.lookAt(0, 0, 0);
+    cwRenderer.render(cwScene, cwCamera);
+  }
+  cwAnimate(0);
+
+})();
+</script>
+
+
 
 </body>
 </html>
