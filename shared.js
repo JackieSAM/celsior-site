@@ -1,11 +1,135 @@
 /**
  * shared.js — Celsior site-wide nav + footer injector
- * Include this script on every page. It reads data-page on the <body>
- * (e.g. <body data-page="how">) to highlight the active nav item.
+ * Include this script on EVERY page (load with `defer`). Active nav item
+ * is auto-detected from the URL filename; you can override with
+ * <body data-page="how">.
  *
  * Pages: home | solve | how | deliver | ai | industries | partners | about
+ *
+ * Homepage safety: the script auto-skips injection if the page already
+ * ships its own <nav id="navbar"> or <footer id="siteFooterLight">, OR
+ * if <body data-shared="off"> is set. So you can drop
+ *   <script src="shared.js" defer></script>
+ * into index.html without producing duplicate headers/footers.
  */
 (function () {
+  if (window.__celsiorSharedLoaded) return;
+  window.__celsiorSharedLoaded = true;
+
+  /* ─── 0.  LEGACY LINK NORMALIZER ────────────────────────────────────
+     Some existing pages, especially index.html, ship their own header and
+     may still contain old URLs. Normalize those links before any guard can
+     skip injection, and intercept clicks as a second safety net.
+  ─────────────────────────────────────────────────────────────────── */
+  const LEGACY_LINK_MAP = {
+    'what-we-solve.html': 'Our_Focus.html',
+    'how-we-do-it.html': 'Capabilities.html',
+    'how-we-deliver.html': 'Solutions.html',
+    'our_focus.html': 'Our_Focus.html',
+    'capabilties.html': 'Capabilities.html',
+    'capabilities.html': 'Capabilities.html',
+    'solutions.html': 'Solutions.html',
+  };
+
+  function normalizeLegacyHref(rawHref) {
+    if (!rawHref || rawHref.startsWith('#') || rawHref.startsWith('mailto:') || rawHref.startsWith('tel:')) return rawHref;
+    try {
+      const url = new URL(rawHref, window.location.href);
+      if (url.origin !== window.location.origin && !/^(file:)$/.test(window.location.protocol)) return rawHref;
+      const file = (url.pathname.split('/').pop() || '').toLowerCase();
+      const replacement = LEGACY_LINK_MAP[file];
+      if (!replacement) return rawHref;
+      const folder = url.pathname.slice(0, Math.max(0, url.pathname.lastIndexOf('/') + 1));
+      return `${folder}${replacement}${url.search}${url.hash}`;
+    } catch (_) {
+      const clean = rawHref.split('#')[0].split('?')[0].split('/').pop().toLowerCase();
+      const replacement = LEGACY_LINK_MAP[clean];
+      return replacement ? rawHref.replace(/[^/?#]+\.html/i, replacement) : rawHref;
+    }
+  }
+
+  function rewriteLegacyLinks(root) {
+    (root || document).querySelectorAll('a[href]').forEach(function (link) {
+      const fixedHref = normalizeLegacyHref(link.getAttribute('href'));
+      if (fixedHref && fixedHref !== link.getAttribute('href')) link.setAttribute('href', fixedHref);
+    });
+  }
+
+  function keepLegacyLinksNormalized() {
+    rewriteLegacyLinks(document);
+    document.addEventListener('DOMContentLoaded', function () { rewriteLegacyLinks(document); }, { once: true });
+    window.addEventListener('load', function () { rewriteLegacyLinks(document); }, { once: true });
+    if (typeof MutationObserver !== 'undefined') {
+      new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.type === 'attributes' && mutation.target && mutation.target.matches && mutation.target.matches('a[href]')) {
+            rewriteLegacyLinks(mutation.target.parentNode || document);
+          }
+          mutation.addedNodes.forEach(function (node) {
+            if (node.nodeType === 1) rewriteLegacyLinks(node);
+          });
+        });
+      }).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['href'] });
+    }
+  }
+
+  function installLegacyClickGuard() {
+    document.addEventListener('click', function (event) {
+      const link = event.target && event.target.closest ? event.target.closest('a[href]') : null;
+      if (!link) return;
+      const currentHref = link.getAttribute('href');
+      const fixedHref = normalizeLegacyHref(currentHref);
+      if (!fixedHref || fixedHref === currentHref) return;
+      event.preventDefault();
+      link.setAttribute('href', fixedHref);
+      window.location.href = fixedHref;
+    }, true);
+  }
+
+  /* ─── 1.  OPT-OUT / EXISTING ELEMENT DETECTION ─────────────────────
+     Clean site-wide rule:
+       • shared.js is the single source of truth for secondary-page nav/footer.
+       • Existing complete homepage nav/footer are respected, so no duplicates.
+       • Missing or empty placeholders are filled independently.
+  ─────────────────────────────────────────────────────────────────── */
+  if (!document.body) {
+    document.addEventListener('DOMContentLoaded', function () {
+      keepLegacyLinksNormalized();
+      installLegacyClickGuard();
+      window.__celsiorSharedLoaded = false;
+      const s = document.createElement('script');
+      s.src = (document.currentScript && document.currentScript.src) || 'shared.js';
+      s.defer = true;
+      document.head.appendChild(s);
+    }, { once: true });
+    return;
+  }
+  keepLegacyLinksNormalized();
+  installLegacyClickGuard();
+
+  if (document.body.dataset.shared === 'off') {
+    console.info('[shared.js] Skipped injection — body[data-shared="off"].');
+    return;
+  }
+
+  function hasUsableNav() {
+    const nav = document.getElementById('navbar');
+    return !!(nav && nav.querySelector('a[href], button, .nav-link, .nav-logo'));
+  }
+
+  function hasUsableFooter() {
+    const footer = document.getElementById('siteFooterLight') || document.querySelector('footer');
+    return !!(footer && footer.querySelector('a[href], .fl-grid, .fl-brand, .fl-bottom'));
+  }
+
+  const shouldInjectNav = !hasUsableNav();
+  const shouldInjectFooter = !hasUsableFooter();
+
+  if (!shouldInjectNav && !shouldInjectFooter) {
+    console.info('[shared.js] Existing complete nav and footer found — normalized links only.');
+    return;
+  }
+
   /* ─── 1.  INJECT CSS ──────────────────────────────────────────────── */
   const style = document.createElement('style');
   style.textContent = `
@@ -202,7 +326,26 @@ a.nav-link{text-decoration:none;}
   document.head.appendChild(style);
 
   /* ─── 2.  DETERMINE ACTIVE PAGE ───────────────────────────────────── */
-  const activePage = (document.body.dataset.page || '').toLowerCase();
+  // Priority: explicit body[data-page] override → auto-detect from URL filename.
+  const PAGE_MAP = {
+    'index.html':        'home',
+    '':                  'home',
+    'our_focus.html':    'solve',
+    'what-we-solve.html':'solve',
+    'capabilities.html': 'how',
+    'how-we-do-it.html': 'how',
+    'solutions.html':    'deliver',
+    'how-we-deliver.html':'deliver',
+    'ai-innovation.html':'ai',
+    'industries.html':   'industries',
+    'partner-ecosystem.html':'partners',
+    'about.html':        'about',
+  };
+  let activePage = (document.body.dataset.page || '').toLowerCase();
+  if (!activePage) {
+    const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    activePage = PAGE_MAP[file] || '';
+  }
 
   /* ─── 3.  NAV HTML ───────────────────────────────────────────────── */
   const LOGO = 'https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg';
@@ -210,9 +353,9 @@ a.nav-link{text-decoration:none;}
   const ARROW_SVG = `<svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7H11.5M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
   const navItems = [
-    { key: 'solve',      label: 'What we Solve',     href: 'what-we-solve.html' },
-    { key: 'how',        label: 'How we Do it',       href: 'how-we-do-it.html'  },
-    { key: 'deliver',    label: 'How we Deliver',     href: 'how-we-deliver.html'},
+    { key: 'solve',      label: 'Our Focus',          href: 'Our_Focus.html' },
+    { key: 'how',        label: 'Capabilities',        href: 'Capabilities.html'  },
+    { key: 'deliver',    label: 'Solutions',           href: 'Solutions.html'},
     { key: 'ai',         label: 'AI &amp; Innovation',href: 'ai-innovation.html' },
     { key: 'industries', label: 'Industries',         href: 'industries.html'    },
     { key: 'partners',   label: 'Partner Ecosystem',  href: 'partner-ecosystem.html'},
@@ -226,25 +369,25 @@ a.nav-link{text-decoration:none;}
 
   const drawerDivHTML = `
     <div class="drawer-item">
-      <div class="drawer-link" data-drawer-toggle="d-solve">What we Solve<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="drawer-link" data-drawer-toggle="d-solve">Our Focus<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-solve">
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Core &amp; Legacy Modernization</div><a href="what-we-solve.html">Technical Debt Reduction</a><a href="what-we-solve.html">Cloud Transformation</a><a href="what-we-solve.html">Continuous Modernization</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Risk &amp; Compliance</div><a href="what-we-solve.html">Regulatory Readiness</a><a href="what-we-solve.html">Audit Readiness</a><a href="what-we-solve.html">Risk &amp; Controls Modernization</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">AI Adoption</div><a href="what-we-solve.html">AI Readiness Assessment</a><a href="what-we-solve.html">Enterprise AI Enablement</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Core &amp; Legacy Modernization</div><a href="Our_Focus.html">Technical Debt Reduction</a><a href="Our_Focus.html">Cloud Transformation</a><a href="Our_Focus.html">Continuous Modernization</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Risk &amp; Compliance</div><a href="Our_Focus.html">Regulatory Readiness</a><a href="Our_Focus.html">Audit Readiness</a><a href="Our_Focus.html">Risk &amp; Controls Modernization</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">AI Adoption</div><a href="Our_Focus.html">AI Readiness Assessment</a><a href="Our_Focus.html">Enterprise AI Enablement</a></div>
       </div>
     </div>
     <div class="drawer-item">
-      <div class="drawer-link" data-drawer-toggle="d-how">How we Do it<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="drawer-link" data-drawer-toggle="d-how">Capabilities<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-how">
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Application &amp; Platform</div><a href="how-we-do-it.html">Application Engineering</a><a href="how-we-do-it.html">Platform Engineering</a><a href="how-we-do-it.html">API &amp; Integration Engineering</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Data &amp; AI Engineering</div><a href="how-we-do-it.html">Data Engineering</a><a href="how-we-do-it.html">AI/ML Engineering</a><a href="how-we-do-it.html">Intelligent Automation</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Application &amp; Platform</div><a href="Capabilities.html">Application Engineering</a><a href="Capabilities.html">Platform Engineering</a><a href="Capabilities.html">API &amp; Integration Engineering</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Data &amp; AI Engineering</div><a href="Capabilities.html">Data Engineering</a><a href="Capabilities.html">AI/ML Engineering</a><a href="Capabilities.html">Intelligent Automation</a></div>
       </div>
     </div>
     <div class="drawer-item">
-      <div class="drawer-link" data-drawer-toggle="d-deliver">How we Deliver<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="drawer-link" data-drawer-toggle="d-deliver">Solutions<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-deliver">
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Global Delivery</div><a href="how-we-deliver.html">GCC Build &amp; Operate</a><a href="how-we-deliver.html">BOT Model</a><a href="how-we-deliver.html">Mexico &amp; LATAM Nearshore</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Teams-as-a-Service</div><a href="how-we-deliver.html">Dedicated Engineering Pods</a><a href="how-we-deliver.html">Hire-Train-Deploy</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Global Delivery</div><a href="Solutions.html">GCC Build &amp; Operate</a><a href="Solutions.html">BOT Model</a><a href="Solutions.html">Mexico &amp; LATAM Nearshore</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Teams-as-a-Service</div><a href="Solutions.html">Dedicated Engineering Pods</a><a href="Solutions.html">Hire-Train-Deploy</a></div>
       </div>
     </div>
     <div class="drawer-item">
@@ -279,47 +422,47 @@ a.nav-link{text-decoration:none;}
   const megaPanelsHTML = `
   <!-- SOLVE -->
   <div class="mega-panel" id="menu-solve"><div class="mega-inner">
-    <div class="mega-col"><div class="mega-label">What we Solve</div><div class="mega-col-head">Modernization</div>
-      <div class="mega-group"><div class="mega-group-title">Core &amp; Legacy Modernization</div><ul class="mega-links"><li><a href="what-we-solve.html">Technical Debt Reduction</a></li><li><a href="what-we-solve.html">Cloud Transformation</a></li><li><a href="what-we-solve.html">Continuous Modernization</a></li></ul></div>
-      <div class="mega-group"><div class="mega-group-title">Digital Experience</div><ul class="mega-links"><li><a href="what-we-solve.html">Omnichannel Transformation</a></li><li><a href="what-we-solve.html">Digital Product Engineering</a></li><li><a href="what-we-solve.html">Customer Experience Modernization</a></li></ul></div>
+    <div class="mega-col"><div class="mega-label">Our Focus</div><div class="mega-col-head">Modernization</div>
+      <div class="mega-group"><div class="mega-group-title">Core &amp; Legacy Modernization</div><ul class="mega-links"><li><a href="Our_Focus.html">Technical Debt Reduction</a></li><li><a href="Our_Focus.html">Cloud Transformation</a></li><li><a href="Our_Focus.html">Continuous Modernization</a></li></ul></div>
+      <div class="mega-group"><div class="mega-group-title">Digital Experience</div><ul class="mega-links"><li><a href="Our_Focus.html">Omnichannel Transformation</a></li><li><a href="Our_Focus.html">Digital Product Engineering</a></li><li><a href="Our_Focus.html">Customer Experience Modernization</a></li></ul></div>
     </div>
     <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Risk &amp; Compliance</div>
-      <div class="mega-group"><div class="mega-group-title">Operational Resilience</div><ul class="mega-links"><li><a href="what-we-solve.html">Regulatory Readiness</a></li><li><a href="what-we-solve.html">Audit Readiness</a></li><li><a href="what-we-solve.html">Risk &amp; Controls Modernization</a></li></ul></div>
-      <div class="mega-group"><div class="mega-group-title">Cost &amp; Efficiency</div><ul class="mega-links"><li><a href="what-we-solve.html">IT Cost Optimization</a></li><li><a href="what-we-solve.html">Cloud FinOps</a></li><li><a href="what-we-solve.html">Platform Consolidation</a></li></ul></div>
+      <div class="mega-group"><div class="mega-group-title">Operational Resilience</div><ul class="mega-links"><li><a href="Our_Focus.html">Regulatory Readiness</a></li><li><a href="Our_Focus.html">Audit Readiness</a></li><li><a href="Our_Focus.html">Risk &amp; Controls Modernization</a></li></ul></div>
+      <div class="mega-group"><div class="mega-group-title">Cost &amp; Efficiency</div><ul class="mega-links"><li><a href="Our_Focus.html">IT Cost Optimization</a></li><li><a href="Our_Focus.html">Cloud FinOps</a></li><li><a href="Our_Focus.html">Platform Consolidation</a></li></ul></div>
     </div>
     <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">AI Adoption</div>
-      <div class="mega-group"><div class="mega-group-title">Enterprise Readiness</div><ul class="mega-links"><li><a href="what-we-solve.html">AI Readiness Assessment</a></li><li><a href="what-we-solve.html">Responsible AI</a></li><li><a href="what-we-solve.html">Enterprise AI Enablement</a></li><li><a href="what-we-solve.html">Intelligent Automation</a></li></ul></div>
+      <div class="mega-group"><div class="mega-group-title">Enterprise Readiness</div><ul class="mega-links"><li><a href="Our_Focus.html">AI Readiness Assessment</a></li><li><a href="Our_Focus.html">Responsible AI</a></li><li><a href="Our_Focus.html">Enterprise AI Enablement</a></li><li><a href="Our_Focus.html">Intelligent Automation</a></li></ul></div>
     </div>
     <div class="mega-featured"><div class="feat-tag">Free Assessment</div><div class="feat-card"><div class="feat-card-title">Modernization Diagnostic</div><div class="feat-card-desc">2-week assessment of your legacy landscape with a prioritized roadmap.</div></div><div class="feat-card"><div class="feat-card-title">AI Readiness Index</div><div class="feat-card-desc">Benchmark your AI maturity against industry peers.</div></div></div>
   </div></div>
 
   <!-- HOW WE DO IT -->
   <div class="mega-panel" id="menu-how"><div class="mega-inner">
-    <div class="mega-col"><div class="mega-label">How we Do it</div><div class="mega-col-head">Engineering</div>
-      <div class="mega-group"><div class="mega-group-title">Application &amp; Platform</div><ul class="mega-links"><li><a href="how-we-do-it.html">Application Engineering</a></li><li><a href="how-we-do-it.html">Platform Engineering</a></li><li><a href="how-we-do-it.html">API &amp; Integration Engineering</a></li><li><a href="how-we-do-it.html">Microservices &amp; Modern Architectures</a></li></ul></div>
-      <div class="mega-group"><div class="mega-group-title">Cloud &amp; Infrastructure</div><ul class="mega-links"><li><a href="how-we-do-it.html">Cloud Engineering &amp; Migration</a></li><li><a href="how-we-do-it.html">DevOps &amp; SRE</a></li><li><a href="how-we-do-it.html">Observability &amp; Reliability</a></li><li><a href="how-we-do-it.html">Infrastructure Automation</a></li></ul></div>
+    <div class="mega-col"><div class="mega-label">Capabilities</div><div class="mega-col-head">Engineering</div>
+      <div class="mega-group"><div class="mega-group-title">Application &amp; Platform</div><ul class="mega-links"><li><a href="Capabilities.html">Application Engineering</a></li><li><a href="Capabilities.html">Platform Engineering</a></li><li><a href="Capabilities.html">API &amp; Integration Engineering</a></li><li><a href="Capabilities.html">Microservices &amp; Modern Architectures</a></li></ul></div>
+      <div class="mega-group"><div class="mega-group-title">Cloud &amp; Infrastructure</div><ul class="mega-links"><li><a href="Capabilities.html">Cloud Engineering &amp; Migration</a></li><li><a href="Capabilities.html">DevOps &amp; SRE</a></li><li><a href="Capabilities.html">Observability &amp; Reliability</a></li><li><a href="Capabilities.html">Infrastructure Automation</a></li></ul></div>
     </div>
     <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Data &amp; Intelligence</div>
-      <div class="mega-group"><div class="mega-group-title">Data &amp; AI Engineering</div><ul class="mega-links"><li><a href="how-we-do-it.html">Data Engineering</a></li><li><a href="how-we-do-it.html">Data Platforms &amp; Warehousing</a></li><li><a href="how-we-do-it.html">AI/ML Engineering</a></li><li><a href="how-we-do-it.html">Intelligent Automation</a></li></ul></div>
+      <div class="mega-group"><div class="mega-group-title">Data &amp; AI Engineering</div><ul class="mega-links"><li><a href="Capabilities.html">Data Engineering</a></li><li><a href="Capabilities.html">Data Platforms &amp; Warehousing</a></li><li><a href="Capabilities.html">AI/ML Engineering</a></li><li><a href="Capabilities.html">Intelligent Automation</a></li></ul></div>
     </div>
     <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Operations &amp; Security</div>
-      <div class="mega-group"><div class="mega-group-title">Enterprise ITSM</div><ul class="mega-links"><li><a href="how-we-do-it.html">IT Service Management</a></li><li><a href="how-we-do-it.html">Incident &amp; Change Management</a></li><li><a href="how-we-do-it.html">Service Operations Automation</a></li></ul></div>
-      <div class="mega-group"><div class="mega-group-title">Security &amp; Governance</div><ul class="mega-links"><li><a href="how-we-do-it.html">Security Engineering</a></li><li><a href="how-we-do-it.html">Compliance Engineering</a></li><li><a href="how-we-do-it.html">Identity &amp; Access Integration</a></li></ul></div>
+      <div class="mega-group"><div class="mega-group-title">Enterprise ITSM</div><ul class="mega-links"><li><a href="Capabilities.html">IT Service Management</a></li><li><a href="Capabilities.html">Incident &amp; Change Management</a></li><li><a href="Capabilities.html">Service Operations Automation</a></li></ul></div>
+      <div class="mega-group"><div class="mega-group-title">Security &amp; Governance</div><ul class="mega-links"><li><a href="Capabilities.html">Security Engineering</a></li><li><a href="Capabilities.html">Compliance Engineering</a></li><li><a href="Capabilities.html">Identity &amp; Access Integration</a></li></ul></div>
     </div>
     <div class="mega-featured"><div class="feat-tag">Spotlight</div><div class="feat-card"><div class="feat-card-title">Platform Engineering at Scale</div><div class="feat-card-desc">Golden paths for 3 global banks with 200+ engineering teams.</div></div></div>
   </div></div>
 
   <!-- HOW WE DELIVER -->
   <div class="mega-panel" id="menu-deliver"><div class="mega-inner">
-    <div class="mega-col"><div class="mega-label">How we Deliver</div><div class="mega-col-head">Consulting</div>
-      <div class="mega-group"><ul class="mega-links"><li><a href="how-we-deliver.html">Strategy-to-Execution Programs</a></li><li><a href="how-we-deliver.html">Architecture &amp; Transformation Consulting</a></li><li><a href="how-we-deliver.html">Platform Implementation</a></li></ul></div>
+    <div class="mega-col"><div class="mega-label">Solutions</div><div class="mega-col-head">Consulting</div>
+      <div class="mega-group"><ul class="mega-links"><li><a href="Solutions.html">Strategy-to-Execution Programs</a></li><li><a href="Solutions.html">Architecture &amp; Transformation Consulting</a></li><li><a href="Solutions.html">Platform Implementation</a></li></ul></div>
     </div>
     <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Global Delivery</div>
-      <div class="mega-group"><div class="mega-group-title">GCC &amp; Nearshore</div><ul class="mega-links"><li><a href="how-we-deliver.html">GCC Build &amp; Operate</a></li><li><a href="how-we-deliver.html">BOT Model</a></li><li><a href="how-we-deliver.html">Mexico &amp; LATAM Nearshore</a></li></ul></div>
-      <div class="mega-group"><div class="mega-group-title">Teams-as-a-Service</div><ul class="mega-links"><li><a href="how-we-deliver.html">Dedicated Engineering Pods</a></li><li><a href="how-we-deliver.html">Skills-Based Teams</a></li><li><a href="how-we-deliver.html">Workforce Orchestration (Hoonr)</a></li><li><a href="how-we-deliver.html">Hire-Train-Deploy</a></li></ul></div>
+      <div class="mega-group"><div class="mega-group-title">GCC &amp; Nearshore</div><ul class="mega-links"><li><a href="Solutions.html">GCC Build &amp; Operate</a></li><li><a href="Solutions.html">BOT Model</a></li><li><a href="Solutions.html">Mexico &amp; LATAM Nearshore</a></li></ul></div>
+      <div class="mega-group"><div class="mega-group-title">Teams-as-a-Service</div><ul class="mega-links"><li><a href="Solutions.html">Dedicated Engineering Pods</a></li><li><a href="Solutions.html">Skills-Based Teams</a></li><li><a href="Solutions.html">Workforce Orchestration (Hoonr)</a></li><li><a href="Solutions.html">Hire-Train-Deploy</a></li></ul></div>
     </div>
     <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Managed Programs</div>
-      <div class="mega-group"><ul class="mega-links"><li><a href="how-we-deliver.html">Managed Platform Operations</a></li><li><a href="how-we-deliver.html">Continuous Modernization Factory</a></li><li><a href="how-we-deliver.html">Managed ServiceNow Operations</a></li><li><a href="how-we-deliver.html">Managed Support Services</a></li></ul></div>
+      <div class="mega-group"><ul class="mega-links"><li><a href="Solutions.html">Managed Platform Operations</a></li><li><a href="Solutions.html">Continuous Modernization Factory</a></li><li><a href="Solutions.html">Managed ServiceNow Operations</a></li><li><a href="Solutions.html">Managed Support Services</a></li></ul></div>
     </div>
     <div class="mega-featured"><div class="feat-tag">Compare Models</div><div class="feat-card"><div class="feat-card-title">GCC vs. BOT vs. Teams-as-a-Service</div><div class="feat-card-desc">Find the right operating model for your scale and goals.</div></div></div>
   </div></div>
@@ -387,52 +530,68 @@ a.nav-link{text-decoration:none;}
     <div class="mega-featured" style="flex:1.3"><div class="feat-tag">Latest News</div><div class="feat-card"><div class="feat-card-title">Celsior Named in Gartner Market Guide</div><div class="feat-card-desc">Recognized for AI-first core banking modernization.</div></div></div>
   </div></div>`;
 
-  // Inject backdrop + nav root
-  const backdropEl = document.createElement('div');
-  backdropEl.id = 'mega-backdrop';
-  document.body.insertBefore(backdropEl, document.body.firstChild);
+  let backdropEl = document.getElementById('mega-backdrop');
+  let navEl = document.getElementById('navbar');
+  let drawerEl = document.getElementById('mobileDrawer');
+  let megaRoot = document.getElementById('megaRoot');
 
-  const navEl = document.createElement('nav');
-  navEl.id = 'navbar';
-  navEl.innerHTML = `
-    <a href="index.html" class="nav-logo">
-      <img src="${LOGO}" alt="Celsior" class="logo-img"/>
-    </a>
-    <ul class="nav-links" id="navLinks">${navLinksHTML}</ul>
-    <div class="nav-right">
-      <a href="index.html#contact" class="btn-nav-solid">Contact us ${ARROW_SVG}</a>
-    </div>
-    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
-      <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
-    </button>`;
-  document.body.insertBefore(navEl, document.body.firstChild);
+  if (shouldInjectNav) {
+    const oldNav = document.getElementById('navbar');
+    if (oldNav) oldNav.remove();
+    const oldBackdrop = document.getElementById('mega-backdrop');
+    if (oldBackdrop) oldBackdrop.remove();
+    const oldDrawer = document.getElementById('mobileDrawer');
+    if (oldDrawer) oldDrawer.remove();
+    const oldMegaRoot = document.getElementById('megaRoot');
+    if (oldMegaRoot) oldMegaRoot.remove();
 
-  // Drawer
-  const drawerEl = document.createElement('div');
-  drawerEl.className = 'mobile-drawer';
-  drawerEl.id = 'mobileDrawer';
-  drawerEl.innerHTML = `
-    <div class="drawer-backdrop" id="drawerBackdrop"></div>
-    <div class="drawer-panel">
-      <div class="drawer-header">
-        <img src="${LOGO}" alt="Celsior" class="drawer-logo"/>
-        <button class="drawer-close" id="drawerClose" aria-label="Close menu">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3L13 13M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </button>
+    // Inject backdrop + nav root
+    backdropEl = document.createElement('div');
+    backdropEl.id = 'mega-backdrop';
+    document.body.insertBefore(backdropEl, document.body.firstChild);
+
+    navEl = document.createElement('nav');
+    navEl.id = 'navbar';
+    navEl.innerHTML = `
+      <a href="index.html" class="nav-logo">
+        <img src="${LOGO}" alt="Celsior" class="logo-img"/>
+      </a>
+      <ul class="nav-links" id="navLinks">${navLinksHTML}</ul>
+      <div class="nav-right">
+        <a href="index.html#contact" class="btn-nav-solid">Contact us ${ARROW_SVG}</a>
       </div>
-      <nav class="drawer-nav">${drawerDivHTML}</nav>
-      <div class="drawer-cta">
-        <a href="index.html#contact" class="drawer-cta-btn">Contact us ${ARROW_SVG}</a>
-      </div>
-    </div>`;
-  document.body.insertBefore(drawerEl, navEl.nextSibling);
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+        <span class="ham-line"></span><span class="ham-line"></span><span class="ham-line"></span>
+      </button>`;
+    document.body.insertBefore(navEl, document.body.firstChild);
 
-  // Mega root
-  const megaRoot = document.createElement('div');
-  megaRoot.className = 'mega-root';
-  megaRoot.id = 'megaRoot';
-  megaRoot.innerHTML = megaPanelsHTML;
-  document.body.insertBefore(megaRoot, drawerEl.nextSibling);
+    // Drawer
+    drawerEl = document.createElement('div');
+    drawerEl.className = 'mobile-drawer';
+    drawerEl.id = 'mobileDrawer';
+    drawerEl.innerHTML = `
+      <div class="drawer-backdrop" id="drawerBackdrop"></div>
+      <div class="drawer-panel">
+        <div class="drawer-header">
+          <img src="${LOGO}" alt="Celsior" class="drawer-logo"/>
+          <button class="drawer-close" id="drawerClose" aria-label="Close menu">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3L13 13M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <nav class="drawer-nav">${drawerDivHTML}</nav>
+        <div class="drawer-cta">
+          <a href="index.html#contact" class="drawer-cta-btn">Contact us ${ARROW_SVG}</a>
+        </div>
+      </div>`;
+    document.body.insertBefore(drawerEl, navEl.nextSibling);
+
+    // Mega root
+    megaRoot = document.createElement('div');
+    megaRoot.className = 'mega-root';
+    megaRoot.id = 'megaRoot';
+    megaRoot.innerHTML = megaPanelsHTML;
+    document.body.insertBefore(megaRoot, drawerEl.nextSibling);
+  }
 
   /* ─── 4.  FOOTER HTML ─────────────────────────────────────────────── */
   const footerEl = document.createElement('footer');
@@ -461,9 +620,9 @@ a.nav-link{text-decoration:none;}
   </div>
 
   <div class="fl-grid">
-    <div class="fl-col"><p class="fl-col-head">Solutions</p><nav class="fl-col-links"><a href="what-we-solve.html" class="fl-col-link">Core Banking Modernization</a><a href="what-we-solve.html" class="fl-col-link">Cloud Transformation</a><a href="what-we-solve.html" class="fl-col-link">Technical Debt Reduction</a><a href="what-we-solve.html" class="fl-col-link">Regulatory Readiness</a><a href="what-we-solve.html" class="fl-col-link">Digital Experience</a><a href="what-we-solve.html" class="fl-col-link">Enterprise AI Enablement</a></nav></div>
-    <div class="fl-col"><p class="fl-col-head">Services</p><nav class="fl-col-links"><a href="how-we-do-it.html" class="fl-col-link">Application Engineering</a><a href="how-we-do-it.html" class="fl-col-link">Platform Engineering</a><a href="how-we-do-it.html" class="fl-col-link">Cloud &amp; DevOps</a><a href="how-we-do-it.html" class="fl-col-link">Data &amp; AI Engineering</a><a href="how-we-do-it.html" class="fl-col-link">Security &amp; Governance</a><a href="how-we-do-it.html" class="fl-col-link">ITSM &amp; Operations</a></nav></div>
-    <div class="fl-col"><p class="fl-col-head">Delivery</p><nav class="fl-col-links"><a href="how-we-deliver.html" class="fl-col-link">GCC Build &amp; Operate</a><a href="how-we-deliver.html" class="fl-col-link">BOT Model</a><a href="how-we-deliver.html" class="fl-col-link">Mexico &amp; LATAM Nearshore</a><a href="how-we-deliver.html" class="fl-col-link">Engineering Pods</a><a href="how-we-deliver.html" class="fl-col-link">Hire-Train-Deploy <span class="fl-badge">New</span></a></nav></div>
+    <div class="fl-col"><p class="fl-col-head">Solutions</p><nav class="fl-col-links"><a href="Our_Focus.html" class="fl-col-link">Core Banking Modernization</a><a href="Our_Focus.html" class="fl-col-link">Cloud Transformation</a><a href="Our_Focus.html" class="fl-col-link">Technical Debt Reduction</a><a href="Our_Focus.html" class="fl-col-link">Regulatory Readiness</a><a href="Our_Focus.html" class="fl-col-link">Digital Experience</a><a href="Our_Focus.html" class="fl-col-link">Enterprise AI Enablement</a></nav></div>
+    <div class="fl-col"><p class="fl-col-head">Services</p><nav class="fl-col-links"><a href="Capabilities.html" class="fl-col-link">Application Engineering</a><a href="Capabilities.html" class="fl-col-link">Platform Engineering</a><a href="Capabilities.html" class="fl-col-link">Cloud &amp; DevOps</a><a href="Capabilities.html" class="fl-col-link">Data &amp; AI Engineering</a><a href="Capabilities.html" class="fl-col-link">Security &amp; Governance</a><a href="Capabilities.html" class="fl-col-link">ITSM &amp; Operations</a></nav></div>
+    <div class="fl-col"><p class="fl-col-head">Delivery</p><nav class="fl-col-links"><a href="Solutions.html" class="fl-col-link">GCC Build &amp; Operate</a><a href="Solutions.html" class="fl-col-link">BOT Model</a><a href="Solutions.html" class="fl-col-link">Mexico &amp; LATAM Nearshore</a><a href="Solutions.html" class="fl-col-link">Engineering Pods</a><a href="Solutions.html" class="fl-col-link">Hire-Train-Deploy <span class="fl-badge">New</span></a></nav></div>
     <div class="fl-col"><p class="fl-col-head">AI &amp; Innovation</p><nav class="fl-col-links"><a href="ai-innovation.html" class="fl-col-link">Celsior AI Lab</a><a href="ai-innovation.html" class="fl-col-link">Agentic Workflows</a><a href="ai-innovation.html" class="fl-col-link">AI Copilots</a><a href="ai-innovation.html" class="fl-col-link">CAFE Framework</a><a href="ai-innovation.html" class="fl-col-link">HALO Framework</a><a href="ai-innovation.html" class="fl-col-link">GenAI Accelerators</a></nav></div>
     <div class="fl-col"><p class="fl-col-head">Company</p><nav class="fl-col-links"><a href="about.html" class="fl-col-link">Who We Are</a><a href="about.html" class="fl-col-link">Our Leadership</a><a href="about.html" class="fl-col-link">AI-first Philosophy</a><a href="about.html" class="fl-col-link">Success Stories</a><a href="about.html" class="fl-col-link">Newsroom</a><a href="about.html" class="fl-col-link">Careers</a><a href="index.html#contact" class="fl-col-link">Contact Us</a></nav></div>
   </div>
@@ -484,17 +643,24 @@ a.nav-link{text-decoration:none;}
     </div>
   </div>`;
 
-  document.body.appendChild(footerEl);
+  if (shouldInjectFooter) {
+    const oldFooter = document.getElementById('siteFooterLight');
+    if (oldFooter) oldFooter.remove();
+    document.body.appendChild(footerEl);
+  }
+
+  if (!shouldInjectNav) return;
 
   /* ─── 5.  NAV JAVASCRIPT ──────────────────────────────────────────── */
   // Scroll state
   window.addEventListener('scroll', () => {
     navEl.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
+  navEl.classList.toggle('scrolled', window.scrollY > 40);
 
   // Desktop mega menu
-  const navItemEls = document.querySelectorAll('.nav-item[data-menu]');
-  const bdEl = document.getElementById('mega-backdrop');
+  const navItemEls = navEl.querySelectorAll('.nav-item[data-menu]');
+  const bdEl = backdropEl;
   let active = null, timer = null;
 
   function openPanel(id) {
@@ -555,12 +721,12 @@ a.nav-link{text-decoration:none;}
   drawerClose.addEventListener('click', closeDrawer);
   drawerBack.addEventListener('click', closeDrawer);
 
-  document.querySelectorAll('[data-drawer-toggle]').forEach(btn => {
+  mobileDrawer.querySelectorAll('[data-drawer-toggle]').forEach(btn => {
     btn.addEventListener('click', () => {
       const sub = document.getElementById(btn.dataset.drawerToggle);
       const isOpen = sub.classList.contains('open');
-      document.querySelectorAll('.drawer-sub.open').forEach(el => el.classList.remove('open'));
-      document.querySelectorAll('.drawer-link.active').forEach(el => el.classList.remove('active'));
+      mobileDrawer.querySelectorAll('.drawer-sub.open').forEach(el => el.classList.remove('open'));
+      mobileDrawer.querySelectorAll('.drawer-link.active').forEach(el => el.classList.remove('active'));
       if (!isOpen) { sub.classList.add('open'); btn.classList.add('active'); }
     });
   });

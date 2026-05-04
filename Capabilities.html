@@ -1,0 +1,2773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celsior | AI-Led Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+<style>
+/* ── RESET & BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green: #0d4f45;
+  --green-light: rgba(13,79,69,0.06);
+  --green-border: rgba(13,79,69,0.1);
+  --navy: #0d1127;
+  --dark: #09090b;
+  --gray-1: #111827;
+  --gray-2: #1f2937;
+  --gray-3: #374151;
+  --gray-4: #4b5563;
+  --gray-5: #6b7280;
+  --gray-6: #9ca3af;
+  --gray-7: #d1d5db;
+  --gray-8: #f3f4f6;
+  --border: #e5e7eb;
+  --yellow: #f1be56;
+  --blue: #2563eb;
+  --teal: #0d9488;
+  --side-pad: clamp(48px, 8.1vw, 117px);
+}
+
+html { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+body { width: 100%; background: #fff; color: #09090b; }
+
+img { display: block; max-width: 100%; }
+a  { text-decoration: none; color: inherit; }
+
+/* ══════════════════════════════════════════════════════
+   1. HERO
+══════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  height: 760px;
+  overflow: hidden;
+  background: #080808;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+/* Gradient overlays — exact Figma reproduction */
+.hero-ov { position: absolute; pointer-events: none; }
+.hero-ov-left  { inset: 0 auto 0 0;  width: 360px; background: linear-gradient(to right, #0b0b0b, transparent); }
+.hero-ov-right { inset: 0 0 0 auto;  width: 360px; background: linear-gradient(to left,  #0b0b0b, transparent); }
+.hero-ov-top   { inset: 0 0 auto 0;  height: 188px; background: linear-gradient(to bottom, #0b0b0b, transparent); }
+.hero-ov-bot   { inset: auto 0 0 0;  height: 516px; background: linear-gradient(to top,   #0b0b0b 0%, transparent 100%); }
+
+.hero-body {
+  position: absolute;
+  bottom: 96px; left: 0; right: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+  text-align: center;
+  padding: 0 var(--side-pad);
+  z-index: 5;
+}
+.hero-heading {
+  font-size: clamp(36px, 4.65vw, 67px);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -1.35px;
+  line-height: 1;
+  max-width: 1280px;
+}
+.hero-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 0 22px;
+  height: 56px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1.1px solid rgba(255,255,255,0.25);
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.hero-btn:hover { background: rgba(255,255,255,0.18); }
+.hero-btn span {
+  font-size: 15.6px; font-weight: 600; color: #fff; white-space: nowrap;
+}
+.hero-btn svg { flex-shrink: 0; }
+
+/* ══════════════════════════════════════════════════════
+   2. STATS
+══════════════════════════════════════════════════════ */
+.stats {
+  background: #fff;
+  border-bottom: 1px solid var(--gray-8);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 0 var(--side-pad);
+}
+.stat-cell {
+  padding: 32px 32px 28px;
+  border-right: 1px solid var(--gray-8);
+}
+.stat-cell:last-child { border-right: none; }
+.stat-num {
+  font-size: clamp(28px, 2.5vw, 36px);
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: -0.72px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-lbl {
+  font-size: 14px; font-weight: 400;
+  color: var(--gray-4); line-height: 1.5;
+}
+.methodology {
+  margin: 0 var(--side-pad);
+  border-top: 1px solid var(--gray-8);
+  padding: 20px 0 24px;
+  background: rgba(13,79,69,0.04);
+  border-radius: 0;
+}
+.methodology-inner {
+  padding: 20px;
+  background: rgba(13,79,69,0.05);
+  border: 1px solid rgba(13,79,69,0.1);
+  border-radius: 12px;
+  margin: 0 var(--side-pad);
+}
+.methodology-inner .m-title {
+  font-size: 14px; font-weight: 500; color: var(--gray-3); margin-bottom: 4px;
+}
+.methodology-inner .m-body {
+  font-size: 12px; font-weight: 400; color: var(--gray-5); line-height: 1.625;
+}
+
+/* ══════════════════════════════════════════════════════
+   3. WHY AI-FIRST  — exact Figma match
+══════════════════════════════════════════════════════ */
+.why-ai {
+  background: #fff;
+  padding: 64px var(--side-pad) 80px;
+  overflow: hidden;
+}
+.why-eyebrow {
+  font-size: 13.6px; font-weight: 700; color: #52525b;
+  letter-spacing: 2.04px; text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.why-heading {
+  font-size: clamp(36px, 3.82vw, 55px);
+  font-weight: 700; color: var(--dark);
+  letter-spacing: -1px; line-height: 1;
+  margin-bottom: 20px;
+}
+.why-sub {
+  font-size: 16px; font-weight: 400; color: #3f3f46;
+  line-height: 1.4375; max-width: 1195px; margin-bottom: 40px;
+}
+/* The Figma card: gradient border (gold→cyan→teal), light gradient background, 3 columns with dividers */
+.why-card-wrap {
+  border: 2px solid transparent;
+  border-radius: 7px;
+  background:
+    linear-gradient(157.85deg, #f8f8f8 5.73%, #fcfafa 26.77%) padding-box,
+    linear-gradient(90deg, #f1be56 0%, #52b8d7 50%, #4bc8ad 100%) border-box;
+  box-shadow:
+    55px 35px 65px rgba(0,0,0,0.09),
+    14px 9px 36px rgba(0,0,0,0.1),
+    123px 78px 87px rgba(0,0,0,0.05);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  min-height: 345px;
+}
+.why-col {
+  padding: 48px 40px;
+  position: relative;
+}
+.why-col + .why-col {
+  border-left: 1px solid #e5e7eb;
+}
+.why-icon {
+  width: 50px; height: 50px;
+  background: #0d0d0f;
+  border-radius: 6.3px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 32px;
+  box-shadow:
+    inset 2.1px 2.1px 6.3px rgba(0,0,0,0.9),
+    inset -1.1px -1.1px 2.1px rgba(0,0,0,0.4);
+  flex-shrink: 0;
+}
+.why-col-title {
+  font-size: 24px; font-weight: 600; color: #000;
+  letter-spacing: -0.21px; margin-bottom: 16px;
+}
+.why-col-body {
+  font-size: 16px; font-weight: 400; color: #000; line-height: 1.4375;
+}
+
+/* ══════════════════════════════════════════════════════
+   4. INNOVATION  — WHEEL CAROUSEL (Celsior wheel)
+   Scoped under .cel so it doesn't bleed into the rest of
+   the page. Gradient lives on the section itself (NOT on
+   <body>) so the surrounding white sections stay intact.
+══════════════════════════════════════════════════════ */
+.cel{
+  position:relative;
+  width:100%;
+  min-height:100vh;
+  padding:80px 0 110px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  color:#fff;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    linear-gradient(40deg, rgba(241,189,86,.55) 6%, rgba(139,109,50,0) 36%),
+    linear-gradient(127deg, #02386f 13%, #0d4f45 72%, #f1bd56 109%);
+}
+
+/* HEADING */
+.cel-copy{
+  position:relative;
+  z-index:3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:0 24px;
+}
+.cel-h1{
+  font-size:clamp(28px,3.8vw,44px);
+  font-weight:700;
+  letter-spacing:-1.1px;
+  color:#fff;
+  margin-bottom:14px;
+  opacity:0;
+  transform:translateY(24px);
+}
+.cel-sub{
+  font-size:clamp(15px,1.6vw,20px);
+  font-weight:400;
+  color:rgba(255,255,255,.75);
+  letter-spacing:-.3px;
+  margin-bottom:36px;
+  opacity:0;
+  transform:translateY(14px);
+}
+
+/* CHIP ROW */
+.chips-row{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  opacity:0;
+  transform:translateY(10px);
+}
+.ch-arr{
+  width:38px;height:38px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:#fff;flex-shrink:0;
+  transition:background .2s,transform .14s;
+  padding:0;
+}
+.ch-arr:hover{background:rgba(255,255,255,.16);transform:scale(1.09);}
+.ch-arr:active{transform:scale(.93);}
+.chips-viewport{
+  overflow:hidden;
+  max-width:min(740px,70vw);
+}
+.chips-track{
+  display:flex;
+  gap:7px;
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.chip{
+  padding:10px 20px;
+  border-radius:30px;
+  font-size:13.5px;font-weight:400;
+  cursor:pointer;white-space:nowrap;
+  border:none;
+  font-family:inherit;
+  transition:background .22s,color .22s,box-shadow .22s,transform .15s;
+  user-select:none;flex-shrink:0;
+  letter-spacing:-.1px;
+}
+.chip.on {background:#fff;color:#000;box-shadow:0 2px 16px rgba(0,0,0,.25);}
+.chip.off{background:rgba(255,255,255,.1);color:rgba(255,255,255,.88);}
+.chip.off:hover{background:rgba(255,255,255,.17);transform:translateY(-1px);}
+
+/* CHIP TOOLTIP — fixed to body */
+#ctip{
+  position:fixed;
+  z-index:999999;
+  pointer-events:none;
+  background:rgba(4,10,26,.93);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.14);
+  color:#fff;
+  font-size:12px;font-weight:500;
+  font-family:'Inter',sans-serif;
+  padding:6px 13px;
+  border-radius:8px;
+  white-space:nowrap;
+  opacity:0;
+  transition:opacity .16s;
+  transform:translateX(-50%) translateY(-100%);
+}
+#ctip::after{
+  content:'';
+  position:absolute;
+  top:100%;left:50%;
+  transform:translateX(-50%);
+  border:5px solid transparent;
+  border-top-color:rgba(4,10,26,.93);
+}
+#ctip.on{opacity:1;}
+
+/* CARD STAGE */
+.stage-wrap{
+  position:relative;
+  width:100%;
+  height:760px;
+  margin-top:40px;
+  flex-shrink:0;
+  overflow:hidden;
+  touch-action:pan-y;
+}
+.stage-pivot{
+  position:absolute;
+  top:80px;left:50%;
+  transform:translate(-50%,0);
+  width:0;height:0;
+}
+
+/* CARDS */
+.cw{
+  position:absolute;
+  width:400px;height:520px;
+  top:0;left:-200px;
+  will-change:transform;
+  cursor:none;
+  transform-origin:50% 50%;
+}
+.cw .card{
+  width:100%;height:100%;
+  border-radius:28px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  padding:34px 34px 0;
+  position:relative;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+.cw .card::after{
+  content:'';position:absolute;inset:0;
+  border-radius:28px;
+  box-shadow:inset 0 1px 2px rgba(255,255,255,.4);
+  pointer-events:none;z-index:5;
+}
+.c-logo{
+  width:46px;height:46px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,.14);
+}
+.c-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.c-title{font-size:20px;font-weight:700;letter-spacing:-.4px;line-height:1.22;}
+.c-desc{font-size:13.5px;line-height:1.64;margin-bottom:16px;}
+.c-stats{display:flex;gap:20px;}
+.c-stats .stat{display:flex;flex-direction:column;gap:3px;}
+.stat-n{font-size:24px;font-weight:800;letter-spacing:-1px;line-height:1;}
+.stat-l{font-size:11px;line-height:1.45;max-width:126px;}
+.c-cta{
+  display:inline-flex;align-items:center;gap:7px;
+  margin-top:16px;padding:9px 18px;
+  border-radius:28px;
+  font-size:12.5px;font-weight:500;
+  border:none;cursor:pointer;
+  font-family:inherit;
+  transition:transform .15s;
+  letter-spacing:.1px;
+  align-self:flex-start;
+}
+.c-cta:hover{transform:scale(1.05);}
+.c-foot{
+  position:absolute;
+  bottom:0;left:0;right:0;height:210px;
+  overflow:hidden;
+}
+
+/* DRAG CURSOR */
+#dcur{
+  position:fixed;
+  pointer-events:none;
+  z-index:999998;
+  top:0;left:0;
+  min-width:72px;height:72px;
+  padding:0 22px;
+  border-radius:999px;
+  background:rgba(8,10,20,.88);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;letter-spacing:1.4px;
+  color:#fff;text-transform:uppercase;
+  white-space:nowrap;
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.5);
+  transition:opacity .22s cubic-bezier(.4,0,.2,1),
+             transform .24s cubic-bezier(.34,1.56,.64,1),
+             min-width .25s cubic-bezier(.34,1.56,.64,1),
+             padding .25s cubic-bezier(.34,1.56,.64,1);
+}
+#dcur.show {opacity:1;transform:translate(-50%,-50%) scale(1);}
+#dcur.press{opacity:1;transform:translate(-50%,-50%) scale(.84);}
+#dcur.drag {min-width:72px;padding:0 22px;letter-spacing:2.5px;font-size:10px;font-weight:800;}
+
+/* ══════════════════════════════════════════════════════
+   5. PARTNER LOGOS STRIP
+══════════════════════════════════════════════════════ */
+/* ── PARTNER MARQUEE ── */
+.partners {
+  background: #f6f6f6;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 40px 0;          /* Figma total section: 184px */
+  overflow: hidden;
+}
+.partners-lbl {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gray-1);
+  letter-spacing: 0;
+  margin-bottom: 32px;
+  padding: 0 var(--side-pad);
+}
+/* ── The ONLY mask: one gradient at each end of the full track ── */
+.marquee-track {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 180px,
+    black calc(100% - 180px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 180px,
+    black calc(100% - 180px),
+    transparent 100%
+  );
+}
+/* scrolling belt */
+.marquee-inner {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  will-change: transform;
+  transform: translateZ(0);
+}
+/* one full set of logos — duplicated 3× in HTML */
+.marquee-set {
+  display: flex;
+  align-items: center;
+  gap: 72px;           /* spacing between logos */
+  padding-right: 72px; /* closes the gap between sets */
+  flex-shrink: 0;
+}
+/* individual logo items — image-based, controlled size */
+.logo-item {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+.logo-item img {
+  height: 32px;        /* base logo height */
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+/* Per-logo height tuning so all logos feel visually balanced */
+.logo-item.logo-boomi img { height: 28px; }
+.logo-item.logo-dyna  img { height: 26px; }
+.partners:hover .logo-item { opacity: 1; }
+
+/* ══════════════════════════════════════════════════════
+   6. OUTCOMES  — 2-col layout
+══════════════════════════════════════════════════════ */
+.outcomes {
+  background: #fff;
+  padding: 96px var(--side-pad);
+  display: flex; align-items: flex-start; gap: 80px;
+}
+.out-left { width: 440px; flex-shrink: 0; }
+.out-eyebrow {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 28px;
+}
+.out-eyebrow-line { width: 32px; height: 1px; background: rgba(11,17,32,0.2); flex-shrink: 0; }
+.out-eyebrow-txt {
+  font-size: 12px; font-weight: 600; color: rgba(11,17,32,0.7);
+  letter-spacing: 2.4px; text-transform: uppercase;
+}
+.out-heading {
+  font-size: clamp(48px, 5vw, 72px); font-weight: 700; color: #0b1120;
+  letter-spacing: -1.8px; line-height: 1.05;
+  margin-bottom: 28px;
+}
+.out-body {
+  font-size: 18px; font-weight: 500; color: #64748b; line-height: 1.625;
+  margin-bottom: 40px;
+}
+.badges {
+  display: flex; align-items: center; gap: 20px;
+}
+.badge-row { display: flex; align-items: center; }
+.badge {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 2px solid #fff; background: #f1f5f9;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 500; color: #0b1120;
+  margin-left: -12px;
+}
+.badge:first-child { margin-left: 0; }
+.badge-lbl { font-size: 14px; font-weight: 500; color: #64748b; }
+
+/* 2×2 metrics grid */
+.out-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  grid-template-rows: auto auto;
+  min-height: 537px;
+}
+.mc { /* metric cell */
+  display: flex; flex-direction: column; padding: 32px;
+  position: relative;
+}
+.mc.tl { /* top-left */
+  border-bottom: 1px solid rgba(226,232,240,0.7);
+  padding-bottom: 48px; justify-content: flex-end;
+}
+.mc.tr { /* top-right */
+  border-left: 1px solid rgba(226,232,240,0.7);
+  padding-top: 32px;
+}
+.mc.bl { /* bottom-left */
+  border-right: 1px solid rgba(226,232,240,0.7);
+  padding-top: 48px;
+}
+.mc.br { /* bottom-right */
+  padding-top: 48px; padding-left: 48px;
+}
+.mc.br::before {
+  content: ''; position: absolute;
+  left: 0; top: 48px; width: 2px; height: 96px;
+  background: var(--teal);
+}
+.mc-eye {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+}
+.mc-eye-txt {
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 1.2px; text-transform: uppercase;
+}
+.mc-eye-txt.blue { color: var(--blue); }
+.mc-eye-txt.slate { color: #64748b; }
+.mc-eye-txt.teal  { color: var(--teal); }
+
+.mc-num-row { display: flex; align-items: baseline; gap: 4px; }
+.mc-num {
+  font-weight: 700; color: #0b1120; line-height: 1;
+}
+.mc-num.xl { font-size: 120px; letter-spacing: -6px; }
+.mc-num.lg { font-size: 100px; letter-spacing: -5px; }
+.mc-num.md { font-size: 80px;  letter-spacing: -4px; }
+.mc-unit { font-weight: 300; color: #64748b; line-height: 1; }
+.mc-unit.xl { font-size: 60px; }
+.mc-unit.lg { font-size: 50px; }
+.mc-unit.md { font-size: 40px; }
+
+.mc-ttl {
+  font-weight: 600; color: #0b1120;
+  margin-top: 20px; margin-bottom: 6px;
+}
+.mc-ttl.lg { font-size: 20px; line-height: 28px; }
+.mc-ttl.sm { font-size: 16px; line-height: 24px; margin-top: 14px; }
+.mc-dsc { font-weight: 400; color: #64748b; }
+.mc-dsc.lg { font-size: 14px; line-height: 22.75px; }
+.mc-dsc.sm { font-size: 12px; line-height: 16px; }
+
+.mc-accent {
+  position: absolute; bottom: -1px; left: 0;
+  width: 96px; height: 2px; background: var(--blue);
+}
+
+/* ══════════════════════════════════════════════════════
+   7. CLIENT PROOF
+══════════════════════════════════════════════════════ */
+.proof {
+  background: #fff;
+  padding: 80px var(--side-pad);
+}
+.proof-eyebrow {
+  font-size: 12px; font-weight: 600; color: var(--gray-6);
+  letter-spacing: 1.2px; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.proof-heading {
+  font-size: clamp(36px, 3.96vw, 57px); font-weight: 700;
+  color: var(--gray-1); letter-spacing: -0.6px;
+  margin-bottom: 32px;
+}
+.proof-card {
+  background: linear-gradient(135deg, #0a1f3d 0%, #0d2d55 50%, #0f3566 100%);
+  border-radius: 16px;
+  /* no fixed height — let content define the height */
+  min-height: 300px;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  position: relative;
+}
+.proof-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.04) 0%, transparent 60%);
+}
+.proof-left {
+  flex: 1; padding: 40px 48px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; z-index: 1;
+}
+.proof-quote {
+  font-size: 15px; font-style: italic; font-weight: 500;
+  color: rgba(255,255,255,0.95);
+  line-height: 1.55; margin-bottom: 28px;
+}
+.proof-attribution { display: flex; align-items: center; gap: 14px; }
+.proof-badge {
+  display: flex; align-items: center; justify-content: center;
+  width: 80px; height: 36px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 9999px;
+  font-size: 12px; font-weight: 700; color: #fff;
+  flex-shrink: 0;
+}
+.proof-name { font-size: 14px; font-weight: 600; color: #fff; }
+.proof-role { font-size: 12px; font-weight: 400; color: #93c5fd; margin-top: 2px; }
+
+.proof-right {
+  width: 420px; flex-shrink: 0;
+  padding: 20px 24px 20px 0;
+  display: flex;
+}
+.proof-panel {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  flex: 1;            /* fill the right column fully */
+  padding: 22px 24px 24px; /* ensure bottom breathing room */
+  display: flex;
+  flex-direction: column;
+}
+.panel-hdr {
+  font-size: 12px; font-weight: 600; color: #93c5fd;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.panel-row {
+  display: flex; gap: 12px; margin-bottom: 14px;
+}
+.panel-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #34d399; margin-top: 7px; flex-shrink: 0;
+}
+.panel-txt {
+  font-size: 13.5px; font-weight: 400; color: rgba(255,255,255,0.9); line-height: 1.55;
+}
+
+/* ══════════════════════════════════════════════════════
+   8. CONTINUE EXPLORING
+══════════════════════════════════════════════════════ */
+.explore {
+  background: #ffffff;
+  border-top: 1px solid rgba(13,17,39,0.08);
+  padding: 110px var(--side-pad) 120px;
+}
+.explore-heading {
+  max-width: 1100px;
+  margin: 0 auto 56px;
+  color: #0d1127;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+.explore-list {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-width: 1100px;
+  margin: 0 auto;
+  border: 1.5px solid rgba(13, 17, 39, 0.12);
+  border-radius: 16px;
+  background: #fff;
+}
+.explore-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 0;
+  height: auto;
+  padding: 32px 36px;
+  border-bottom: 1.5px solid rgba(13, 17, 39, 0.09);
+  border-radius: 0;
+  background: #ffffff;
+  color: #0d1127;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.explore-row:last-child { border-bottom: 0; }
+.explore-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.explore-row.green::before { background: linear-gradient(120deg, #07574a 0%, #12baa0 50%, #2ed8be 100%); }
+.explore-row.rose::before  { background: linear-gradient(120deg, #4a0825 0%, #961a4d 50%, #c94070 100%); }
+.explore-row.gold::before  { background: linear-gradient(120deg, #8a6200 0%, #c99010 40%, #f3d25f 100%); }
+.explore-row:hover::before { opacity: 1; }
+.explore-row:hover { background: transparent; }
+
+.ex-row-left,
+.ex-row-right {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
+.ex-row-left { gap: 24px; }
+.ex-row-right { flex-shrink: 0; }
+
+.ex-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 128px;
+  height: auto;
+  padding: 6px 14px;
+  margin: 0;
+  border-radius: 4px;
+  background: #0d1127;
+  color: #ffffff;
+  font-size: 0.65rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.explore-row:hover .ex-tag {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.ex-title {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 0 1 auto;
+  color: #0d1127;
+  font-size: clamp(1.1rem, 1.8vw, 1.55rem);
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+.ex-char {
+  display: inline-block;
+  color: currentColor;
+  transition: transform 0.48s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+  transition-delay: calc(var(--i) * 0.02s);
+}
+.explore-row:hover .ex-title { color: #ffffff; }
+.explore-row:hover .ex-char { transform: translateY(-4px); }
+
+.ex-arrow {
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border: 1.5px solid rgba(13, 17, 39, 0.14);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #0d1127;
+  overflow: hidden;
+  transition: background 0.28s ease, border-color 0.28s ease, color 0.28s ease;
+}
+.ex-arrow svg { width: 16px; height: 16px; display: block; }
+.explore-row:hover .ex-arrow {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+}
+.explore-row.green:hover .ex-arrow {
+  background: rgba(18, 186, 160, 0.3);
+  border-color: rgba(18, 186, 160, 0.55);
+}
+.explore-row.rose:hover .ex-arrow {
+  background: rgba(34, 211, 238, 0.28);
+  border-color: rgba(34, 211, 238, 0.55);
+}
+.explore-row.gold:hover .ex-arrow {
+  background: rgba(243, 210, 95, 0.3);
+  border-color: rgba(243, 210, 95, 0.6);
+}
+.explore-row:hover .ex-arrow svg {
+  animation: exploreArrowStagger 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes exploreArrowStagger {
+  0%   { transform: translate(0, 0); opacity: 1; }
+  40%  { transform: translate(8px, -8px); opacity: 0; }
+  41%  { transform: translate(-8px, 8px); opacity: 0; }
+  100% { transform: translate(0, 0); opacity: 1; }
+}
+
+/* ══════════════════════════════════════════════════════
+   9. INSIGHTS
+══════════════════════════════════════════════════════ */
+.insights {
+  background: #fff;
+  border-top: 1px solid var(--gray-8);
+  padding: 80px var(--side-pad);
+}
+.insights-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 40px;
+}
+.ins-lbl {
+  font-size: 12px; font-weight: 600; color: var(--gray-6);
+  letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 12px;
+}
+.ins-heading {
+  font-size: clamp(28px, 2.78vw, 40px); font-weight: 700;
+  color: var(--gray-1); line-height: 1.25; letter-spacing: -0.24px;
+}
+.ins-link {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 14px; font-weight: 600; color: var(--green);
+  cursor: pointer; white-space: nowrap; margin-top: 8px;
+}
+.articles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.article {
+  border: 1px solid var(--gray-8); border-radius: 16px;
+  overflow: hidden; display: flex; flex-direction: column;
+  cursor: pointer; transition: box-shadow 0.2s, transform 0.2s;
+}
+.article:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+.art-img {
+  height: 176px; position: relative; overflow: hidden; flex-shrink: 0;
+}
+.art-img img {
+  width: 100%; height: 137%; object-fit: cover;
+  position: absolute; top: -18.5%; left: 0;
+}
+.art-grad {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+}
+.art-tag {
+  position: absolute; top: 12px; left: 12px;
+  background: rgba(255,255,255,0.92);
+  border-radius: 9999px; height: 24px; padding: 0 10px;
+  font-size: 12px; font-weight: 600; color: var(--green);
+  display: flex; align-items: center;
+}
+.art-body { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; }
+.art-title {
+  font-size: 14px; font-weight: 600; color: var(--gray-1);
+  line-height: 1.375; margin-bottom: 10px; flex: 1;
+}
+.art-excerpt {
+  font-size: 12px; font-weight: 400; color: var(--gray-5); line-height: 1.625; margin-bottom: 14px;
+}
+.art-footer {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--gray-6);
+}
+.art-read { margin-left: auto; font-weight: 600; color: var(--green); }
+
+/* ══════════════════════════════════════════════════════
+   10. FAQ
+══════════════════════════════════════════════════════ */
+.faq {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  background: #ffffff;
+  padding: 0 var(--side-pad) 120px;
+  border-top: 1px solid rgba(13, 17, 39, 0.08);
+}
+.faq__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: start;
+  position: relative;
+  border-top: 1px solid rgba(13, 17, 39, 0.12);
+}
+.faq__inner::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 1px;
+  background: rgba(13, 17, 39, 0.12);
+  pointer-events: none;
+}
+.faq__intro {
+  position: sticky;
+  top: 108px;
+  text-align: left;
+  padding: 80px 80px 80px 0;
+}
+.faq__intro .eyebrow {
+  margin: 0 0 30px;
+  color: #0d1127;
+  font-size: 0.72rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.faq__intro h2 {
+  margin: 0;
+  color: #0d1127;
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  line-height: 1.12;
+  letter-spacing: -0.036em;
+  font-weight: 700;
+}
+.faq__intro p {
+  margin: 44px 0 20px;
+  color: #6b7280;
+  font-size: clamp(0.83rem, 1.05vw, 0.92rem);
+  line-height: 1.82;
+  font-weight: 400;
+}
+.faq__intro a {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--green);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  font-weight: 600;
+  text-decoration: none;
+}
+.faq__items {
+  padding-left: 52px;
+  padding-top: 80px;
+}
+.faq__item {
+  border-bottom: 1px solid rgba(13, 17, 39, 0.1);
+}
+.faq__item:first-child {
+  border-top: 1px solid rgba(13, 17, 39, 0.1);
+}
+.faq__trigger {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+.faq__q {
+  color: #0d1127;
+  font-size: clamp(0.88rem, 1.2vw, 1rem);
+  line-height: 1.5;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  transition: color 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq__arrow {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  color: #0d1127;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+.faq__arrow svg { width: 100%; height: 100%; display: block; }
+.faq__item.is-open .faq__arrow { transform: rotate(180deg); }
+
+.faq__item:nth-child(5n + 1):hover .faq__q,
+.faq__item:nth-child(5n + 1).is-open .faq__q,
+.faq__item:nth-child(5n + 1).is-open .faq__arrow { color: #e8834a; }
+
+.faq__item:nth-child(5n + 2):hover .faq__q,
+.faq__item:nth-child(5n + 2).is-open .faq__q,
+.faq__item:nth-child(5n + 2).is-open .faq__arrow { color: #12baa0; }
+
+.faq__item:nth-child(5n + 3):hover .faq__q,
+.faq__item:nth-child(5n + 3).is-open .faq__q,
+.faq__item:nth-child(5n + 3).is-open .faq__arrow { color: #3675bc; }
+
+.faq__item:nth-child(5n + 4):hover .faq__q,
+.faq__item:nth-child(5n + 4).is-open .faq__q,
+.faq__item:nth-child(5n + 4).is-open .faq__arrow { color: #961a4d; }
+
+.faq__item:nth-child(5n + 5):hover .faq__q,
+.faq__item:nth-child(5n + 5).is-open .faq__q,
+.faq__item:nth-child(5n + 5).is-open .faq__arrow { color: #6b3fa0; }
+
+.faq__body {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq__item.is-open .faq__body { max-height: 320px; }
+.faq__body p {
+  margin: 0;
+  padding: 0 0 28px;
+  color: #6b7280;
+  font-size: clamp(0.83rem, 1.05vw, 0.92rem);
+  line-height: 1.82;
+  font-weight: 400;
+}
+
+@media (max-width: 900px) {
+  .faq__inner { grid-template-columns: 1fr; }
+  .faq__inner::after { display: none; }
+  .faq__intro { position: static; padding: 60px 0 20px; }
+  .faq__items { padding-left: 0; padding-top: 20px; }
+}
+
+/* ══════════════════════════════════════════════════════
+   11. CTA
+══════════════════════════════════════════════════════ */
+.cta-sec {
+  background: #fff;
+  border-top: 1px solid rgba(13,17,39,0.08);
+  padding: 100px 52px;
+  position: relative;
+  z-index: 2;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 32px;
+  text-align: center;
+}
+.cta-logo {
+  height: 42px; width: auto;
+  filter: brightness(0);
+  opacity: 0.85;
+}
+.cta-h {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+  font-size: clamp(1.3rem, 2.6vw, 2rem);
+  font-weight: 500;
+  color: #0d1127;
+  line-height: 1.45;
+  letter-spacing: -0.025em;
+  position: relative;
+  display: inline-block;
+}
+.cta-h::before,
+.cta-h::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+.cta-h::before { color: #2254f4; }
+.cta-h::after  { color: #e11d48; }
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  background: #000; color: #fff;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+  font-size: 0.82rem; font-weight: 600; letter-spacing: 0.01em;
+  padding: 12px 28px; border-radius: 5px;
+  border: none; cursor: pointer;
+  transition: opacity 0.2s, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s;
+}
+.cta-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.32);
+}
+@media (max-width: 640px) {
+  .cta-sec { padding: 72px 24px; }
+  .cta-h   { font-size: clamp(1.1rem, 5vw, 1.4rem); }
+}
+
+/* ══════════════════════════════════════════════════════
+   IMAGE ACCORDION — Desktop-3
+══════════════════════════════════════════════════════ */
+.acc-section {
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 48px;   /* breathing room below the innovation/carousel section */
+}
+.acc-row {
+  position: relative;
+  border-bottom: 1px solid #e5e7eb;
+  cursor: pointer;
+  background: #fff;
+  outline: none;
+}
+.acc-row:last-child { border-bottom: none; }
+.acc-header {
+  display: flex;
+  align-items: center;
+  padding: 0 23px;
+  min-height: 68px;
+  position: relative;
+  z-index: 2;
+  user-select: none;
+  gap: 0;
+}
+/* Left active indicator */
+.acc-row.active .acc-header::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: #111;
+}
+.acc-icon {
+  width: 27.93px; height: 27.93px;
+  border-radius: 3.99px;
+  background: #3a3a3a;
+  flex-shrink: 0;
+  margin-right: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.35s cubic-bezier(0.22,1,0.36,1);
+}
+.acc-row.active .acc-icon { background: #111; }
+.acc-number {
+  font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.55);
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  letter-spacing: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.acc-row:not(.active):hover .acc-number { opacity: 1; }
+.acc-title {
+  font-size: 24px; font-weight: 400;
+  color: #09090b; line-height: 1.2;
+  flex: 1;
+  letter-spacing: -0.24px;
+  transition: color 0.15s;
+  /* allow wrapping for long titles on row 2/3 */
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: calc(100% - 240px);
+}
+.acc-cta {
+  display: flex; align-items: center; gap: 7px;
+  border: 1px solid #9ca3af; border-radius: 6px;
+  padding: 0 18px; height: 44.89px;
+  font-size: 16.4px; font-weight: 700;
+  color: #09090b; white-space: nowrap;
+  flex-shrink: 0;
+  opacity: 0; pointer-events: none;
+  transform: translateX(8px);
+  transition: border-color 0.18s;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.16px;
+}
+.acc-cta:hover { border-color: #374151; }
+.acc-cta-arrow { display: flex; align-items: center; opacity: 0.55; }
+
+/* BODY — height driven by GSAP */
+.acc-body { overflow: hidden; height: 0; }
+
+.acc-image-wrap {
+  margin: 0 23px;
+  border-radius: 15.96px;
+  overflow: hidden;
+  height: 597px;
+  position: relative;
+}
+.acc-image-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  will-change: transform;
+  transform-origin: center center;
+}
+/* subtle ken burns only on active */
+.acc-row.active .acc-image-wrap img {
+  animation: acc-ken 18s ease-in-out infinite alternate;
+}
+@keyframes acc-ken {
+  from { transform: scale(1.00) translate(0%, 0%); }
+  to   { transform: scale(1.025) translate(-0.3%, -0.2%); }
+}
+
+/* STATS */
+.acc-stats {
+  display: flex; align-items: center;
+  padding: 0 23px; height: 56px;
+  border-top: 1px solid #e5e7eb;
+  margin: 0 23px;
+  opacity: 0;
+  transform: translateY(6px);
+}
+.acc-stat {
+  flex: 1; font-size: 16.72px; color: #09090b;
+  display: flex; align-items: center; gap: 5px; line-height: 1.2;
+}
+.acc-stat:not(:first-child) { padding-left: 28px; }
+.acc-stat strong { font-weight: 600; }
+.acc-stat span  { color: #6b7280; font-weight: 400; }
+.acc-stat .products-label { font-weight: 600; color: #09090b; }
+.acc-stat .products-value { color: #9ca3af; font-weight: 500; font-size: 14.5px; }
+.acc-body-pad { height: 28px; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 1 · HERO
+══════════════════════════════════════════════════════ -->
+<section class="hero">
+  <img class="hero-bg" src="https://www.figma.com/api/mcp/asset/af44dad9-9046-4f33-b625-7a2c5901e12c" alt="">
+  <div class="hero-ov hero-ov-left"></div>
+  <div class="hero-ov hero-ov-right"></div>
+  <div class="hero-ov hero-ov-top"></div>
+  <div class="hero-ov hero-ov-bot"></div>
+
+  <div class="hero-body">
+    <h1 class="hero-heading">Legacy systems slow you down.&nbsp; AI-led engineering gets you ahead.</h1>
+    <div class="hero-btn">
+      <span>Start Your Transformation</span>
+      <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+        <path d="M3.5 8.5H13.5M13.5 8.5L9 4M13.5 8.5L9 13" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 2 · STATS BAR
+══════════════════════════════════════════════════════ -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat-cell">
+      <div class="stat-num">50–60%</div>
+      <div class="stat-lbl">Faster delivery cycles with AI-assisted development</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">35–45%</div>
+      <div class="stat-lbl">Cost savings through intelligent automation</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">46%</div>
+      <div class="stat-lbl">Faster migration with our Cloud Management Framework</div>
+    </div>
+    <div class="stat-cell" style="border-right:none;">
+      <div class="stat-num">50%</div>
+      <div class="stat-lbl">Reduction in development and training costs</div>
+    </div>
+  </div>
+  <div style="padding: 16px var(--side-pad) 0;">
+    <div class="methodology-inner">
+      <div class="m-title">Methodology note</div>
+      <div class="m-body">All metrics derived from completed client engagements. Baseline comparisons use client-provided pre-engagement data and industry benchmarks from Gartner, Forrester, and IDC.</div>
+    </div>
+  </div>
+  <div style="height:32px;"></div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 3 · WHY AI-FIRST ENGINEERING
+══════════════════════════════════════════════════════ -->
+<section class="why-ai">
+  <div class="why-eyebrow">WHY AI-FIRST ENGINEERING?</div>
+  <h2 class="why-heading">The compounding cost of legacy logic.</h2>
+  <p class="why-sub">Aging infrastructure anchors innovation, while market velocity demands agility. Manual consulting approaches treat modernization and cloud migration as separate, multi-year initiatives. The engineering reality demands better.</p>
+
+  <div class="why-card-wrap">
+    <!-- Col 1 -->
+    <div class="why-col">
+      <div class="why-icon">
+        <!-- operational / lock icon -->
+        <svg width="21" height="21" viewBox="0 0 21 21" fill="none">
+          <rect x="3.5" y="8.5" width="14" height="10" rx="2" stroke="#fff" stroke-width="1.5"/>
+          <path d="M7 8.5V6a3.5 3.5 0 0 1 7 0v2.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M10.5 12v2" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="why-col-title">Operational inefficiency</div>
+      <div class="why-col-body">Infrastructure sprawl drives support costs and limits observability. Engineering teams spend more time firefighting than building.</div>
+    </div>
+    <!-- Col 2 -->
+    <div class="why-col">
+      <div class="why-icon">
+        <!-- person / talent icon -->
+        <svg width="21" height="21" viewBox="0 0 21 21" fill="none">
+          <circle cx="10.5" cy="7.5" r="3.5" stroke="#fff" stroke-width="1.5"/>
+          <path d="M3 18c0-4.142 3.358-7.5 7.5-7.5S18 13.858 18 18" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="why-col-title">Talent attrition</div>
+      <div class="why-col-body">Engineers leave organizations maintaining legacy stacks. The loss of institutional knowledge accelerates technical erosion.</div>
+    </div>
+    <!-- Col 3 -->
+    <div class="why-col">
+      <div class="why-icon">
+        <!-- fragmentation / triangle-warning icon -->
+        <svg width="21" height="21" viewBox="0 0 21 21" fill="none">
+          <path d="M10.5 3.5L2.5 17.5h16L10.5 3.5z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M10.5 9.5v4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="10.5" cy="15.5" r="0.75" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="why-col-title">Architectural fragmentation</div>
+      <div class="why-col-body">Undocumented dependencies create cascading failures. Each change introduces regression risk, extending testing and delaying deployment.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 4 · INNOVATION / CASE STUDIES
+══════════════════════════════════════════════════════ -->
+<section class="cel" id="cel">
+  <div class="cel-copy">
+    <h2 class="cel-h1" id="cel-h1">Innovation, Engineered by Celsior</h2>
+    <p  class="cel-sub" id="cel-sub">Powered by Synthetix — our AI platform that spans the complete application lifecycle</p>
+
+    <div class="chips-row" id="chips-row">
+      <button class="ch-arr" id="ch-prev" aria-label="Previous">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M8.5 11L5 7l3.5-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="chips-viewport"><div class="chips-track" id="chips-track"></div></div>
+      <button class="ch-arr" id="ch-next" aria-label="Next">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M5.5 3L9 7l-3.5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="stage-wrap" id="stage-wrap">
+    <div class="stage-pivot" id="stage-pivot"></div>
+  </div>
+</section>
+
+<!-- Global overlays for the wheel (must be siblings of <section>, not inside it) -->
+<div id="dcur">DRAG</div>
+<div id="ctip"></div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 4b · IMAGE ACCORDION / CASE STUDIES
+══════════════════════════════════════════════════════ -->
+<section class="acc-section" id="acc-section" aria-label="Client case studies">
+
+  <!-- ROW 1 — Hertz (default active) -->
+  <div class="acc-row active" data-index="0" tabindex="0">
+    <div class="acc-header">
+      <div class="acc-icon" aria-hidden="true"><span class="acc-number">01</span></div>
+      <span class="acc-title">Hertz unifies commerce with Celsior</span>
+      <a class="acc-cta" href="#" tabindex="-1">
+        Read the story
+        <span class="acc-cta-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5H10.5M7.5 3.5L10.5 6.5L7.5 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+    </div>
+    <div class="acc-body">
+      <div class="acc-image-wrap">
+        <img src="https://www.figma.com/api/mcp/asset/088995cf-9275-499c-a526-dd1374c63e77" alt="Hertz enterprise operations">
+      </div>
+      <div class="acc-stats">
+        <div class="acc-stat"><strong>160</strong><span>countries</span></div>
+        <div class="acc-stat"><strong>11K+</strong><span>locations globally</span></div>
+        <div class="acc-stat"><span class="products-label">Products used&nbsp;</span><span class="products-value">AI Platform, Cloud Migration, DevOps Transformation</span></div>
+      </div>
+      <div class="acc-body-pad"></div>
+    </div>
+  </div>
+
+  <!-- ROW 2 — URBN -->
+  <div class="acc-row" data-index="1" tabindex="0">
+    <div class="acc-header">
+      <div class="acc-icon" aria-hidden="true"><span class="acc-number">02</span></div>
+      <span class="acc-title">URBN consolidates $5 billion in online and in-store revenue onto a unified platform.</span>
+      <a class="acc-cta" href="#" tabindex="-1">
+        Read the story
+        <span class="acc-cta-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5H10.5M7.5 3.5L10.5 6.5L7.5 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+    </div>
+    <div class="acc-body">
+      <div class="acc-image-wrap">
+        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1400&q=80&fit=crop" alt="Retail operations" style="object-position:center 30%;">
+      </div>
+      <div class="acc-stats">
+        <div class="acc-stat"><strong>$5B</strong><span>consolidated revenue</span></div>
+        <div class="acc-stat"><strong>40%</strong><span>faster checkout</span></div>
+        <div class="acc-stat"><span class="products-label">Products used&nbsp;</span><span class="products-value">Commerce Platform, Real-time Analytics, API Modernisation</span></div>
+      </div>
+      <div class="acc-body-pad"></div>
+    </div>
+  </div>
+
+  <!-- ROW 3 — Instacart -->
+  <div class="acc-row" data-index="2" tabindex="0">
+    <div class="acc-header">
+      <div class="acc-icon" aria-hidden="true"><span class="acc-number">03</span></div>
+      <span class="acc-title">Instacart powers online grocery delivery with intelligent infrastructure.</span>
+      <a class="acc-cta" href="#" tabindex="-1">
+        Read the story
+        <span class="acc-cta-arrow"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5H10.5M7.5 3.5L10.5 6.5L7.5 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+    </div>
+    <div class="acc-body">
+      <div class="acc-image-wrap">
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1400&q=80&fit=crop" alt="Grocery delivery" style="object-position:center 40%;">
+      </div>
+      <div class="acc-stats">
+        <div class="acc-stat"><strong>50M+</strong><span>orders processed</span></div>
+        <div class="acc-stat"><strong>99.98%</strong><span>platform uptime</span></div>
+        <div class="acc-stat"><span class="products-label">Products used&nbsp;</span><span class="products-value">Microservices, Kubernetes, Event-driven Architecture</span></div>
+      </div>
+      <div class="acc-body-pad"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 5 · PARTNER LOGOS
+══════════════════════════════════════════════════════ -->
+<section class="partners" id="partners-section">
+  <div class="partners-lbl">Delivered on the platforms your enterprise already trusts</div>
+  <div class="marquee-track">
+    <div class="marquee-inner" id="marquee-inner">
+      <div class="marquee-set">
+        <div class="logo-item logo-dyna">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/Dynatrace_1_t3ayxc.png" alt="Dynatrace" draggable="false">
+        </div>
+        <div class="logo-item">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/ServiceNow_1_plissc.png" alt="ServiceNow" draggable="false">
+        </div>
+        <div class="logo-item logo-boomi">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Boomi_1_kvrpcd.png" alt="Boomi" draggable="false">
+        </div>
+        <div class="logo-item">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/GuideWire_logo_color_1_whi7lu.png" alt="Guidewire" draggable="false">
+        </div>
+        <div class="logo-item">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/RingCentral_1_zjcj4f.png" alt="RingCentral" draggable="false">
+        </div>
+        <div class="logo-item">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Informatica_1_gkhjs0.png" alt="Informatica" draggable="false">
+        </div>
+      </div>
+      <div class="marquee-set" aria-hidden="true">
+        <div class="logo-item logo-dyna">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/Dynatrace_1_t3ayxc.png" alt="Dynatrace" draggable="false">
+        </div>
+        <div class="logo-item">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/ServiceNow_1_plissc.png" alt="ServiceNow" draggable="false">
+        </div>
+        <div class="logo-item logo-boomi">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Boomi_1_kvrpcd.png" alt="Boomi" draggable="false">
+        </div>
+        <div class="logo-item">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/GuideWire_logo_color_1_whi7lu.png" alt="Guidewire" draggable="false">
+        </div>
+        <div class="logo-item">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/RingCentral_1_zjcj4f.png" alt="RingCentral" draggable="false">
+        </div>
+        <div class="logo-item">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Informatica_1_gkhjs0.png" alt="Informatica" draggable="false">
+        </div>
+      </div>
+      <div class="marquee-set" aria-hidden="true">
+        <div class="logo-item logo-dyna">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/Dynatrace_1_t3ayxc.png" alt="Dynatrace" draggable="false">
+        </div>
+        <div class="logo-item">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/ServiceNow_1_plissc.png" alt="ServiceNow" draggable="false">
+        </div>
+        <div class="logo-item logo-boomi">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Boomi_1_kvrpcd.png" alt="Boomi" draggable="false">
+        </div>
+        <div class="logo-item">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/GuideWire_logo_color_1_whi7lu.png" alt="Guidewire" draggable="false">
+        </div>
+        <div class="logo-item">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/RingCentral_1_zjcj4f.png" alt="RingCentral" draggable="false">
+        </div>
+        <div class="logo-item">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Informatica_1_gkhjs0.png" alt="Informatica" draggable="false">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 6 · OUTCOMES
+══════════════════════════════════════════════════════ -->
+<section class="outcomes">
+  <div class="out-left">
+    <div class="out-eyebrow">
+      <div class="out-eyebrow-line"></div>
+      <div class="out-eyebrow-txt">IMPACT METRICS</div>
+    </div>
+    <h2 class="out-heading">Outcomes<br>we're<br>accountable to</h2>
+    <p class="out-body">We define success metrics at engagement start and report against them throughout delivery, ensuring every milestone translates into measurable business value.</p>
+    <div class="badges">
+      <div class="badge-row">
+        <div class="badge">Q1</div>
+        <div class="badge">Q2</div>
+        <div class="badge">Q3</div>
+      </div>
+      <div class="badge-lbl">Quarterly benchmarked</div>
+    </div>
+  </div>
+
+  <div class="out-grid">
+    <!-- TL: Cost Reduction -->
+    <div class="mc tl">
+      <div class="mc-eye">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 12l4-4 3 3 5-6" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="mc-eye-txt blue">COST REDUCTION</span>
+      </div>
+      <div class="mc-num-row">
+        <span class="mc-num xl">56</span><span class="mc-unit xl">%</span>
+      </div>
+      <div class="mc-ttl lg">Reduction in development costs</div>
+      <div class="mc-dsc lg">Average across enterprise engagements, measured from day one.</div>
+      <div class="mc-accent"></div>
+    </div>
+
+    <!-- TR: Velocity -->
+    <div class="mc tr">
+      <div class="mc-eye">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#64748b" stroke-width="1.5"/><path d="M8 5v3.5l2 2" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="mc-eye-txt slate">VELOCITY</span>
+      </div>
+      <div class="mc-num-row" style="margin-top:8px;">
+        <span class="mc-num md">06</span>
+      </div>
+      <div class="mc-ttl sm">Projects delivered in 12 months</div>
+      <div class="mc-dsc sm">For a single enterprise client</div>
+    </div>
+
+    <!-- BL: Performance -->
+    <div class="mc bl">
+      <div class="mc-eye">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 10l4-4 3 3 5-6" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="mc-eye-txt slate">PERFORMANCE</span>
+      </div>
+      <div class="mc-num-row" style="margin-top:8px;">
+        <span class="mc-num md">46</span><span class="mc-unit md">%</span>
+      </div>
+      <div class="mc-ttl sm">Faster cloud migration</div>
+      <div class="mc-dsc sm">Versus industry benchmark</div>
+    </div>
+
+    <!-- BR: Efficiency -->
+    <div class="mc br">
+      <div class="mc-eye" style="padding-left:16px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v4M9 12v4M2 9h4M12 9h4" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2.5" stroke="#0d9488" stroke-width="1.5"/></svg>
+        <span class="mc-eye-txt teal">EFFICIENCY</span>
+      </div>
+      <div class="mc-num-row" style="padding-left:16px; margin-top:8px;">
+        <span class="mc-num lg">57</span><span class="mc-unit lg">%</span>
+      </div>
+      <div style="padding-left:16px;">
+        <div class="mc-ttl lg">Lower total migration cost</div>
+        <div class="mc-dsc lg">Against original client estimates and projections.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 7 · CLIENT PROOF
+══════════════════════════════════════════════════════ -->
+<section class="proof">
+  <div class="proof-eyebrow">CLIENT PROOF</div>
+  <h2 class="proof-heading">Delivered at enterprise scale</h2>
+  <div class="proof-card">
+    <div class="proof-left">
+      <blockquote class="proof-quote">"We accelerated an insurance carrier's modernization program by implementing a blended delivery model that reduced development costs by 50% while modernizing their agent portal. Six strategic projects completed in 12 months with restored engineering confidence and rapid ROI realization."</blockquote>
+      <div class="proof-attribution">
+        <div class="proof-badge">CIO</div>
+        <div>
+          <div class="proof-name">Major life insurance company</div>
+          <div class="proof-role">Agent Portal Modernisation</div>
+        </div>
+      </div>
+    </div>
+    <div class="proof-right">
+      <div class="proof-panel">
+        <div class="panel-hdr">DELIVERY APPROACH:</div>
+        <div class="panel-row">
+          <div class="panel-dot"></div>
+          <div class="panel-txt">Cross-functional engineering pods aligned to business outcomes</div>
+        </div>
+        <div class="panel-row">
+          <div class="panel-dot"></div>
+          <div class="panel-txt">Onshore, offshore, and nearshore delivery models for cost optimization</div>
+        </div>
+        <div class="panel-row">
+          <div class="panel-dot"></div>
+          <div class="panel-txt">Pre-certified talent on enterprise platforms (ServiceNow, Guidewire, Jack Henry)</div>
+        </div>
+        <div class="panel-row">
+          <div class="panel-dot"></div>
+          <div class="panel-txt">Continuous delivery with DevOps, SRE, and observability built in</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 8 · CONTINUE EXPLORING
+══════════════════════════════════════════════════════ -->
+<section class="explore">
+  <h2 class="explore-heading">Continue exploring Celsior's capabilities</h2>
+  <div class="explore-list">
+    <a href="#" class="explore-row green">
+      <span class="ex-row-left">
+        <span class="ex-tag">AI Lab</span>
+        <span class="ex-title">Application &amp; Platform Engineering</span>
+      </span>
+      <span class="ex-row-right">
+        <span class="ex-arrow" aria-hidden="true">
+          <svg viewBox="0 0 18 18" fill="none">
+            <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <polyline points="7,3 15,3 15,11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </span>
+    </a>
+    <a href="#" class="explore-row rose">
+      <span class="ex-row-left">
+        <span class="ex-tag">CoEs</span>
+        <span class="ex-title">Microservices &amp; Modern Architectures</span>
+      </span>
+      <span class="ex-row-right">
+        <span class="ex-arrow" aria-hidden="true">
+          <svg viewBox="0 0 18 18" fill="none">
+            <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <polyline points="7,3 15,3 15,11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </span>
+    </a>
+    <a href="#" class="explore-row gold">
+      <span class="ex-row-left">
+        <span class="ex-tag">Accelerators</span>
+        <span class="ex-title">Cloud Engineering &amp; Transformation</span>
+      </span>
+      <span class="ex-row-right">
+        <span class="ex-arrow" aria-hidden="true">
+          <svg viewBox="0 0 18 18" fill="none">
+            <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <polyline points="7,3 15,3 15,11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 9 · INSIGHTS
+══════════════════════════════════════════════════════ -->
+<section class="insights">
+  <div class="insights-top">
+    <div>
+      <div class="ins-lbl">Insights</div>
+      <h2 class="ins-heading">Thinking on AI-led engineering<br>and enterprise modernization</h2>
+    </div>
+    <div class="ins-link" style="margin-top:auto;">
+      All insights
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M9 4l3 3-3 3" stroke="#0d4f45" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+  <div class="articles">
+    <div class="article">
+      <div class="art-img">
+        <img src="https://www.figma.com/api/mcp/asset/e449475b-a839-45c4-a278-58480126970e" alt="">
+        <div class="art-grad"></div>
+        <div class="art-tag">Technical Debt</div>
+      </div>
+      <div class="art-body">
+        <div class="art-title">How AI changes the application modernization equation</div>
+        <div class="art-excerpt">AI-powered code analysis and automated refactoring reduce legacy modernization timelines from years to months...</div>
+        <div class="art-footer">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="#9ca3af" stroke-width="1"/><path d="M6 3.5v3l1.5 1.5" stroke="#9ca3af" stroke-width="1" stroke-linecap="round"/></svg>
+          6 min read
+          <div class="art-read">Read →</div>
+        </div>
+      </div>
+    </div>
+    <div class="article">
+      <div class="art-img">
+        <img src="https://www.figma.com/api/mcp/asset/c6bf8c66-aa14-42cf-bdc7-4084085720b8" alt="">
+        <div class="art-grad"></div>
+        <div class="art-tag">Modernisation</div>
+      </div>
+      <div class="art-body">
+        <div class="art-title">Building microservices architectures that scale</div>
+        <div class="art-excerpt">Five architectural patterns that enable resilience, observability, and independent deployment...</div>
+        <div class="art-footer">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="#9ca3af" stroke-width="1"/><path d="M6 3.5v3l1.5 1.5" stroke="#9ca3af" stroke-width="1" stroke-linecap="round"/></svg>
+          8 min read
+          <div class="art-read">Read →</div>
+        </div>
+      </div>
+    </div>
+    <div class="article">
+      <div class="art-img">
+        <img src="https://www.figma.com/api/mcp/asset/8a97096c-4dcb-4497-935e-93b1faca220e" alt="">
+        <div class="art-grad"></div>
+        <div class="art-tag">Engineering Leadership</div>
+      </div>
+      <div class="art-body">
+        <div class="art-title">The engineering economics of cloud-native applications</div>
+        <div class="art-excerpt">How one insurance carrier reduced infrastructure costs by 40% while improving deployment frequency...</div>
+        <div class="art-footer">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="#9ca3af" stroke-width="1"/><path d="M6 3.5v3l1.5 1.5" stroke="#9ca3af" stroke-width="1" stroke-linecap="round"/></svg>
+          5 min read
+          <div class="art-read">Read →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 10 · FAQ
+══════════════════════════════════════════════════════ -->
+<section class="faq">
+  <div class="faq__inner">
+    <div class="faq__intro">
+      <p class="eyebrow">FAQ</p>
+      <h2>Questions business leaders ask before engaging</h2>
+      <p>Covering ROI, risk, timelines, and delivery model — the questions that matter to decision-makers, answered directly.</p>
+      <a href="#consultation">Speak to our team <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="faq__items">
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">What ROI can we realistically expect from a technical debt reduction engagement?</span>
+            <span class="faq__arrow"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq__body"><p>ROI varies by estate complexity and debt severity, but our completed engagements consistently show 40–60% reduction in ongoing maintenance costs and a 30–50% improvement in feature delivery velocity within 12 months. We quantify the expected ROI during the initial assessment phase before any commitment is made.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">How do you manage risk during remediation — particularly for live systems?</span>
+            <span class="faq__arrow"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq__body"><p>We use a strangler fig pattern combined with feature flags and parallel running environments to ensure zero-downtime migration. Every remediation effort begins with comprehensive regression test coverage before any changes are deployed to production.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">What is a typical engagement timeline from assessment to measurable outcomes?</span>
+            <span class="faq__arrow"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq__body"><p>Assessment typically takes 2–4 weeks. First measurable outcomes are usually visible within 90 days of remediation start. Full transformation engagements typically run 6–18 months depending on estate complexity.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">How do you prevent debt from accumulating again after the engagement?</span>
+            <span class="faq__arrow"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq__body"><p>We embed architectural governance, automated quality gates, and developer education as standard deliverables — not afterthoughts. Our Continuous Modernisation Factory model provides ongoing oversight to prevent regression.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">What is the difference between your approach and simply rewriting the system?</span>
+            <span class="faq__arrow"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq__body"><p>Rewrites are high-risk, high-cost, and frequently fail. Our approach incrementally modernises existing systems, preserving business logic while replacing outdated infrastructure — reducing risk by an order of magnitude.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">How do you prioritise which debt to address first?</span>
+            <span class="faq__arrow"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq__body"><p>We use a risk-impact matrix combining business criticality, remediation cost, and downstream dependency analysis. High-impact, lower-risk items are tackled first to demonstrate ROI quickly and build organisational confidence.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">What does knowledge transfer look like, and how do we retain capability after you leave?</span>
+            <span class="faq__arrow"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq__body"><p>Every engagement includes embedded pairing, living documentation, architecture decision records, and structured handoff ceremonies. We measure knowledge retention, not just delivery velocity.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">What delivery model do you use — staff augmentation, project-based, or managed service?</span>
+            <span class="faq__arrow"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <div class="faq__body"><p>All three, configured to your context. We design the delivery model during scoping and can flex across models as the engagement evolves — with transparent pricing and no lock-in.</p></div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 11 · CTA
+══════════════════════════════════════════════════════ -->
+<section class="cta-sec" id="ctaBand">
+  <img class="cta-logo"
+    src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
+    alt="Celsior" />
+  <p class="cta-h" data-text="Most modernization efforts begin with understanding the environment.">Most
+    modernization efforts begin with<br>understanding the environment.</p>
+  <a href="#contact" class="cta-btn">Start the conversation</a>
+</section>
+
+<script>
+/* ── IMAGE ACCORDION — GSAP ─────────────────────────────────────────── */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js"></script>
+<script>
+(function() {
+  // Wait for GSAP to be ready
+  if (typeof gsap === 'undefined') return;
+
+  gsap.registerPlugin(CustomEase);
+
+  // Liquid easing curves — slow entry, fast travel, ultra-soft landing
+  CustomEase.create("accOpen",  "M0,0 C0.14,0 0.22,0.18 0.36,0.56 0.48,0.86 0.6,1.02 0.76,1.02 0.88,1.02 0.94,1 1,1");
+  CustomEase.create("accClose", "M0,0 C0.2,0.2 0.3,0.6 0.5,0.82 0.72,1.04 0.86,1 1,1");
+  CustomEase.create("fadeUp",   "M0,0 C0.16,0 0.3,0.4 0.5,0.78 0.72,1.02 0.88,1 1,1");
+
+  const IMAGE_H = 597;
+  const STATS_H = 57;   // 56px + 1 border
+  const PAD_H   = 28;
+  const BODY_H  = IMAGE_H + STATS_H + PAD_H;
+
+  let activeIndex = 0;
+  let busy = false;
+
+  const rows = Array.from(document.querySelectorAll('#acc-section .acc-row'));
+
+  // — init state instantly —
+  rows.forEach((row, i) => {
+    const body  = row.querySelector('.acc-body');
+    const cta   = row.querySelector('.acc-cta');
+    const stats = row.querySelector('.acc-stats');
+    if (i === 0) {
+      gsap.set(body,  { height: BODY_H });
+      gsap.set(cta,   { opacity: 1, x: 0, pointerEvents: 'auto' });
+      gsap.set(stats, { opacity: 1, y: 0 });
+    } else {
+      gsap.set(body,  { height: 0 });
+      gsap.set(cta,   { opacity: 0, x: 8, pointerEvents: 'none' });
+      gsap.set(stats, { opacity: 0, y: 6 });
+    }
+  });
+
+  function openRow(idx) {
+    if (idx === activeIndex || busy) return;
+    busy = true;
+
+    const prev = rows[activeIndex];
+    const next = rows[idx];
+
+    prev.classList.remove('active');
+    next.classList.add('active');
+
+    const prevBody  = prev.querySelector('.acc-body');
+    const nextBody  = next.querySelector('.acc-body');
+    const prevCta   = prev.querySelector('.acc-cta');
+    const nextCta   = next.querySelector('.acc-cta');
+    const prevStats = prev.querySelector('.acc-stats');
+    const nextStats = next.querySelector('.acc-stats');
+    const nextImg   = next.querySelector('.acc-image-wrap img');
+
+    const tl = gsap.timeline({
+      onComplete() { activeIndex = idx; busy = false; }
+    });
+
+    // collapse outgoing
+    tl.to(prevCta,  { opacity:0, x:8, duration:0.2, ease:'power2.in', onComplete(){ prevCta.style.pointerEvents='none'; } }, 0)
+      .to(prevStats,{ opacity:0, y:4, duration:0.18, ease:'power2.in' }, 0)
+      .to(prevBody, { height:0, duration:0.55, ease:'accClose' }, 0.04)
+
+    // expand incoming
+      .set(nextImg, { scale:1.05 }, 0)
+      .to(nextBody, { height:BODY_H, duration:0.68, ease:'accOpen' }, 0.08)
+      .to(nextImg,  { scale:1, duration:0.78, ease:'power2.out' }, 0.08)
+      .to(nextCta,  { opacity:1, x:0, duration:0.28, ease:'power2.out',
+                      onStart(){ nextCta.style.pointerEvents='auto'; } }, 0.44)
+      .to(nextStats,{ opacity:1, y:0, duration:0.32, ease:'fadeUp' }, 0.52);
+  }
+
+  // click listeners
+  rows.forEach((row, i) => {
+    row.querySelector('.acc-header').addEventListener('click', e => {
+      if (e.target.closest('.acc-cta')) return;
+      openRow(i);
+    });
+    row.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openRow(i); }
+      if (e.key === 'ArrowDown' && i < rows.length-1) { openRow(i+1); }
+      if (e.key === 'ArrowUp'   && i > 0)             { openRow(i-1); }
+    });
+  });
+
+  // No auto-advance — first row open on load, user-driven only.
+})();
+/* ── END ACCORDION ─────────────────────────────────────────────────── */
+
+/* ── PARTNER MARQUEE — individual logos, single mask, liquid GSAP ────── */
+(function() {
+  const inner   = document.getElementById('marquee-inner');
+  const section = document.getElementById('partners-section');
+  if (!inner || !section || typeof gsap === 'undefined') return;
+
+  const SPEED        = 44;   // px/s
+  const PAUSE_DUR    = 0.55; // s to ease to stop
+  const RESUME_DUR   = 0.75; // s to ease back to full speed
+
+  const speed = { v: 1 };
+  let tweenX  = 0;
+  let lastT   = null;
+  let setW    = 0;
+  let sTween  = null;
+
+  function measure() {
+    const set = inner.querySelector('.marquee-set');
+    if (!set) return false;
+    // getBoundingClientRect gives actual rendered width including gap
+    const r = set.getBoundingClientRect();
+    if (r.width < 20) return false;
+    setW = r.width;
+    return true;
+  }
+
+  function tick(t) {
+    if (lastT !== null && setW > 0) {
+      tweenX -= SPEED * speed.v * ((t - lastT) / 1000);
+      if (tweenX <= -setW) tweenX += setW;   // seamless wrap
+      if (tweenX > 0) tweenX = 0;
+      gsap.set(inner, { x: tweenX, force3D: true });
+    }
+    lastT = t;
+    requestAnimationFrame(tick);
+  }
+
+  function start() {
+    if (!measure()) { setTimeout(start, 100); return; }
+    requestAnimationFrame(tick);
+
+    section.addEventListener('mouseenter', () => {
+      if (sTween) sTween.kill();
+      sTween = gsap.to(speed, { v: 0, duration: PAUSE_DUR,  ease: 'power2.inOut' });
+    });
+    section.addEventListener('mouseleave', () => {
+      if (sTween) sTween.kill();
+      sTween = gsap.to(speed, { v: 1, duration: RESUME_DUR, ease: 'power2.out' });
+    });
+  }
+
+  // Wait for all images then start
+  const imgs = Array.from(inner.querySelectorAll('img'));
+  let loaded = 0;
+  function onLoad() { if (++loaded >= Math.min(imgs.length, 6)) start(); }
+  imgs.forEach(img => {
+    if (img.complete && img.naturalWidth > 0) onLoad();
+    else { img.addEventListener('load', onLoad); img.addEventListener('error', onLoad); }
+  });
+  // hard fallback
+  setTimeout(start, 2000);
+})();
+/* ── END MARQUEE ─────────────────────────────────────────────────────── */
+
+/* (legacy toggleFaq removed — see new .faq__trigger handler near </body>) */
+</script>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 4 · INNOVATION WHEEL — script
+══════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  if (typeof gsap === 'undefined') return;
+
+  /* CARD DATA */
+  const DATA = [
+    {
+      chip:'Americana Group',
+      logo:{t:'AG', bg:'#c9a84c'},
+      title:'Banking & Financial Services',
+      desc:'Engineered a predictive logistics intelligence core for the global QSR giant, unifying supply chain across 15 countries.',
+      stats:[{n:'100%',l:'increase in dispatch automation'},{n:'4×',l:'improvement in operational standards'}],
+      bg:'#fff9e6', titleC:'#111', descC:'#666', statC:'#111', lblC:'#999',
+      ctaBg:'rgba(0,0,0,.82)', ctaC:'#fff', ctaBorder:'',
+      shadow:'0 28px 56px rgba(0,0,0,.52)',
+      footBg:'#18181a', footR:'130px 130px 0 0', foot:'phones',
+      imgs:{p1:'https://www.figma.com/api/mcp/asset/82f08dfb-247f-412e-9922-b42e99054f48',
+            p2:'https://www.figma.com/api/mcp/asset/39958a32-2bcc-49e5-8019-92c884ecf706'},
+    },
+    {
+      chip:'Flynas',
+      logo:{t:'FN', bg:'#38bdf8'},
+      title:'Insurance Modernisation',
+      desc:'Re-engineered the digital passenger journey with an AI-native mobile ecosystem, recovering market edge in GCC aviation.',
+      stats:[{n:'65%',l:'reduction in quote-to-policy time'},{n:'3×',l:'faster claims resolution'}],
+      bg:'#e0fcfa', titleC:'#0f2f3a', descC:'#4a7a8a', statC:'#0f2f3a', lblC:'#6aaabb',
+      ctaBg:'rgba(14,46,58,.85)', ctaC:'#fff', ctaBorder:'',
+      shadow:'0 22px 44px rgba(0,0,0,.35)',
+      footBg:'transparent', footR:'0', foot:'airplane',
+      imgs:{plane:'https://www.figma.com/api/mcp/asset/6d7a9e08-81bd-44e2-a85c-d88063d5563a'},
+    },
+    {
+      chip:'Healthcare',
+      logo:{t:'HC', bg:'#16a34a'},
+      title:'Patient Care Platform',
+      desc:'Integrated EHR, billing, and care coordination into a single AI-powered platform, reducing admin burden by 40%.',
+      stats:[{n:'40%',l:'reduction in admin overhead'},{n:'98%',l:'patient satisfaction score'}],
+      bg:'#f0fdf4', titleC:'#14532d', descC:'#4a7a5a', statC:'#14532d', lblC:'#5a9a6a',
+      ctaBg:'rgba(20,83,45,.88)', ctaC:'#fff', ctaBorder:'',
+      shadow:'0 22px 44px rgba(0,0,0,.32)',
+      footBg:'#1a2a1a', footR:'120px 120px 0 0', foot:'dashboard',
+      imgs:{dash:'https://www.figma.com/api/mcp/asset/d6d272b1-6903-4e4d-998b-a6bcf2104c12'},
+    },
+    {
+      chip:'KFC',
+      logo:{t:'KFC', bg:'#e4000f'},
+      title:'QSR Digital Commerce',
+      desc:'Engineered a unified digital commerce ecosystem across 7 global markets to reclaim brand sovereignty from aggregators.',
+      stats:[{n:'50%',l:'orders routed via native app'},{n:'22%',l:'increase in digital conversion'}],
+      bg:'#c8000e', titleC:'#fff', descC:'rgba(255,255,255,.78)', statC:'#fff', lblC:'rgba(255,255,255,.62)',
+      ctaBg:'rgba(255,255,255,.14)', ctaC:'#fff', ctaBorder:'1px solid rgba(255,255,255,.28)',
+      shadow:'0 24px 48px rgba(180,0,10,.5)',
+      footBg:'rgba(0,0,0,.2)', footR:'0', foot:'wordmark',
+      wordmark:'KFC', wordmarkSz:'96px', wordmarkC:'rgba(255,255,255,.08)',
+    },
+    {
+      chip:'Adidas',
+      logo:{t:'ADI', bg:'#111'},
+      title:'Mobile Commerce',
+      desc:'Designed an immersive direct-to-consumer mobile commerce experience driving global user acquisition and brand loyalty.',
+      stats:[{n:'2M+',l:'downloads achieved post-launch'},{n:'500k',l:'new users in key strategic regions'}],
+      bg:'#d6ef9e', titleC:'#1a2800', descC:'#4a6020', statC:'#1a2800', lblC:'#6a8830',
+      ctaBg:'rgba(26,40,0,.82)', ctaC:'#fff', ctaBorder:'',
+      shadow:'0 22px 44px rgba(0,0,0,.3)',
+      footBg:'transparent', footR:'0', foot:'wordmark',
+      wordmark:'adidas', wordmarkSz:'58px', wordmarkC:'rgba(26,40,0,.1)',
+    },
+    {
+      chip:'MyExec',
+      logo:{t:'ME', bg:'#18181a'},
+      title:'AI Business Intelligence',
+      desc:'Architected a Multi-Agent GenAI system functioning as an autonomous, high-level business consultant for SMBs.',
+      stats:[{n:'10×',l:'faster strategic insights'},{n:'85%',l:'decision accuracy lift'}],
+      bg:'#ffffff', titleC:'#111', descC:'#555', statC:'#111', lblC:'#999',
+      ctaBg:'rgba(0,0,0,.82)', ctaC:'#fff', ctaBorder:'',
+      shadow:'0 22px 44px rgba(0,0,0,.32)',
+      footBg:'#111', footR:'120px 120px 0 0', foot:'dashboard',
+      imgs:{dash:'https://www.figma.com/api/mcp/asset/d6d272b1-6903-4e4d-998b-a6bcf2104c12'},
+    },
+    {
+      chip:"Sonny's Enterprises",
+      logo:{t:'SE', bg:'#6366f1'},
+      title:'Data Infrastructure',
+      desc:'Modernised legacy analytics stack to drive real-time intelligence across the world\'s largest car wash network.',
+      stats:[{n:'90%',l:'faster report load time'},{n:'1,000+',l:'locations with unified data'}],
+      bg:'#1e1b4b', titleC:'#e8e4ff', descC:'rgba(232,228,255,.66)', statC:'#c7d2fe', lblC:'rgba(165,180,252,.66)',
+      ctaBg:'rgba(99,102,241,.28)', ctaC:'#c7d2fe', ctaBorder:'1px solid rgba(99,102,241,.5)',
+      shadow:'0 22px 48px rgba(99,102,241,.38)',
+      footBg:'#312e81', footR:'120px 120px 0 0', foot:'dashboard',
+      imgs:{dash:'https://www.figma.com/api/mcp/asset/d6d272b1-6903-4e4d-998b-a6bcf2104c12'},
+    },
+    {
+      chip:'RetailAI',
+      logo:{t:'RA', bg:'#f97316'},
+      title:'Retail Intelligence',
+      desc:'Built an AI demand-forecasting and inventory optimisation engine across 500+ SKUs for a tier-1 retail chain.',
+      stats:[{n:'31%',l:'reduction in stockouts'},{n:'$8M',l:'annual inventory savings'}],
+      bg:'#fff7ed', titleC:'#431407', descC:'#9a5a3a', statC:'#431407', lblC:'#b87050',
+      ctaBg:'rgba(67,20,7,.85)', ctaC:'#fff', ctaBorder:'',
+      shadow:'0 22px 44px rgba(0,0,0,.32)',
+      footBg:'#1c0f07', footR:'120px 120px 0 0', foot:'dashboard',
+      imgs:{dash:'https://www.figma.com/api/mcp/asset/d6d272b1-6903-4e4d-998b-a6bcf2104c12'},
+    },
+    {
+      chip:'MedTech',
+      logo:{t:'MT', bg:'#0ea5e9'},
+      title:'Clinical Analytics',
+      desc:'Deployed a real-time clinical decision-support system integrating multimodal patient data at hospital scale.',
+      stats:[{n:'60%',l:'faster diagnosis turnaround'},{n:'99.2%',l:'HIPAA compliance score'}],
+      bg:'#e0f2fe', titleC:'#0c4a6e', descC:'#3a7090', statC:'#0c4a6e', lblC:'#5a90b0',
+      ctaBg:'rgba(12,74,110,.88)', ctaC:'#fff', ctaBorder:'',
+      shadow:'0 22px 44px rgba(0,0,0,.3)',
+      footBg:'#0c4a6e', footR:'120px 120px 0 0', foot:'dashboard',
+      imgs:{dash:'https://www.figma.com/api/mcp/asset/d6d272b1-6903-4e4d-998b-a6bcf2104c12'},
+    },
+    {
+      chip:'EduSync',
+      logo:{t:'ES', bg:'#a855f7'},
+      title:'Adaptive EdTech Platform',
+      desc:'Created an AI-personalised learning ecosystem where intelligent tutors adapt content to every learner\'s pace and style.',
+      stats:[{n:'3×',l:'improvement in course completion'},{n:'250k',l:'active learners globally'}],
+      bg:'#faf5ff', titleC:'#3b0764', descC:'#7a4aaa', statC:'#3b0764', lblC:'#9a6acc',
+      ctaBg:'rgba(59,7,100,.85)', ctaC:'#fff', ctaBorder:'',
+      shadow:'0 22px 44px rgba(168,85,247,.28)',
+      footBg:'#3b0764', footR:'120px 120px 0 0', foot:'phones',
+      imgs:{p1:'https://www.figma.com/api/mcp/asset/82f08dfb-247f-412e-9922-b42e99054f48',
+            p2:'https://www.figma.com/api/mcp/asset/39958a32-2bcc-49e5-8019-92c884ecf706'},
+    },
+  ];
+  const N = DATA.length;
+
+  /* BUILD CHIPS */
+  const chipsTrackEl = document.getElementById('chips-track');
+  if (!chipsTrackEl) return;
+  DATA.forEach((d,i)=>{
+    const el = document.createElement('div');
+    el.className = 'chip ' + (i===0?'on':'off');
+    el.dataset.i  = i;
+    el.textContent = d.chip;
+    chipsTrackEl.appendChild(el);
+  });
+  const chipEls = [...chipsTrackEl.querySelectorAll('.chip')];
+
+  function scrollChipIntoView(i){
+    const vp  = chipsTrackEl.parentElement;
+    const el  = chipEls[i];
+    const vpR = vp.getBoundingClientRect();
+    const elR = el.getBoundingClientRect();
+    const cur = parseFloat(chipsTrackEl.style.transform?.match(/-?\d+\.?\d*/)?.[0]||0)*-1;
+    let  next = cur;
+    if(elR.left < vpR.left + 10)   next = cur - (vpR.left - elR.left) - 10;
+    if(elR.right > vpR.right - 10) next = cur + (elR.right - vpR.right) + 10;
+    next = Math.max(0, next);
+    chipsTrackEl.style.transform = `translateX(-${next}px)`;
+  }
+
+  /* CHIP TOOLTIP */
+  const ctip = document.getElementById('ctip');
+  let ctipHide;
+  function showTip(chipEl){
+    clearTimeout(ctipHide);
+    const r = chipEl.getBoundingClientRect();
+    ctip.textContent = chipEl.textContent.trim();
+    ctip.style.left  = (r.left + r.width/2) + 'px';
+    ctip.style.top   = (r.top - 10) + 'px';
+    ctip.classList.add('on');
+  }
+  function hideTip(){
+    ctipHide = setTimeout(()=> ctip.classList.remove('on'), 80);
+  }
+  chipEls.forEach(ch=>{
+    ch.addEventListener('mouseenter', ()=> showTip(ch));
+    ch.addEventListener('mouseleave', hideTip);
+  });
+
+  /* BUILD CARD DOM */
+  function buildFoot(d){
+    if(d.foot==='phones') return `
+      <div class="c-foot">
+        <div style="background:${d.footBg};border-radius:${d.footR};width:100%;height:100%;position:relative;">
+          <div style="position:absolute;bottom:-14px;left:18px;width:126px;height:224px;border-radius:15px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.4);transform:rotate(-10deg);">
+            <img src="${d.imgs.p1}" style="width:100%;height:100%;object-fit:cover;" draggable="false"/></div>
+          <div style="position:absolute;bottom:4px;right:22px;width:126px;height:224px;border-radius:15px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.4);transform:rotate(8deg);">
+            <img src="${d.imgs.p2}" style="width:100%;height:100%;object-fit:cover;" draggable="false"/></div>
+        </div></div>`;
+    if(d.foot==='airplane') return `
+      <div class="c-foot" style="overflow:visible;background:transparent;">
+        <img src="${d.imgs.plane}" style="position:absolute;bottom:0;left:-8%;width:116%;object-fit:cover;mix-blend-mode:darken;" draggable="false"/>
+      </div>`;
+    if(d.foot==='dashboard') return `
+      <div class="c-foot">
+        <div style="background:${d.footBg};border-radius:${d.footR};width:100%;height:100%;display:flex;align-items:flex-start;justify-content:center;padding-top:24px;overflow:hidden;">
+          <div style="width:335px;height:185px;border-radius:10px 10px 0 0;overflow:hidden;box-shadow:-4px -4px 18px rgba(0,0,0,.42);transform:rotate(2deg);">
+            <img src="${d.imgs.dash}" style="width:95%;height:95%;margin:2.5%;object-fit:cover;display:block;" draggable="false"/>
+          </div></div></div>`;
+    if(d.foot==='wordmark') return `
+      <div class="c-foot" style="display:flex;align-items:center;justify-content:center;background:transparent;">
+        <span style="font-size:${d.wordmarkSz};font-weight:900;color:${d.wordmarkC};letter-spacing:-3px;user-select:none;line-height:1;">${d.wordmark}</span>
+      </div>`;
+    return '';
+  }
+
+  const pivot = document.getElementById('stage-pivot');
+  const cardEls = DATA.map((d,i)=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'cw';
+    wrap.dataset.i = i;
+    const lSz = d.logo.t.length > 2 ? '7px' : '9.5px';
+    const bdr = d.ctaBorder ? `border:${d.ctaBorder};` : '';
+    wrap.innerHTML = `
+      <div class="card" style="background:${d.bg};box-shadow:${d.shadow};">
+        <div class="c-head">
+          <div class="c-logo" style="background:${d.logo.bg};width:46px;height:46px;">
+            <span style="font-size:${lSz};font-weight:800;letter-spacing:.5px;color:#fff;text-transform:uppercase;">${d.logo.t}</span>
+          </div>
+          <div class="c-title" style="color:${d.titleC};">${d.title}</div>
+        </div>
+        <p class="c-desc" style="color:${d.descC};">${d.desc}</p>
+        <div class="c-stats">
+          ${d.stats.map(s=>`<div class="stat">
+            <div class="stat-n" style="color:${d.statC};">${s.n}</div>
+            <div class="stat-l" style="color:${d.lblC};">${s.l}</div>
+          </div>`).join('')}
+        </div>
+        <button class="c-cta" style="background:${d.ctaBg};color:${d.ctaC};${bdr}">
+          View case study
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        ${buildFoot(d)}
+      </div>`;
+    pivot.appendChild(wrap);
+    return wrap;
+  });
+
+  /* WHEEL CAROUSEL */
+  const RADIUS  = 2200;
+  const STEP    = 17 * Math.PI/180;
+  const PERIOD  = STEP * N;
+  const VISIBLE_HALF = 4;
+  const FRICTION    = 0.955;
+  const MIN_VEL     = 0.00022;
+  const SNAP_K      = 0.18;
+  const SNAP_DAMP   = 0.78;
+  const MAX_VEL     = 0.42;
+  const VEL_BOOST   = 1.35;
+
+  let theta = 0, vTheta = 0, rafId = null, mode = 'idle', cur = 0;
+  let floatTw;
+
+  function placeCard(el, i, wheelTheta){
+    let a = i * STEP - wheelTheta;
+    a = ((a % PERIOD) + PERIOD + PERIOD/2) % PERIOD - PERIOD/2;
+    const x = Math.sin(a) * RADIUS;
+    const y = RADIUS - Math.cos(a) * RADIUS;
+    const rotDeg = a * 180/Math.PI;
+    const slotsAway = Math.abs(a) / STEP;
+    const visible = slotsAway < VISIBLE_HALF + 0.5;
+    const op  = visible ? Math.max(0, 1 - Math.max(0, slotsAway - VISIBLE_HALF + 0.4)) : 0;
+    const scl = 1 - Math.min(0.18, slotsAway * 0.07);
+    const z   = Math.round(100 - slotsAway * 10);
+    el.style.zIndex = Math.max(1, z);
+    gsap.set(el, { x, y, rotation: rotDeg, scaleX: scl, scaleY: scl, opacity: op, force3D: true });
+  }
+
+  function applyAll(){
+    for(let i=0;i<N;i++) placeCard(cardEls[i], i, theta);
+    const newCur = ((Math.round(theta / STEP) % N) + N) % N;
+    if(newCur !== cur){ cur = newCur; syncChips(); }
+  }
+
+  function loop(){
+    if(mode === 'coast'){
+      vTheta *= FRICTION;
+      theta  += vTheta;
+      if(Math.abs(vTheta) < MIN_VEL) mode = 'snap';
+    } else if(mode === 'snap'){
+      const target = Math.round(theta / STEP) * STEP;
+      const diff   = target - theta;
+      vTheta = vTheta * SNAP_DAMP + diff * SNAP_K;
+      theta += vTheta;
+      if(Math.abs(diff) < 0.0008 && Math.abs(vTheta) < 0.0008){
+        theta = target; vTheta = 0;
+        applyAll();
+        mode = 'idle';
+        restartFloat();
+        return;
+      }
+    } else { return; }
+    applyAll();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function startLoop(initialMode){
+    cancelAnimationFrame(rafId);
+    if(floatTw) floatTw.kill();
+    mode = initialMode;
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function goTo(idx){
+    let delta = ((idx - cur) % N + N) % N;
+    if(delta > N/2) delta -= N;
+    const desiredTheta = theta + delta * STEP;
+    cancelAnimationFrame(rafId);
+    if(floatTw) floatTw.kill();
+    mode = 'idle';
+    const obj = {t: theta};
+    gsap.to(obj, {
+      t: desiredTheta,
+      duration: 0.7,
+      ease: 'power3.out',
+      onUpdate(){ theta = obj.t; applyAll(); },
+      onComplete(){ theta = desiredTheta; vTheta = 0; applyAll(); restartFloat(); },
+    });
+  }
+  const goPrev = () => goTo(((cur - 1) % N + N) % N);
+  const goNext = () => goTo(((cur + 1) % N + N) % N);
+
+  function syncChips(){
+    chipEls.forEach((ch,i)=> ch.className = 'chip ' + (i===cur?'on':'off'));
+    scrollChipIntoView(cur);
+  }
+
+  document.getElementById('ch-prev').addEventListener('click', goPrev);
+  document.getElementById('ch-next').addEventListener('click', goNext);
+  chipEls.forEach((ch,i)=> ch.addEventListener('click',()=>{ if(i!==cur) goTo(i); }));
+
+  const stageEl = document.getElementById('stage-wrap');
+
+  // Arrow keys only when wheel is in viewport — don't hijack page navigation
+  document.addEventListener('keydown', e=>{
+    const r = stageEl.getBoundingClientRect();
+    const inView = r.top < window.innerHeight && r.bottom > 0;
+    if(!inView) return;
+    if(e.key==='ArrowLeft')  { e.preventDefault(); goPrev(); }
+    if(e.key==='ArrowRight') { e.preventDefault(); goNext(); }
+  });
+
+  /* DRAG */
+  let pDown=false, isDrag=false, isVert=false;
+  let pX0=0, yStart=0, lastX=0, lastT=0, thetaAtDown=0;
+  const VEL_WINDOW = 80;
+  const samples = [];
+
+  stageEl.addEventListener('pointerdown', e=>{
+    if(e.button !== 0) return;
+    cancelAnimationFrame(rafId);
+    if(floatTw) floatTw.kill();
+    mode = 'idle'; vTheta = 0;
+    pDown = true; isDrag=false; isVert=false;
+    pX0 = lastX = e.clientX;
+    yStart = e.clientY;
+    lastT = performance.now();
+    thetaAtDown = theta;
+    samples.length = 0;
+    samples.push({t: lastT, x: e.clientX});
+    stageEl.setPointerCapture(e.pointerId);
+  }, {passive:true});
+
+  stageEl.addEventListener('pointermove', e=>{
+    if(!pDown) return;
+    const dx = e.clientX - pX0;
+    const dy = e.clientY - yStart;
+    if(!isDrag && !isVert){
+      if(Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 8){ isVert=true; return; }
+      if(Math.abs(dx) > 6) isDrag = true;
+    }
+    if(isVert || !isDrag) return;
+    e.preventDefault();
+    const now = performance.now();
+    lastX = e.clientX;
+    lastT = now;
+    samples.push({t: now, x: e.clientX});
+    const cutoff = now - VEL_WINDOW;
+    while(samples.length > 2 && samples[0].t < cutoff) samples.shift();
+    theta = thetaAtDown - dx / RADIUS;
+    applyAll();
+  }, {passive:false});
+
+  function endDrag(){
+    if(!pDown) return;
+    pDown = false;
+    if(!isDrag || isVert){ startLoop('snap'); return; }
+    let v = 0;
+    if(samples.length >= 2){
+      const a = samples[0], b = samples[samples.length - 1];
+      const dt = Math.max(1, b.t - a.t);
+      const pxPerMs = (b.x - a.x) / dt;
+      v = -(pxPerMs * 16.67) / RADIUS * VEL_BOOST;
+    }
+    v = Math.max(-MAX_VEL, Math.min(MAX_VEL, v));
+    vTheta = v;
+    startLoop(Math.abs(vTheta) < 0.0025 ? 'snap' : 'coast');
+  }
+  stageEl.addEventListener('pointerup',     endDrag, {passive:true});
+  stageEl.addEventListener('pointercancel', endDrag, {passive:true});
+
+  cardEls.forEach((el,i)=>{
+    el.addEventListener('click', ()=>{
+      if(isDrag) return;
+      if(i !== cur) goTo(i);
+    });
+  });
+
+  stageEl.addEventListener('wheel', e=>{
+    if(Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    cancelAnimationFrame(rafId);
+    if(floatTw) floatTw.kill();
+    mode = 'idle';
+    theta += e.deltaX / RADIUS;
+    applyAll();
+    clearTimeout(stageEl._wheelTO);
+    stageEl._wheelTO = setTimeout(()=>{ vTheta=0; startLoop('snap'); }, 90);
+  }, {passive:false});
+
+  /* DRAG CURSOR */
+  const dcur = document.getElementById('dcur');
+  let cX=0, cY=0, tX=0, tY=0;
+  (function cursorLoop(){
+    cX += (tX - cX) * .14;
+    cY += (tY - cY) * .14;
+    dcur.style.left = cX + 'px';
+    dcur.style.top  = cY + 'px';
+    requestAnimationFrame(cursorLoop);
+  })();
+  document.addEventListener('mousemove', e=>{ tX=e.clientX; tY=e.clientY; });
+  stageEl.addEventListener('mouseenter', ()=>{ dcur.classList.add('show');  stageEl.style.cursor='none'; });
+  stageEl.addEventListener('mouseleave', ()=>{ dcur.classList.remove('show','press'); stageEl.style.cursor=''; });
+  stageEl.addEventListener('pointerdown', ()=> dcur.classList.add('press'));
+  document.addEventListener('pointerup',  ()=> dcur.classList.remove('press'));
+
+  let hoveredCardIdx = -1;
+  function updateCursorLabel(){
+    const spinning = pDown || mode !== 'idle';
+    let next;
+    if(!spinning && hoveredCardIdx >= 0){
+      next = DATA[hoveredCardIdx].chip;
+    } else {
+      next = 'DRAG';
+    }
+    if(dcur.textContent !== next) dcur.textContent = next;
+    dcur.classList.toggle('drag', next === 'DRAG');
+  }
+  cardEls.forEach((el,i)=>{
+    el.addEventListener('mouseenter', ()=>{ hoveredCardIdx = i; updateCursorLabel(); });
+    el.addEventListener('mouseleave', ()=>{ if(hoveredCardIdx===i){ hoveredCardIdx = -1; updateCursorLabel(); } });
+  });
+  (function labelLoop(){ updateCursorLabel(); requestAnimationFrame(labelLoop); })();
+
+  /* IDLE FLOAT */
+  function restartFloat(){
+    if(floatTw) floatTw.kill();
+    setTimeout(()=>{
+      if(mode !== 'idle' || pDown) return;
+      floatTw = gsap.to(cardEls[cur], {
+        y: '-=10', duration: 2.8, ease: 'sine.inOut', yoyo: true, repeat: -1,
+      });
+    }, 700);
+  }
+
+  /* ENTRANCE */
+  applyAll();
+  cardEls.forEach(el=> gsap.set(el,{opacity:0, y:'+=80'}));
+
+  const entryTl = gsap.timeline({delay:.1});
+  entryTl
+    .to('#cel-h1',    {opacity:1, y:0, duration:.76, ease:'power3.out'})
+    .to('#cel-sub',   {opacity:1, y:0, duration:.64, ease:'power3.out'}, '-=.44')
+    .to('#chips-row', {opacity:1, y:0, duration:.54, ease:'power3.out'}, '-=.36')
+    .call(()=>{
+      for(let i=0;i<N;i++){
+        let a = i * STEP - theta;
+        a = ((a % PERIOD) + PERIOD + PERIOD/2) % PERIOD - PERIOD/2;
+        const x = Math.sin(a) * RADIUS;
+        const y = RADIUS - Math.cos(a) * RADIUS;
+        const slotsAway = Math.abs(a) / STEP;
+        const visible = slotsAway < VISIBLE_HALF + 0.5;
+        const op  = visible ? Math.max(0, 1 - Math.max(0, slotsAway - VISIBLE_HALF + 0.4)) : 0;
+        const scl = 1 - Math.min(0.18, slotsAway * 0.07);
+        cardEls[i].style.zIndex = Math.max(1, Math.round(100 - slotsAway*10));
+        gsap.to(cardEls[i], {
+          opacity: op, x, y,
+          rotation: a*180/Math.PI,
+          scaleX: scl, scaleY: scl,
+          duration: .9, delay: Math.min(slotsAway, 3) * .06,
+          ease: 'power3.out', overwrite: true,
+        });
+      }
+    }, null, '-=.05')
+    .call(restartFloat, null, '+=.7');
+})();
+</script>
+<script>
+  /* Explore section: split title chars for staggered hover lift */
+  (function () {
+    document.querySelectorAll('.explore .ex-title').forEach(function (node) {
+      var text = node.textContent;
+      node.textContent = '';
+      Array.from(text).forEach(function (ch, i) {
+        var span = document.createElement('span');
+        span.className = 'ex-char';
+        span.style.setProperty('--i', i);
+        span.textContent = ch === ' ' ? '\u00a0' : ch;
+        node.appendChild(span);
+      });
+    });
+  })();
+</script>
+<script>
+  /* FAQ accordion — single open at a time, smooth height transition */
+  (function () {
+    document.querySelectorAll('.faq__trigger').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item = btn.closest('.faq__item');
+        var isOpen = item.classList.contains('is-open');
+        document.querySelectorAll('.faq__item.is-open').forEach(function (o) {
+          o.classList.remove('is-open');
+          var t = o.querySelector('.faq__trigger');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  })();
+</script>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   METRIC CELL HOVER — ORBIT COMET  (unified engine, 4 color voices)
+   Palette sourced from the gradient border: gold #f1be56, cyan #52b8d7,
+   teal #4bc8ad — extended with brand indigo #6366f1
+═══════════════════════════════════════════════════════════════════ */
+
+/* ── Shared @property + keyframe: one engine for all four cells ── */
+@property --mc-a {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes mc-comet { to { --mc-a: 360deg; } }
+
+/* Shared base */
+.mc {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mc:hover { transform: translateY(-2px); }
+.mc-num   { transition: color 0.4s ease, text-shadow 0.5s ease; }
+.mc-accent{ transition: width 0.55s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s; }
+
+/* Shared ::after comet border scaffold (all 4 cells) */
+.mc::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.mc:hover::after {
+  opacity: 1;
+  animation: mc-comet 2.4s linear infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   TL · 56%  GOLD — #f1be56 → #f97316 → #fbbf24
+   Warm amber comet, hot tip fading into golden trail
+───────────────────────────────────────────────────────────────── */
+.mc.tl::after {
+  background: conic-gradient(
+    from var(--mc-a),
+    transparent       0%,
+    transparent      52%,
+    rgba(241,190,86,.25) 62%,
+    #f1be56          72%,
+    #f97316          80%,
+    #fbbf24          86%,
+    rgba(251,191,36,.1) 94%,
+    transparent     100%
+  );
+}
+.mc.tl:hover .mc-num  { color: #b45309; text-shadow: 0 0 44px rgba(241,190,86,.55), 0 0 80px rgba(249,115,22,.28); }
+.mc.tl:hover .mc-accent { width: 160px; box-shadow: 0 0 12px rgba(241,190,86,.7), 0 0 28px rgba(249,115,22,.35); }
+
+/* ─────────────────────────────────────────────────────────────────
+   TR · 06   CYAN — #52b8d7 → #38bdf8 → #2563eb
+   Cool electric-blue comet, crisp cyan head, deep blue fade
+───────────────────────────────────────────────────────────────── */
+.mc.tr::after {
+  background: conic-gradient(
+    from var(--mc-a),
+    transparent       0%,
+    transparent      52%,
+    rgba(82,184,215,.25) 62%,
+    #52b8d7          72%,
+    #38bdf8          80%,
+    #2563eb          86%,
+    rgba(37,99,235,.1)  94%,
+    transparent     100%
+  );
+}
+.mc.tr:hover .mc-num { color: #0369a1; text-shadow: 0 0 44px rgba(82,184,215,.55), 0 0 80px rgba(56,189,248,.28); }
+
+/* ─────────────────────────────────────────────────────────────────
+   BL · 46%  TEAL — #4bc8ad → #14b8a6 → #10b981
+   Fresh teal-emerald comet, matches brand teal exactly
+───────────────────────────────────────────────────────────────── */
+.mc.bl::after {
+  background: conic-gradient(
+    from var(--mc-a),
+    transparent       0%,
+    transparent      52%,
+    rgba(75,200,173,.25) 62%,
+    #4bc8ad          72%,
+    #14b8a6          80%,
+    #10b981          86%,
+    rgba(16,185,129,.1) 94%,
+    transparent     100%
+  );
+}
+.mc.bl:hover .mc-num { color: #0f766e; text-shadow: 0 0 44px rgba(75,200,173,.55), 0 0 80px rgba(20,184,166,.28); }
+
+/* ─────────────────────────────────────────────────────────────────
+   BR · 57%  INDIGO — #6366f1 → #a855f7 → #818cf8
+   Rich violet comet — deepens the palette without clashing
+───────────────────────────────────────────────────────────────── */
+.mc.br::after {
+  background: conic-gradient(
+    from var(--mc-a),
+    transparent       0%,
+    transparent      52%,
+    rgba(99,102,241,.25) 62%,
+    #6366f1          72%,
+    #a855f7          80%,
+    #818cf8          86%,
+    rgba(129,140,248,.1) 94%,
+    transparent     100%
+  );
+}
+.mc.br:hover .mc-num { color: #4f46e5; text-shadow: 0 0 44px rgba(99,102,241,.55), 0 0 80px rgba(168,85,247,.28); }
+</style>
+
+<style>
+/* old rules purged */
+@keyframes _noop { from {} to {} }
+/* placeholder closed */
+</style>
+
+<script>
+  /* ── CTA BAND · scroll-entry + glitch ──────────────────────────────── */
+  (function () {
+    if (!window.gsap) return;
+    if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from('.cta-logo', { opacity: 0, y: 18, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
+    gsap.from('.cta-h', { opacity: 0, y: 22, duration: 0.9, ease: 'power3.out', delay: 0.12,
+      scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
+    gsap.from('.cta-btn', { opacity: 0, y: 18, duration: 0.7, ease: 'power3.out', delay: 0.26,
+      scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
+
+    const el = document.querySelector('.cta-h');
+    if (!el) return;
+    el.setAttribute('data-text', el.textContent);
+
+    function glitch() {
+      const chars = '!<>-_\\/[]{}—=+*^?#________';
+      const original = el.innerHTML;
+      const tl = gsap.timeline({
+        onComplete: () => { el.innerHTML = original; gsap.delayedCall(gsap.utils.random(2.5, 5), glitch); }
+      });
+      tl.to(el, { duration: 0.04, onStart() {
+          el.style.textShadow = '-4px 2px 0 rgba(34,84,244,0.7), 4px -2px 0 rgba(225,29,72,0.7)';
+        }})
+        .to(el, { duration: 0.06, onStart() {
+          const txt = el.textContent; let out = '';
+          for (let i = 0; i < txt.length; i++) {
+            if (txt[i] !== ' ' && txt[i] !== '\n' && Math.random() < 0.18)
+              out += chars[Math.floor(Math.random() * chars.length)];
+            else out += txt[i];
+          }
+          el.textContent = out;
+          el.style.textShadow = '3px -2px 0 rgba(34,84,244,0.6), -3px 2px 0 rgba(225,29,72,0.6)';
+          el.style.transform = `translate(${gsap.utils.random(-2,2)}px,${gsap.utils.random(-1,1)}px)`;
+        }})
+        .to(el, { duration: 0.05, onStart() {
+          const txt = el.getAttribute('data-text'); let out = '';
+          for (let i = 0; i < txt.length; i++) {
+            if (txt[i] !== ' ' && txt[i] !== '\n' && Math.random() < 0.28)
+              out += chars[Math.floor(Math.random() * chars.length)];
+            else out += txt[i];
+          }
+          el.textContent = out;
+          el.style.textShadow = '-5px 0 0 rgba(34,84,244,0.8), 5px 0 0 rgba(225,29,72,0.8)';
+          el.style.transform = `translate(${gsap.utils.random(-3,3)}px,0)`;
+          el.style.clipPath = `inset(${gsap.utils.random(10,40)}% 0 ${gsap.utils.random(10,40)}% 0)`;
+        }})
+        .to(el, { duration: 0.04, onStart() {
+          el.textContent = el.getAttribute('data-text');
+          el.style.textShadow = '2px 1px 0 rgba(34,84,244,0.4), -2px -1px 0 rgba(225,29,72,0.4)';
+          el.style.transform = ''; el.style.clipPath = '';
+        }})
+        .to(el, { duration: 0.06, onStart() {
+          el.innerHTML = original;
+          el.style.textShadow = ''; el.style.transform = ''; el.style.clipPath = '';
+        }});
+    }
+    gsap.delayedCall(1.4, glitch);
+  })();
+</script>
+<script src="shared.js" defer></script>
+</body>
+</html>
