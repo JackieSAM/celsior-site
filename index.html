@@ -974,11 +974,11 @@
       inset: auto 0 0 0;
       height: 82%;
       z-index: 2;
-      background: linear-gradient(to top, 
-        rgba(13, 17, 39, 0.94) 0%, 
-        rgba(13, 17, 39, 0.65) 28%, 
-        rgba(13, 17, 39, 0.22) 58%, 
-        transparent 100%);
+      background: linear-gradient(to top,
+          rgba(13, 17, 39, 0.94) 0%,
+          rgba(13, 17, 39, 0.65) 28%,
+          rgba(13, 17, 39, 0.22) 58%,
+          transparent 100%);
       pointer-events: none;
     }
 
@@ -1023,6 +1023,34 @@
 
     .hl-faded {
       color: rgba(255, 255, 255, 0.36);
+    }
+
+    .hl-strong {
+      color: #ffffff;
+      font-weight: 800;
+      background: linear-gradient(180deg, #ffffff 0%, #cfd6ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.15vw, 1.15rem);
+      line-height: 1.55;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.72);
+      max-width: 760px;
+      margin: -14px auto 30px;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 640px) {
+      .hero-sub {
+        font-size: 0.92rem;
+        margin: -8px auto 22px;
+        padding: 0 4px;
+      }
     }
 
     .hero-ctas {
@@ -1143,20 +1171,42 @@
 
     /* Slide label strip */
     .hero-slide-label {
-      position: absolute;
-      bottom: 100px;
-      left: 60px;
+      position: relative;
       z-index: 12;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
+      justify-content: center;
+      gap: 14px;
+      margin: 0 auto 22px;
+      padding: 6px 0;
     }
 
     .hero-label-line {
-      width: 28px;
+      width: 36px;
       height: 1px;
-      background: rgba(255, 255, 255, 0.40);
-      transition: width 0.4s;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.65) 100%);
+      transform-origin: right center;
+      animation: heroDashPulse 2.4s ease-in-out infinite;
+    }
+
+    .hero-label-line--right {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 100%);
+      transform-origin: left center;
+      animation-delay: 1.2s;
+    }
+
+    @keyframes heroDashPulse {
+
+      0%,
+      100% {
+        transform: scaleX(0.55);
+        opacity: 0.45;
+      }
+
+      50% {
+        transform: scaleX(1);
+        opacity: 1;
+      }
     }
 
     .hero-label-text {
@@ -1391,8 +1441,8 @@
             <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg></a></li>
-      <li class="nav-item" data-menu="how"><a class="nav-link" href="Capabilities.html">Capabilities <svg class="chevron" viewBox="0 0 12 12"
-            fill="none">
+      <li class="nav-item" data-menu="how"><a class="nav-link" href="Capabilities.html">Capabilities <svg
+            class="chevron" viewBox="0 0 12 12" fill="none">
             <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg></a></li>
@@ -1401,23 +1451,23 @@
             <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg></a></li>
-      <li class="nav-item" data-menu="ai"><a class="nav-link" href="ai-innovation.html">AI & Innovation <svg class="chevron"
-            viewBox="0 0 12 12" fill="none">
+      <li class="nav-item" data-menu="ai"><a class="nav-link" href="ai-innovation.html">AI & Innovation <svg
+            class="chevron" viewBox="0 0 12 12" fill="none">
             <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg></a></li>
-      <li class="nav-item" data-menu="industries"><a class="nav-link" href="industries.html">Industries <svg class="chevron"
-            viewBox="0 0 12 12" fill="none">
+      <li class="nav-item" data-menu="industries"><a class="nav-link" href="industries.html">Industries <svg
+            class="chevron" viewBox="0 0 12 12" fill="none">
             <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg></a></li>
-      <li class="nav-item" data-menu="partners"><a class="nav-link" href="partner-ecosystem.html">Partner Ecosystem <svg class="chevron"
-            viewBox="0 0 12 12" fill="none">
+      <li class="nav-item" data-menu="partners"><a class="nav-link" href="partner-ecosystem.html">Partner Ecosystem <svg
+            class="chevron" viewBox="0 0 12 12" fill="none">
             <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg></a></li>
-      <li class="nav-item" data-menu="about"><a class="nav-link" href="about.html">About <svg class="chevron" viewBox="0 0 12 12"
-            fill="none">
+      <li class="nav-item" data-menu="about"><a class="nav-link" href="about.html">About <svg class="chevron"
+            viewBox="0 0 12 12" fill="none">
             <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg></a></li>
@@ -1455,8 +1505,8 @@
       </div>
       <nav class="drawer-nav">
         <div class="drawer-item">
-          <div class="drawer-link" data-drawer-toggle="d-solve">Our Focus<svg class="drawer-chevron"
-              viewBox="0 0 16 16" fill="none">
+          <div class="drawer-link" data-drawer-toggle="d-solve">Our Focus<svg class="drawer-chevron" viewBox="0 0 16 16"
+              fill="none">
               <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                 stroke-linejoin="round" />
             </svg></div>
@@ -1993,6 +2043,11 @@
           <source src="https://www.pexels.com/download/video/18069804/" type="video/mp4" />
         </video>
       </div>
+      <div class="hero-slide" id="heroSlide3" data-index="3">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="https://www.pexels.com/download/video/6804109/" type="video/mp4" />
+        </video>
+      </div>
     </div>
 
     <!-- Dot grid parallax layer -->
@@ -2009,14 +2064,9 @@
         <div class="hds-dot active" data-slide="0"></div>
         <div class="hds-dot" data-slide="1"></div>
         <div class="hds-dot" data-slide="2"></div>
+        <div class="hds-dot" data-slide="3"></div>
       </div>
       <div class="hds-num" style="color:rgba(255,255,255,0.18)">03</div>
-    </div>
-
-    <!-- Bottom-left label -->
-    <div class="hero-slide-label" id="heroSlideLabel">
-      <div class="hero-label-line"></div>
-      <span class="hero-label-text" id="heroLabelText">Enterprise Modernization</span>
     </div>
 
     <!-- Scroll hint -->
@@ -2029,16 +2079,25 @@
 
     <!-- Main content (slides share one content block, text swaps) -->
     <div class="hero-content">
+      <!-- Eyebrow above headline -->
+      <div class="hero-slide-label" id="heroSlideLabel">
+        <div class="hero-label-line"></div>
+        <span class="hero-label-text" id="heroLabelText">AI-First Digital Engineering Platform</span>
+        <div class="hero-label-line hero-label-line--right"></div>
+      </div>
       <h1 class="hero-headline">
-        <span class="hl-bright" id="hlBright">Modernize critical systems.<br />Operationalize AI.</span><span
-          class="hl-faded" id="hlFaded"> Run with confidence.</span>
+        <span class="hl-bright" id="hlBright">Engineer Faster. Ship Smarter. Scale <span class="hl-strong">Without
+            Limits</span></span>
       </h1>
+      <p class="hero-sub" id="hlFaded">From business requirement to production release — fully traced, AI-accelerated,
+        and delivered in weeks, not months.</p>
       <div class="hero-ctas" id="heroCtas">
         <a href="#contact" class="cta-primary">Talk to an Expert <svg viewBox="0 0 14 14" fill="none">
             <path d="M2.5 7H11.5M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5"
               stroke-linecap="round" stroke-linejoin="round" />
           </svg></a>
-        <a href="#capabilities" class="cta-secondary">Explore Capabilities</a>
+        <a href="#capabilities" class="cta-secondary" id="heroCtaSecondary">Explore the AI-First Digital Engineering
+          Platform</a>
       </div>
     </div>
 
@@ -2071,30 +2130,53 @@
   <section id="showcase" class="showcase-section">
     <div class="carousel-viewport">
       <div class="carousel-track" id="carouselTrack">
-        <div class="sc-card sc-card--logo sc-pal-1">
-          <div class="sc-card-frost"></div><img
-            src="https://cdn.fastpixel.io/fp/ret_img+v_e662+q_lossy+to_webp/pyramidci.com%2Fwp-content%2Fuploads%2F2024%2F07%2FFrame-1973341828.svg"
-            alt="" />
+        <div class="sc-card sc-card--logo sc-card--news sc-pal-1">
+          <div class="sc-card-frost"></div>
+          <div class="sc-news">
+            <h3 class="sc-news-title">Celsior Joins Jack Henry Fintech Integration Network</h3>
+          </div>
         </div>
-        <div class="sc-card sc-card--logo sc-pal-2" style="--orb-delay:1.4s">
-          <div class="sc-card-frost"></div><img
-            src="https://cdn.fastpixel.io/fp/ret_img+v_67f1+q_lossy+to_webp/pyramidci.com%2Fwp-content%2Fuploads%2F2024%2F05%2FFrame-1973341655.svg"
-            alt="" />
+        <div class="sc-card sc-card--logo sc-card--news sc-pal-2" style="--orb-delay:1.4s">
+          <div class="sc-card-frost"></div>
+          <div class="sc-news">
+            <h3 class="sc-news-title">Ramesh Maturu Named Among Georgia TITAN 100</h3>
+          </div>
         </div>
-        <div class="sc-card sc-card--logo sc-pal-3" style="--orb-delay:2.8s">
-          <div class="sc-card-frost"></div><img
-            src="https://cdn.dm.dynatrace.com/assets/Marketing/seo/dynatrace_web.png" alt=""
-            style="filter: brightness(0) invert(1);" />
+        <div class="sc-card sc-card--logo sc-card--news sc-pal-3" style="--orb-delay:2.8s">
+          <div class="sc-card-frost"></div>
+          <div class="sc-news">
+            <h3 class="sc-news-title">Celsior Now an Official Guidewire Technology Partner</h3>
+          </div>
         </div>
-        <div class="sc-card sc-card--logo sc-pal-4" style="--orb-delay:0.7s">
-          <div class="sc-card-frost"></div><img
-            src="https://cdn.fastpixel.io/fp/ret_img+v_fb5e+q_lossy+to_webp/pyramidci.com%2Fwp-content%2Fuploads%2F2024%2F07%2FFrame-1973341827.svg"
-            alt="" />
+        <div class="sc-card sc-card--logo sc-card--news sc-pal-4" style="--orb-delay:0.7s">
+          <div class="sc-card-frost"></div>
+          <div class="sc-news">
+            <h3 class="sc-news-title">Recognized as Challenger in Avasant&rsquo;s GCC Services 2025 Report</h3>
+          </div>
         </div>
-        <div class="sc-card sc-card--logo sc-pal-5" style="--orb-delay:2.1s">
-          <div class="sc-card-frost"></div><img
-            src="https://avasant.com/wp-content/uploads/2023/06/Avasant-white-logo.png" alt=""
-            style="filter: brightness(0) invert(1);" />
+        <div class="sc-card sc-card--logo sc-card--news sc-pal-5" style="--orb-delay:2.1s">
+          <div class="sc-card-frost"></div>
+          <div class="sc-news">
+            <h3 class="sc-news-title">Celsior Launches AI-First Digital Engineering Accelerator</h3>
+          </div>
+        </div>
+        <div class="sc-card sc-card--logo sc-card--news sc-pal-1" style="--orb-delay:3.4s">
+          <div class="sc-card-frost"></div>
+          <div class="sc-news">
+            <h3 class="sc-news-title">Asia Inc. 500 Excellence in Digital Assurance</h3>
+          </div>
+        </div>
+        <div class="sc-card sc-card--logo sc-card--news sc-pal-2" style="--orb-delay:4.1s">
+          <div class="sc-card-frost"></div>
+          <div class="sc-news">
+            <h3 class="sc-news-title">Atlanta Technology Professionals &mdash; Top Technology Service Provider</h3>
+          </div>
+        </div>
+        <div class="sc-card sc-card--logo sc-card--news sc-pal-3" style="--orb-delay:5.0s">
+          <div class="sc-card-frost"></div>
+          <div class="sc-news">
+            <h3 class="sc-news-title">TAG &mdash; Inclusion Technology Leadership Award</h3>
+          </div>
         </div>
       </div>
       <div class="carousel-fade carousel-fade--left"></div>
@@ -2102,6 +2184,7 @@
     </div>
     <div class="showcase-tagline">
       <p>Start Where Your Priority Is</p>
+      <p class="showcase-subtagline">Tailored insights for every leader, every team, every goal.</p>
     </div>
   </section>
 
@@ -2170,15 +2253,19 @@
 ══════════════════════════════════════════════════════════ -->
   <section class="priority-static" style="background: #ffffff; padding: 0 0 96px;">
     <div class="showcase-tagline" style="margin-top: 0; margin-bottom: 24px;">
-      <p>From Data Nebula to Enterprise Value—Powered by <span style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; display: inline;">Intelligence</span></p>
+      <p>Engineering and platform ownership, in one <span
+          style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; display: inline;">engagement.</span>
+      </p>
     </div>
     <div class="specs-inner" style="text-align: center;">
       <span class="spec-desc" style="display: inline-block; max-width: 680px; margin: 0 auto; text-align: center;">
-        Modern enterprises don’t run on a single system—they operate on millions of data signals flowing across
-        platforms, applications, and core systems. Celsior brings this complexity together. By integrating and
-        aggregating these scattered data particles, we transform them into connected, intelligent platforms that power
-        the enterprise. With AI-led accelerators, frameworks, and deep engineering capabilities—we modernize
-        organizations to move faster, launch quicker, and deliver measurable business outcomes with confidence.
+        Most enterprise businesses carry decades of layered investment including different systems, multiple vendors,
+        and data that rarely connects across the boundaries between them. Due to this fragmentation, AI programs that
+        look credible in a pilot rarely reach production at scale. <br>
+        Celsior addresses the problem at its source. Our engineering teams deliver modernization and AI programs on the
+        same platforms we designed and own; giving every engagement the precision, traceability, and delivery
+        accountability that come from having the platform and the program in the same hands. 
+
       </span>
     </div>
   </section>
@@ -2313,11 +2400,11 @@
     }
 
     /* ══════════════════════════════
-   PAL-2 · CRIMSON  #961A4D dominant
-   base: deep burgundy #110006
+   PAL-2 · CRIMSON  #1B6FB8 dominant
+   base: deep burgundy #061222
 ══════════════════════════════ */
     .sc-pal-2 {
-      background: #110006 !important;
+      background: #061222 !important;
     }
 
     .sc-pal-2::before {
@@ -2326,10 +2413,10 @@
       inset: -60%;
       background: conic-gradient(from 0deg at 42% 54%,
           transparent 0deg,
-          rgba(150, 26, 77, 0.68) 45deg,
-          rgba(210, 40, 100, 0.48) 95deg,
+          rgba(27, 111, 184, 0.68) 45deg,
+          rgba(74, 143, 212, 0.48) 95deg,
           transparent 155deg,
-          rgba(150, 26, 77, 0.44) 245deg,
+          rgba(27, 111, 184, 0.44) 245deg,
           rgba(54, 117, 188, 0.18) 305deg,
           transparent 360deg);
       animation: pal2Fwd 14s linear infinite;
@@ -2343,9 +2430,9 @@
       inset: -60%;
       background: conic-gradient(from 180deg at 60% 44%,
           transparent 0deg,
-          rgba(210, 40, 100, 0.30) 60deg,
+          rgba(74, 143, 212, 0.30) 60deg,
           transparent 130deg,
-          rgba(150, 26, 77, 0.22) 220deg,
+          rgba(27, 111, 184, 0.22) 220deg,
           transparent 360deg);
       animation: pal2Rev 22s linear infinite;
       filter: blur(32px);
@@ -2355,17 +2442,17 @@
     .sc-pal-2 .sc-card-frost {
       background:
         radial-gradient(circle, rgba(255, 255, 255, 0.11) 1px, transparent 1px),
-        radial-gradient(ellipse at 68% 16%, rgba(150, 26, 77, 0.50) 0%, transparent 46%),
-        radial-gradient(ellipse at 20% 80%, rgba(210, 40, 100, 0.32) 0%, transparent 44%);
+        radial-gradient(ellipse at 68% 16%, rgba(27, 111, 184, 0.50) 0%, transparent 46%),
+        radial-gradient(ellipse at 20% 80%, rgba(74, 143, 212, 0.32) 0%, transparent 44%);
       background-size: 22px 22px, 100% 100%, 100% 100%;
     }
 
     .sc-pal-2 .sc-card-frost::before {
-      border-color: rgba(150, 26, 77, 0.50);
+      border-color: rgba(27, 111, 184, 0.50);
     }
 
     .sc-pal-2 .sc-card-frost::after {
-      border-color: rgba(210, 40, 100, 0.32);
+      border-color: rgba(74, 143, 212, 0.32);
     }
 
     @keyframes pal2Fwd {
@@ -2518,10 +2605,10 @@
 
     /* ══════════════════════════════
    PAL-5 · ROSE-GOLD  crimson×gold
-   base: dark plum #130508
+   base: dark plum #061222
 ══════════════════════════════ */
     .sc-pal-5 {
-      background: #130508 !important;
+      background: #061222 !important;
     }
 
     .sc-pal-5::before {
@@ -2530,10 +2617,10 @@
       inset: -60%;
       background: conic-gradient(from 0deg at 40% 52%,
           transparent 0deg,
-          rgba(150, 26, 77, 0.55) 40deg,
+          rgba(27, 111, 184, 0.55) 40deg,
           rgba(243, 210, 95, 0.45) 90deg,
           transparent 150deg,
-          rgba(150, 26, 77, 0.40) 235deg,
+          rgba(27, 111, 184, 0.40) 235deg,
           rgba(232, 131, 74, 0.22) 295deg,
           transparent 360deg);
       animation: pal5Fwd 12s linear infinite;
@@ -2549,7 +2636,7 @@
           transparent 0deg,
           rgba(243, 210, 95, 0.28) 62deg,
           transparent 125deg,
-          rgba(150, 26, 77, 0.22) 215deg,
+          rgba(27, 111, 184, 0.22) 215deg,
           transparent 360deg);
       animation: pal5Rev 19s linear infinite;
       filter: blur(32px);
@@ -2559,13 +2646,13 @@
     .sc-pal-5 .sc-card-frost {
       background:
         radial-gradient(circle, rgba(255, 255, 255, 0.11) 1px, transparent 1px),
-        radial-gradient(ellipse at 70% 15%, rgba(150, 26, 77, 0.44) 0%, transparent 46%),
+        radial-gradient(ellipse at 70% 15%, rgba(27, 111, 184, 0.44) 0%, transparent 46%),
         radial-gradient(ellipse at 20% 82%, rgba(243, 210, 95, 0.32) 0%, transparent 44%);
       background-size: 22px 22px, 100% 100%, 100% 100%;
     }
 
     .sc-pal-5 .sc-card-frost::before {
-      border-color: rgba(150, 26, 77, 0.44);
+      border-color: rgba(27, 111, 184, 0.44);
     }
 
     .sc-pal-5 .sc-card-frost::after {
@@ -2675,6 +2762,88 @@
       transform: scale(1.04);
     }
 
+    /* ── News content (replaces logo image) ── */
+    .sc-card--news .sc-news {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sc-card--news:hover .sc-news {
+      transform: translateY(-4px);
+    }
+
+    .sc-card--news .sc-news-tag {
+      align-self: flex-start;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.92);
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .sc-card--news .sc-news-title {
+      font-family: var(--font-head);
+      font-size: 23px;
+      line-height: 1.28;
+      font-weight: 600;
+      letter-spacing: -0.012em;
+      color: #fff;
+      margin: 0;
+      max-width: 92%;
+      text-align: center;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    .sc-card--news .sc-news-arrow {
+      position: absolute;
+      right: 22px;
+      bottom: 22px;
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      color: #fff;
+      font-size: 16px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+    }
+
+    .sc-card--news:hover .sc-news-arrow {
+      transform: translate(2px, -2px) rotate(-8deg);
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    @media (max-width: 640px) {
+      .sc-card--news .sc-news-title {
+        font-size: 19px;
+      }
+
+      .sc-card--news .sc-news {
+        padding: 22px 22px 22px;
+      }
+    }
+
     /* ── Mobile ── */
     @media (max-width: 640px) {
       .sc-card--logo::before {
@@ -2722,8 +2891,17 @@
       color: #1a1a2e;
     }
 
+    .showcase-tagline p.showcase-subtagline {
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      color: rgba(26, 26, 46, 0.62);
+      margin-top: 14px;
+    }
+
     .priority-gradient {
-      background: linear-gradient(90deg, #f7e08c 0%, #4dd4bc 32%, #7aaee0 64%, #c96a8e 100%);
+      background: linear-gradient(90deg, #f7e08c 0%, #4dd4bc 32%, #7aaee0 64%, #6FA3D6 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -2883,7 +3061,7 @@
       tl.from('.specs-section', { opacity: 0, duration: 0.6, ease: 'power2.out' }).from(rows, { opacity: 0, y: 24, duration: 0.65, ease: 'power3.out', stagger: { each: 0.09, ease: 'power1.out' } }, '-=0.3');
 
       // Subtle slow hover: title colour shifts to row's brand colour, no spotlight
-      const hoverColors = ['#E8834A', '#12BAA0', '#3675BC', '#961A4D', '#6B3FA0'];
+      const hoverColors = ['#B87333', '#00A88F', '#1B6FB8', '#4A6078', '#D4A017'];
       rows.forEach((row, i) => {
         const col = hoverColors[i % hoverColors.length];
         row.addEventListener('mouseenter', () => {
@@ -3497,6 +3675,63 @@
         font-size: 8.5px;
       }
     }
+
+    /* ══════════════════════════════════════════════════════
+       UNIFIED SECTION RHYTHM + HEADING SYSTEM
+       (single source of truth — appended last so it wins)
+    ══════════════════════════════════════════════════════ */
+    #celsior-wrapper {
+      --section-py: clamp(96px, 12vh, 160px);
+      --section-px: clamp(24px, 6vw, 96px);
+      --heading-size: clamp(34px, 4.6vw, 64px);
+      --heading-tracking: -0.025em;
+      --heading-leading: 1.08;
+    }
+
+    #celsior-wrapper .page-sections section {
+      padding: var(--section-py) var(--section-px);
+      min-height: auto;
+    }
+
+    #celsior-wrapper #sec-hero {
+      min-height: 100vh;
+      padding: var(--section-py) var(--section-px);
+    }
+
+    #celsior-wrapper .hero-title,
+    #celsior-wrapper .sec-heading,
+    #celsior-wrapper .ald-heading,
+    #celsior-wrapper .tg-heading {
+      font-size: var(--heading-size);
+      letter-spacing: var(--heading-tracking);
+      line-height: var(--heading-leading);
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+
+    #celsior-wrapper .hero-title {
+      margin-bottom: 0;
+    }
+
+    #celsior-wrapper .sec-eyebrow {
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      #celsior-wrapper {
+        --section-py: 80px;
+        --section-px: 32px;
+        --heading-size: clamp(28px, 6.4vw, 44px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      #celsior-wrapper {
+        --section-py: 64px;
+        --section-px: 24px;
+        --heading-size: clamp(24px, 7.2vw, 36px);
+      }
+    }
   </style>
 
   <!-- ══════════════════════════════════════════════════════════
@@ -3512,51 +3747,249 @@
 
       <!-- 1. HERO -->
       <section id="sec-hero">
-        <h1 class="hero-title">Innovate.<br>Accelerate. Elevate.</h1>
+        <h1 class="hero-title">From systems that <br>hold your business<br>Back to AI <br>that moves it forward.</h1>
         <p class="hero-scroll-hint">Scroll to explore</p>
       </section>
 
-      <!-- 2. LAYERS / DISPERSION COATINGS -->
+      <!-- 2. WHAT ENTERPRISES ARE TRYING TO FIX -->
+      <section id="sec-fix">
+        <div class="fix-inner">
+          <p class="sec-eyebrow anim-up">The Challenge</p>
+          <h2 class="sec-heading anim-up">The same five problems.<br>Every organization carries <br>decades of
+            technology
+            debt.<span class="cw-blue">Every year.</span></h2>
+          <style>
+            #celsior-wrapper .fix-list {
+              gap: 0;
+            }
+
+            #celsior-wrapper .fix-item.fix-acc {
+              display: block;
+              cursor: pointer;
+              padding: 28px 0;
+              transition: padding .5s var(--ease-expo);
+            }
+
+            #celsior-wrapper .fix-acc-head {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              gap: 24px;
+            }
+
+            #celsior-wrapper .fix-acc-num {
+              font-size: 14px;
+              font-weight: 500;
+              color: var(--muted);
+              letter-spacing: .02em;
+              min-width: 36px;
+              transition: color .4s var(--ease-expo);
+            }
+
+            #celsior-wrapper .fix-acc .fix-item-label {
+              flex: 1;
+              transition: color .4s var(--ease-expo), transform .5s var(--ease-expo);
+            }
+
+            #celsior-wrapper .fix-acc .fix-arrows {
+              margin-left: 24px;
+            }
+
+            #celsior-wrapper .fix-acc.is-open .fix-arrow {
+              opacity: 1;
+              transform: translateX(0);
+              background: #fff;
+            }
+
+            #celsior-wrapper .fix-acc.is-open .fix-arrow::after {
+              border-left-color: #fff;
+            }
+
+            #celsior-wrapper .fix-acc.is-open .fix-arrow:nth-child(1) {
+              transition-delay: 0s;
+            }
+
+            #celsior-wrapper .fix-acc.is-open .fix-arrow:nth-child(2) {
+              transition-delay: .06s;
+            }
+
+            #celsior-wrapper .fix-acc.is-open .fix-arrow:nth-child(3) {
+              transition-delay: .12s;
+            }
+
+            #celsior-wrapper .fix-acc.is-open .fix-item-label {
+              color: #fff;
+            }
+
+            #celsior-wrapper .fix-acc-body {
+              max-height: 0;
+              overflow: hidden;
+              opacity: 0;
+              transition: max-height .6s var(--ease-expo), opacity .5s var(--ease-expo), margin-top .5s var(--ease-expo);
+              margin-top: 0;
+            }
+
+            #celsior-wrapper .fix-acc.is-open .fix-acc-body {
+              max-height: 320px;
+              opacity: 1;
+              margin-top: 18px;
+            }
+
+            #celsior-wrapper .fix-acc-body p {
+              font-size: clamp(16px, 1.2vw, 19px);
+              line-height: 1.55;
+              color: rgba(255, 255, 255, 0.78);
+              max-width: 760px;
+              padding-right: 40px;
+            }
+
+            @media (max-width: 768px) {
+              #celsior-wrapper .fix-acc-body p {
+                padding-left: 0;
+                padding-right: 0;
+              }
+            }
+          </style>
+          <div class="fix-list" id="fixAccList">
+            <div class="fix-item fix-acc anim-up">
+              <div class="fix-acc-head">
+
+                <span class="fix-item-label">Core system debt that consumes the IT budget</span>
+                <div class="fix-arrows">
+                  <div class="fix-arrow"></div>
+                  <div class="fix-arrow"></div>
+                  <div class="fix-arrow"></div>
+                </div>
+              </div>
+              <div class="fix-acc-body">
+                <p>Legacy platforms absorb 60–80% of available IT spend and leave little room for the modernization
+                  work.</p>
+              </div>
+            </div>
+            <div class="fix-item fix-acc anim-up">
+              <div class="fix-acc-head">
+
+                <span class="fix-item-label">Fragmented data that prevents a single view of the business</span>
+                <div class="fix-arrows">
+                  <div class="fix-arrow"></div>
+                  <div class="fix-arrow"></div>
+                  <div class="fix-arrow"></div>
+                </div>
+              </div>
+              <div class="fix-acc-body">
+                <p>Disconnected systems across operations, finance, and customer records — making accurate, real-time
+                  decisions structurally difficult.</p>
+              </div>
+            </div>
+            <div class="fix-item fix-acc anim-up">
+              <div class="fix-acc-head">
+
+                <span class="fix-item-label">AI programs that stall before they reach production</span>
+                <div class="fix-arrows">
+                  <div class="fix-arrow"></div>
+                  <div class="fix-arrow"></div>
+                  <div class="fix-arrow"></div>
+                </div>
+              </div>
+              <div class="fix-acc-body">
+                <p>Pilot initiatives cannot scale because the data infrastructure and governance frameworks needed to
+                  run AI in a regulated environment are not ready.</p>
+              </div>
+            </div>
+            <div class="fix-item fix-acc anim-up">
+              <div class="fix-acc-head">
+
+                <span class="fix-item-label">Regulatory and compliance exposure on aging infrastructure</span>
+                <div class="fix-arrows">
+                  <div class="fix-arrow"></div>
+                  <div class="fix-arrow"></div>
+                  <div class="fix-arrow"></div>
+                </div>
+              </div>
+              <div class="fix-acc-body">
+                <p>Systems that were never designed to produce the audit trails, change records, and risk documentation
+                  that regulators now require as standard.</p>
+              </div>
+            </div>
+            <div class="fix-item fix-acc anim-up">
+              <div class="fix-acc-head">
+
+                <span class="fix-item-label">Customer experience held back by backend limitations</span>
+                <div class="fix-arrows">
+                  <div class="fix-arrow"></div>
+                  <div class="fix-arrow"></div>
+                  <div class="fix-arrow"></div>
+                </div>
+              </div>
+              <div class="fix-acc-body">
+                <p>Digital interactions that cannot keep pace with the expectations set by consumer technology due to
+                  legacy systems.</p>
+              </div>
+            </div>
+          </div>
+          <script>
+            (function () {
+              var list = document.getElementById('fixAccList');
+              if (!list) return;
+              var items = list.querySelectorAll('.fix-acc');
+              items.forEach(function (item) {
+                item.querySelector('.fix-acc-head').addEventListener('click', function () {
+                  var open = item.classList.contains('is-open');
+                  items.forEach(function (i) { i.classList.remove('is-open'); });
+                  if (!open) item.classList.add('is-open');
+                });
+              });
+
+            })();
+          </script>
+        </div>
+      </section>
+
+      <!-- 3. LAYERS / DISPERSION COATINGS -->
       <section id="sec-layers">
         <div class="layers-inner">
-          <p class="sec-eyebrow anim-up">Digital Transformation</p>
+          <p class="sec-eyebrow anim-up"> Celsior’s AI-First Digital Engineering Platform </p>
           <h2 class="sec-heading anim-up">
-            <span class="cw-blue">data-driven</span><br>
-            transformation<br>
-            for the modern<br>
-            enterprise
+            <span class="cw-blue">The months</span><br>
+            your program spends<br>
+            understanding your legacy systems;<br>
+            we do it in weeks.
           </h2>
-          <p class="body-text anim-up">A highly integrated approach designed to modernize organizations at every layer
-            of the technology stack.</p>
-          <p class="body-text anim-up">We use data, AI, and digital engineering to unlock insights, optimize operations,
-            and drive exceptional customer experiences — keeping your business agile, scalable, and future-ready.</p>
+
+          <p class="body-text anim-up">An AI-native software delivery platform that reads what your existing systems do,
+            generates the artifacts your team needs to move, and keeps every output traceable from the original business
+            requirement to the deployed line of code.
+          </p>
           <div class="legend">
             <div class="legend-row anim-up">
-              <div class="leg-line cw-blue"></div><span>Data &amp; AI</span>
+              <div class="leg-line cw-blue"></div><span>$3.8T Global IT technical debt sitting in legacy systems </span>
             </div>
             <div class="legend-row anim-up">
-              <div class="leg-line cw-tan"></div><span>Digital Solutions &amp; Automation</span>
+              <div class="leg-line cw-tan"></div><span>71% Of Enterprises report legacy infrastructure blocks their AI
+                strategy </span>
             </div>
             <div class="legend-row anim-up">
-              <div class="leg-dot"></div><span>Digital Operations</span>
+              <div class="leg-dot"></div><span>80% Of code generation automated across UI, backend, and database
+                layers</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 3. ALD -->
+      <!-- 4. ALD -->
       <section id="sec-ald">
         <h2 class="ald-heading">
-          <span class="anim-left" style="display:block">With decades of experience</span>
-          <span class="anim-left" style="display:block">across nine industries</span>
-          <span class="anim-left" style="display:block">we propel growth</span>
+          <span class="anim-left" style="display:block">One AI-First digital engineering platform.</span>
+          <span class="anim-left" style="display:block">Every stage automated.</span>
+          <span class="anim-left" style="display:block">From legacy to governed production.</span>
         </h2>
       </section>
 
-      <!-- 4. TWO GASES -->
+      <!-- 5. TWO GASES -->
       <section id="sec-two-gases">
         <div class="tg-inner">
-          <h2 class="tg-heading anim-up">Transformation Powered<br>by Data &amp; Digital</h2>
+          <h2 class="tg-heading anim-up">Core modernization, connected data,<br>& AI in production. The full engineering
+            stack. </h2>
           <div class="pills anim-up">
             <div class="pill">
               <div class="pill-dot cw-blue"></div>Data &amp; AI
@@ -3565,73 +3998,26 @@
               <div class="pill-dot cw-green"></div>Digital Solutions
             </div>
           </div>
-          <p class="tg-body anim-up">Our end-to-end digital transformation services span Data &amp; AI, Digital
-            Solutions, Automation, and Digital Operations. We help you implement a common, integrated data view,
-            transform customer experiences through application modernization, and automate operations with AI and
-            intelligent platforms — driving measurable results at every level of your organization.</p>
+          <p class="tg-body anim-up">Celsior's engineering practices are structured specifically for the compliance,
+            scale, and delivery demands of Insurance, Banking and Healthcare. Every engagement regardless of scope or
+            scale is structured to produce AI-led outcomes that hold up under operational and regulatory scrutiny.</p>
           <div class="stats">
             <div class="anim-up">
-              <div class="stat-val">15+ Services</div>
-              <div class="stat-label">Spanning Data &amp; AI, Digital Solutions, Automation, and Digital Operations
-              </div>
+              <div class="stat-val">Proprietary AI Platforms </div>
+              <div class="stat-label">Built in-house for regulated enterprise delivery </div>
             </div>
             <div class="anim-up">
-              <div class="stat-val">9 Industries</div>
-              <div class="stat-label">Aviation, Banking, Healthcare, Insurance, Life Sciences, and more</div>
+              <div class="stat-val">2× Faster Modernization </div>
+              <div class="stat-label">Delivered across banking, insurance, and healthcare </div>
             </div>
             <div class="anim-up">
-              <div class="stat-val">End-to-End</div>
-              <div class="stat-label">From strategy and engineering to managed operations and user support</div>
+              <div class="stat-val">4 Global Delivery Hubs </div>
+              <div class="stat-label">United States · United Kingdom · India · Mexico </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5. WHAT ENTERPRISES ARE TRYING TO FIX -->
-      <section id="sec-fix">
-        <div class="fix-inner">
-          <p class="sec-eyebrow anim-up">The Challenge</p>
-          <h2 class="sec-heading anim-up">What Enterprises<br>Are Trying <span class="cw-blue">To Fix</span></h2>
-          <div class="fix-list">
-            <div class="fix-item anim-up">
-              <span class="fix-item-label">Modernize core platforms</span>
-              <div class="fix-arrows">
-                <div class="fix-arrow"></div>
-                <div class="fix-arrow"></div>
-                <div class="fix-arrow"></div>
-              </div>
-            </div>
-            <div class="fix-item anim-up">
-              <span class="fix-item-label">Adopt AI safely</span>
-              <div class="fix-arrows">
-                <div class="fix-arrow"></div>
-                <div class="fix-arrow"></div>
-                <div class="fix-arrow"></div>
-              </div>
-            </div>
-            <div class="fix-item anim-up">
-              <span class="fix-item-label">Reduce operational risk</span>
-              <div class="fix-arrows">
-                <div class="fix-arrow"></div>
-                <div class="fix-arrow"></div>
-                <div class="fix-arrow"></div>
-              </div>
-            </div>
-            <div class="fix-item anim-up">
-              <span class="fix-item-label">Control IT costs</span>
-              <div class="fix-arrows">
-                <div class="fix-arrow"></div>
-                <div class="fix-arrow"></div>
-                <div class="fix-arrow"></div>
-              </div>
-            </div>
-            <div class="fix-item anim-up">
-              <span class="fix-item-label">Improve digital experience</span>
-              <div class="fix-arrows">
-                <div class="fix-arrow"></div>
-                <div class="fix-arrow"></div>
-                <div class="fix-arrow"></div>
-              </div>
+            <div class="anim-up">
+              <div class="stat-val">7,000+ Consultants</div>
+              <div class="stat-label">Domain-trained, platform-certified, and industry-ready deployed across
+                industries. </div>
             </div>
           </div>
         </div>
@@ -3681,10 +4067,10 @@
       </div>
       <svg class="orbit-svg" id="orbitSvg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid meet"
         aria-hidden="true">
-        <ellipse id="outerOval" cx="720" cy="350" rx="820" ry="270" fill="none" stroke="rgba(13,17,39,0.22)"
-          stroke-width="1.8" stroke-dasharray="6 9" />
-        <circle id="orbitRing" cx="720" cy="350" r="270" fill="none" stroke="rgba(13,17,39,0.22)" stroke-width="1.8"
-          stroke-dasharray="6 9" />
+        <ellipse id="ringA" cx="720" cy="350" rx="560" ry="135" fill="none" stroke="rgba(13,17,39,0.32)"
+          stroke-width="1.8" stroke-dasharray="6 9" transform="rotate(26 720 350)" />
+        <ellipse id="ringB" cx="720" cy="350" rx="560" ry="135" fill="none" stroke="rgba(13,17,39,0.32)"
+          stroke-width="1.8" stroke-dasharray="6 9" transform="rotate(-26 720 350)" />
         <g id="om0">
           <polygon points="0,-8 6,5 -6,5" fill="#0d1127" />
         </g>
@@ -3787,7 +4173,7 @@
       height: calc(min(37.5vw, 77.1vh) - 32px);
       border-radius: 50%;
       overflow: hidden;
-      z-index: 2;
+      z-index: 20;
       isolation: isolate;
       /* contain all animated layers inside */
       box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.10), 0 8px 64px rgba(0, 0, 0, 0.45);
@@ -3987,11 +4373,11 @@
     }
 
     /* ══════════════════════════════════════
-   SLIDE 3 · CRIMSON  #961A4D — Operations
-   base: deep burgundy #110006
+   SLIDE 3 · CRIMSON  #1B6FB8 — Operations
+   base: deep burgundy #061222
 ══════════════════════════════════════ */
     .orbit-grad-3 {
-      background: #110006;
+      background: #061222;
     }
 
     .orbit-grad-3::before {
@@ -4000,10 +4386,10 @@
       inset: -60%;
       background: conic-gradient(from 0deg at 41% 53%,
           transparent 0deg,
-          rgba(150, 26, 77, 0.70) 45deg,
-          rgba(210, 40, 100, 0.50) 95deg,
+          rgba(27, 111, 184, 0.70) 45deg,
+          rgba(74, 143, 212, 0.50) 95deg,
           transparent 155deg,
-          rgba(150, 26, 77, 0.52) 245deg,
+          rgba(27, 111, 184, 0.52) 245deg,
           rgba(54, 117, 188, 0.18) 305deg,
           transparent 360deg);
       animation: ob3Fwd 12s linear infinite;
@@ -4017,9 +4403,9 @@
       inset: -60%;
       background: conic-gradient(from 188deg at 62% 45%,
           transparent 0deg,
-          rgba(210, 40, 100, 0.32) 62deg,
+          rgba(74, 143, 212, 0.32) 62deg,
           transparent 126deg,
-          rgba(150, 26, 77, 0.22) 218deg,
+          rgba(27, 111, 184, 0.22) 218deg,
           transparent 360deg);
       animation: ob3Rev 20s linear infinite;
       filter: blur(32px);
@@ -4029,8 +4415,8 @@
     .orbit-grad-3 .orbit-grad-inner {
       background:
         radial-gradient(circle, rgba(255, 255, 255, 0.10) 1px, transparent 1px),
-        radial-gradient(ellipse at 68% 15%, rgba(150, 26, 77, 0.52) 0%, transparent 46%),
-        radial-gradient(ellipse at 20% 82%, rgba(210, 40, 100, 0.32) 0%, transparent 44%);
+        radial-gradient(ellipse at 68% 15%, rgba(27, 111, 184, 0.52) 0%, transparent 46%),
+        radial-gradient(ellipse at 20% 82%, rgba(74, 143, 212, 0.32) 0%, transparent 44%);
       background-size: 20px 20px, 100% 100%, 100% 100%;
     }
 
@@ -4283,27 +4669,51 @@
     (function () {
       const isMobile = window.innerWidth < 640;
       const GEO = isMobile
-        ? { viewBox: '0 0 360 740', CX: 180, CY: 370, R: 148, ovalRX: 178, ovalRY: 168, markerPts: '0,-7 5,4 -5,4' }
-        : { viewBox: '0 0 1440 700', CX: 720, CY: 350, R: 270, ovalRX: 820, ovalRY: 270, markerPts: '0,-8 6,5 -6,5' };
+        ? { viewBox: '0 0 360 740', CX: 180, CY: 370, RX: 165, RY: 60, ROT: 26, markerPts: '0,-7 5,4 -5,4' }
+        : { viewBox: '0 0 1440 700', CX: 720, CY: 350, RX: 560, RY: 135, ROT: 26, markerPts: '0,-8 6,5 -6,5' };
       const svg = document.getElementById('orbitSvg'); svg.setAttribute('viewBox', GEO.viewBox);
-      const ring = document.getElementById('orbitRing'); ring.setAttribute('cx', GEO.CX); ring.setAttribute('cy', GEO.CY); ring.setAttribute('r', GEO.R);
-      const oval = document.getElementById('outerOval'); oval.setAttribute('cx', GEO.CX); oval.setAttribute('cy', GEO.CY); oval.setAttribute('rx', GEO.ovalRX); oval.setAttribute('ry', GEO.ovalRY);
+      const ringA = document.getElementById('ringA'), ringB = document.getElementById('ringB');
+      [ringA, ringB].forEach(r => { r.setAttribute('cx', GEO.CX); r.setAttribute('cy', GEO.CY); r.setAttribute('rx', GEO.RX); r.setAttribute('ry', GEO.RY); });
+      ringA.setAttribute('transform', `rotate(${GEO.ROT} ${GEO.CX} ${GEO.CY})`);
+      ringB.setAttribute('transform', `rotate(${-GEO.ROT} ${GEO.CX} ${GEO.CY})`);
       ['om0', 'om1', 'om2', 'om3'].forEach(id => { document.getElementById(id).querySelector('polygon').setAttribute('points', GEO.markerPts); });
-      const { CX, CY, R } = GEO;
-      function circleAt(t) { return { x: CX + R * Math.cos(t), y: CY + R * Math.sin(t), ang: 180 + t * (180 / Math.PI) }; }
+      const { CX, CY, RX, RY, ROT } = GEO;
+      const cosA = Math.cos(ROT * Math.PI / 180), sinA = Math.sin(ROT * Math.PI / 180);
+      function ellipseAt(t, sign) {
+        // sign: +1 = ringA (rotated +ROT), -1 = ringB (rotated -ROT)
+        const cR = cosA, sR = sign * sinA;
+        const x0 = RX * Math.cos(t), y0 = RY * Math.sin(t);
+        const x = CX + x0 * cR - y0 * sR;
+        const y = CY + x0 * sR + y0 * cR;
+        const tx0 = -RX * Math.sin(t), ty0 = RY * Math.cos(t);
+        const tx = tx0 * cR - ty0 * sR, ty = tx0 * sR + ty0 * cR;
+        const ang = Math.atan2(ty, tx) * 180 / Math.PI + 90;
+        return { x, y, ang };
+      }
       const wrap = document.getElementById('orbitWrap'), markers = ['om0', 'om1', 'om2', 'om3'].map(id => document.getElementById(id)), slides = Array.from(document.querySelectorAll('.os-slide')), N = slides.length;
       const bgImgs = ['obg0', 'obg1', 'obg2', 'obg3'].map(id => document.getElementById(id));
       const SCROLL_MULT = N + 2.5; wrap.style.height = `${Math.round(window.innerHeight * SCROLL_MULT)}px`;
-      function placeMarkers(t) { markers.forEach((m, i) => { const { x, y, ang } = circleAt(t + i * (Math.PI / 2)); m.setAttribute('transform', `translate(${x},${y}) rotate(${ang})`); }); }
+      const markerCfg = [
+        { sign: 1, off: 0 },
+        { sign: -1, off: 0 },
+        { sign: 1, off: Math.PI },
+        { sign: -1, off: Math.PI },
+      ];
+      function placeMarkers(t) {
+        markers.forEach((m, i) => {
+          const c = markerCfg[i];
+          const { x, y, ang } = ellipseAt(t + c.off, c.sign);
+          m.setAttribute('transform', `translate(${x},${y}) rotate(${ang})`);
+        });
+      }
       let activeIdx = -1; const tweens = new Array(N).fill(null);
-      let lastProgress = 0; // track scroll direction
+      let lastProgress = 0;
 
       function goTo(idx, dir) {
         if (idx === activeIdx) return; const prev = activeIdx; activeIdx = idx;
         if (prev >= 0 && tweens[prev]) { tweens[prev].kill(); tweens[prev] = null; }
         if (tweens[idx]) { tweens[idx].kill(); tweens[idx] = null; }
         const nextSlide = slides[idx];
-        // Crossfade background gradient
         if (prev >= 0 && bgImgs[prev]) gsap.to(bgImgs[prev], { opacity: 0, duration: 0.75, ease: 'power2.inOut' });
         if (bgImgs[idx]) gsap.to(bgImgs[idx], { opacity: 1, duration: 0.75, ease: 'power2.inOut' });
         if (prev < 0) {
@@ -4313,44 +4723,24 @@
         }
         const prevSlide = slides[prev];
         prevSlide.classList.remove('is-current');
-
-        // dir: 1 = scrolling down (new slide enters from below, old exits up)
-        //      -1 = scrolling up   (new slide enters from above, old exits down)
         const exitY = dir >= 0 ? -22 : 22;
         const enterY = dir >= 0 ? 22 : -22;
-
         gsap.set(prevSlide, { zIndex: 1 });
         gsap.set(nextSlide, { zIndex: 2, y: enterY, opacity: 0, scale: 0.96 });
-
         const tl = gsap.timeline({
           onComplete() { gsap.set(prevSlide, { y: 0, scale: 1, zIndex: 0, opacity: 0 }); }
         });
-
-        // Outgoing: fade + drift in exit direction, slight scale-down
-        tl.to(prevSlide, {
-          opacity: 0,
-          y: exitY,
-          scale: 0.94,
-          duration: 0.38,
-          ease: 'power2.in'
-        });
-
-        // Incoming: overlap slightly, spring into place
+        tl.to(prevSlide, { opacity: 0, y: exitY, scale: 0.94, duration: 0.38, ease: 'power2.in' });
         tl.to(nextSlide, {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.55,
-          ease: 'expo.out',
+          opacity: 1, y: 0, scale: 1, duration: 0.55, ease: 'expo.out',
           onStart() { nextSlide.classList.add('is-current'); }
         }, '-=0.18');
-
         tweens[prev] = tl; tweens[idx] = tl;
       }
       slides.forEach(s => gsap.set(s, { opacity: 0, y: 18, scale: 0.96, zIndex: 0 })); placeMarkers(-Math.PI / 2); goTo(0, 1);
-      const circPerim = 2 * Math.PI * R, ovalPerim = 2 * Math.PI * Math.sqrt((GEO.ovalRX ** 2 + GEO.ovalRY ** 2) / 2);
-      gsap.from('#orbitRing', { strokeDashoffset: circPerim, strokeDasharray: `${circPerim} ${circPerim}`, duration: 2.2, ease: 'power2.out', scrollTrigger: { trigger: '#orbitWrap', start: 'top 80%', once: true } });
-      gsap.from('#outerOval', { strokeDashoffset: ovalPerim, strokeDasharray: `${ovalPerim} ${ovalPerim}`, duration: 2.7, ease: 'power2.out', delay: 0.18, scrollTrigger: { trigger: '#orbitWrap', start: 'top 80%', once: true } });
+      const ringPerim = Math.PI * (3 * (RX + RY) - Math.sqrt((3 * RX + RY) * (RX + 3 * RY)));
+      gsap.from('#ringA', { strokeDashoffset: ringPerim, strokeDasharray: `${ringPerim} ${ringPerim}`, duration: 2.2, ease: 'power2.out', scrollTrigger: { trigger: '#orbitWrap', start: 'top 80%', once: true } });
+      gsap.from('#ringB', { strokeDashoffset: ringPerim, strokeDasharray: `${ringPerim} ${ringPerim}`, duration: 2.4, ease: 'power2.out', delay: 0.18, scrollTrigger: { trigger: '#orbitWrap', start: 'top 80%', once: true } });
       gsap.from('#orbitEyebrow', { opacity: 0, y: 28, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: '#orbitWrap', start: 'top 84%', once: true } });
       const THRESHOLD = 0.008, SLIDE_PROGRESS_END = N / SCROLL_MULT;
       ScrollTrigger.create({
@@ -4373,6 +4763,26 @@
      3D FLIP CARD CAROUSEL
 ══════════════════════════════════════════════════════════ -->
   <section class="flip-section" id="flipSection">
+    <div class="priority-static" style="background: #ffffff; padding: 0 0 72px;">
+      <div class="showcase-tagline" style="margin-top: 0; margin-bottom: 24px;">
+        <p>Engineering and platform ownership, in one <span
+            style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; display: inline;">engagement.</span>
+        </p>
+      </div>
+      <div class="specs-inner" style="text-align: center;">
+        <span class="spec-desc" style="display: inline-block; max-width: 680px; margin: 0 auto; text-align: center;">
+          Most enterprise businesses carry decades of layered investment including different systems, multiple vendors,
+          and data that rarely connects across the boundaries between them. Due to this fragmentation, AI programs that
+          look credible in a pilot rarely reach production at scale. <br>
+          Celsior addresses the problem at its source. Our engineering teams deliver modernization and AI programs on
+          the
+          same platforms we designed and own; giving every engagement the precision, traceability, and delivery
+          accountability that come from having the platform and the program in the same hands.
+
+        </span>
+      </div>
+    </div>
+
     <div class="flip-header">
       <span class="flip-eyebrow">Our Products</span>
       <h2 class="flip-title">AI-Powered Platforms</h2>
@@ -4386,11 +4796,11 @@
         <div class="fc-scene">
           <div class="fc-card" tabindex="0">
             <div class="fc-front">
-              <img src="https://i.pinimg.com/1200x/21/a5/4c/21a54c0e253b084832c4c542a12fad20.jpg" alt="Synthetix"
+              <img src="https://i.pinimg.com/236x/b3/1b/79/b31b795a1109c73f147236ea2e73e1a8.jpg" alt="Synthetix"
                 class="fc-img" />
               <div class="fc-glass-header">
                 <span class="fc-tag">Digital Engineering</span>
-                <h3 class="fc-front-title">Synthetix</h3>
+                <h3 class="fc-front-title">AI-First Software Delivery Orchestration</h3>
               </div>
               <div class="fc-front-hint">
                 <span> </span>
@@ -4405,18 +4815,11 @@
               <div class="fc-back-orb fc-back-orb-2"></div>
               <div class="fc-back-inner">
                 <span class="fc-back-tag">AI-First Digital Engineering</span>
-                <h3 class="fc-back-title">Multi-Agent Modernization Orchestration</h3>
+                <h3 class="fc-back-title">AI-First Digital Engineering  
+                </h3>
                 <p class="fc-back-desc">Multi-agent digital engineering orchestration platform that combines AI
-                  automation with human expertise. Complete modernization outcomes with full traceability, guardrails,
-                  and enterprise-grade quality assurance.</p>
-                <div class="fc-back-stats">
-                  <div class="fc-stat"><span class="fc-stat-num">AI+Human</span><span
-                      class="fc-stat-label">Orchestration</span></div>
-                  <div class="fc-stat"><span class="fc-stat-num">100%</span><span
-                      class="fc-stat-label">Traceability</span></div>
-                  <div class="fc-stat"><span class="fc-stat-num">Enterprise</span><span class="fc-stat-label">Grade
-                      QA</span></div>
-                </div>
+                  automation with human expertise. Complete modernization outcomes with full traceability, guardrails,
+                  and enterprise-grade quality assurance. </p>
                 <a href="#contact" class="fc-back-cta">Learn More <svg viewBox="0 0 14 14" fill="none">
                     <path d="M2.5 7h9M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5"
                       stroke-linecap="round" stroke-linejoin="round" />
@@ -4450,17 +4853,11 @@
               <div class="fc-back-orb fc-back-orb-2"></div>
               <div class="fc-back-inner">
                 <span class="fc-back-tag">From Pilot to Production. Fast.</span>
-                <h3 class="fc-back-title">Modular Enterprise AI Platform</h3>
+                <h3 class="fc-back-title">From pilot to production. Fast. 
+                </h3>
                 <p class="fc-back-desc">Modular enterprise AI platform with LLMs, agents, RAG, and governance. Plugs
-                  into existing systems with security and compliance built in.</p>
-                <div class="fc-back-stats">
-                  <div class="fc-stat"><span class="fc-stat-num">LLMs</span><span class="fc-stat-label">+ Agents</span>
-                  </div>
-                  <div class="fc-stat"><span class="fc-stat-num">RAG</span><span class="fc-stat-label">Built-in</span>
-                  </div>
-                  <div class="fc-stat"><span class="fc-stat-num">Secure</span><span
-                      class="fc-stat-label">Compliant</span></div>
-                </div>
+                  into existing systems with security and compliance built in. 
+                </p>
                 <a href="#contact" class="fc-back-cta">Learn More <svg viewBox="0 0 14 14" fill="none">
                     <path d="M2.5 7h9M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5"
                       stroke-linecap="round" stroke-linejoin="round" />
@@ -4493,17 +4890,10 @@
               <div class="fc-back-orb fc-back-orb-2"></div>
               <div class="fc-back-inner">
                 <span class="fc-back-tag">Explainable AI for Smarter Claims</span>
-                <h3 class="fc-back-title">AI Intelligence Layer for Insurance</h3>
+                <h3 class="fc-back-title">Explainable AI for smarter claims 
+                </h3>
                 <p class="fc-back-desc">AI intelligence layer for insurance claims from FNOL to investigation. Real-time
-                  risk scoring with SHAP explainability, humans in the loop.</p>
-                <div class="fc-back-stats">
-                  <div class="fc-stat"><span class="fc-stat-num">FNOL</span><span class="fc-stat-label">to
-                      Resolution</span></div>
-                  <div class="fc-stat"><span class="fc-stat-num">SHAP</span><span
-                      class="fc-stat-label">Explainability</span></div>
-                  <div class="fc-stat"><span class="fc-stat-num">Real-time</span><span class="fc-stat-label">Risk
-                      Scoring</span></div>
-                </div>
+                  risk scoring with SHAP explainability, humans in the loop. </p>
                 <a href="#contact" class="fc-back-cta">Learn More <svg viewBox="0 0 14 14" fill="none">
                     <path d="M2.5 7h9M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5"
                       stroke-linecap="round" stroke-linejoin="round" />
@@ -4536,17 +4926,10 @@
               <div class="fc-back-orb fc-back-orb-2"></div>
               <div class="fc-back-inner">
                 <span class="fc-back-tag">AI-Native Quality Engineering</span>
-                <h3 class="fc-back-title">End-to-End Test Automation Framework</h3>
+                <h3 class="fc-back-title">AI-native quality engineering 
+                </h3>
                 <p class="fc-back-desc">End-to-end framework connecting requirements, code, tests, and execution.
                   Automate test creation, accelerate releases, strengthen CI/CD.</p>
-                <div class="fc-back-stats">
-                  <div class="fc-stat"><span class="fc-stat-num">E2E</span><span class="fc-stat-label">Coverage</span>
-                  </div>
-                  <div class="fc-stat"><span class="fc-stat-num">Auto</span><span class="fc-stat-label">Test
-                      Creation</span></div>
-                  <div class="fc-stat"><span class="fc-stat-num">CI/CD</span><span
-                      class="fc-stat-label">Accelerated</span></div>
-                </div>
                 <a href="#contact" class="fc-back-cta">Learn More <svg viewBox="0 0 14 14" fill="none">
                     <path d="M2.5 7h9M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5"
                       stroke-linecap="round" stroke-linejoin="round" />
@@ -4579,17 +4962,10 @@
               <div class="fc-back-orb fc-back-orb-2"></div>
               <div class="fc-back-inner">
                 <span class="fc-back-tag">One Query. Every Answer.</span>
-                <h3 class="fc-back-title">Intent-Aware Enterprise Retrieval</h3>
-                <p class="fc-back-desc">Intent-aware retrieval unifying structured databases and unstructured documents.
+                <h3 class="fc-back-title">One query. Every answer. 
+                </h3>
+                <p class="fc-back-desc">Intent-aware retrieval unifying structured databases and unstructured documents.
                   Intelligent routing delivers precise, enterprise-wide answers.</p>
-                <div class="fc-back-stats">
-                  <div class="fc-stat"><span class="fc-stat-num">Unified</span><span class="fc-stat-label">Data
-                      Sources</span></div>
-                  <div class="fc-stat"><span class="fc-stat-num">Intent</span><span class="fc-stat-label">Aware</span>
-                  </div>
-                  <div class="fc-stat"><span class="fc-stat-num">Precise</span><span
-                      class="fc-stat-label">Answers</span></div>
-                </div>
                 <a href="#contact" class="fc-back-cta">Learn More <svg viewBox="0 0 14 14" fill="none">
                     <path d="M2.5 7h9M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5"
                       stroke-linecap="round" stroke-linejoin="round" />
@@ -4850,32 +5226,32 @@
 
     /* PAL-2 CRIMSON */
     .fc-pal-2 {
-      background: #110006;
+      background: #061222;
     }
 
     .fc-pal-2 .fc-back-orb-1 {
-      background: conic-gradient(from 0deg at 42% 54%, transparent 0deg, rgba(150, 26, 77, 0.72) 55deg, rgba(210, 40, 100, 0.52) 110deg, transparent 170deg, rgba(150, 26, 77, 0.48) 260deg, transparent 360deg);
+      background: conic-gradient(from 0deg at 42% 54%, transparent 0deg, rgba(27, 111, 184, 0.72) 55deg, rgba(74, 143, 212, 0.52) 110deg, transparent 170deg, rgba(27, 111, 184, 0.48) 260deg, transparent 360deg);
       animation: fcOrb1 14s linear infinite;
     }
 
     .fc-pal-2 .fc-back-orb-2 {
-      background: conic-gradient(from 180deg at 60% 44%, transparent 0deg, rgba(210, 40, 100, 0.34) 70deg, transparent 140deg, rgba(150, 26, 77, 0.22) 230deg, transparent 360deg);
+      background: conic-gradient(from 180deg at 60% 44%, transparent 0deg, rgba(74, 143, 212, 0.34) 70deg, transparent 140deg, rgba(27, 111, 184, 0.22) 230deg, transparent 360deg);
       animation: fcOrb2 22s linear infinite;
     }
 
     .fc-pal-2 .fc-back-tag {
-      color: rgba(210, 40, 100, 0.90);
-      border-color: rgba(210, 40, 100, 0.28);
+      color: rgba(74, 143, 212, 0.90);
+      border-color: rgba(74, 143, 212, 0.28);
     }
 
     .fc-pal-2 .fc-back-cta {
-      background: rgba(210, 40, 100, 0.14);
-      color: rgba(210, 40, 100, 0.95);
-      border-color: rgba(210, 40, 100, 0.28);
+      background: rgba(74, 143, 212, 0.14);
+      color: rgba(74, 143, 212, 0.95);
+      border-color: rgba(74, 143, 212, 0.28);
     }
 
     .fc-pal-2 .fc-back-cta:hover {
-      background: rgba(210, 40, 100, 0.26);
+      background: rgba(74, 143, 212, 0.26);
     }
 
     /* PAL-3 TEAL */
@@ -4908,64 +5284,64 @@
       background: rgba(18, 186, 160, 0.26);
     }
 
-    /* PAL-4 BLUE */
+    /* PAL-4 BRONZE (complements card 04 accent) */
     .fc-pal-4 {
-      background: #010d1e;
+      background: #1a0f05;
     }
 
     .fc-pal-4 .fc-back-orb-1 {
-      background: conic-gradient(from 0deg at 40% 52%, transparent 0deg, rgba(54, 117, 188, 0.72) 55deg, rgba(80, 155, 235, 0.52) 105deg, transparent 165deg, rgba(54, 117, 188, 0.48) 255deg, transparent 360deg);
+      background: conic-gradient(from 0deg at 40% 52%, transparent 0deg, rgba(184, 115, 51, 0.72) 55deg, rgba(217, 156, 92, 0.52) 105deg, transparent 165deg, rgba(184, 115, 51, 0.48) 255deg, transparent 360deg);
       animation: fcOrb1 13s linear infinite;
     }
 
     .fc-pal-4 .fc-back-orb-2 {
-      background: conic-gradient(from 195deg at 63% 46%, transparent 0deg, rgba(80, 155, 235, 0.36) 70deg, transparent 135deg, rgba(54, 117, 188, 0.24) 222deg, transparent 360deg);
+      background: conic-gradient(from 195deg at 63% 46%, transparent 0deg, rgba(217, 156, 92, 0.36) 70deg, transparent 135deg, rgba(184, 115, 51, 0.24) 222deg, transparent 360deg);
       animation: fcOrb2 21s linear infinite;
     }
 
     .fc-pal-4 .fc-back-tag {
-      color: rgba(80, 155, 235, 0.90);
-      border-color: rgba(80, 155, 235, 0.28);
+      color: rgba(217, 156, 92, 0.92);
+      border-color: rgba(217, 156, 92, 0.30);
     }
 
     .fc-pal-4 .fc-back-cta {
-      background: rgba(80, 155, 235, 0.14);
-      color: rgba(80, 155, 235, 0.95);
-      border-color: rgba(80, 155, 235, 0.28);
+      background: rgba(217, 156, 92, 0.14);
+      color: rgba(217, 156, 92, 0.95);
+      border-color: rgba(217, 156, 92, 0.30);
     }
 
     .fc-pal-4 .fc-back-cta:hover {
-      background: rgba(80, 155, 235, 0.26);
+      background: rgba(217, 156, 92, 0.26);
     }
 
-    /* PAL-5 PURPLE */
+    /* PAL-5 SLATE (complements card 05 accent) */
     .fc-pal-5 {
-      background: #090114;
+      background: #0c1118;
     }
 
     .fc-pal-5 .fc-back-orb-1 {
-      background: conic-gradient(from 0deg at 40% 52%, transparent 0deg, rgba(138, 54, 188, 0.72) 55deg, rgba(160, 80, 235, 0.52) 105deg, transparent 165deg, rgba(138, 54, 188, 0.48) 255deg, transparent 360deg);
+      background: conic-gradient(from 0deg at 40% 52%, transparent 0deg, rgba(74, 96, 120, 0.72) 55deg, rgba(107, 130, 156, 0.52) 105deg, transparent 165deg, rgba(74, 96, 120, 0.48) 255deg, transparent 360deg);
       animation: fcOrb1 13s linear infinite;
     }
 
     .fc-pal-5 .fc-back-orb-2 {
-      background: conic-gradient(from 195deg at 63% 46%, transparent 0deg, rgba(160, 80, 235, 0.36) 70deg, transparent 135deg, rgba(138, 54, 188, 0.24) 222deg, transparent 360deg);
+      background: conic-gradient(from 195deg at 63% 46%, transparent 0deg, rgba(107, 130, 156, 0.36) 70deg, transparent 135deg, rgba(74, 96, 120, 0.24) 222deg, transparent 360deg);
       animation: fcOrb2 21s linear infinite;
     }
 
     .fc-pal-5 .fc-back-tag {
-      color: rgba(160, 80, 235, 0.90);
-      border-color: rgba(160, 80, 235, 0.28);
+      color: rgba(140, 165, 192, 0.92);
+      border-color: rgba(140, 165, 192, 0.30);
     }
 
     .fc-pal-5 .fc-back-cta {
-      background: rgba(160, 80, 235, 0.14);
-      color: rgba(160, 80, 235, 0.95);
-      border-color: rgba(160, 80, 235, 0.28);
+      background: rgba(140, 165, 192, 0.14);
+      color: rgba(140, 165, 192, 0.95);
+      border-color: rgba(140, 165, 192, 0.30);
     }
 
     .fc-pal-5 .fc-back-cta:hover {
-      background: rgba(160, 80, 235, 0.26);
+      background: rgba(140, 165, 192, 0.26);
     }
 
     /* Shared orb layers */
@@ -5005,7 +5381,11 @@
       display: flex;
       flex-direction: column;
       height: 100%;
-      padding: clamp(14px, 1.6vw, 22px) clamp(14px, 1.6vw, 22px);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: clamp(18px, 2vw, 28px) clamp(16px, 1.8vw, 24px);
+      gap: clamp(8px, 1vw, 14px);
       overflow: hidden;
     }
 
@@ -5016,9 +5396,9 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       border: 1px solid;
-      border-radius: 4px;
-      padding: 3px 8px;
-      margin-bottom: clamp(8px, 1vw, 14px);
+      border-radius: 999px;
+      padding: 4px 12px;
+      margin: 0;
       width: fit-content;
       flex-shrink: 0;
     }
@@ -5030,20 +5410,20 @@
       line-height: 1.24;
       color: #fff;
       letter-spacing: -0.018em;
-      margin-bottom: clamp(6px, 0.85vw, 12px);
+      margin: 0;
+      max-width: 95%;
       flex-shrink: 0;
     }
 
     .fc-back-desc {
       font-size: clamp(0.66rem, 0.80vw, 0.76rem);
-      line-height: 1.46;
-      color: rgba(255, 255, 255, 0.62);
-      margin-bottom: clamp(6px, 0.8vw, 12px);
-      flex: 1;
-      min-height: 0;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.72);
+      margin: 0;
+      max-width: 92%;
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 6;
       -webkit-box-orient: vertical;
     }
 
@@ -5099,14 +5479,18 @@
       font-size: 0.70rem;
       font-weight: 700;
       letter-spacing: 0.04em;
-      padding: 7px 12px;
-      border-radius: 7px;
+      padding: 8px 16px;
+      border-radius: 999px;
       border: 1px solid;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.2s;
       text-decoration: none;
       width: fit-content;
-      margin-top: auto;
+      margin: 4px 0 0;
       flex-shrink: 0;
+    }
+
+    .fc-back-cta:hover {
+      transform: translateY(-1px);
     }
 
     .fc-back-cta svg {
@@ -5416,7 +5800,7 @@
     }
 
     .faq-mod-grad {
-      background: linear-gradient(90deg, #f7e08c 0%, #4dd4bc 32%, #7aaee0 64%, #c96a8e 100%);
+      background: linear-gradient(90deg, #f7e08c 0%, #4dd4bc 32%, #7aaee0 64%, #6FA3D6 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -5560,7 +5944,7 @@
       gsap.from('.faq-item', { opacity: 0, y: 20, duration: 0.65, ease: 'power3.out', stagger: 0.09, scrollTrigger: { trigger: '#faqSection', start: 'top 76%', once: true } });
 
       // Slow palette hover on FAQ question titles
-      const faqColors = ['#E8834A', '#12BAA0', '#3675BC', '#961A4D', '#6B3FA0'];
+      const faqColors = ['#B87333', '#00A88F', '#1B6FB8', '#D4A017', '#4A6078', '#66C2B3'];
       items.forEach((item, i) => {
         const q = item.querySelector('.faq-q');
         const col = faqColors[i % faqColors.length];
@@ -5584,9 +5968,10 @@
       <canvas id="emParticleCanvas"></canvas>
       <div class="em-left-inner">
         <span class="em-pill">How We Deliver</span>
-        <h2 class="em-heading">Engagement Models Designed For Regulated Enterprises</h2>
-        <p class="em-desc">Flexible, enterprise-grade delivery models built for the compliance, scale and operational
-          demands of regulated industries.</p>
+        <h2 class="em-heading">Five ways to work with Celsior. One standard of delivery. </h2>
+        <p class="em-desc">Every engagement model is built around the same principle. Engineering accountability from
+          the first sprint to the final handover, structured for the operational and compliance demands of banking,
+          insurance, and healthcare. </p>
         <a href="#contact" class="em-cta">Get Started <svg viewBox="0 0 16 16" fill="none">
             <line x1="2" y1="14" x2="14" y2="2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
             <polyline points="6,2 14,2 14,10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
@@ -5693,9 +6078,11 @@
           </svg>
         </div>
         <span class="em-num">04</span>
-        <h3 class="em-card-title">Hire-Train-Deploy</h3>
-        <p class="em-card-desc">We source, domain-train, and deploy engineering talent tailored to your stack, industry,
-          and regulatory context — reducing ramp time dramatically.</p>
+        <h3 class="em-card-title">AI-Trained Engineering Talent 
+        </h3>
+        <p class="em-card-desc">We source, AI-train, and deploy engineering talent tailored to your stack, industry, and
+          regulatory context; reducing ramp time dramatically. 
+        </p>
       </div>
 
       <!-- Card 05: Managed Programs -->
@@ -5884,13 +6271,13 @@
     }
 
     .em-card[data-index="04"]:hover {
-      background: rgba(150, 26, 77, 0.07);
-      border-left: 3px solid #961A4D;
+      background: rgba(184, 115, 51, 0.07);
+      border-left: 3px solid #B87333;
     }
 
     .em-card[data-index="05"]:hover {
-      background: rgba(243, 210, 95, 0.07);
-      border-left: 3px solid #F3D25F;
+      background: rgba(74, 96, 120, 0.08);
+      border-left: 3px solid #4A6078;
     }
 
     /* L-bracket corners — default subtle, coloured on hover */
@@ -5933,12 +6320,12 @@
 
     .em-card[data-index="04"]:hover .em-bracket--tl,
     .em-card[data-index="04"]:hover .em-bracket--br {
-      border-color: #961A4D;
+      border-color: #B87333;
     }
 
     .em-card[data-index="05"]:hover .em-bracket--tl,
     .em-card[data-index="05"]:hover .em-bracket--br {
-      border-color: #F3D25F;
+      border-color: #4A6078;
     }
 
     /* Icon wrap — contained, no overflow */
@@ -5994,12 +6381,12 @@
 
     /* Blue     */
     .em-card[data-index="04"] .em-num {
-      color: #961A4D;
+      color: #B87333;
     }
 
     /* Crimson  */
     .em-card[data-index="05"] .em-num {
-      color: #F3D25F;
+      color: #4A6078;
     }
 
     /* Gold     */
@@ -6441,9 +6828,9 @@
       background: linear-gradient(120deg, #07574a 0%, #12BAA0 50%, #2ed8be 100%);
     }
 
-    /* Row 2 — CoEs: Crimson #961A4D gradient */
+    /* Row 2 — CoEs: Crimson #1B6FB8 gradient */
     .careers-row:nth-child(2)::before {
-      background: linear-gradient(120deg, #4a0825 0%, #961A4D 50%, #c94070 100%);
+      background: linear-gradient(120deg, #0A2540 0%, #1B6FB8 50%, #4A8FD4 100%);
     }
 
     /* Row 3 — Accelerators: Gold #F3D25F gradient */
@@ -6683,7 +7070,7 @@
       // Per-row palette gradient shimmer on role text — matches background hover gradient
       const rowPalettes = [
         { stops: '#2ed8be, #12BAA0, #07574a, #12BAA0, #2ed8be' },  // Row 1: Teal
-        { stops: '#c94070, #961A4D, #4a0825, #961A4D, #c94070' },  // Row 2: Crimson
+        { stops: '#4A8FD4, #1B6FB8, #0A2540, #1B6FB8, #4A8FD4' },  // Row 2: Crimson
         { stops: '#F3D25F, #c99010, #8a6200, #c99010, #F3D25F' },  // Row 3: Gold
       ];
 
@@ -6953,7 +7340,7 @@
 
   <script>
     (function () {
-      const DOT_COLORS = ['#F3D25F', '#12BAA0', '#3675BC', '#961A4D', '#E8834A', '#6B3FA0'];
+      const DOT_COLORS = ['#F3D25F', '#12BAA0', '#3675BC', '#1B6FB8', '#E8834A', '#3B5A9B'];
 
       function buildEco() {
         const svg = document.getElementById('ecoSvg');
@@ -7141,10 +7528,17 @@
       <span class="impact-pill">Our Impact</span>
       <p class="impact-sub">Not testimonials but operational proof:</p>
       <ul class="impact-list">
-        <li class="impact-item-wrap"><span class="impact-item" data-dir="left">Reduced <span style="background: linear-gradient(135deg, #3675bc 0%, #509beb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">incident</span> volume</span></li>
-        <li class="impact-item-wrap"><span class="impact-item" data-dir="right">Faster <span style="background: linear-gradient(135deg, #e8834a 0%, #f3d25f 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">change</span> releases</span></li>
-        <li class="impact-item-wrap"><span class="impact-item" data-dir="left">Compliance <span style="background: linear-gradient(135deg, #12baa0 0%, #00dcc8 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">readiness</span></span></li>
-        <li class="impact-item-wrap"><span class="impact-item" data-dir="right">Platform stability <span style="background: linear-gradient(135deg, #961a4d 0%, #d22864 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">improvement</span></span>
+        <li class="impact-item-wrap"><span class="impact-item" data-dir="left">Reduced <span
+              style="background: linear-gradient(135deg, #3675bc 0%, #509beb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">incident</span>
+            volume</span></li>
+        <li class="impact-item-wrap"><span class="impact-item" data-dir="right">Faster <span
+              style="background: linear-gradient(135deg, #e8834a 0%, #f3d25f 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">change</span>
+            releases</span></li>
+        <li class="impact-item-wrap"><span class="impact-item" data-dir="left">Compliance <span
+              style="background: linear-gradient(135deg, #12baa0 0%, #00dcc8 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">readiness</span></span>
+        </li>
+        <li class="impact-item-wrap"><span class="impact-item" data-dir="right">Platform stability <span
+              style="background: linear-gradient(135deg, #4A6078 0%, #6B829C 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">improvement</span></span>
         </li>
       </ul>
     </div>
@@ -7258,7 +7652,7 @@
       <div class="news-track" id="newsTrack">
         <article class="news-card">
           <div class="nc-img"
-            style="background-image:url('https://res.cloudinary.com/dden4hawr/image/upload/v1773082602/cel/1d8a48b5ea80f15da836ffe849249af1_kdbqrb.jpg')">
+            style="background-image:url('https://images.unsplash.com/photo-1601597111158-2fceff292cdc?auto=format&fit=crop&w=1200&q=80')">
           </div>
           <div class="nc-overlay"></div>
           <div class="nc-body">
@@ -7274,7 +7668,7 @@
         </article>
         <article class="news-card">
           <div class="nc-img"
-            style="background-image:url('https://res.cloudinary.com/dden4hawr/image/upload/v1773082724/cel/5ad3756f1c5f3bf7ef43fd94d0e9622c_fhqzj1.jpg')">
+            style="background-image:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80')">
           </div>
           <div class="nc-overlay"></div>
           <div class="nc-body">
@@ -7290,7 +7684,7 @@
         </article>
         <article class="news-card">
           <div class="nc-img"
-            style="background-image:url('https://res.cloudinary.com/dden4hawr/image/upload/v1773082600/cel/videoframe_1_n4bwzs.png')">
+            style="background-image:url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80')">
           </div>
           <div class="nc-overlay"></div>
           <div class="nc-body">
@@ -7626,6 +8020,278 @@
   </script>
 
   <!-- ══════════════════════════════════════════════════════════
+     OUTCOMES STRIP
+══════════════════════════════════════════════════════════ -->
+  <section class="outcomes-section" id="outcomesSection">
+    <div class="outcomes-heading-row">
+      <h2 class="outcomes-hl" id="outcomesHl">Outcomes our clients measure.<br />Results we stand behind.</h2>
+      <a href="#" class="outcomes-all">All case studies <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="outcomes-grid">
+      <article class="outcome-card">
+        <div class="oc-img-wrap">
+          <span class="oc-tag">Insurance</span>
+          <img class="oc-img" loading="lazy" alt="Insurance portal modernization"
+            src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&q=80&auto=format&fit=crop" />
+        </div>
+        <div class="oc-body">
+          <h3 class="oc-title">50% reduction in development and training costs for a major U.S. life insurance company
+            through legacy agent portal modernization</h3>
+          <p class="oc-desc">Celsior implemented a blended onshore and offshore delivery model, developed a strategic
+            roadmap addressing operational bottlenecks, and completed six successful projects within twelve months.</p>
+          <div class="oc-foot">
+            <span class="oc-meta">6 min read</span>
+            <a class="oc-read" href="#">Read <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="outcome-card">
+        <div class="oc-img-wrap">
+          <span class="oc-tag">Insurance · Guidewire</span>
+          <img class="oc-img" loading="lazy" alt="Guidewire quality engineering"
+            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&auto=format&fit=crop" />
+        </div>
+        <div class="oc-body">
+          <h3 class="oc-title">80–90% time savings in data validation for a top-tier P&C insurer’s cloud-based Guidewire
+            transformation</h3>
+          <p class="oc-desc">Celsior automated end-to-end testing across 1,000+ test scripts using ReadyAPI, Selenium,
+            and AWS — significantly reducing program risk and accelerating delivery.</p>
+          <div class="oc-foot">
+            <span class="oc-meta">7 min read</span>
+            <a class="oc-read" href="#">Read <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="outcome-card">
+        <div class="oc-img-wrap">
+          <span class="oc-tag">Healthcare &amp; Life Sciences</span>
+          <img class="oc-img" loading="lazy" alt="Healthcare cloud migration"
+            src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=80&auto=format&fit=crop" />
+        </div>
+        <div class="oc-body">
+          <h3 class="oc-title">55% reduction in hosting operations costs for a diagnostic testing company through
+            Microsoft Azure migration</h3>
+          <p class="oc-desc">Celsior migrated critical applications to Microsoft Azure — resolving latency issues with
+            minimal downtime and cutting provisioning times from weeks to hours.</p>
+          <div class="oc-foot">
+            <span class="oc-meta">5 min read</span>
+            <a class="oc-read" href="#">Read <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <style>
+    .outcomes-section {
+      position: relative;
+      z-index: 2;
+      background: #ffffff;
+      padding: 72px 52px 64px;
+    }
+
+    .outcomes-heading-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .outcomes-hl {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+      font-size: clamp(1.9rem, 3.4vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: #0d1127;
+      margin: 0;
+      max-width: 760px;
+    }
+
+    .outcomes-all {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #0c6b5d;
+      text-decoration: none;
+      white-space: nowrap;
+      padding-bottom: 6px;
+      transition: color .25s ease;
+    }
+
+    .outcomes-all:hover {
+      color: #0a5247;
+    }
+
+    .outcomes-all span {
+      display: inline-block;
+      margin-left: 6px;
+      transition: transform .3s ease;
+    }
+
+    .outcomes-all:hover span {
+      transform: translateX(4px);
+    }
+
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .outcome-card {
+      background: #ffffff;
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(13, 17, 39, 0.06);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+
+    .outcome-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 36px -24px rgba(13, 17, 39, 0.22);
+    }
+
+    .oc-img-wrap {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      margin: 12px 12px 0;
+      border-radius: 10px;
+    }
+
+    .oc-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .6s ease;
+    }
+
+    .outcome-card:hover .oc-img {
+      transform: scale(1.04);
+    }
+
+    .oc-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #ffffff;
+      color: #0c6b5d;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 5px 11px;
+      border-radius: 999px;
+      letter-spacing: -0.005em;
+      z-index: 2;
+    }
+
+    .oc-body {
+      padding: 18px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .oc-title {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.3;
+      font-weight: 700;
+      color: #0d1127;
+      letter-spacing: -0.015em;
+      margin: 0;
+    }
+
+    .oc-desc {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: #6b7180;
+      margin: 0;
+    }
+
+    .oc-foot {
+      margin-top: auto;
+      padding-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .oc-meta {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+      font-size: 0.82rem;
+      color: #6b7180;
+    }
+
+    .oc-read {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #0c6b5d;
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+
+    .oc-read span {
+      display: inline-block;
+      margin-left: 4px;
+      transition: transform .3s ease;
+    }
+
+    .oc-read:hover {
+      color: #0a5247;
+    }
+
+    .oc-read:hover span {
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 1024px) {
+      .outcomes-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .outcomes-section {
+        padding: 72px 24px 56px;
+      }
+
+      .outcomes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .outcomes-heading-row {
+        margin-bottom: 36px;
+      }
+    }
+  </style>
+
+  <script>
+    (function () {
+      if (typeof gsap === 'undefined') return;
+      gsap.from('#outcomesHl', {
+        opacity: 0, y: 60, duration: 1.1, ease: 'power4.out',
+        scrollTrigger: { trigger: '#outcomesSection', start: 'top 82%', once: true }
+      });
+      gsap.from('.outcome-card', {
+        opacity: 0, y: 60, scale: 0.96, duration: 0.95, ease: 'power3.out', stagger: 0.13,
+        scrollTrigger: { trigger: '#outcomesSection', start: 'top 76%', once: true }
+      });
+    })();
+  </script>
+
+  <!-- ══════════════════════════════════════════════════════════
      CTA BAND
 ══════════════════════════════════════════════════════════ -->
   <section class="cta-band" id="ctaBand">
@@ -7690,7 +8356,7 @@
     }
 
     .cta-band-text::after {
-      color: #e11d48;
+      color: #1B6FB8;
     }
 
     .cta-band-btn {
@@ -8563,9 +9229,11 @@
     ═══════════════════════════════════════════════════ */
     (function () {
       const SLIDES = [
-        { label: 'Enterprise Modernization', bright: 'Modernize critical systems.<br/>Operationalize AI.', faded: ' Run with confidence.' },
-        { label: 'Data & Digital', bright: 'Transformation powered<br/>by data &amp; intelligence.', faded: ' At every layer.' },
-        { label: 'AI Innovation', bright: 'Build AI-first enterprises.<br/>Accelerate growth.', faded: ' With measurable impact.' },
+        { label: 'Insurance', bright: 'One AI Layer. Across <br> <span class="hl-strong">Policy, Claims, and Risk.</span>', faded: 'Break down operational silos and run a fully connected insurance enterprise — powered by AI that works end to end.', cta: 'Explore Insurance Capabilities' },
+        { label: 'Banking & Financial Services', bright: 'Modern Banking Starts <br> Where <span class="hl-strong">Legacy Transforms.</span>', faded: 'Eliminate technical debt, unify fragmented data, and deploy AI that actually performs where it counts — in production.', cta: 'Explore Banking & Financial Services Capabilities' },
+        { label: 'Healthcare', bright: 'Close the Gaps. <span class="hl-strong">Protect the Revenue.</span> Stay Compliant.', faded: 'From data fragmentation to compliance risk — build a healthcare operation that\'s accurate, audit-ready, and financially resilient.', cta: 'Explore Healthcare Capabilities' },
+        { label: 'AI-First Digital Engineering Platform', bright: 'Engineer Faster. Ship Smarter.<br> Scale <span class="hl-strong">Without Limits</span>', faded: 'From business requirement to production release — fully traced, AI-accelerated, and delivered in weeks, not months.', cta: 'Explore the AI-First Digital Engineering Platform' },
+
       ];
       const DURATION = 6000, XOVER = 900, PARALLAX = 0.012;
       let current = 0, prev = -1, timer = null, progRaf = null, progStart = 0, mx = 0, my = 0, smx = 0, smy = 0;
@@ -8576,6 +9244,7 @@
       const fillEl = document.getElementById('heroProgFill');
       const brightEl = document.getElementById('hlBright');
       const fadedEl = document.getElementById('hlFaded');
+      const ctaSecEl = document.getElementById('heroCtaSecondary');
 
       function goTo(idx, instant) {
         if (idx === current && !instant) return;
@@ -8603,9 +9272,16 @@
               gsap.fromTo(labelEl, { opacity: 0, x: 10 }, { opacity: 1, x: 0, duration: 0.40, ease: 'power3.out' });
             }
           });
+          if (ctaSecEl) gsap.to(ctaSecEl, {
+            opacity: 0, y: -6, duration: 0.22, ease: 'power2.in', onComplete() {
+              ctaSecEl.textContent = SLIDES[current].cta;
+              gsap.fromTo(ctaSecEl, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.40, ease: 'power3.out' });
+            }
+          });
         } else {
           brightEl.innerHTML = SLIDES[current].bright; fadedEl.innerHTML = SLIDES[current].faded;
           labelEl.textContent = SLIDES[current].label;
+          if (ctaSecEl) ctaSecEl.textContent = SLIDES[current].cta;
         }
         dotEls.forEach((d, i) => d.classList.toggle('active', i === current));
         if (numEl) numEl.textContent = String(current + 1).padStart(2, '0');
