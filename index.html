@@ -1418,6 +1418,20 @@
       }
     }
   </style>
+  <!-- ============================================================
+       HERO SLIDER HEADING ONLY
+       Keep SF Pro Bold 55px (responsive) override on the hero
+       slider headline. All other text reverts to original styles.
+       ============================================================ -->
+  <style>
+    .hero-headline {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif !important;
+      font-weight: 700 !important;
+      font-size: clamp(28px, 5.2vw, 55px) !important;
+      line-height: 1.08 !important;
+      letter-spacing: -0.02em !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -2259,7 +2273,11 @@
     </div>
     <div class="specs-inner" style="text-align: center;">
       <span class="spec-desc" style="display: inline-block; max-width: 680px; margin: 0 auto; text-align: center;">
-        Modern enterprises don’t run on a single system—they operate on millions of data signals flowing across platforms, applications, and core systems. Celsior brings this complexity together. By integrating and aggregating these scattered data particles, we transform them into connected, intelligent platforms that power the enterprise. With AI-led accelerators, frameworks, and deep engineering capabilities—we modernize organizations to move faster, launch quicker, and deliver measurable business outcomes with confidence.
+        Modern enterprises don’t run on a single system—they operate on millions of data signals flowing across
+        platforms, applications, and core systems. Celsior brings this complexity together. By integrating and
+        aggregating these scattered data particles, we transform them into connected, intelligent platforms that power
+        the enterprise. With AI-led accelerators, frameworks, and deep engineering capabilities—we modernize
+        organizations to move faster, launch quicker, and deliver measurable business outcomes with confidence.
 
       </span>
     </div>
@@ -2796,7 +2814,7 @@
       font-family: var(--font-head);
       font-size: 23px;
       line-height: 1.28;
-      font-weight: 600;
+      font-weight: 400;
       letter-spacing: -0.012em;
       color: #fff;
       margin: 0;
@@ -4062,10 +4080,12 @@
       </div>
       <svg class="orbit-svg" id="orbitSvg" viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid meet"
         aria-hidden="true">
-        <ellipse id="ringA" cx="720" cy="350" rx="560" ry="135" fill="none" stroke="rgba(13,17,39,0.32)"
-          stroke-width="1.8" stroke-dasharray="6 9" transform="rotate(26 720 350)" />
-        <ellipse id="ringB" cx="720" cy="350" rx="560" ry="135" fill="none" stroke="rgba(13,17,39,0.32)"
-          stroke-width="1.8" stroke-dasharray="6 9" transform="rotate(-26 720 350)" />
+        <ellipse id="outerOval" cx="720" cy="350" rx="700" ry="220" fill="none" stroke="rgba(13,17,39,0.32)"
+          stroke-width="1.8" stroke-dasharray="6 9" transform="rotate(-10 720 350)" />
+        <ellipse id="outerOval2" cx="720" cy="350" rx="700" ry="220" fill="none" stroke="rgba(13,17,39,0.32)"
+          stroke-width="1.8" stroke-dasharray="6 9" transform="rotate(10 720 350)" />
+        <circle id="orbitRing" cx="720" cy="350" r="270" fill="none" stroke="rgba(13,17,39,0.32)" stroke-width="1.8"
+          stroke-dasharray="6 9" />
         <g id="om0">
           <polygon points="0,-8 6,5 -6,5" fill="#0d1127" />
         </g>
@@ -4664,43 +4684,23 @@
     (function () {
       const isMobile = window.innerWidth < 640;
       const GEO = isMobile
-        ? { viewBox: '0 0 360 740', CX: 180, CY: 370, RX: 165, RY: 60, ROT: 26, markerPts: '0,-7 5,4 -5,4' }
-        : { viewBox: '0 0 1440 700', CX: 720, CY: 350, RX: 560, RY: 135, ROT: 26, markerPts: '0,-8 6,5 -6,5' };
+        ? { viewBox: '0 0 360 740', CX: 180, CY: 370, R: 148, ovalRX: 168, ovalRY: 130, tilt: 10, markerPts: '0,-7 5,4 -5,4' }
+        : { viewBox: '0 0 1440 700', CX: 720, CY: 350, R: 270, ovalRX: 700, ovalRY: 220, tilt: 10, markerPts: '0,-8 6,5 -6,5' };
       const svg = document.getElementById('orbitSvg'); svg.setAttribute('viewBox', GEO.viewBox);
-      const ringA = document.getElementById('ringA'), ringB = document.getElementById('ringB');
-      [ringA, ringB].forEach(r => { r.setAttribute('cx', GEO.CX); r.setAttribute('cy', GEO.CY); r.setAttribute('rx', GEO.RX); r.setAttribute('ry', GEO.RY); });
-      ringA.setAttribute('transform', `rotate(${GEO.ROT} ${GEO.CX} ${GEO.CY})`);
-      ringB.setAttribute('transform', `rotate(${-GEO.ROT} ${GEO.CX} ${GEO.CY})`);
+      const ring = document.getElementById('orbitRing'); ring.setAttribute('cx', GEO.CX); ring.setAttribute('cy', GEO.CY); ring.setAttribute('r', GEO.R);
+      [['outerOval', -GEO.tilt], ['outerOval2', GEO.tilt]].forEach(([id, deg]) => {
+        const o = document.getElementById(id);
+        o.setAttribute('cx', GEO.CX); o.setAttribute('cy', GEO.CY);
+        o.setAttribute('rx', GEO.ovalRX); o.setAttribute('ry', GEO.ovalRY);
+        o.setAttribute('transform', `rotate(${deg} ${GEO.CX} ${GEO.CY})`);
+      });
       ['om0', 'om1', 'om2', 'om3'].forEach(id => { document.getElementById(id).querySelector('polygon').setAttribute('points', GEO.markerPts); });
-      const { CX, CY, RX, RY, ROT } = GEO;
-      const cosA = Math.cos(ROT * Math.PI / 180), sinA = Math.sin(ROT * Math.PI / 180);
-      function ellipseAt(t, sign) {
-        // sign: +1 = ringA (rotated +ROT), -1 = ringB (rotated -ROT)
-        const cR = cosA, sR = sign * sinA;
-        const x0 = RX * Math.cos(t), y0 = RY * Math.sin(t);
-        const x = CX + x0 * cR - y0 * sR;
-        const y = CY + x0 * sR + y0 * cR;
-        const tx0 = -RX * Math.sin(t), ty0 = RY * Math.cos(t);
-        const tx = tx0 * cR - ty0 * sR, ty = tx0 * sR + ty0 * cR;
-        const ang = Math.atan2(ty, tx) * 180 / Math.PI + 90;
-        return { x, y, ang };
-      }
+      const { CX, CY, R } = GEO;
+      function circleAt(t) { return { x: CX + R * Math.cos(t), y: CY + R * Math.sin(t), ang: 180 + t * (180 / Math.PI) }; }
       const wrap = document.getElementById('orbitWrap'), markers = ['om0', 'om1', 'om2', 'om3'].map(id => document.getElementById(id)), slides = Array.from(document.querySelectorAll('.os-slide')), N = slides.length;
       const bgImgs = ['obg0', 'obg1', 'obg2', 'obg3'].map(id => document.getElementById(id));
       const SCROLL_MULT = N + 2.5; wrap.style.height = `${Math.round(window.innerHeight * SCROLL_MULT)}px`;
-      const markerCfg = [
-        { sign: 1, off: 0 },
-        { sign: -1, off: 0 },
-        { sign: 1, off: Math.PI },
-        { sign: -1, off: Math.PI },
-      ];
-      function placeMarkers(t) {
-        markers.forEach((m, i) => {
-          const c = markerCfg[i];
-          const { x, y, ang } = ellipseAt(t + c.off, c.sign);
-          m.setAttribute('transform', `translate(${x},${y}) rotate(${ang})`);
-        });
-      }
+      function placeMarkers(t) { markers.forEach((m, i) => { const { x, y, ang } = circleAt(t + i * (Math.PI / 2)); m.setAttribute('transform', `translate(${x},${y}) rotate(${ang})`); }); }
       let activeIdx = -1; const tweens = new Array(N).fill(null);
       let lastProgress = 0;
 
@@ -4733,9 +4733,10 @@
         tweens[prev] = tl; tweens[idx] = tl;
       }
       slides.forEach(s => gsap.set(s, { opacity: 0, y: 18, scale: 0.96, zIndex: 0 })); placeMarkers(-Math.PI / 2); goTo(0, 1);
-      const ringPerim = Math.PI * (3 * (RX + RY) - Math.sqrt((3 * RX + RY) * (RX + 3 * RY)));
-      gsap.from('#ringA', { strokeDashoffset: ringPerim, strokeDasharray: `${ringPerim} ${ringPerim}`, duration: 2.2, ease: 'power2.out', scrollTrigger: { trigger: '#orbitWrap', start: 'top 80%', once: true } });
-      gsap.from('#ringB', { strokeDashoffset: ringPerim, strokeDasharray: `${ringPerim} ${ringPerim}`, duration: 2.4, ease: 'power2.out', delay: 0.18, scrollTrigger: { trigger: '#orbitWrap', start: 'top 80%', once: true } });
+      const circPerim = 2 * Math.PI * R, ovalPerim = 2 * Math.PI * Math.sqrt((GEO.ovalRX ** 2 + GEO.ovalRY ** 2) / 2);
+      gsap.from('#orbitRing', { strokeDashoffset: circPerim, strokeDasharray: `${circPerim} ${circPerim}`, duration: 2.2, ease: 'power2.out', scrollTrigger: { trigger: '#orbitWrap', start: 'top 80%', once: true } });
+      gsap.from('#outerOval', { strokeDashoffset: ovalPerim, strokeDasharray: `${ovalPerim} ${ovalPerim}`, duration: 2.7, ease: 'power2.out', delay: 0.18, scrollTrigger: { trigger: '#orbitWrap', start: 'top 80%', once: true } });
+      gsap.from('#outerOval2', { strokeDashoffset: ovalPerim, strokeDasharray: `${ovalPerim} ${ovalPerim}`, duration: 2.7, ease: 'power2.out', delay: 0.32, scrollTrigger: { trigger: '#orbitWrap', start: 'top 80%', once: true } });
       gsap.from('#orbitEyebrow', { opacity: 0, y: 28, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: '#orbitWrap', start: 'top 84%', once: true } });
       const THRESHOLD = 0.008, SLIDE_PROGRESS_END = N / SCROLL_MULT;
       ScrollTrigger.create({
@@ -4766,7 +4767,12 @@
       </div>
       <div class="specs-inner" style="text-align: center;">
         <span class="spec-desc" style="display: inline-block; max-width: 680px; margin: 0 auto; text-align: center;">
-        Most enterprise businesses carry decades of layered investment including different systems, multiple vendors, and data that rarely connects across the boundaries between them. Due to this fragmentation, AI programs that look credible in a pilot rarely reach production at scale. <br> Celsior addresses the problem at its source. Our engineering teams deliver modernization and AI programs on the same platforms we designed and own; giving every engagement the precision, traceability, and delivery accountability that come from having the platform and the program in the same hands. 
+          Most enterprise businesses carry decades of layered investment including different systems, multiple vendors,
+          and data that rarely connects across the boundaries between them. Due to this fragmentation, AI programs that
+          look credible in a pilot rarely reach production at scale. <br> Celsior addresses the problem at its source.
+          Our engineering teams deliver modernization and AI programs on the same platforms we designed and own; giving
+          every engagement the precision, traceability, and delivery accountability that come from having the platform
+          and the program in the same hands.
         </span>
       </div>
     </div>
@@ -4787,7 +4793,7 @@
               <img src="https://i.pinimg.com/236x/b3/1b/79/b31b795a1109c73f147236ea2e73e1a8.jpg" alt="Synthetix"
                 class="fc-img" />
               <div class="fc-glass-header">
-                <span class="fc-tag">Digital Engineering</span>
+                <span class="fc-tag">AI Powered Delivery</span>
                 <h3 class="fc-front-title">AI-First Software Delivery Orchestration</h3>
               </div>
               <div class="fc-front-hint">
@@ -4825,7 +4831,7 @@
                 src="https://res.cloudinary.com/dden4hawr/image/upload/v1775935971/remove_all_the_202604120051_qtgesq.jpg"
                 alt="CAFÉ" class="fc-img" />
               <div class="fc-glass-header">
-                <span class="fc-tag">Enterprise AI</span>
+                <span class="fc-tag">AI Platform</span>
                 <h3 class="fc-front-title">CAFÉ</h3>
               </div>
               <div class="fc-front-hint">
@@ -4840,11 +4846,12 @@
               <div class="fc-back-orb fc-back-orb-1"></div>
               <div class="fc-back-orb fc-back-orb-2"></div>
               <div class="fc-back-inner">
-                <span class="fc-back-tag">From Pilot to Production. Fast.</span>
-                <h3 class="fc-back-title">From pilot to production. Fast. 
+                <span class="fc-back-tag">CAFÉ</span>
+                <h3 class="fc-back-title">CAFÉ
                 </h3>
-                <p class="fc-back-desc">Modular enterprise AI platform with LLMs, agents, RAG, and governance. Plugs
-                  into existing systems with security and compliance built in. 
+                <p class="fc-back-desc">From pilot to production. Fast. 
+                  Modular enterprise AI platform with LLMs, agents, RAG, and governance. Plugs into existing systems
+                  with security and compliance built in. 
                 </p>
                 <a href="#contact" class="fc-back-cta">Learn More <svg viewBox="0 0 14 14" fill="none">
                     <path d="M2.5 7h9M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5"
@@ -4877,11 +4884,12 @@
               <div class="fc-back-orb fc-back-orb-1"></div>
               <div class="fc-back-orb fc-back-orb-2"></div>
               <div class="fc-back-inner">
-                <span class="fc-back-tag">Explainable AI for Smarter Claims</span>
-                <h3 class="fc-back-title">Explainable AI for smarter claims 
+                <span class="fc-back-tag">ClaimX</span>
+                <h3 class="fc-back-title">ClaimX
                 </h3>
-                <p class="fc-back-desc">AI intelligence layer for insurance claims from FNOL to investigation. Real-time
-                  risk scoring with SHAP explainability, humans in the loop. </p>
+                <p class="fc-back-desc">Explainable AI for smarter claims
+                  AI intelligence layer for insurance claims from FNOL to investigation. Real-time risk scoring with
+                  SHAP explainability, humans in the loop.  </p>
                 <a href="#contact" class="fc-back-cta">Learn More <svg viewBox="0 0 14 14" fill="none">
                     <path d="M2.5 7h9M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5"
                       stroke-linecap="round" stroke-linejoin="round" />
@@ -4913,11 +4921,12 @@
               <div class="fc-back-orb fc-back-orb-1"></div>
               <div class="fc-back-orb fc-back-orb-2"></div>
               <div class="fc-back-inner">
-                <span class="fc-back-tag">AI-Native Quality Engineering</span>
-                <h3 class="fc-back-title">AI-native quality engineering 
+                <span class="fc-back-tag">AiDeviser</span>
+                <h3 class="fc-back-title">AiDeviser 
                 </h3>
-                <p class="fc-back-desc">End-to-end framework connecting requirements, code, tests, and execution.
-                  Automate test creation, accelerate releases, strengthen CI/CD.</p>
+                <p class="fc-back-desc">AI-native quality engineering 
+                  End-to-end framework connecting requirements, code, tests, and execution. Automate test creation,
+                  accelerate releases, strengthen CI/CD. </p>
                 <a href="#contact" class="fc-back-cta">Learn More <svg viewBox="0 0 14 14" fill="none">
                     <path d="M2.5 7h9M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5"
                       stroke-linecap="round" stroke-linejoin="round" />
@@ -4934,7 +4943,7 @@
               <img src="https://i.pinimg.com/1200x/2a/4e/30/2a4e308d142e5c38b1d7c83025566e47.jpg" alt="Agentic RAG"
                 class="fc-img" />
               <div class="fc-glass-header">
-                <span class="fc-tag">Enterprise Search</span>
+                <span class="fc-tag">AI/Data</span>
                 <h3 class="fc-front-title">Agentic RAG</h3>
               </div>
               <div class="fc-front-hint">
@@ -4949,11 +4958,12 @@
               <div class="fc-back-orb fc-back-orb-1"></div>
               <div class="fc-back-orb fc-back-orb-2"></div>
               <div class="fc-back-inner">
-                <span class="fc-back-tag">One Query. Every Answer.</span>
-                <h3 class="fc-back-title">One query. Every answer. 
+                <span class="fc-back-tag">Agentic RAG </span>
+                <h3 class="fc-back-title">Agentic RAG  
                 </h3>
-                <p class="fc-back-desc">Intent-aware retrieval unifying structured databases and unstructured documents.
-                  Intelligent routing delivers precise, enterprise-wide answers.</p>
+                <p class="fc-back-desc">One query. Every answer. 
+                  Intent-aware retrieval unifying structured databases and unstructured documents. Intelligent routing
+                  delivers precise, enterprise-wide answers. </p>
                 <a href="#contact" class="fc-back-cta">Learn More <svg viewBox="0 0 14 14" fill="none">
                     <path d="M2.5 7h9M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5"
                       stroke-linecap="round" stroke-linejoin="round" />
@@ -5362,30 +5372,30 @@
       }
     }
 
-    /* Back content */
+    /* Back content — Figma layout: top-aligned tag/title/desc, CTA pinned bottom, left-aligned */
     .fc-back-inner {
       position: relative;
       z-index: 2;
       display: flex;
       flex-direction: column;
       height: 100%;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: clamp(18px, 2vw, 28px) clamp(16px, 1.8vw, 24px);
-      gap: clamp(8px, 1vw, 14px);
+      justify-content: flex-start;
+      align-items: flex-start;
+      text-align: left;
+      padding: clamp(20px, 2.2vw, 32px) clamp(18px, 2vw, 28px);
+      gap: clamp(12px, 1.4vw, 20px);
       overflow: hidden;
     }
 
     .fc-back-tag {
       display: inline-block;
-      font-size: clamp(0.48rem, 0.72vw, 0.58rem);
+      font-size: clamp(0.50rem, 0.74vw, 0.62rem);
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       border: 1px solid;
       border-radius: 999px;
-      padding: 4px 12px;
+      padding: 6px 14px;
       margin: 0;
       width: fit-content;
       flex-shrink: 0;
@@ -5393,25 +5403,27 @@
 
     .fc-back-title {
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
-      font-size: clamp(0.85rem, 1.15vw, 1.05rem);
+      font-size: clamp(1.15rem, 1.7vw, 1.6rem);
       font-weight: 700;
-      line-height: 1.24;
+      line-height: 1.18;
       color: #fff;
-      letter-spacing: -0.018em;
+      letter-spacing: -0.02em;
       margin: 0;
-      max-width: 95%;
+      text-align: left;
+      max-width: 100%;
       flex-shrink: 0;
     }
 
     .fc-back-desc {
-      font-size: clamp(0.66rem, 0.80vw, 0.76rem);
-      line-height: 1.55;
-      color: rgba(255, 255, 255, 0.72);
+      font-size: clamp(0.72rem, 0.88vw, 0.86rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.78);
       margin: 0;
-      max-width: 92%;
+      text-align: left;
+      max-width: 100%;
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 6;
+      -webkit-line-clamp: 7;
       -webkit-box-orient: vertical;
     }
 
@@ -5473,7 +5485,7 @@
       transition: background 0.2s, transform 0.2s;
       text-decoration: none;
       width: fit-content;
-      margin: 4px 0 0;
+      margin: auto 0 0;
       flex-shrink: 0;
     }
 
@@ -9223,6 +9235,16 @@
         { label: 'AI-First Digital Engineering Platform', bright: 'Engineer Faster. Ship Smarter.<br> Scale <span class="hl-strong">Without Limits</span>', faded: 'From business requirement to production release — fully traced, AI-accelerated, and delivered in weeks, not months.', cta: 'Explore the AI-First Digital Engineering Platform' },
 
       ];
+      // ───────────────────────────────────────────────────────────────
+      // HERO SLIDER AUTOPLAY SETTINGS
+      //   AUTOPLAY        → set to false to disable autoplay (loop stops)
+      //   AUTOPLAY_MS     → time each slide stays visible, in milliseconds
+      //                     (7000 = 7 seconds). Change this to tweak duration.
+      //   Slider loops automatically (wraps from last → first).
+      // ───────────────────────────────────────────────────────────────
+      const AUTOPLAY = true;
+      const AUTOPLAY_MS = 7000;
+
       const DURATION = 6000, XOVER = 900, PARALLAX = 0.012;
       let current = 0, prev = -1, timer = null, progRaf = null, progStart = 0, mx = 0, my = 0, smx = 0, smy = 0;
       const slideEls = Array.from(document.querySelectorAll('.hero-slide'));
@@ -9243,6 +9265,22 @@
         } else if (prev >= 0) { slideEls[prev].classList.remove('active'); gsap.set(slideEls[prev], { opacity: 0 }); }
         slideEls[current].classList.add('active');
         gsap.fromTo(slideEls[current], { opacity: 0 }, { opacity: 1, duration: instant ? 0 : XOVER / 1000, ease: 'power2.inOut' });
+
+        // ── Video lifecycle: pause previous, restart & play current ──
+        // Browsers throttle/freeze background <video> elements which is why
+        // they appear "stuck on a frame". We explicitly drive playback here.
+        if (prev >= 0 && prev !== current) {
+          const prevVid = slideEls[prev].querySelector('video');
+          if (prevVid) { try { prevVid.pause(); } catch (e) { } }
+        }
+        const curVid = slideEls[current].querySelector('video');
+        if (curVid) {
+          try { curVid.currentTime = 0; } catch (e) { }
+          curVid.muted = true; curVid.playsInline = true;
+          const playPromise = curVid.play();
+          if (playPromise && playPromise.catch) playPromise.catch(() => { });
+        }
+
         if (!instant) {
           const med = slideEls[current].querySelector('video,.hs-img');
           if (med) gsap.fromTo(med, { scale: 1.06, x: 18 }, { scale: 1.03, x: 0, duration: 1.8, ease: 'power2.out' });
@@ -9278,10 +9316,22 @@
 
       function startProgress() {
         if (progRaf) cancelAnimationFrame(progRaf);
-        // Autoplay disabled
+        if (fillEl) { fillEl.style.transition = 'none'; fillEl.style.width = '0%'; }
+        clearTimeout(timer);
+        if (!AUTOPLAY) return;
+        // Animate the progress bar across AUTOPLAY_MS
+        if (fillEl) {
+          requestAnimationFrame(() => {
+            fillEl.style.transition = `width ${AUTOPLAY_MS}ms linear`;
+            fillEl.style.width = '100%';
+          });
+        }
+        // Schedule the next slide (loops via modulo in goTo)
+        timer = setTimeout(() => { goTo(current + 1); }, AUTOPLAY_MS);
       }
 
-      function resetTimer() { clearTimeout(timer); } // Autoplay disabled
+      // Restarts the autoplay countdown after manual interaction
+      function resetTimer() { clearTimeout(timer); startProgress(); }
 
       document.getElementById('heroNext')?.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
       document.getElementById('heroPrev')?.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
