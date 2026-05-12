@@ -38,7 +38,10 @@
       color: inherit;
     }
 
-    /* ── HERO ── */
+    /* ============================================================
+       === HERO ===
+       Full-bleed hero with image background + dark gradient overlays.
+       ============================================================ */
     .hero {
       position: relative;
       width: 100%;
@@ -146,7 +149,10 @@
       white-space: nowrap;
     }
 
-    /* ── STATS STRIP ── */
+    /* ============================================================
+       === STATS ===
+       Three highlight stat cards with animated counters.
+       ============================================================ */
     .stats-wrap {
       background: #fff;
       border-bottom: 1px solid var(--border);
@@ -221,7 +227,10 @@
       border-top: 1px solid rgba(13, 17, 39, 0.08);
     }
 
-    /* ── COST SECTION ── */
+    /* ============================================================
+       === COST Q×Q ===
+       Quarter-by-quarter narrative + cost-category accordion.
+       ============================================================ */
     .cost-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -310,7 +319,10 @@
 
     /* platform-ops-cards CSS replaced by inline styles */
 
-    /* ── BLOG TEASERS ── */
+    /* ============================================================
+       === BLOG TEASERS / ACCELERATORS ===
+       Row of accelerator cards with chip + arrow CTA.
+       ============================================================ */
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -360,7 +372,10 @@
       line-height: 23px;
     }
 
-    /* ── EXPLORE (ported from Our_Focus) ── */
+    /* ============================================================
+       === EXPLORE ===
+       Cross-link grid pointing to other focus areas.
+       ============================================================ */
     .explore {
       background: #ffffff;
       max-width: none;
@@ -584,35 +599,56 @@
       }
 
       .explore__links a {
-        align-items: flex-start;
-        flex-direction: row;
-        gap: 18px;
-        flex-wrap: wrap;
-        padding: 22px 18px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "label label"
+          "text  arrow";
+        column-gap: 14px;
+        row-gap: 14px;
+        align-items: center;
+        padding: 20px 18px;
       }
 
       .explore__row-left {
-        gap: 12px;
-        flex-wrap: wrap;
+        display: contents;
+      }
+
+      .explore__row-right {
+        display: contents;
+      }
+
+      .explore__label {
+        grid-area: label;
+        justify-self: start;
       }
 
       .explore__text {
+        grid-area: text;
         font-size: clamp(0.9rem, 4vw, 1.1rem);
+        align-self: center;
       }
 
+      .explore__arrow {
+        grid-area: arrow;
+        width: 36px;
+        height: 36px;
+        align-self: center;
+      }
+    }
+
+    @media (max-width: 720px) {
       .explore__label {
         min-width: auto;
         padding: 5px 10px;
         font-size: 0.58rem;
       }
-
-      .explore__arrow {
-        width: 36px;
-        height: 36px;
-      }
     }
 
-    /* ── PLATFORMS ── */
+    /* ============================================================
+       === PARTNERS / PLATFORMS ===
+       Headline + horizontally scrolling partner-logo strip.
+       ============================================================ */
     .platforms {
       background: #fff;
       padding: 32px 112px 0;
@@ -709,18 +745,12 @@
       }
     }
 
-    /* ══════════════════════════════════════════════════════════
-   OUTCOMES — Ported from Our_Focus styling
-   Cascading absolute-positioned cards with gradient fills,
-   animated counters via GSAP ScrollTrigger.
-══════════════════════════════════════════════════════════ */
-    /* ════════════════════════════════════════════════════
-   OUTCOMES — heading overlays whitespace above left cards
-   Cards: full-width CSS Grid, bottom-aligned (stagger).
-   Heading: absolute top-left, floats over clear space
-   above the shorter green/blue cards — like text on top
-   of a background panorama. No horizontal overflow.
-════════════════════════════════════════════════════ */
+    /* ============================================================
+       === OUTCOMES ===
+       Heading floats over whitespace above the left cards;
+       four gradient outcome cards (green / blue / gold / dark)
+       with animated counters (GSAP ScrollTrigger).
+       ============================================================ */
     .outcomes-section {
       background: #fff;
       width: 100%;
@@ -1042,36 +1072,42 @@
 
 
 
-    /* ── TESTIMONIAL ── */
+    /* ============================================================
+       === TESTIMONIAL ===
+       Pull-quote + author + result chips on dark panel.
+       ============================================================ */
     .test-card {
       background: linear-gradient(135deg, #0a1f3d 0%, #0d2d55 50%, #0f3566 100%);
       border-radius: 16px;
       overflow: hidden;
       display: grid;
-      grid-template-columns: 1fr auto;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 36%);
+      align-items: stretch;
     }
 
     .test-left {
-      padding: 40px 48px;
+      padding: clamp(28px, 3.5vw, 44px) clamp(24px, 3.8vw, 52px);
+      min-width: 0;
     }
 
     .test-right {
-      width: 360px;
-      margin: 24px 24px 24px 0;
+      margin: clamp(16px, 1.8vw, 24px);
+      margin-left: 0;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
-      padding: 28px 32px;
+      padding: clamp(20px, 2.2vw, 30px) clamp(20px, 2.4vw, 32px);
       display: flex;
       flex-direction: column;
       justify-content: center;
+      min-width: 0;
     }
 
     .test-quote {
-      font-size: 16px;
+      font-size: clamp(14px, 1.1vw, 17px);
       font-style: italic;
       color: #fff;
-      line-height: 21px;
+      line-height: 1.55;
       opacity: 0.95;
     }
 
@@ -1122,12 +1158,16 @@
     }
 
     .test-res-text {
-      font-size: 14px;
+      font-size: clamp(12px, 0.92vw, 14px);
       color: rgba(255, 255, 255, 0.9);
-      line-height: 23px;
+      line-height: 1.45;
+      white-space: normal;
     }
 
-    /* ── INSIGHTS ── */
+    /* ============================================================
+       === INSIGHTS ===
+       Three-column thought-leadership card grid.
+       ============================================================ */
     .insight-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1224,7 +1264,10 @@
       gap: 4px;
     }
 
-    /* ── FAQ — ported from Our_Focus ── */
+    /* ============================================================
+       === FAQ ===
+       Two-column FAQ — intro left, accordion right.
+       ============================================================ */
     .faq {
       position: relative;
       z-index: 2;
@@ -1241,7 +1284,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
-      align-items: start;
+      align-items: center;
       position: relative;
       border-top: 1px solid rgba(13, 17, 39, 0.12);
     }
@@ -1258,21 +1301,12 @@
     }
 
     .faq__intro {
-      position: sticky;
-      top: 108px;
       text-align: left;
       padding: 80px 80px 80px 0;
     }
 
     .faq__intro .eyebrow {
       margin: 0 0 30px;
-      color: #0d1127;
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 0.72rem;
-      line-height: 1;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
     }
 
     .faq__intro h2 {
@@ -1440,7 +1474,10 @@
 
     /* ── Mobile styles consolidated below ── */
 
-    /* ── CTA BANNER ── */
+    /* ============================================================
+       === CTA BANNER ===
+       Closing call-to-action band with pull-quote + button.
+       ============================================================ */
     .cta-banner {
       background: #fff;
       border-top: 1px solid rgba(13, 17, 39, 0.08);
@@ -1619,7 +1656,7 @@
     }
 
     .faq__intro {
-      padding: var(--section-pad-v) 0 clamp(32px, 4vw, 48px) !important;
+      padding: var(--section-pad-v) clamp(32px, 4vw, 64px) clamp(32px, 4vw, 48px) 0 !important;
     }
 
     /* CTA banner — intentionally 20% more breathing room as a finale */
@@ -1673,8 +1710,8 @@
     }
 
     .test-res-text {
-      font-size: 16px !important;
-      line-height: 23px !important;
+      font-size: clamp(12px, 0.95vw, 15px) !important;
+      line-height: 1.45 !important;
     }
 
     .insight-title {
@@ -1718,9 +1755,36 @@
     }
 
     /* ═══════════════════════════════════════════════════
-   REMOVE ALL EYEBROW TEXTS
+   UNIFIED EYEBROW STYLE
+   Single source of truth for all section eyebrows.
 ═══════════════════════════════════════════════════ */
     .eyebrow {
+      display: block;
+      margin: 0 0 16px;
+      color: #6b7280 !important;
+      font-family: 'Inter', system-ui, sans-serif !important;
+      font-size: 0.72rem !important;
+      line-height: 1 !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase !important;
+    }
+
+    /* Beat parent paragraph overrides (e.g. .faq__intro p { font-size:16px }) */
+    p.eyebrow,
+    .faq__intro p.eyebrow,
+    section p.eyebrow {
+      font-size: 0.72rem !important;
+      line-height: 1 !important;
+      color: #6b7280 !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase !important;
+      font-family: 'Inter', system-ui, sans-serif !important;
+    }
+
+    /* Outcomes section intentionally hides its eyebrow */
+    .outcomes__heading .eyebrow {
       display: none !important;
     }
 
@@ -2157,7 +2221,13 @@
 
 <body>
 
-  <!-- ════════════════  HERO  ════════════════ -->
+  <!-- ============================================================
+       SECTION: HERO
+       Purpose : Full-bleed hero with background image, dark overlays,
+                 centered headline + supporting copy.
+       CSS tag : /* === HERO === */
+       Reusable: copy this <section class="hero"> + .hero* styles.
+       ============================================================ -->
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-gt"></div>
@@ -2179,7 +2249,11 @@
     </div>
   </section>
 
-  <!-- ════════════════  STATS  ════════════════ -->
+  <!-- ============================================================
+       SECTION: STATS STRIP
+       Purpose : Three highlight stat cards with animated counters.
+       CSS tag : /* === STATS === */
+       ============================================================ -->
   <div class="stats-wrap">
     <div class="stats-grid">
       <div class="stat-col">
@@ -2208,7 +2282,12 @@
     </div>
   </div>
 
-  <!-- ════════════════  COST Q×Q  ════════════════ -->
+  <!-- ============================================================
+       SECTION: COST Q×Q
+       Purpose : Quarter-by-quarter narrative + accordion of cost
+                 categories with hero portrait image.
+       CSS tag : /* === COST Q×Q === */
+       ============================================================ -->
   <!--
   Figma: Desktop - 6 (node 1:258) — 1440×873
   Layout:
@@ -2415,10 +2494,16 @@
     </div><!-- /two-col -->
   </section>
 
-  <!-- ════════════════  PLATFORM OPS COST — Desktop-31 exact ════════════════ -->
+  <!-- ============================================================
+       SECTION: PLATFORM OPS COST
+       Purpose : Two-column comparison (unmanaged vs managed) with
+                 stat tiles. Pixel-mirror of Figma Desktop-31.
+       CSS tag : /* === PLATFORM OPS COST === */
+       ============================================================ -->
   <section id="platform-ops-cost" style="background:#fff;border-top:1px solid rgba(13,17,39,0.08);">
 
     <!-- Heading -->
+    <p class="eyebrow">THE BUSINESS CONSEQUENCES</p>
     <h2
       style="font-size:55px;font-weight:700;letter-spacing:-1px;line-height:55px;color:#09090b;max-width:1048px;margin-bottom:32px;">
       How enterprise platforms lose <br>operational ownership after go-live</h2>
@@ -2536,7 +2621,11 @@
     </div><!-- /card-frame -->
   </section>
 
-  <!-- ════════════════  BLOG TEASERS  ════════════════ -->
+  <!-- ============================================================
+       SECTION: BLOG TEASERS / ACCELERATORS
+       Purpose : Row of accelerator program cards linking to detail.
+       CSS tag : /* === BLOG TEASERS === */
+       ============================================================ -->
   <section class="pad sec-border">
     <h2 style="font-size:55px;font-weight:700;line-height:60px;color:#09090b;max-width:1000px;margin-bottom:16px;">
       See the latest from Celsior on managed platform operations and continuous delivery.</h2>
@@ -2579,11 +2668,15 @@
     </div>
   </section>
 
-  <!-- ════════════════  PLATFORMS STRIP  ════════════════ -->
+  <!-- ============================================================
+       SECTION: PLATFORMS STRIP
+       Purpose : Headline + horizontally scrolling partner-logo strip.
+       CSS tag : /* === PARTNERS / PLATFORMS === */
+       ============================================================ -->
   <div class="platforms" style="background:#FFFFFF;">
 
     <h3>Delivered on the platforms your enterprise already <span
-        style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; display: inline;">trust.</span>
+        style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; display:inline;">trusts</span>
     </h3>
     <section class="partners" aria-label="Partner ecosystem">
       <div class="partners__track">
@@ -2619,11 +2712,12 @@
     </section>
   </div>
 
-  <!-- ════════════════════════════════════════════════════
-     OUTCOMES WE'RE ACCOUNTABLE TO
-     Pixel-exact replication of Figma Desktop-30 (1433×894)
-     All left/top/height values are taken directly from Figma node data.
-════════════════════════════════════════════════════ -->
+  <!-- ============================================================
+       SECTION: OUTCOMES
+       Purpose : Heading on the left, three colored outcome stat cards
+                 on the right. Pixel-exact Figma Desktop-30 (1433×894).
+       CSS tag : /* === OUTCOMES === */
+       ============================================================ -->
   <section class="outcomes-section">
     <section class="outcomes" aria-label="Outcomes">
       <div class="outcomes__heading">
@@ -2680,9 +2774,13 @@
     </section>
   </section>
 
-  <!-- ════════════════  TESTIMONIAL  ════════════════ -->
+  <!-- ============================================================
+       SECTION: TESTIMONIAL
+       Purpose : Pull-quote with author + result chips on dark panel.
+       CSS tag : /* === TESTIMONIAL === */
+       ============================================================ -->
   <section id="testimonial-sec" class="sec-border">
-    <h2 style="font-size:58px;font-weight:700;color:#111827;letter-spacing:-0.6px;line-height:50px;margin-bottom:32px;">
+    <h2 style="font-size:clamp(28px, 4.5vw, 58px);font-weight:700;color:#111827;letter-spacing:-0.6px;line-height:1.05;margin-bottom:clamp(20px, 2.4vw, 32px);">
       Delivered at enterprise scale</h2>
     <div class="test-card">
       <div class="test-left">
@@ -2719,7 +2817,12 @@
     </div>
   </section>
 
-  <!-- ════════════════  EXPLORE (ported from Our_Focus)  ════════════════ -->
+  <!-- ============================================================
+       SECTION: EXPLORE
+       Purpose : Cross-link grid pointing to other focus areas.
+                 Ported from the Our_Focus page.
+       CSS tag : /* === EXPLORE === */
+       ============================================================ -->
   <section class="explore">
     <h2>Continue exploring Celsior's capabilities</h2>
     <div class="explore__links">
@@ -2771,10 +2874,16 @@
     </div>
   </section>
 
-  <!-- ════════════════  INSIGHTS  ════════════════ -->
+  <!-- ============================================================
+       SECTION: INSIGHTS
+       Purpose : Three-column thought-leadership card grid with tag
+                 chip, image, headline, and excerpt.
+       CSS tag : /* === INSIGHTS === */
+       ============================================================ -->
   <section id="insights-sec" style="border-top:1px solid #f3f4f6;">
     <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;">
       <div>
+        <p class="eyebrow">INSIGHTS</p>
         <h2
           style="font-size:40px;font-weight:700;color:#111827;line-height:50px;max-width:900px;letter-spacing:-0.24px;">
           Thinking on managed operations and enterprise platform accountability</h2>
@@ -2842,11 +2951,16 @@
     </div>
   </section>
 
-  <!-- ════════════════  FAQ  ════════════════ -->
+  <!-- ============================================================
+       SECTION: FAQ
+       Purpose : Two-column FAQ — intro on the left, accordion of
+                 questions on the right, separated by vertical rule.
+       CSS tag : /* === FAQ === */
+       ============================================================ -->
   <section class="faq">
     <div class="faq__inner">
       <div class="faq__intro">
-        <p class="eyebrow">FAQ</p>
+        <p class="eyebrow">QUESTIONS LEADERS ASK BEFORE ENGAGING</p>
         <h2>Questions business leaders ask before engaging</h2>
         <p>Covering ROI, risk, timelines, and delivery model — the questions that matter to decision-makers, answered
           directly.</p>
@@ -2952,7 +3066,11 @@
     </div>
   </section>
 
-  <!-- ════════════════  CTA BANNER  ════════════════ -->
+  <!-- ============================================================
+       SECTION: CTA BANNER
+       Purpose : Closing call-to-action band with pull-quote + button.
+       CSS tag : /* === CTA BANNER === */
+       ============================================================ -->
   <section class="cta-banner" id="ctaBand">
     <div class="cta-banner-inner">
       <img class="cta-band-logo"
