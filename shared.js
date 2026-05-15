@@ -182,7 +182,7 @@ a.nav-link{text-decoration:none;}
 .nav-hamburger.open .ham-line:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .nav-hamburger.open .ham-line:nth-child(2){opacity:0;transform:scaleX(0);}
 .nav-hamburger.open .ham-line:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-@media(max-width:1024px){.nav-links,.nav-right{display:none;}.nav-hamburger{display:flex;}#navbar{padding:0 24px;}}
+@media(max-width:1280px){#navbar{padding:0 32px;}.nav-link{padding:7px 9px;font-size:.76rem;}.btn-nav-solid{padding:8px 16px;}.nav-logo{margin-right:28px;}}@media(max-width:1139px){.nav-links,.nav-right{display:none;}.nav-hamburger{display:flex;}#navbar{padding:0 24px;}}
 
 /* ═══════════════════════ MOBILE DRAWER ════════════════════════════ */
 .mobile-drawer{position:fixed;inset:0;z-index:999;display:flex;pointer-events:none;}
@@ -319,7 +319,7 @@ a.nav-link{text-decoration:none;}
 .fl-trust-pill{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border:1px solid var(--fl-border-md);border-radius:20px;font-size:.65rem;font-weight:600;color:var(--fl-ink-soft);letter-spacing:.04em;background:var(--fl-bg);transition:border-color .2s,color .2s;}
 .fl-trust-pill:hover{border-color:var(--fl-accent);color:var(--fl-accent);}
 .fl-trust-pill svg{width:11px;height:11px;flex-shrink:0;}
-@media(max-width:1024px){.fl-top{padding:48px 32px 40px;gap:32px;}.fl-grid{padding:0 32px;}.fl-grid{grid-template-columns:repeat(3,1fr);}.fl-locations{padding:0 32px;}.fl-bottom{padding:18px 32px;flex-direction:column;align-items:flex-start;gap:12px;}.fl-trust{display:none;}}
+@media(max-width:1139px){.fl-top{padding:48px 32px 40px;gap:32px;}.fl-grid{padding:0 32px;}.fl-grid{grid-template-columns:repeat(3,1fr);}.fl-locations{padding:0 32px;}.fl-bottom{padding:18px 32px;flex-direction:column;align-items:flex-start;gap:12px;}.fl-trust{display:none;}}
 @media(max-width:640px){.fl-top{grid-template-columns:1fr;}.fl-social{align-items:flex-start;}.fl-grid{grid-template-columns:1fr 1fr;padding:0 24px;}.fl-col{padding:32px 20px 32px 0;}.fl-locations{padding:0 24px;}.fl-bottom{padding:16px 24px;}.fl-legal{flex-wrap:wrap;gap:4px;}}
 @media(max-width:480px){.fl-grid{grid-template-columns:1fr;}.fl-col,.fl-col:last-child{border-right:none !important;padding-right:0 !important;border-bottom:1px solid var(--fl-border);}.fl-col:last-child{border-bottom:none !important;}}
 `;
@@ -353,13 +353,13 @@ a.nav-link{text-decoration:none;}
   const ARROW_SVG = `<svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7H11.5M11.5 7L8 3.5M11.5 7L8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
   const navItems = [
-    { key: 'solve',      label: 'Our Focus',          href: 'Our_Focus.html' },
-    { key: 'how',        label: 'Capabilities',        href: 'Capabilities.html'  },
-    { key: 'deliver',    label: 'Solutions',           href: 'Solutions.html'},
-    { key: 'ai',         label: 'AI &amp; Innovation',href: 'ai-innovation.html' },
-    { key: 'industries', label: 'Industries',         href: 'industries.html'    },
-    { key: 'partners',   label: 'Partner Ecosystem',  href: 'partner-ecosystem.html'},
-    { key: 'about',      label: 'About',              href: 'about.html'         },
+    { key: 'solve',      label: 'Our Focus',           href: 'Our_Focus.html'          },
+    { key: 'how',        label: 'Capabilities',         href: 'Capabilities.html'       },
+    { key: 'deliver',    label: 'Solutions',            href: 'Solutions.html'          },
+    { key: 'ai',         label: 'AI &amp; Innovation',  href: 'ai-innovation.html'      },
+    { key: 'industries', label: 'Industries',           href: 'industries.html'         },
+    { key: 'partners',   label: 'Partner Ecosystem',    href: 'partner-ecosystem.html'  },
+    { key: 'about',      label: 'About',                href: 'about.html'              },
   ];
 
   const navLinksHTML = navItems.map(it => `
@@ -368,167 +368,261 @@ a.nav-link{text-decoration:none;}
     </li>`).join('');
 
   const drawerDivHTML = `
+
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-solve">Our Focus<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-solve">
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Core &amp; Legacy Modernization</div><a href="Our_Focus.html">Technical Debt Reduction</a><a href="Our_Focus.html">Cloud Transformation</a><a href="Our_Focus.html">Continuous Modernization</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Risk &amp; Compliance</div><a href="Our_Focus.html">Regulatory Readiness</a><a href="Our_Focus.html">Audit Readiness</a><a href="Our_Focus.html">Risk &amp; Controls Modernization</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">AI Adoption</div><a href="Our_Focus.html">AI Readiness Assessment</a><a href="Our_Focus.html">Enterprise AI Enablement</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Priorities</div><a href="Our_Focus.html">AI-First Digital Engineering</a><a href="Our_Focus.html">AI Adoption</a><a href="Our_Focus.html">Risk &amp; Compliance</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Outcomes</div><a href="Our_Focus.html">Cost &amp; Efficiency</a><a href="Our_Focus.html">Digital Experience</a><a href="Our_Focus.html">AI-Led Engineering</a></div>
       </div>
     </div>
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-how">Capabilities<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-how">
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Application &amp; Platform</div><a href="Capabilities.html">Application Engineering</a><a href="Capabilities.html">Platform Engineering</a><a href="Capabilities.html">API &amp; Integration Engineering</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Data &amp; AI Engineering</div><a href="Capabilities.html">Data Engineering</a><a href="Capabilities.html">AI/ML Engineering</a><a href="Capabilities.html">Intelligent Automation</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Engineering</div><a href="Capabilities.html">Cloud &amp; Infrastructure Engineering</a><a href="Capabilities.html">AI &amp; Data</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Operations</div><a href="Capabilities.html">Digital Operations &amp; Security</a><a href="Capabilities.html">Security &amp; Governance</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Programs</div><a href="Capabilities.html">Managed Programs</a><a href="Capabilities.html">Technology Consulting</a></div>
       </div>
     </div>
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-deliver">Solutions<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-deliver">
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Global Delivery</div><a href="Solutions.html">GCC Build &amp; Operate</a><a href="Solutions.html">BOT Model</a><a href="Solutions.html">Mexico &amp; LATAM Nearshore</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Teams-as-a-Service</div><a href="Solutions.html">Dedicated Engineering Pods</a><a href="Solutions.html">Hire-Train-Deploy</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Global Delivery</div><a href="Solutions.html">GCC &amp; Nearshore</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Talent Models</div><a href="Solutions.html">Teams-as-a-Service</a><a href="Solutions.html">Hire-Train-Deploy</a></div>
       </div>
     </div>
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-ai">AI &amp; Innovation<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-ai">
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Celsior AI Lab</div><a href="ai-innovation.html">Enterprise AI Pilots</a><a href="ai-innovation.html">AI Copilots</a><a href="ai-innovation.html">Agentic Workflows</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Frameworks</div><a href="ai-innovation.html">CAFE Framework</a><a href="ai-innovation.html">HALO Framework</a><a href="ai-innovation.html">InSightX</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Products</div><a href="ai-innovation.html">Synthetix</a><a href="ai-innovation.html">Celsior AI Lab</a><a href="ai-innovation.html">Design Lab</a></div>
+        <div class="drawer-sub-group"><div class="drawer-sub-head">Programs</div><a href="ai-innovation.html">Centers of Excellence</a><a href="ai-innovation.html">Frameworks &amp; Accelerators</a></div>
       </div>
     </div>
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-ind">Industries<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-ind">
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Banking &amp; Financial Services</div><a href="industries.html">Core Banking Modernization</a><a href="industries.html">Digital Lending Platforms</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Insurance</div><a href="industries.html">Policy Admin Modernization</a><a href="industries.html">Claims Automation</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Healthcare</div><a href="industries.html">Interoperability</a><a href="industries.html">Revenue Cycle Optimization</a></div>
+        <div class="drawer-sub-group"><a href="industries.html">Banking &amp; Financial Services</a><a href="industries.html">Insurance</a><a href="industries.html">Healthcare</a></div>
       </div>
     </div>
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-part">Partner Ecosystem<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-part">
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Platforms</div><a href="partner-ecosystem.html">ServiceNow</a><a href="partner-ecosystem.html">Guidewire</a><a href="partner-ecosystem.html">AWS · Azure · Google Cloud</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Data &amp; Automation</div><a href="partner-ecosystem.html">Snowflake</a><a href="partner-ecosystem.html">Dynatrace · UiPath · Boomi</a></div>
+        <div class="drawer-sub-group"><a href="partner-ecosystem.html">Partners</a></div>
       </div>
     </div>
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-about">About<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-about">
-        <div class="drawer-sub-group"><a href="about.html">Who we are</a><a href="about.html">Our Leadership</a><a href="about.html">AI-first Philosophy</a><a href="about.html">Success Stories</a><a href="about.html">Newsroom</a><a href="about.html">Careers</a></div>
+        <div class="drawer-sub-group"><a href="about.html">Who We Are &amp; Our Leadership</a><a href="about.html">AI-first Philosophy</a><a href="about.html">Success Stories</a><a href="about.html">Blogs</a><a href="about.html">Careers</a><a href="about.html">Events &amp; News</a></div>
       </div>
-    </div>`;
+    </div>
+`;
 
   const megaPanelsHTML = `
-  <!-- SOLVE -->
+
+  <!-- OUR FOCUS -->
   <div class="mega-panel" id="menu-solve"><div class="mega-inner">
-    <div class="mega-col"><div class="mega-label">Our Focus</div><div class="mega-col-head">Modernization</div>
-      <div class="mega-group"><div class="mega-group-title">Core &amp; Legacy Modernization</div><ul class="mega-links"><li><a href="Our_Focus.html">Technical Debt Reduction</a></li><li><a href="Our_Focus.html">Cloud Transformation</a></li><li><a href="Our_Focus.html">Continuous Modernization</a></li></ul></div>
-      <div class="mega-group"><div class="mega-group-title">Digital Experience</div><ul class="mega-links"><li><a href="Our_Focus.html">Omnichannel Transformation</a></li><li><a href="Our_Focus.html">Digital Product Engineering</a></li><li><a href="Our_Focus.html">Customer Experience Modernization</a></li></ul></div>
+    <div class="mega-col">
+      <div class="mega-label">Our Focus</div>
+      <div class="mega-col-head">Priorities</div>
+      <div class="mega-group">
+        <ul class="mega-links">
+          <li><a href="Our_Focus.html">AI-First Digital Engineering</a></li>
+          <li><a href="Our_Focus.html">AI Adoption</a></li>
+          <li><a href="Our_Focus.html">Risk &amp; Compliance</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Risk &amp; Compliance</div>
-      <div class="mega-group"><div class="mega-group-title">Operational Resilience</div><ul class="mega-links"><li><a href="Our_Focus.html">Regulatory Readiness</a></li><li><a href="Our_Focus.html">Audit Readiness</a></li><li><a href="Our_Focus.html">Risk &amp; Controls Modernization</a></li></ul></div>
-      <div class="mega-group"><div class="mega-group-title">Cost &amp; Efficiency</div><ul class="mega-links"><li><a href="Our_Focus.html">IT Cost Optimization</a></li><li><a href="Our_Focus.html">Cloud FinOps</a></li><li><a href="Our_Focus.html">Platform Consolidation</a></li></ul></div>
+    <div class="mega-col">
+      <div class="mega-col-head" style="margin-top:26px">Outcomes</div>
+      <div class="mega-group">
+        <ul class="mega-links">
+          <li><a href="Our_Focus.html">Cost &amp; Efficiency</a></li>
+          <li><a href="Our_Focus.html">Digital Experience</a></li>
+          <li><a href="Our_Focus.html">AI-Led Engineering</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">AI Adoption</div>
-      <div class="mega-group"><div class="mega-group-title">Enterprise Readiness</div><ul class="mega-links"><li><a href="Our_Focus.html">AI Readiness Assessment</a></li><li><a href="Our_Focus.html">Responsible AI</a></li><li><a href="Our_Focus.html">Enterprise AI Enablement</a></li><li><a href="Our_Focus.html">Intelligent Automation</a></li></ul></div>
+    <div class="mega-col"></div>
+    <div class="mega-featured">
+      <div class="feat-tag">Free Assessment</div>
+      <div class="feat-card"><div class="feat-card-title">Modernization Diagnostic</div><div class="feat-card-desc">2-week assessment of your legacy landscape with a prioritized roadmap.</div></div>
+      <div class="feat-card"><div class="feat-card-title">AI Readiness Index</div><div class="feat-card-desc">Benchmark your AI maturity against industry peers.</div></div>
     </div>
-    <div class="mega-featured"><div class="feat-tag">Free Assessment</div><div class="feat-card"><div class="feat-card-title">Modernization Diagnostic</div><div class="feat-card-desc">2-week assessment of your legacy landscape with a prioritized roadmap.</div></div><div class="feat-card"><div class="feat-card-title">AI Readiness Index</div><div class="feat-card-desc">Benchmark your AI maturity against industry peers.</div></div></div>
   </div></div>
 
-  <!-- HOW WE DO IT -->
+  <!-- CAPABILITIES -->
   <div class="mega-panel" id="menu-how"><div class="mega-inner">
-    <div class="mega-col"><div class="mega-label">Capabilities</div><div class="mega-col-head">Engineering</div>
-      <div class="mega-group"><div class="mega-group-title">Application &amp; Platform</div><ul class="mega-links"><li><a href="Capabilities.html">Application Engineering</a></li><li><a href="Capabilities.html">Platform Engineering</a></li><li><a href="Capabilities.html">API &amp; Integration Engineering</a></li><li><a href="Capabilities.html">Microservices &amp; Modern Architectures</a></li></ul></div>
-      <div class="mega-group"><div class="mega-group-title">Cloud &amp; Infrastructure</div><ul class="mega-links"><li><a href="Capabilities.html">Cloud Engineering &amp; Migration</a></li><li><a href="Capabilities.html">DevOps &amp; SRE</a></li><li><a href="Capabilities.html">Observability &amp; Reliability</a></li><li><a href="Capabilities.html">Infrastructure Automation</a></li></ul></div>
+    <div class="mega-col">
+      <div class="mega-label">Capabilities</div>
+      <div class="mega-col-head">Engineering</div>
+      <div class="mega-group">
+        <ul class="mega-links">
+          <li><a href="Capabilities.html">Cloud &amp; Infrastructure Engineering</a></li>
+          <li><a href="Capabilities.html">AI &amp; Data</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Data &amp; Intelligence</div>
-      <div class="mega-group"><div class="mega-group-title">Data &amp; AI Engineering</div><ul class="mega-links"><li><a href="Capabilities.html">Data Engineering</a></li><li><a href="Capabilities.html">Data Platforms &amp; Warehousing</a></li><li><a href="Capabilities.html">AI/ML Engineering</a></li><li><a href="Capabilities.html">Intelligent Automation</a></li></ul></div>
+    <div class="mega-col">
+      <div class="mega-col-head" style="margin-top:26px">Operations</div>
+      <div class="mega-group">
+        <ul class="mega-links">
+          <li><a href="Capabilities.html">Digital Operations &amp; Security</a></li>
+          <li><a href="Capabilities.html">Security &amp; Governance</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Operations &amp; Security</div>
-      <div class="mega-group"><div class="mega-group-title">Enterprise ITSM</div><ul class="mega-links"><li><a href="Capabilities.html">IT Service Management</a></li><li><a href="Capabilities.html">Incident &amp; Change Management</a></li><li><a href="Capabilities.html">Service Operations Automation</a></li></ul></div>
-      <div class="mega-group"><div class="mega-group-title">Security &amp; Governance</div><ul class="mega-links"><li><a href="Capabilities.html">Security Engineering</a></li><li><a href="Capabilities.html">Compliance Engineering</a></li><li><a href="Capabilities.html">Identity &amp; Access Integration</a></li></ul></div>
+    <div class="mega-col">
+      <div class="mega-col-head" style="margin-top:26px">Programs</div>
+      <div class="mega-group">
+        <ul class="mega-links">
+          <li><a href="Capabilities.html">Managed Programs</a></li>
+          <li><a href="Capabilities.html">Technology Consulting</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="mega-featured"><div class="feat-tag">Spotlight</div><div class="feat-card"><div class="feat-card-title">Platform Engineering at Scale</div><div class="feat-card-desc">Golden paths for 3 global banks with 200+ engineering teams.</div></div></div>
+    <div class="mega-featured">
+      <div class="feat-tag">Spotlight</div>
+      <div class="feat-card"><div class="feat-card-title">Platform Engineering at Scale</div><div class="feat-card-desc">Golden paths for global banks with 200+ engineering teams.</div></div>
+    </div>
   </div></div>
 
-  <!-- HOW WE DELIVER -->
+  <!-- SOLUTIONS -->
   <div class="mega-panel" id="menu-deliver"><div class="mega-inner">
-    <div class="mega-col"><div class="mega-label">Solutions</div><div class="mega-col-head">Consulting</div>
-      <div class="mega-group"><ul class="mega-links"><li><a href="Solutions.html">Strategy-to-Execution Programs</a></li><li><a href="Solutions.html">Architecture &amp; Transformation Consulting</a></li><li><a href="Solutions.html">Platform Implementation</a></li></ul></div>
+    <div class="mega-col">
+      <div class="mega-label">Solutions</div>
+      <div class="mega-col-head">Global Delivery</div>
+      <div class="mega-group">
+        <ul class="mega-links">
+          <li><a href="Solutions.html">GCC &amp; Nearshore</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Global Delivery</div>
-      <div class="mega-group"><div class="mega-group-title">GCC &amp; Nearshore</div><ul class="mega-links"><li><a href="Solutions.html">GCC Build &amp; Operate</a></li><li><a href="Solutions.html">BOT Model</a></li><li><a href="Solutions.html">Mexico &amp; LATAM Nearshore</a></li></ul></div>
-      <div class="mega-group"><div class="mega-group-title">Teams-as-a-Service</div><ul class="mega-links"><li><a href="Solutions.html">Dedicated Engineering Pods</a></li><li><a href="Solutions.html">Skills-Based Teams</a></li><li><a href="Solutions.html">Workforce Orchestration (Hoonr)</a></li><li><a href="Solutions.html">Hire-Train-Deploy</a></li></ul></div>
+    <div class="mega-col">
+      <div class="mega-col-head" style="margin-top:26px">Talent Models</div>
+      <div class="mega-group">
+        <ul class="mega-links">
+          <li><a href="Solutions.html">Teams-as-a-Service</a></li>
+          <li><a href="Solutions.html">Hire-Train-Deploy <span style="display:inline-flex;align-items:center;padding:1px 7px;background:#0d1127;color:#fff;font-size:.58rem;font-weight:700;letter-spacing:.06em;border-radius:3px;text-transform:uppercase;margin-left:4px;">New</span></a></li>
+        </ul>
+      </div>
     </div>
-    <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Managed Programs</div>
-      <div class="mega-group"><ul class="mega-links"><li><a href="Solutions.html">Managed Platform Operations</a></li><li><a href="Solutions.html">Continuous Modernization Factory</a></li><li><a href="Solutions.html">Managed ServiceNow Operations</a></li><li><a href="Solutions.html">Managed Support Services</a></li></ul></div>
+    <div class="mega-col"></div>
+    <div class="mega-featured">
+      <div class="feat-tag">Compare Models</div>
+      <div class="feat-card"><div class="feat-card-title">GCC vs. Teams-as-a-Service</div><div class="feat-card-desc">Find the right operating model for your scale and goals.</div></div>
     </div>
-    <div class="mega-featured"><div class="feat-tag">Compare Models</div><div class="feat-card"><div class="feat-card-title">GCC vs. BOT vs. Teams-as-a-Service</div><div class="feat-card-desc">Find the right operating model for your scale and goals.</div></div></div>
   </div></div>
 
   <!-- AI & INNOVATION -->
   <div class="mega-panel" id="menu-ai"><div class="mega-inner">
-    <div class="mega-col"><div class="mega-label">AI &amp; Innovation</div><div class="mega-col-head">Celsior AI Lab</div>
-      <div class="mega-group"><ul class="mega-links"><li><a href="ai-innovation.html">Enterprise AI Pilots</a></li><li><a href="ai-innovation.html">AI Copilots</a></li><li><a href="ai-innovation.html">Agentic Workflows</a></li><li><a href="ai-innovation.html">GenAI Accelerators</a></li></ul></div>
-      <div class="mega-group"><div class="mega-group-title">Design Lab</div><ul class="mega-links"><li><a href="ai-innovation.html">CX Journey Design</a></li><li><a href="ai-innovation.html">Service Blueprinting</a></li><li><a href="ai-innovation.html">Digital Product Prototyping</a></li></ul></div>
+    <div class="mega-col">
+      <div class="mega-label">AI &amp; Innovation</div>
+      <div class="mega-col-head">Products</div>
+      <div class="mega-group">
+        <ul class="mega-links">
+          <li><a href="ai-innovation.html">Synthetix</a></li>
+          <li><a href="ai-innovation.html">Celsior AI Lab</a></li>
+          <li><a href="ai-innovation.html">Design Lab</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Centers of Excellence</div>
-      <div class="mega-group"><ul class="mega-links"><li><a href="ai-innovation.html">ServiceNow CoE</a></li><li><a href="ai-innovation.html">Guidewire CoE</a></li><li><a href="ai-innovation.html">Data &amp; AI CoE</a></li><li><a href="ai-innovation.html">Cloud &amp; DevOps CoE</a></li></ul></div>
+    <div class="mega-col">
+      <div class="mega-col-head" style="margin-top:26px">Programs</div>
+      <div class="mega-group">
+        <ul class="mega-links">
+          <li><a href="ai-innovation.html">Centers of Excellence</a></li>
+          <li><a href="ai-innovation.html">Frameworks &amp; Accelerators</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Frameworks &amp; Accelerators</div>
-      <div class="mega-group"><ul class="mega-links"><li><a href="ai-innovation.html">CAFE Framework</a></li><li><a href="ai-innovation.html">HALO Framework</a></li><li><a href="ai-innovation.html">DPS</a></li><li><a href="ai-innovation.html">InSightX</a></li><li><a href="ai-innovation.html">EvalueX</a></li></ul></div>
+    <div class="mega-col"></div>
+    <div class="mega-featured">
+      <div class="feat-tag">Live Demo</div>
+      <div class="feat-card"><div class="feat-card-title">Synthetix in Action</div><div class="feat-card-desc">See how our AI orchestration layer connects policy, claims, and risk in real time.</div></div>
     </div>
-    <div class="mega-featured"><div class="feat-tag">Live in Production</div><div class="feat-card"><div class="feat-card-title">Agentic AI for Core Banking</div><div class="feat-card-desc">Autonomous reconciliation agents cutting ops cost by 60%.</div></div><div class="feat-card"><div class="feat-card-title">CAFE Framework</div><div class="feat-card-desc">AI-first modernization for regulated industries.</div></div></div>
   </div></div>
 
   <!-- INDUSTRIES -->
   <div class="mega-panel" id="menu-industries"><div class="mega-inner">
-    <div class="mega-col"><div class="mega-label">Industries</div><div class="mega-col-head">Banking &amp; Financial Services</div>
-      <div class="mega-group"><ul class="mega-links"><li><a href="industries.html">Core Banking Modernization</a></li><li><a href="industries.html">Regulatory Automation</a></li><li><a href="industries.html">ITSM &amp; Change Control</a></li><li><a href="industries.html">Digital Lending Platforms</a></li></ul></div>
+    <div class="mega-col">
+      <div class="mega-label">Industries</div>
+      <div class="mega-col-head">Sectors</div>
+      <div class="mega-group">
+        <ul class="mega-links">
+          <li><a href="industries.html">Banking &amp; Financial Services</a></li>
+          <li><a href="industries.html">Insurance</a></li>
+          <li><a href="industries.html">Healthcare</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Insurance</div>
-      <div class="mega-group"><ul class="mega-links"><li><a href="industries.html">Policy Admin Modernization</a></li><li><a href="industries.html">Claims Automation</a></li><li><a href="industries.html">Underwriting AI</a></li><li><a href="industries.html">Guidewire Acceleration</a></li></ul></div>
+    <div class="mega-col"></div>
+    <div class="mega-col"></div>
+    <div class="mega-featured">
+      <div class="feat-tag">Industry Brief</div>
+      <div class="feat-card"><div class="feat-card-title">Regulated Industry Playbook</div><div class="feat-card-desc">How leading banks, insurers, and health systems modernize without disruption.</div></div>
     </div>
-    <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Healthcare</div>
-      <div class="mega-group"><ul class="mega-links"><li><a href="industries.html">Interoperability</a></li><li><a href="industries.html">HIPAA Compliance</a></li><li><a href="industries.html">Revenue Cycle Optimization</a></li><li><a href="industries.html">Intelligent Care Workflows</a></li></ul></div>
-    </div>
-    <div class="mega-featured"><div class="feat-tag">Case Studies</div><div class="feat-card"><div class="feat-card-title">Top 10 US Bank: Core Modernization</div><div class="feat-card-desc">COBOL to cloud-native in 18 months — zero downtime.</div></div><div class="feat-card"><div class="feat-card-title">Insurance Claims at 83% STP</div><div class="feat-card-desc">Straight-through processing with Guidewire + AI.</div></div></div>
   </div></div>
 
-  <!-- PARTNERS -->
+  <!-- PARTNER ECOSYSTEM -->
   <div class="mega-panel" id="menu-partners"><div class="mega-inner">
-    <div class="mega-col"><div class="mega-label">Partner Ecosystem</div><div class="mega-col-head">Enterprise Platforms</div>
-      <div class="partner-grid"><a href="partner-ecosystem.html" class="partner-pill"><span class="p-dot" style="background:#61b8ff"></span>ServiceNow</a><a href="partner-ecosystem.html" class="partner-pill"><span class="p-dot" style="background:#5cb85c"></span>Guidewire</a><a href="partner-ecosystem.html" class="partner-pill"><span class="p-dot" style="background:#f0a500"></span>Jack Henry</a></div>
+    <div class="mega-col">
+      <div class="mega-label">Partner Ecosystem</div>
+      <div class="mega-col-head">Alliances</div>
+      <div class="mega-group">
+        <ul class="mega-links">
+          <li><a href="partner-ecosystem.html">Partners</a></li>
+        </ul>
+      </div>
+      <div class="partner-grid">
+        <span class="partner-pill"><span class="p-dot"></span>ServiceNow</span>
+        <span class="partner-pill"><span class="p-dot"></span>Guidewire</span>
+        <span class="partner-pill"><span class="p-dot"></span>AWS</span>
+        <span class="partner-pill"><span class="p-dot"></span>Azure</span>
+        <span class="partner-pill"><span class="p-dot"></span>Google Cloud</span>
+        <span class="partner-pill"><span class="p-dot"></span>Snowflake</span>
+        <span class="partner-pill"><span class="p-dot"></span>Dynatrace</span>
+        <span class="partner-pill"><span class="p-dot"></span>UiPath</span>
+      </div>
     </div>
-    <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Cloud Platforms</div>
-      <div class="partner-grid"><a href="partner-ecosystem.html" class="partner-pill"><span class="p-dot" style="background:#ff9900"></span>AWS</a><a href="partner-ecosystem.html" class="partner-pill"><span class="p-dot" style="background:#0078d4"></span>Azure</a><a href="partner-ecosystem.html" class="partner-pill"><span class="p-dot" style="background:#4285f4"></span>Google Cloud</a></div>
+    <div class="mega-col"></div>
+    <div class="mega-col"></div>
+    <div class="mega-featured">
+      <div class="feat-tag">Partnerships</div>
+      <div class="feat-card"><div class="feat-card-title">Become a Partner</div><div class="feat-card-desc">Join Celsior's ecosystem of technology and implementation partners.</div></div>
     </div>
-    <div class="mega-col"><div class="mega-col-head" style="margin-top:26px">Data &amp; Automation</div>
-      <div class="partner-grid"><a href="partner-ecosystem.html" class="partner-pill"><span class="p-dot" style="background:#29b5e8"></span>Snowflake</a><a href="partner-ecosystem.html" class="partner-pill"><span class="p-dot" style="background:#fa4616"></span>UiPath</a><a href="partner-ecosystem.html" class="partner-pill"><span class="p-dot" style="background:#00b388"></span>Boomi</a><a href="partner-ecosystem.html" class="partner-pill"><span class="p-dot" style="background:#1595d3"></span>Dynatrace</a></div>
-    </div>
-    <div class="mega-featured"><div class="feat-tag">Partnership</div><div class="feat-card"><div class="feat-card-title">Become a Partner</div><div class="feat-card-desc">Join our technology and implementation partner ecosystem.</div></div></div>
   </div></div>
 
   <!-- ABOUT -->
-  <div class="mega-panel" id="menu-about"><div class="mega-inner" style="max-width:900px">
-    <div class="mega-col" style="flex:1.2"><div class="mega-label">About Celsior</div>
-      <div class="about-links">
-        <a href="about.html" class="about-link"><div class="about-icon">🏢</div><span class="about-link-text">Who we are</span></a>
-        <a href="about.html" class="about-link"><div class="about-icon">👥</div><span class="about-link-text">Our Leadership</span></a>
-        <a href="about.html" class="about-link"><div class="about-icon">🤖</div><span class="about-link-text">AI-first Philosophy</span></a>
-        <a href="about.html" class="about-link"><div class="about-icon">⭐</div><span class="about-link-text">Success Stories</span></a>
+  <div class="mega-panel" id="menu-about"><div class="mega-inner">
+    <div class="mega-col">
+      <div class="mega-label">About</div>
+      <div class="mega-col-head">Company</div>
+      <div class="mega-group">
+        <ul class="mega-links">
+          <li><a href="about.html">Who We Are &amp; Our Leadership</a></li>
+          <li><a href="about.html">AI-first Philosophy</a></li>
+          <li><a href="about.html">Success Stories</a></li>
+        </ul>
       </div>
     </div>
-    <div class="mega-col" style="flex:1.2"><div class="mega-col-head" style="margin-top:26px">Resources</div>
-      <div class="about-links">
-        <a href="about.html" class="about-link"><div class="about-icon">📚</div><span class="about-link-text">Resources &amp; Insights</span></a>
-        <a href="about.html" class="about-link"><div class="about-icon">📰</div><span class="about-link-text">Newsroom</span></a>
-        <a href="about.html" class="about-link"><div class="about-icon">📅</div><span class="about-link-text">Events</span></a>
+    <div class="mega-col">
+      <div class="mega-col-head" style="margin-top:26px">News &amp; Careers</div>
+      <div class="mega-group">
+        <ul class="mega-links">
+          <li><a href="about.html">Blogs</a></li>
+          <li><a href="about.html">Careers</a></li>
+          <li><a href="about.html">Events &amp; News</a></li>
+        </ul>
       </div>
     </div>
-    <div class="mega-featured" style="flex:1.3"><div class="feat-tag">Latest News</div><div class="feat-card"><div class="feat-card-title">Celsior Named in Gartner Market Guide</div><div class="feat-card-desc">Recognized for AI-first core banking modernization.</div></div></div>
-  </div></div>`;
+    <div class="mega-col"></div>
+    <div class="mega-featured">
+      <div class="feat-tag">Join Us</div>
+      <div class="feat-card"><div class="feat-card-title">Life at Celsior</div><div class="feat-card-desc">Engineering-first culture, global teams, and a mission that matters.</div></div>
+    </div>
+  </div></div>
+`;
 
   let backdropEl = document.getElementById('mega-backdrop');
   let navEl = document.getElementById('navbar');
@@ -731,4 +825,11 @@ a.nav-link{text-decoration:none;}
     });
   });
   mobileDrawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+
+  /* ─── 6.  READY SIGNAL ───────────────────────────────────────────────
+     Lets pages defer work (e.g. footer entrance animations) until after
+     the nav + footer are safely in the DOM.
+  ─────────────────────────────────────────────────────────────────── */
+  window.__celsiorSharedDone = true;
+  document.dispatchEvent(new CustomEvent('celsior:shared-ready'));
 })();
