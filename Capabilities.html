@@ -50,7 +50,10 @@
     .hero {
       position: relative;
       width: 100%;
-      height: 760px;
+      height: 100vh;
+      height: 100svh;
+      min-height: 640px;
+      max-height: 100dvh;
       overflow: hidden;
       background: #0b0b0b;
     }
@@ -665,8 +668,7 @@
        ============================================================ */
     .platforms {
       background: #fff;
-      padding: 32px 112px 0;
-      border-top: 1px solid rgba(13, 17, 39, 0.08);
+      padding: 56px 112px 40px;
     }
 
     .platforms h3 {
@@ -674,7 +676,7 @@
       font-weight: 700;
       color: #111827;
       letter-spacing: -0.24px;
-      margin-bottom: 24px;
+      margin: 0 0 28px;
     }
 
     .partners {
@@ -1686,8 +1688,8 @@
       padding: calc(var(--section-pad-v) * 0.75) var(--section-pad-h) !important;
     }
 
-    /* ── Tablet 960–1280px: tighten slightly ── */
-    @media (max-width: 1280px) {
+    /* ── Below 1139px: tighten section padding ── */
+    @media (max-width: 1139px) {
       :root {
         --section-pad-v: clamp(32px, 3vw, 44px);
         --section-pad-h: clamp(20px, 5.5vw, 80px);
@@ -1859,13 +1861,14 @@
 
     /* Shared padding utility classes — now handled by CSS custom properties above */
 
-    /* ── Medium screens 1024–1280px ── */
-    @media (max-width: 1280px) {
+    /* ── Below 1139px: layout begins to adapt ── */
+    @media (max-width: 1139px) {
 
-      /* Hero */
+      /* Hero — keep full-viewport, allow flex content to stack */
       .hero {
-        height: auto;
-        min-height: 600px;
+        height: 100vh;
+        height: 100svh;
+        min-height: 620px;
       }
 
       .hero-btns {
@@ -2374,9 +2377,10 @@
   width:400px;height:520px;
   top:0;left:-200px;
   will-change:transform;
-  cursor:none;
+  cursor:grab;
   transform-origin:50% 50%;
 }
+#stage-wrap.custom-cursor .cw{cursor:none;}
 .cw .card{
   width:100%;height:100%;
   border-radius:28px;
@@ -2394,10 +2398,17 @@
   pointer-events:none;z-index:5;
 }
 .c-logo{
-  width:46px;height:46px;border-radius:13px;
+  width:46px;height:46px;border-radius:999px;
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;overflow:hidden;
-  box-shadow:0 4px 12px rgba(0,0,0,.14);
+  background:rgba(255,255,255,.92);
+  border:1.5px solid rgba(0,0,0,.72);
+  box-shadow:0 4px 12px rgba(0,0,0,.10);
+}
+.c-logo img{
+  width:28px;height:28px;
+  object-fit:contain;
+  display:block;
 }
 .c-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
 .c-title{font-size:20px;font-weight:700;letter-spacing:-.4px;line-height:1.22;}
@@ -2560,6 +2571,7 @@
   letter-spacing: -1.6px;
   color: #09090b;
   margin: 0 0 22px;
+  font-weight: 500;
 }
 .acc-desc {
   font-size: 16px;
@@ -2615,116 +2627,281 @@
 }
 
   /* CAPABILITIES: IMPACT METRICS */
-/* ══════════════════════════════════════════════════════
-   6. OUTCOMES  — 2-col layout
-══════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════
+   OUTCOMES — Pixel-locked to Figma frame 1348×643px
+   
+   Figma measurements at 1348px:
+   • Frame total height: 643px → ~48px top+bottom padding each side
+   • Left col width: ~390px = 29% of 1348
+   • Heading: ~76px @ 1348 = 5.64vw, tight 3-line stack
+   • TL/BR number: ~80px main, ~42px suffix (ratio 0.525)
+   • TR/BL number: ~68px main, ~36px suffix (ratio 0.529)
+   • Cell padding: 36px all sides, uniform
+   • Label: 15px, #18181b, 500 weight, 8px gap below number
+   • Body text: 14px, #52525b, appears below heading
+   • Dividers: 1px solid #d1d5db (more visible than #e5e7eb)
+   
+   Desktop holds ≥1140px. Below that: vertical stack.
+══════════════════════════════════════════════════════════════════ */
+
 .outcomes {
   background: #fff;
-  padding: var(--section-pad-v) var(--side-pad);
-  display: flex; align-items: stretch; gap: 80px;
+  padding: clamp(40px, 3.6vw, 56px) var(--side-pad);
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border-top: 1px solid #e5e7eb;
+  box-sizing: border-box;
 }
-.out-left { width: 440px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; }
-.out-eyebrow {
-  display: flex; align-items: center; gap: 16px;
-  margin-bottom: 28px;
-}
-.out-eyebrow-line { width: 32px; height: 1px; background: rgba(11,17,32,0.2); flex-shrink: 0; }
-.out-eyebrow-txt {
-  font-size: 12px; font-weight: 600; color: rgba(11,17,32,0.7);
-  letter-spacing: 2.4px; text-transform: uppercase;
-}
-.out-heading {
-  font-size: clamp(48px, 5vw, 72px); font-weight: 700; color: #0b1120;
-  letter-spacing: -1.8px; line-height: 1.05;
-  margin-bottom: 28px;
-}
-.out-body {
-  font-size: 18px; font-weight: 500; color: #64748b; line-height: 1.625;
-  margin-bottom: 0;
-}
-.badges {
-  display: flex; align-items: center; gap: 20px;
-}
-.badge-row { display: flex; align-items: center; }
-.badge {
-  width: 40px; height: 40px; border-radius: 50%;
-  border: 2px solid #fff; background: #f1f5f9;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 500; color: #0b1120;
-  margin-left: -12px;
-}
-.badge:first-child { margin-left: 0; }
-.badge-lbl { font-size: 14px; font-weight: 500; color: #64748b; }
 
-/* 2×2 metrics grid */
+/* ── Left col: 29% width matching Figma proportion ── */
+.out-left {
+  width: 29%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: clamp(20px, 2.8vw, 44px);
+}
+
+/* Heading: 76px at 1348px = 5.64vw, 3 tight lines */
+.out-heading {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-size: clamp(40px, 5.64vw, 80px);
+  font-weight: 700;
+  color: #09090b;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin: 0 0 20px;
+}
+
+/* Body: 14px, muted, Figma shows #52525b */
+.out-body {
+  font-size: 14px;
+  font-weight: 400;
+  color: #52525b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Right 2×2 grid: 71% ── */
 .out-grid {
   flex: 1;
+  min-width: 0;
   display: grid;
-  grid-template-columns: 7fr 5fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  align-content: stretch;
 }
-.mc { /* metric cell */
-  display: flex; flex-direction: column; padding: 32px;
-  position: relative; min-height: 0;
-}
-.mc.tl { /* top-left */
-  border-bottom: 1px solid rgba(226,232,240,0.7);
-  justify-content: flex-end;
-}
-.mc.tr { /* top-right */
-  border-left: 1px solid rgba(226,232,240,0.7);
-  padding-top: 32px;
-}
-.mc.bl { /* bottom-left */
-  border-right: 1px solid rgba(226,232,240,0.7);
-  justify-content: center;
-}
-.mc.br { /* bottom-right */
-  padding-left: 48px; justify-content: center;
-}
-.mc.br::before {
-  content: ''; position: absolute;
-  left: 0; top: 48px; width: 2px; height: 96px;
-  background: var(--teal);
-}
-.mc-eye {
-  display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
-}
-.mc-eye-txt {
-  font-size: 12px; font-weight: 700;
-  letter-spacing: 1.2px; text-transform: uppercase;
-}
-.mc-eye-txt.blue { color: var(--blue); }
-.mc-eye-txt.slate { color: #64748b; }
-.mc-eye-txt.teal  { color: var(--teal); }
 
-.mc-num-row { display: flex; align-items: baseline; gap: 4px; }
-.mc-num {
-  font-weight: 700; color: #0b1120; line-height: 1;
+/* ── Each cell: uniform 36px padding matching Figma ── */
+.mc {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: clamp(24px, 2.7vw, 38px);
+  background: #fff;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px);
 }
-.mc-num.xl { font-size: 120px; letter-spacing: -6px; }
-.mc-num.lg { font-size: 100px; letter-spacing: -5px; }
-.mc-num.md { font-size: 80px;  letter-spacing: -4px; }
-.mc-unit { font-weight: 300; color: #64748b; line-height: 1; }
-.mc-unit.xl { font-size: 60px; }
-.mc-unit.lg { font-size: 50px; }
-.mc-unit.md { font-size: 40px; }
 
-.mc-ttl {
-  font-weight: 600; color: #0b1120;
-  margin-top: 20px; margin-bottom: 6px;
-}
-.mc-ttl.lg { font-size: 20px; line-height: 28px; }
-.mc-ttl.sm { font-size: 16px; line-height: 24px; margin-top: 14px; }
-.mc-dsc { font-weight: 400; color: #64748b; }
-.mc-dsc.lg { font-size: 14px; line-height: 22.75px; }
-.mc-dsc.sm { font-size: 12px; line-height: 16px; }
+/* Grid hairlines — more visible #d1d5db matching Figma */
+.mc.tl { border-right: 1px solid #d1d5db; border-bottom: 1px solid #d1d5db; }
+.mc.tr { border-bottom: 1px solid #d1d5db; }
+.mc.bl { border-right: 1px solid #d1d5db; }
+.mc.br { }
 
-.mc-accent {
-  position: absolute; bottom: -1px; left: 0;
-  width: 96px; height: 2px; background: var(--blue);
+/* ── Number row: 8px gap below ── */
+.mc-num-row {
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+  margin-bottom: 8px;
+  line-height: 1;
 }
+
+/* Main number */
+.mc-n {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-weight: 700;
+  color: #09090b;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  white-space: nowrap;
+  transition: color 0.4s ease, text-shadow 0.5s ease;
+}
+
+/* Suffix % — exactly 52.5% the size of the main number */
+.mc-s {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-weight: 700;
+  color: #09090b;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
+  white-space: nowrap;
+  transition: color 0.4s ease, text-shadow 0.5s ease;
+}
+
+/* LARGE diagonal — TL (50-60%) and BR (35-45%): ~80px @ 1348 = 5.93vw */
+.mc.tl .mc-n,
+.mc.br .mc-n { font-size: clamp(44px, 5.93vw, 84px); }
+.mc.tl .mc-s,
+.mc.br .mc-s { font-size: clamp(23px, 3.12vw, 44px); }  /* 52.5% ratio */
+
+/* MEDIUM diagonal — TR (50%) and BL (40%): ~68px @ 1348 = 5.04vw */
+.mc.tr .mc-n,
+.mc.bl .mc-n { font-size: clamp(36px, 5.04vw, 72px); }
+.mc.tr .mc-s,
+.mc.bl .mc-s { font-size: clamp(19px, 2.67vw, 38px); }  /* 52.5% ratio */
+
+/* ── Label: 15px, #18181b, weight 500 matching Figma ── */
+.mc-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #18181b;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ── NO accent bars ── */
+.mc-accent,
+.mc-accent-tr,
+.mc-accent-bl,
+.mc-accent-br { display: none !important; }
+.mc.br::before { display: none !important; }
+
+/* Initial opacity for GSAP */
+.out-left    { opacity: 0; }
+.out-heading { opacity: 0; }
+.out-body    { opacity: 0; }
+
+/* Hover base */
+.mc {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity   0.45s ease;
+}
+.mc:hover { transform: translateY(-3px); }
+
+/* ══════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ≥ 1140px : desktop 2-col (left 29% | grid 71%)
+   < 1140px : vertical stack
+   < 640px  : mobile scale-down
+══════════════════════════════════════════════════════════════════ */
+@media (max-width: 1139px) {
+  .outcomes {
+    flex-direction: column !important;
+    padding: 48px var(--side-pad) 56px !important;
+    align-items: flex-start !important;
+  }
+  .out-left {
+    width: 100% !important;
+    padding-right: 0 !important;
+    margin-bottom: 32px !important;
+    max-width: 600px !important;
+  }
+  .out-heading {
+    font-size: clamp(36px, 5.5vw, 64px) !important;
+  }
+  .out-grid {
+    width: 100% !important;
+  }
+  .mc {
+    padding: clamp(20px, 2.8vw, 32px) !important;
+  }
+  .mc.tl .mc-n, .mc.br .mc-n { font-size: clamp(40px, 6vw, 72px) !important; }
+  .mc.tl .mc-s, .mc.br .mc-s { font-size: clamp(21px, 3.15vw, 38px) !important; }
+  .mc.tr .mc-n, .mc.bl .mc-n { font-size: clamp(32px, 5vw, 60px) !important; }
+  .mc.tr .mc-s, .mc.bl .mc-s { font-size: clamp(17px, 2.63vw, 31px) !important; }
+  .mc-label { font-size: 14px !important; }
+}
+
+@media (max-width: 640px) {
+  .outcomes {
+    padding: 36px 20px 44px !important;
+  }
+  .out-heading { font-size: clamp(32px, 8vw, 48px) !important; }
+  .out-body    { font-size: 13px !important; }
+  .mc { padding: 18px 16px !important; }
+  .mc.tl .mc-n, .mc.br .mc-n { font-size: clamp(30px, 9vw, 44px) !important; }
+  .mc.tl .mc-s, .mc.br .mc-s { font-size: clamp(16px, 4.7vw, 23px) !important; }
+  .mc.tr .mc-n, .mc.bl .mc-n { font-size: clamp(26px, 7.5vw, 36px) !important; }
+  .mc.tr .mc-s, .mc.bl .mc-s { font-size: clamp(14px, 3.9vw, 19px) !important; }
+  .mc-label { font-size: 12px !important; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   ORBIT COMET HOVER ENGINE
+   TL=gold, TR=cyan, BL=teal, BR=indigo
+   Each ::after is an orbiting conic-gradient border.
+══════════════════════════════════════════════════════════════════ */
+@property --mc-a {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes mc-comet { to { --mc-a: 360deg; } }
+
+.mc::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.mc:hover::after {
+  opacity: 1;
+  animation: mc-comet 2.6s linear infinite;
+}
+
+/* TL — gold comet */
+.mc.tl::after {
+  background: conic-gradient(from var(--mc-a),
+    transparent 0%, transparent 50%,
+    rgba(241,190,86,.15) 60%, #f1be56 70%, #fbbf24 78%, #eab308 84%,
+    rgba(234,179,8,.08) 92%, transparent 100%);
+}
+.mc.tl:hover .mc-n,
+.mc.tl:hover .mc-s    { color: #92400e; text-shadow: 0 0 40px rgba(251,191,36,.5), 0 0 72px rgba(234,179,8,.25); }
+.mc.tl:hover .mc-accent { width: clamp(110px, 15vw, 200px); box-shadow: 0 0 8px rgba(37,99,235,.6), 0 0 20px rgba(37,99,235,.25); }
+
+/* TR — cyan comet */
+.mc.tr::after {
+  background: conic-gradient(from var(--mc-a),
+    transparent 0%, transparent 50%,
+    rgba(82,184,215,.15) 60%, #52b8d7 70%, #38bdf8 78%, #0ea5e9 84%,
+    rgba(14,165,233,.08) 92%, transparent 100%);
+}
+.mc.tr:hover .mc-n,
+.mc.tr:hover .mc-s { color: #0369a1; text-shadow: 0 0 40px rgba(56,189,248,.5), 0 0 72px rgba(14,165,233,.25); }
+
+/* BL — teal comet */
+.mc.bl::after {
+  background: conic-gradient(from var(--mc-a),
+    transparent 0%, transparent 50%,
+    rgba(20,184,166,.15) 60%, #14b8a6 70%, #10b981 78%, #059669 84%,
+    rgba(5,150,105,.08) 92%, transparent 100%);
+}
+.mc.bl:hover .mc-n,
+.mc.bl:hover .mc-s { color: #065f46; text-shadow: 0 0 40px rgba(20,184,166,.5), 0 0 72px rgba(16,185,129,.25); }
+
+/* BR — indigo comet */
+.mc.br::after {
+  background: conic-gradient(from var(--mc-a),
+    transparent 0%, transparent 50%,
+    rgba(99,102,241,.15) 60%, #6366f1 70%, #818cf8 78%, #a5b4fc 84%,
+    rgba(165,180,252,.08) 92%, transparent 100%);
+}
+.mc.br:hover .mc-n,
+.mc.br:hover .mc-s { color: #3730a3; text-shadow: 0 0 40px rgba(99,102,241,.5), 0 0 72px rgba(129,140,248,.25); }
+.mc.br:hover::before { height: clamp(100px, 12vw, 140px); box-shadow: 0 0 8px rgba(13,148,136,.7), 0 0 20px rgba(13,148,136,.3); }
 
 /* ══════════════════════════════════════════════════════
    7. CLIENT PROOF
@@ -2746,7 +2923,6 @@
 .proof-card {
   background: linear-gradient(135deg, #0a1f3d 0%, #0d2d55 50%, #0f3566 100%);
   border-radius: 16px;
-  /* no fixed height — let content define the height */
   min-height: 300px;
   display: flex;
   align-items: stretch;
@@ -2759,131 +2935,8 @@
   background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.04) 0%, transparent 60%);
 }
 
-/* CAPABILITIES: METRIC HOVER — ORBIT COMET */
-/* ═══════════════════════════════════════════════════════════════════
-   METRIC CELL HOVER — ORBIT COMET  (unified engine, 4 color voices)
-   Palette sourced from the gradient border: gold #f1be56, cyan #52b8d7,
-   teal #4bc8ad — extended with brand indigo #6366f1
-═══════════════════════════════════════════════════════════════════ */
-
-/* ── Shared @property + keyframe: one engine for all four cells ── */
-@property --mc-a {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-@keyframes mc-comet { to { --mc-a: 360deg; } }
-
-/* Shared base */
-.mc {
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.mc:hover { transform: translateY(-2px); }
-.mc-num   { transition: color 0.4s ease, text-shadow 0.5s ease; }
-.mc-accent{ transition: width 0.55s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s; }
-
-/* Shared ::after comet border scaffold (all 4 cells) */
-.mc::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  padding: 1.5px;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-  pointer-events: none;
-  z-index: 2;
-}
-.mc:hover::after {
-  opacity: 1;
-  animation: mc-comet 2.4s linear infinite;
-}
-
-/* ─────────────────────────────────────────────────────────────────
-   TL · 56%  GOLD — #f1be56 → #f97316 → #fbbf24
-   Warm amber comet, hot tip fading into golden trail
-───────────────────────────────────────────────────────────────── */
-.mc.tl::after {
-  background: conic-gradient(
-    from var(--mc-a),
-    transparent       0%,
-    transparent      52%,
-    rgba(241,190,86,.25) 62%,
-    #f1be56          72%,
-    #f97316          80%,
-    #fbbf24          86%,
-    rgba(251,191,36,.1) 94%,
-    transparent     100%
-  );
-}
-.mc.tl:hover .mc-num  { color: #b45309; text-shadow: 0 0 44px rgba(241,190,86,.55), 0 0 80px rgba(249,115,22,.28); }
-.mc.tl:hover .mc-accent { width: 160px; box-shadow: 0 0 12px rgba(241,190,86,.7), 0 0 28px rgba(249,115,22,.35); }
-
-/* ─────────────────────────────────────────────────────────────────
-   TR · 06   CYAN — #52b8d7 → #38bdf8 → #2563eb
-   Cool electric-blue comet, crisp cyan head, deep blue fade
-───────────────────────────────────────────────────────────────── */
-.mc.tr::after {
-  background: conic-gradient(
-    from var(--mc-a),
-    transparent       0%,
-    transparent      52%,
-    rgba(82,184,215,.25) 62%,
-    #52b8d7          72%,
-    #38bdf8          80%,
-    #2563eb          86%,
-    rgba(37,99,235,.1)  94%,
-    transparent     100%
-  );
-}
-.mc.tr:hover .mc-num { color: #0369a1; text-shadow: 0 0 44px rgba(82,184,215,.55), 0 0 80px rgba(56,189,248,.28); }
-
-/* ─────────────────────────────────────────────────────────────────
-   BL · 46%  TEAL — #4bc8ad → #14b8a6 → #10b981
-   Fresh teal-emerald comet, matches brand teal exactly
-───────────────────────────────────────────────────────────────── */
-.mc.bl::after {
-  background: conic-gradient(
-    from var(--mc-a),
-    transparent       0%,
-    transparent      52%,
-    rgba(75,200,173,.25) 62%,
-    #4bc8ad          72%,
-    #14b8a6          80%,
-    #10b981          86%,
-    rgba(16,185,129,.1) 94%,
-    transparent     100%
-  );
-}
-.mc.bl:hover .mc-num { color: #0f766e; text-shadow: 0 0 44px rgba(75,200,173,.55), 0 0 80px rgba(20,184,166,.28); }
-
-/* ─────────────────────────────────────────────────────────────────
-   BR · 57%  INDIGO — #6366f1 → #a855f7 → #818cf8
-   Rich violet comet — deepens the palette without clashing
-───────────────────────────────────────────────────────────────── */
-.mc.br::after {
-  background: conic-gradient(
-    from var(--mc-a),
-    transparent       0%,
-    transparent      52%,
-    rgba(99,102,241,.25) 62%,
-    #6366f1          72%,
-    #a855f7          80%,
-    #818cf8          86%,
-    rgba(129,140,248,.1) 94%,
-    transparent     100%
-  );
-}
-.mc.br:hover .mc-num { color: #4f46e5; text-shadow: 0 0 44px rgba(99,102,241,.55), 0 0 80px rgba(168,85,247,.28); }
-
   /* ═══════════════════════════════════════════════════════════════
      CAPABILITIES OUTCOMES — FULL RESET
-     Neutralises Solutions: position:relative, flex-direction:column,
-     justify-content:flex-end, min-height:900px, margin:0 auto
   ═══════════════════════════════════════════════════════════════ */
   section.outcomes {
     position: static !important;
@@ -2894,32 +2947,49 @@
     flex-wrap: nowrap !important;
     align-items: stretch !important;
     justify-content: flex-start !important;
-    gap: 80px !important;
-    padding: var(--section-pad-v) var(--side-pad) !important;
+    gap: 0 !important;
+    padding: clamp(40px, 3.6vw, 56px) var(--side-pad) !important;
     background: #fff !important;
+    border-top: 1px solid #e5e7eb !important;
   }
   section.outcomes .out-left {
-    width: 440px !important;
+    width: 29% !important;
     flex-shrink: 0 !important;
     position: static !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
+    padding-right: clamp(20px, 2.8vw, 44px) !important;
   }
   section.outcomes .out-grid {
     flex: 1 !important;
+    min-width: 0 !important;
     display: grid !important;
-    grid-template-columns: 7fr 5fr !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
     align-content: stretch !important;
     position: static !important;
+    border: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
   }
-  @media (max-width: 960px) {
+  @media (max-width: 1139px) {
     section.outcomes {
       flex-direction: column !important;
-      gap: 40px !important;
+      align-items: flex-start !important;
+      padding: 48px var(--side-pad) 56px !important;
     }
-    section.outcomes .out-left { width: auto !important; }
-    section.outcomes .out-grid { grid-template-columns: 1fr 1fr !important; min-height: unset !important; }
+    section.outcomes .out-left {
+      width: 100% !important;
+      padding-right: 0 !important;
+      max-width: 600px !important;
+    }
+    section.outcomes .out-grid {
+      width: 100% !important;
+    }
+  }
+  @media (max-width: 640px) {
+    section.outcomes { padding: 36px 20px 44px !important; }
   }
 
   </style>
@@ -2991,6 +3061,7 @@
   <section id="platform-ops-cost" style="background:#fff;border-top:1px solid rgba(13,17,39,0.08);">
 
     <!-- Heading -->
+    <p class="eyebrow">CONSEQUENCES</p>
     <h2
       style="font-size:55px;font-weight:700;letter-spacing:-1px;line-height:55px;color:#09090b;max-width:1048px;margin-bottom:32px;">
       What traditional engineering approaches <br><span style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; display:inline;">cost</span> your organization</h2>
@@ -3177,7 +3248,7 @@
           </a>
         </div>
         <div class="acc-img2">
-          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80&fit=crop" alt="Modern enterprise workspace" style="object-position:center 30%;">
+          <img src="https://images.pexels.com/photos/2599538/pexels-photo-2599538.jpeg" alt="Modern enterprise workspace" style="object-position:center 30%;">
         </div>
       </div>
     </div>
@@ -3262,68 +3333,49 @@
        ============================================================ -->
   
   <!-- CAPABILITIES: IMPACT METRICS -->
-<section class="outcomes">
-  <div class="out-left">
+<section class="outcomes" id="outcomes-section">
+  <!-- Left: heading + body, GSAP slide-in from left -->
+  <div class="out-left" data-gsap="out-left">
     <h2 class="out-heading">Outcomes<br>we're<br>accountable to</h2>
     <p class="out-body">These outcomes reflect engagements across banking, insurance, and healthcare organizations. Results vary based on application complexity, technology stack, and organizational readiness.</p>
-
   </div>
 
+  <!-- Right: 2×2 grid — LARGE pair on diagonal (TL+BR), MEDIUM pair on diagonal (TR+BL) -->
   <div class="out-grid">
-    <!-- TL: Time to Market -->
+
+    <!-- TL: LARGE — 50-60% + blue horizontal accent (Figma-exact) -->
     <div class="mc tl">
-      <div class="mc-eye">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 12l4-4 3 3 5-6" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span class="mc-eye-txt blue">TIME TO MARKET</span>
-      </div>
       <div class="mc-num-row">
-        <span class="mc-num xl">50</span><span class="mc-unit xl">–60%</span>
+        <span class="mc-n">50-60</span><span class="mc-s"> %</span>
       </div>
-      <div class="mc-ttl lg">Faster time-to-market for new features and applications</div>
-      <div class="mc-dsc lg">Measured across banking, insurance, and healthcare engagements.</div>
+      <p class="mc-label">Faster time-to-market for new features and applications</p>
       <div class="mc-accent"></div>
     </div>
 
-    <!-- TR: Test Velocity -->
+    <!-- TR: MEDIUM — 50% — no resting accent -->
     <div class="mc tr">
-      <div class="mc-eye">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#64748b" stroke-width="1.5"/><path d="M8 5v3.5l2 2" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <span class="mc-eye-txt slate">TEST VELOCITY</span>
+      <div class="mc-num-row">
+        <span class="mc-n">50</span><span class="mc-s">%</span>
       </div>
-      <div class="mc-num-row" style="margin-top:8px;">
-        <span class="mc-num md">40</span><span class="mc-unit md">%</span>
-      </div>
-      <div class="mc-ttl sm">Faster test case analysis with AI-driven generation</div>
-      <div class="mc-dsc sm">Across all delivery engagements</div>
+      <p class="mc-label">Reduction in technical debt remediation time</p>
     </div>
 
-    <!-- BL: Cost Savings -->
+    <!-- BL: MEDIUM — 40% — no resting accent -->
     <div class="mc bl">
-      <div class="mc-eye">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 10l4-4 3 3 5-6" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span class="mc-eye-txt slate">COST SAVINGS</span>
+      <div class="mc-num-row">
+        <span class="mc-n">40</span><span class="mc-s"> %</span>
       </div>
-      <div class="mc-num-row" style="margin-top:8px;">
-        <span class="mc-num md">35</span><span class="mc-unit md">–45%</span>
-      </div>
-      <div class="mc-ttl sm">Lower engineering costs through intelligent automation</div>
-      <div class="mc-dsc sm">Versus traditional development approaches</div>
+      <p class="mc-label">Faster test case analysis with AI-driven generation</p>
     </div>
 
-    <!-- BR: Tech Debt -->
+    <!-- BR: LARGE — 35-45% + teal vertical accent on left edge (Figma-exact, via ::before) -->
     <div class="mc br">
-      <div class="mc-eye" style="padding-left:16px;">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v4M9 12v4M2 9h4M12 9h4" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2.5" stroke="#0d9488" stroke-width="1.5"/></svg>
-        <span class="mc-eye-txt teal">TECH DEBT</span>
+      <div class="mc-num-row">
+        <span class="mc-n">35-45</span><span class="mc-s"> %</span>
       </div>
-      <div class="mc-num-row" style="padding-left:16px; margin-top:8px;">
-        <span class="mc-num lg">50</span><span class="mc-unit lg">%</span>
-      </div>
-      <div style="padding-left:16px;">
-        <div class="mc-ttl lg">Reduction in technical debt remediation time</div>
-        <div class="mc-dsc lg">Against client baseline before engagement start.</div>
-      </div>
+      <p class="mc-label">Lower engineering costs through intelligent automation</p>
     </div>
+
   </div>
 </section>
 
@@ -3695,6 +3747,82 @@
       if (typeof gsap === 'undefined') return;
       gsap.registerPlugin(ScrollTrigger);
 
+      /* ── OUTCOMES SECTION — full micro-animation suite ── */
+      (function initOutcomes() {
+        const section  = document.getElementById('outcomes-section');
+        if (!section) return;
+
+        const outLeft  = section.querySelector('.out-left');
+        const heading  = section.querySelector('.out-heading');
+        const bodyTxt  = section.querySelector('.out-body');
+        const cells    = section.querySelectorAll('.mc');
+
+        /* Set initial hidden states */
+        gsap.set(outLeft, { opacity: 0, x: -28 });
+        gsap.set(heading, { opacity: 0, y: 20 });
+        gsap.set(bodyTxt, { opacity: 0, y: 14 });
+
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: section, start: 'top 75%', once: true }
+        });
+
+        /* 1. Left col slides in */
+        tl.to(outLeft, { opacity: 1, x: 0,  duration: 0.85, ease: 'power3.out' })
+          .to(heading,  { opacity: 1, y: 0,  duration: 0.65, ease: 'power3.out' }, '-=0.6')
+          .to(bodyTxt,  { opacity: 1, y: 0,  duration: 0.6,  ease: 'power3.out' }, '-=0.42')
+
+          /* 2. Grid cells cascade in — TL → TR → BL → BR */
+          .to(cells[0], { opacity: 1, y: 0, duration: 0.65, ease: 'expo.out' }, '-=0.28')
+          .to(cells[1], { opacity: 1, y: 0, duration: 0.65, ease: 'expo.out' }, '-=0.5')
+          .to(cells[2], { opacity: 1, y: 0, duration: 0.65, ease: 'expo.out' }, '-=0.5')
+          .to(cells[3], { opacity: 1, y: 0, duration: 0.65, ease: 'expo.out' }, '-=0.5');
+
+        /* 3. Number counter roll-up */
+        const counterDefs = [
+          { cell: cells[0], prefix: '50-', to: 60, delay: 0.5  },
+          { cell: cells[1], prefix: '',    to: 50, delay: 0.62 },
+          { cell: cells[2], prefix: '',    to: 40, delay: 0.74 },
+          { cell: cells[3], prefix: '35-', to: 45, delay: 0.86 }
+        ];
+        counterDefs.forEach(function(def) {
+          if (!def.cell) return;
+          const numEl = def.cell.querySelector('.mc-n');
+          if (!numEl) return;
+          const obj = { val: 0 };
+          gsap.to(obj, {
+            val: def.to,
+            duration: 1.6,
+            ease: 'power4.out',
+            delay: def.delay,
+            scrollTrigger: { trigger: section, start: 'top 75%', once: true },
+            onUpdate: function() { numEl.textContent = def.prefix + Math.round(obj.val); },
+            onComplete: function() { numEl.textContent = def.prefix + def.to; }
+          });
+        });
+
+        /* 4. Magnetic 3D tilt on hover */
+        cells.forEach(function(cell) {
+          cell.addEventListener('mousemove', function(e) {
+            const r  = cell.getBoundingClientRect();
+            const dx = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
+            const dy = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
+            gsap.to(cell, {
+              x: dx * 4, y: dy * 4 - 3,
+              rotateX: -dy * 2, rotateY: dx * 2,
+              transformPerspective: 800,
+              duration: 0.4, ease: 'power2.out', overwrite: 'auto'
+            });
+          });
+          cell.addEventListener('mouseleave', function() {
+            gsap.to(cell, {
+              x: 0, y: 0, rotateX: 0, rotateY: 0,
+              duration: 0.65, ease: 'elastic.out(1, 0.5)', overwrite: 'auto'
+            });
+          });
+        });
+
+      })();
+
       /* Cost Q×Q section — staggered entrance */
       var cqHead = document.getElementById('cqxq-heading');
       var cqBody = document.getElementById('cqxq-body');
@@ -3930,10 +4058,12 @@
   if (typeof gsap === 'undefined') return;
 
   /* CARD DATA */
+  const FAN_TOOLTIP_ENABLED = false; // true = ON, false = OFF for all carousel hover labels/tooltips
+
   const DATA = [
     {
       chip:'Healthcare',
-      logo:{t:'HC', bg:'#16a34a'},
+      logo:{img:'https://res.cloudinary.com/dden4hawr/image/upload/v1779293592/C1_yailh3.png', alt:'Healthcare icon'},
       title:'Healthcare',
       desc:'Patient care platform integrating EHR, billing, and care coordination workflows.',
       stats:[{n:'40%',l:'reduction in admin overhead'},{n:'98%',l:'patient satisfaction score'}],
@@ -3945,7 +4075,7 @@
     },
     {
       chip:'Banking & Financial Services',
-      logo:{t:'BFS', bg:'#c9a84c'},
+      logo:{img:'https://res.cloudinary.com/dden4hawr/image/upload/v1779293592/C2_o3sbq2.png', alt:'Banking and financial services icon'},
       title:'Banking & Financial Services',
       desc:'Digital lending platform with real-time underwriting and omnichannel customer experience.',
       stats:[{n:'50%',l:'reduction in development costs'},{n:'6',l:'strategic projects in 12 months'}],
@@ -3958,7 +4088,7 @@
     },
     {
       chip:'Insurance',
-      logo:{t:'INS', bg:'#38bdf8'},
+      logo:{img:'https://res.cloudinary.com/dden4hawr/image/upload/v1779293592/C3_jgcxl3.png', alt:'Insurance icon'},
       title:'Insurance',
       desc:'Reduce technical debt while maintaining business logic continuity.',
       stats:[{n:'65%',l:'reduction in quote-to-policy time'},{n:'3×',l:'faster claims resolution'}],
@@ -3996,10 +4126,11 @@
     chipsTrackEl.style.transform = `translateX(-${next}px)`;
   }
 
-  /* CHIP TOOLTIP */
+  /* CHIP TOOLTIP — controlled by FAN_TOOLTIP_ENABLED above */
   const ctip = document.getElementById('ctip');
   let ctipHide;
   function showTip(chipEl){
+    if(!FAN_TOOLTIP_ENABLED || !ctip) return;
     clearTimeout(ctipHide);
     const r = chipEl.getBoundingClientRect();
     ctip.textContent = chipEl.textContent.trim();
@@ -4008,12 +4139,17 @@
     ctip.classList.add('on');
   }
   function hideTip(){
+    if(!FAN_TOOLTIP_ENABLED || !ctip) return;
     ctipHide = setTimeout(()=> ctip.classList.remove('on'), 80);
   }
-  chipEls.forEach(ch=>{
-    ch.addEventListener('mouseenter', ()=> showTip(ch));
-    ch.addEventListener('mouseleave', hideTip);
-  });
+  if(FAN_TOOLTIP_ENABLED){
+    chipEls.forEach(ch=>{
+      ch.addEventListener('mouseenter', ()=> showTip(ch));
+      ch.addEventListener('mouseleave', hideTip);
+    });
+  } else if(ctip){
+    ctip.style.display = 'none';
+  }
 
   /* BUILD CARD DOM */
   function buildFoot(d){
@@ -4054,13 +4190,12 @@
       wrap.className = 'cw';
       wrap.dataset.i = i;
       wrap.dataset.k = k - 1;
-      const lSz = d.logo.t.length > 2 ? '7px' : '9.5px';
       const bdr = d.ctaBorder ? `border:${d.ctaBorder};` : '';
       wrap.innerHTML = `
         <div class="card" style="background:${d.bg};box-shadow:${d.shadow};">
           <div class="c-head">
-            <div class="c-logo" style="background:${d.logo.bg};width:46px;height:46px;">
-              <span style="font-size:${lSz};font-weight:800;letter-spacing:.5px;color:#fff;text-transform:uppercase;">${d.logo.t}</span>
+            <div class="c-logo">
+              <img src="${d.logo.img}" alt="${d.logo.alt}" draggable="false" loading="lazy"/>
             </div>
             <div class="c-title" style="color:${d.titleC};">${d.title}</div>
           </div>
@@ -4279,21 +4414,26 @@
     stageEl._wheelTO = setTimeout(()=>{ vTheta=0; startLoop('snap'); }, 90);
   }, {passive:false});
 
-  /* DRAG CURSOR */
+  /* DRAG CURSOR / CARD HOVER LABEL — controlled by FAN_TOOLTIP_ENABLED above */
   const dcur = document.getElementById('dcur');
   let cX=0, cY=0, tX=0, tY=0;
-  (function cursorLoop(){
-    cX += (tX - cX) * .14;
-    cY += (tY - cY) * .14;
-    dcur.style.left = cX + 'px';
-    dcur.style.top  = cY + 'px';
-    requestAnimationFrame(cursorLoop);
-  })();
-  document.addEventListener('mousemove', e=>{ tX=e.clientX; tY=e.clientY; });
-  stageEl.addEventListener('mouseenter', ()=>{ dcur.classList.add('show');  stageEl.style.cursor='none'; });
-  stageEl.addEventListener('mouseleave', ()=>{ dcur.classList.remove('show','press'); stageEl.style.cursor=''; });
-  stageEl.addEventListener('pointerdown', ()=> dcur.classList.add('press'));
-  document.addEventListener('pointerup',  ()=> dcur.classList.remove('press'));
+  if(FAN_TOOLTIP_ENABLED && dcur){
+    stageEl.classList.add('custom-cursor');
+    (function cursorLoop(){
+      cX += (tX - cX) * .14;
+      cY += (tY - cY) * .14;
+      dcur.style.left = cX + 'px';
+      dcur.style.top  = cY + 'px';
+      requestAnimationFrame(cursorLoop);
+    })();
+    document.addEventListener('mousemove', e=>{ tX=e.clientX; tY=e.clientY; });
+    stageEl.addEventListener('mouseenter', ()=>{ dcur.classList.add('show');  stageEl.style.cursor='none'; });
+    stageEl.addEventListener('mouseleave', ()=>{ dcur.classList.remove('show','press'); stageEl.style.cursor=''; });
+    stageEl.addEventListener('pointerdown', ()=> dcur.classList.add('press'));
+    document.addEventListener('pointerup',  ()=> dcur.classList.remove('press'));
+  } else if(dcur){
+    dcur.style.display = 'none';
+  }
 
   let hoveredCardIdx = -1;
   function updateCursorLabel(){
@@ -4304,15 +4444,18 @@
     } else {
       next = 'DRAG';
     }
+    if(!FAN_TOOLTIP_ENABLED || !dcur) return;
     if(dcur.textContent !== next) dcur.textContent = next;
     dcur.classList.toggle('drag', next === 'DRAG');
   }
-  cardEls.forEach((el,j)=>{
-    const li = cardLogical[j];
-    el.addEventListener('mouseenter', ()=>{ hoveredCardIdx = li; updateCursorLabel(); });
-    el.addEventListener('mouseleave', ()=>{ if(hoveredCardIdx===li){ hoveredCardIdx = -1; updateCursorLabel(); } });
-  });
-  (function labelLoop(){ updateCursorLabel(); requestAnimationFrame(labelLoop); })();
+  if(FAN_TOOLTIP_ENABLED){
+    cardEls.forEach((el,j)=>{
+      const li = cardLogical[j];
+      el.addEventListener('mouseenter', ()=>{ hoveredCardIdx = li; updateCursorLabel(); });
+      el.addEventListener('mouseleave', ()=>{ if(hoveredCardIdx===li){ hoveredCardIdx = -1; updateCursorLabel(); } });
+    });
+    (function labelLoop(){ updateCursorLabel(); requestAnimationFrame(labelLoop); })();
+  }
 
   /* IDLE FLOAT */
   function centerGhost(i){ return cardEls[N + i]; } // k=0 ghost
