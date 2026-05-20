@@ -2305,19 +2305,30 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: clamp(12px, 1.4vw, 20px);
       margin-top: clamp(16px, 2vw, 28px);
+      align-items: stretch;
     }
 
     .solution-cards article {
       position: relative;
       display: flex;
       flex-direction: column;
-      min-height: clamp(360px, 32vw, 500px);
+      /* Fixed height so all 3 cards are identical — content aligns perfectly */
+      height: clamp(460px, 42vw, 580px);
       overflow: hidden;
       border-radius: clamp(10px, 1.2vw, 16px);
       background: #071018;
       color: #fff;
       box-shadow: 0 18px 34px rgba(15, 23, 42, 0.22);
       isolation: isolate;
+      cursor: pointer;
+      /* Smooth card lift on hover */
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .solution-cards article:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 56px rgba(15, 23, 42, 0.38);
     }
 
     /* Dark gradient overlay — bottom-heavy for text legibility */
@@ -2330,8 +2341,8 @@
       background:
         linear-gradient(180deg,
           rgba(2, 8, 18, 0.04) 0%,
-          rgba(2, 8, 18, 0.22) 40%,
-          rgba(2, 8, 18, 0.90) 100%);
+          rgba(2, 8, 18, 0.18) 35%,
+          rgba(2, 8, 18, 0.92) 100%);
     }
 
     /* Subtle top gloss */
@@ -2345,7 +2356,7 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
     }
 
-    /* Background image */
+    /* Background image — subtle zoom on hover */
     .solution-cards img {
       position: absolute;
       inset: 0;
@@ -2355,66 +2366,124 @@
       object-fit: cover;
       filter: saturate(0.88) contrast(0.96);
       opacity: 0.85;
+      transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.55s ease;
     }
 
-    /* Inner flex column — fills the card and stacks content */
+    .solution-cards article:hover img {
+      transform: scale(1.05);
+      opacity: 0.72;
+    }
+
+    /* ── Inner layout: index top, body pinned to bottom ── */
     .solution-card-inner {
       position: relative;
       z-index: 3;
       display: flex;
       flex-direction: column;
-      flex: 1;
+      height: 100%;
       padding: clamp(18px, 2vw, 28px);
     }
 
+    /* Index number — top-left, spacer pushes body down */
     .solution-index {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.65);
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 1.5px;
-      margin-bottom: auto;
-      /* pushes body to bottom */
-      padding-bottom: clamp(80px, 10vw, 140px);
+      flex-shrink: 0;
     }
 
+    /* Invisible spacer between index and body — fills available space */
+    .solution-card-spacer {
+      flex: 1;
+    }
+
+    /* Body: h3 + p + link — always anchored to bottom of card */
     .solution-card-body {
+      flex-shrink: 0;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 0;
     }
 
     .solution-cards h3 {
-      margin: 0;
-      font-size: clamp(16px, 1.5vw, 21px);
+      margin: 0 0 10px;
+      font-size: clamp(17px, 1.5vw, 21px);
       font-weight: 700;
       line-height: 1.22;
       text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+      flex-shrink: 0;
     }
 
-    .solution-cards p {
+    /* ── Truncated paragraph with expand ── */
+    .solution-card-text {
+      position: relative;
       margin: 0;
       color: rgba(255, 255, 255, 0.82);
-      font-size: clamp(12px, 1vw, 14px);
-      line-height: 1.6;
+      font-size: clamp(13px, 1vw, 14.5px);
+      line-height: 1.65;
       text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
+
+      /* Clamp to 3 lines by default */
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+
+      /* Smooth height transition */
+      max-height: calc(3 * 1.65 * 14.5px);
+      transition: max-height 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  -webkit-line-clamp 0s 0s;
     }
 
+    /* Ellipsis fade-out gradient */
+    .solution-card-text::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 28px;
+      background: linear-gradient(to top, rgba(2, 8, 18, 0.92), transparent);
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.45s ease;
+    }
+
+    /* Expanded state — triggered by .is-expanded class (JS) or hover */
+    .solution-cards article.is-expanded .solution-card-text,
+    .solution-cards article:hover .solution-card-text {
+      -webkit-line-clamp: unset;
+      max-height: 260px;
+    }
+
+    .solution-cards article.is-expanded .solution-card-text::after,
+    .solution-cards article:hover .solution-card-text::after {
+      opacity: 0;
+    }
+
+    /* ── Explore link ── */
     .solution-link {
-      display: inline-block;
-      margin-top: 4px;
-      color: rgba(255, 255, 255, 0.82);
-      font-size: clamp(11px, 0.9vw, 13px);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: clamp(11px, 0.88vw, 13px);
       font-weight: 500;
       letter-spacing: 0.02em;
       text-decoration: none;
-      transition: color 0.2s;
+      flex-shrink: 0;
+      transition: color 0.3s ease, gap 0.3s ease;
     }
 
     .solution-link:hover {
       color: #fff;
+      gap: 8px;
     }
 
-    /* ── Responsive: tablet ── */
+    /* ── Responsive: tablet — keep 3 columns ── */
     @media (max-width: 900px) {
       .analysis {
         grid-template-columns: 1fr;
@@ -2422,17 +2491,36 @@
       }
 
       .solution-cards {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(8px, 1.5vw, 14px);
       }
 
       .solution-cards article {
-        min-height: 320px;
+        height: clamp(400px, 54vw, 520px);
       }
     }
 
-    @media (min-width: 600px) and (max-width: 900px) {
+    /* ── Responsive: mobile — single column ── */
+    @media (max-width: 640px) {
       .solution-cards {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .solution-cards article {
+        height: auto;
+        min-height: 320px;
+      }
+
+      /* On mobile, always show full text (no truncation) */
+      .solution-card-text {
+        -webkit-line-clamp: unset !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+
+      .solution-card-text::after {
+        display: none !important;
       }
     }
 
@@ -3409,9 +3497,10 @@
         <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778615984/1_rsqe5e.png" alt="" />
         <div class="solution-card-inner">
           <span class="solution-index">01</span>
+          <div class="solution-card-spacer"></div>
           <div class="solution-card-body">
             <h3>Core Modernization</h3>
-            <p>Transform aging systems into governed, cloud-ready architectures without losing trapped institutional
+            <p class="solution-card-text">Transform aging systems into governed, cloud-ready architectures without losing trapped institutional
               logic. Our AI-assisted software archaeology reverse-engineers legacy codebases into traceable
               specifications. We execute incremental transformation through strangler fig patterns, ensuring seamless
               business continuity and compliance-ready audit trails from day one.</p>
@@ -3423,9 +3512,10 @@
         <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778615985/2_rqynuj.png" alt="" />
         <div class="solution-card-inner">
           <span class="solution-index">02</span>
+          <div class="solution-card-spacer"></div>
           <div class="solution-card-body">
             <h3>Cloud Transformation</h3>
-            <p>Architect cloud-native environments built for sustained evolution, not one-time migration. We combine
+            <p class="solution-card-text">Architect cloud-native environments built for sustained evolution, not one-time migration. We combine
               infrastructure automation with FinOps discipline to deliver environments that scale production velocity
               while controlling costs. DevOps pipelines, SRE practices, and observability frameworks are embedded from
               day one.</p>
@@ -3437,9 +3527,10 @@
         <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778615983/3_gt3g7i.png" alt="" />
         <div class="solution-card-inner">
           <span class="solution-index">03</span>
+          <div class="solution-card-spacer"></div>
           <div class="solution-card-body">
             <h3>Continuous Engineering</h3>
-            <p>Engineering transformation isn't a project; it's an operational model. Our managed engineering pods
+            <p class="solution-card-text">Engineering transformation isn't a project; it's an operational model. Our managed engineering pods
               combine platform expertise with AI-powered quality frameworks to sustain delivery velocity as your systems
               evolve. From observability to automated testing, we embed the practices that prevent future technical
               debt.</p>
@@ -3479,7 +3570,8 @@
         </article>
         <article class="outcome-card outcome-card--blue" data-stat-card>
           <strong><span class="stat-num" data-target="40">0</span><span>%</span></strong>
-          <p>Reduction in operational support costs compared to in-house management models</p>
+          <p>Reduction in operational support costs compared to in-house management models (Source: HDI State of
+            Technical Support, 2024)</p>
           <div class="outcome-card-arrow">
             <svg viewBox="0 0 18 18" fill="none">
               <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
@@ -3489,7 +3581,7 @@
         </article>
         <article class="outcome-card outcome-card--gold" data-stat-card>
           <strong><span class="stat-num" data-target="50">0</span><span>%</span></strong>
-          <p>Faster incident resolution times on managed platform engagements</p>
+          <p>Faster incident resolution times on managed platform engagements (Industry benchmark — Gartner, 2024)</p>
           <div class="outcome-card-arrow">
             <svg viewBox="0 0 18 18" fill="none">
               <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#000" stroke-width="1.6" stroke-linecap="round"
@@ -4307,6 +4399,16 @@
     })();
   </script>
 
+  <script>
+    // Solution cards — click to toggle expanded text
+    document.querySelectorAll('.solution-cards article').forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        // Don't toggle if user clicked the link
+        if (e.target.closest('.solution-link')) return;
+        this.classList.toggle('is-expanded');
+      });
+    });
+  </script>
   <script src="shared.js" defer></script>
 </body>
 
