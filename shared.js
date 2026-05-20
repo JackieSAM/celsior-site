@@ -382,15 +382,15 @@ a.nav-link{text-decoration:none;}
 
         <div class="drawer-sub-group">
           <div class="drawer-sub-head">Priorities</div>
-          <a href="Our_Focus.html">AI-First Digital Engineering</a>   /* ← LINK */
-          <a href="Our_Focus.html">AI Adoption</a>                    /* ← LINK */
-          <a href="Our_Focus.html">Risk &amp; Compliance</a>          /* ← LINK */
+          <a href="ai-first-digital-engineering.html">AI-First Digital Engineering</a>   /* ← LINK */
+          <a href="ai-adoption.html">AI Adoption</a>                    /* ← LINK */
+          <a href="risk-compliance.html">Risk &amp; Compliance</a>          /* ← LINK */
         </div>
 
         <div class="drawer-sub-group">
           <div class="drawer-sub-head">Outcomes</div>
-          <a href="Our_Focus.html">Cost &amp; Efficiency</a>          /* ← LINK */
-          <a href="Our_Focus.html">Digital Experience</a>             /* ← LINK */
+          <a href="cost-efficiency.html">Cost &amp; Efficiency</a>          /* ← LINK */
+          <a href="digital-experience.html">Digital Experience</a>             /* ← LINK */
         </div>
 
       </div>
@@ -403,15 +403,15 @@ a.nav-link{text-decoration:none;}
 
         <div class="drawer-sub-group">
           <div class="drawer-sub-head">Engineering</div>
-          <a href="Capabilities.html">AI Led Engineering</a>                       /* ← LINK */
-          <a href="Capabilities.html">Cloud &amp; Infrastructure Engineering</a>  /* ← LINK */
-          <a href="Capabilities.html">AI &amp; Data</a>                           /* ← LINK */
+          <a href="ai-led-engineering.html">AI Led Engineering</a>                       /* ← LINK */
+          <a href="cloud-infrastructure-engineering.html">Cloud &amp; Infrastructure Engineering</a>  /* ← LINK */
+          <a href="ai-and-data.html">AI &amp; Data</a>                           /* ← LINK */
         </div>
 
         <div class="drawer-sub-group">
           <div class="drawer-sub-head">Operations</div>
-          <a href="Capabilities.html">Digital Operations &amp; Security</a>       /* ← LINK */
-          <a href="Capabilities.html">Security &amp; Governance</a>               /* ← LINK */
+          <a href="digital-operations.html">Digital Operations &amp; Security</a>       /* ← LINK */
+          <a href="security-governance.html">Security &amp; Governance</a>               /* ← LINK */
         </div>
 
 
@@ -426,19 +426,19 @@ a.nav-link{text-decoration:none;}
 
         <div class="drawer-sub-group">
           <div class="drawer-sub-head">Programs</div>
-          <a href="Solutions.html">Managed Programs</a>                           /* ← LINK */
-          <a href="Solutions.html">Technology Consulting</a>                      /* ← LINK */
+          <a href="managed-programs.html">Managed Programs</a>                           /* ← LINK */
+          <a href="technology-consulting.html">Technology Consulting</a>                      /* ← LINK */
         </div>
 
         <div class="drawer-sub-group">
           <div class="drawer-sub-head">Global Delivery</div>
-          <a href="Solutions.html">GCC &amp; Nearshore</a>                        /* ← LINK */
+          <a href="gcc-nearshore.html">GCC &amp; Nearshore</a>                        /* ← LINK */
         </div>
 
         <div class="drawer-sub-group">
           <div class="drawer-sub-head">Talent Models</div>
-          <a href="Solutions.html">Teams-as-a-Service</a>                         /* ← LINK */
-          <a href="Solutions.html">Hire-Train-Deploy</a>                          /* ← LINK */
+          <a href="teams-as-a-service.html">Teams-as-a-Service</a>                         /* ← LINK */
+          <a href="hire-train-deploy.html">Hire-Train-Deploy</a>                          /* ← LINK */
         </div>
 
       </div>
@@ -451,15 +451,15 @@ a.nav-link{text-decoration:none;}
 
         <div class="drawer-sub-group">
           <div class="drawer-sub-head">Products</div>
-          <a href="ai-innovation.html">Synthetix</a>                              /* ← LINK */
-          <a href="ai-innovation.html">Celsior AI Lab</a>                         /* ← LINK */
-          <a href="ai-innovation.html">Design Lab</a>                             /* ← LINK */
+          <a href="synthetix.html">Synthetix</a>                              /* ← LINK */
+          <a href="celsior-ai-lab.html">Celsior AI Lab</a>                         /* ← LINK */
+          <a href="design-lab.html">Design Lab</a>                             /* ← LINK */
         </div>
 
         <div class="drawer-sub-group">
           <div class="drawer-sub-head">Programs</div>
-          <a href="ai-innovation.html">Centers of Excellence</a>                  /* ← LINK */
-          <a href="ai-innovation.html">Frameworks &amp; Accelerators</a>          /* ← LINK */
+          <a href="centers-of-excellence.html">Centers of Excellence</a>                  /* ← LINK */
+          <a href="frameworks-accelerators.html">Frameworks &amp; Accelerators</a>          /* ← LINK */
         </div>
 
       </div>
@@ -471,9 +471,9 @@ a.nav-link{text-decoration:none;}
       <div class="drawer-sub" id="d-ind">
 
         <div class="drawer-sub-group">
-          <a href="industries.html">Banking &amp; Financial Services</a>          /* ← LINK */
-          <a href="industries.html">Insurance</a>                                 /* ← LINK */
-          <a href="industries.html">Healthcare</a>                                /* ← LINK */
+          <a href="banking-financial-services.html">Banking &amp; Financial Services</a>          /* ← LINK */
+          <a href="insurance.html">Insurance</a>                                 /* ← LINK */
+          <a href="healthcare.html">Healthcare</a>                                /* ← LINK */
         </div>
 
       </div>
@@ -485,7 +485,7 @@ a.nav-link{text-decoration:none;}
       <div class="drawer-sub" id="d-part">
 
         <div class="drawer-sub-group">
-          <a href="partner-ecosystem.html">Partners</a>                           /* ← LINK */
+          <a href="partners.html">Partners</a>                           /* ← LINK */
         </div>
 
       </div>
@@ -497,12 +497,12 @@ a.nav-link{text-decoration:none;}
       <div class="drawer-sub" id="d-about">
 
         <div class="drawer-sub-group">
-          <a href="about.html">Who we are + Our Leadership</a>                    /* ← LINK */
-          <a href="about.html">AI-first Philosophy</a>                            /* ← LINK */
-          <a href="about.html">Success Stories</a>                                /* ← LINK */
-          <a href="about.html">Blogs</a>                                          /* ← LINK */
-          <a href="about.html">Careers</a>                                        /* ← LINK */
-          <a href="about.html">Events &amp; News</a>                              /* ← LINK */
+          <a href="about-leadership.html">Who we are + Our Leadership</a>                    /* ← LINK */
+          <a href="ai-first-philosophy.html">AI-first Philosophy</a>                            /* ← LINK */
+          <a href="success-stories.html">Success Stories</a>                                /* ← LINK */
+          <a href="blogs.html">Blogs</a>                                          /* ← LINK */
+          <a href="careers.html">Careers</a>                                        /* ← LINK */
+          <a href="events-news.html">Events &amp; News</a>                              /* ← LINK */
         </div>
 
       </div>
@@ -530,9 +530,9 @@ a.nav-link{text-decoration:none;}
         <div class="mega-col-head">Priorities</div>
         <div class="mega-group">
           <ul class="mega-links">
-            <li><a href="Our_Focus.html">AI-First Digital Engineering</a></li>  <!-- ← LINK -->
-            <li><a href="Our_Focus.html">AI Adoption</a></li>                   <!-- ← LINK -->
-            <li><a href="Our_Focus.html">Risk &amp; Compliance</a></li>         <!-- ← LINK -->
+            <li><a href="ai-first-digital-engineering.html">AI-First Digital Engineering</a></li>  <!-- ← LINK -->
+            <li><a href="ai-adoption.html">AI Adoption</a></li>                   <!-- ← LINK -->
+            <li><a href="risk-compliance.html">Risk &amp; Compliance</a></li>         <!-- ← LINK -->
           </ul>
         </div>
       </div>
@@ -542,8 +542,8 @@ a.nav-link{text-decoration:none;}
         <div class="mega-col-head" style="margin-top:26px">Outcomes</div>
         <div class="mega-group">
           <ul class="mega-links">
-            <li><a href="Our_Focus.html">Cost &amp; Efficiency</a></li>         <!-- ← LINK -->
-            <li><a href="Our_Focus.html">Digital Experience</a></li>            <!-- ← LINK -->
+            <li><a href="cost-efficiency.html">Cost &amp; Efficiency</a></li>         <!-- ← LINK -->
+            <li><a href="digital-experience.html">Digital Experience</a></li>            <!-- ← LINK -->
           </ul>
         </div>
       </div>
@@ -579,9 +579,9 @@ a.nav-link{text-decoration:none;}
         <div class="mega-col-head">Engineering</div>
         <div class="mega-group">
           <ul class="mega-links">
-            <li><a href="Capabilities.html">AI Led Engineering</a></li>                      <!-- ← LINK -->
-            <li><a href="Capabilities.html">Cloud &amp; Infrastructure Engineering</a></li>  <!-- ← LINK -->
-            <li><a href="Capabilities.html">AI &amp; Data</a></li>                           <!-- ← LINK -->
+            <li><a href="ai-led-engineering.html">AI Led Engineering</a></li>                      <!-- ← LINK -->
+            <li><a href="cloud-infrastructure-engineering.html">Cloud &amp; Infrastructure Engineering</a></li>  <!-- ← LINK -->
+            <li><a href="ai-and-data.html">AI &amp; Data</a></li>                           <!-- ← LINK -->
           </ul>
         </div>
       </div>
@@ -591,8 +591,8 @@ a.nav-link{text-decoration:none;}
         <div class="mega-col-head" style="margin-top:26px">Operations</div>
         <div class="mega-group">
           <ul class="mega-links">
-            <li><a href="Capabilities.html">Digital Operations &amp; Security</a></li>       <!-- ← LINK -->
-            <li><a href="Capabilities.html">Security &amp; Governance</a></li>               <!-- ← LINK -->
+            <li><a href="digital-operations.html">Digital Operations &amp; Security</a></li>       <!-- ← LINK -->
+            <li><a href="security-governance.html">Security &amp; Governance</a></li>               <!-- ← LINK -->
           </ul>
         </div>
       </div>
@@ -624,8 +624,8 @@ a.nav-link{text-decoration:none;}
         <div class="mega-col-head">Programs</div>
         <div class="mega-group">
           <ul class="mega-links">
-            <li><a href="Solutions.html">Managed Programs</a></li>                           <!-- ← LINK -->
-            <li><a href="Solutions.html">Technology Consulting</a></li>                      <!-- ← LINK -->
+            <li><a href="managed-programs.html">Managed Programs</a></li>                           <!-- ← LINK -->
+            <li><a href="technology-consulting.html">Technology Consulting</a></li>                      <!-- ← LINK -->
           </ul>
         </div>
       </div>
@@ -635,7 +635,7 @@ a.nav-link{text-decoration:none;}
         <div class="mega-col-head" style="margin-top:26px">Global Delivery</div>
         <div class="mega-group">
           <ul class="mega-links">
-            <li><a href="Solutions.html">GCC &amp; Nearshore</a></li>                        <!-- ← LINK -->
+            <li><a href="gcc-nearshore.html">GCC &amp; Nearshore</a></li>                        <!-- ← LINK -->
           </ul>
         </div>
       </div>
@@ -645,8 +645,8 @@ a.nav-link{text-decoration:none;}
         <div class="mega-col-head" style="margin-top:26px">Talent Models</div>
         <div class="mega-group">
           <ul class="mega-links">
-            <li><a href="Solutions.html">Teams-as-a-Service</a></li>                         <!-- ← LINK -->
-            <li><a href="Solutions.html">Hire-Train-Deploy
+            <li><a href="teams-as-a-service.html">Teams-as-a-Service</a></li>                         <!-- ← LINK -->
+            <li><a href="hire-train-deploy.html">Hire-Train-Deploy
               <span style="display:inline-flex;align-items:center;padding:1px 7px;background:#0d1127;color:#fff;font-size:.58rem;font-weight:700;letter-spacing:.06em;border-radius:3px;text-transform:uppercase;margin-left:4px;">New</span>
             </a></li>                                                                        <!-- ← LINK -->
           </ul>
@@ -677,9 +677,9 @@ a.nav-link{text-decoration:none;}
         <div class="mega-col-head">Products</div>
         <div class="mega-group">
           <ul class="mega-links">
-            <li><a href="ai-innovation.html">Synthetix</a></li>                              <!-- ← LINK -->
-            <li><a href="ai-innovation.html">Celsior AI Lab</a></li>                         <!-- ← LINK -->
-            <li><a href="ai-innovation.html">Design Lab</a></li>                             <!-- ← LINK -->
+            <li><a href="synthetix.html">Synthetix</a></li>                              <!-- ← LINK -->
+            <li><a href="celsior-ai-lab.html">Celsior AI Lab</a></li>                         <!-- ← LINK -->
+            <li><a href="design-lab.html">Design Lab</a></li>                             <!-- ← LINK -->
           </ul>
         </div>
       </div>
@@ -689,8 +689,8 @@ a.nav-link{text-decoration:none;}
         <div class="mega-col-head" style="margin-top:26px">Programs</div>
         <div class="mega-group">
           <ul class="mega-links">
-            <li><a href="ai-innovation.html">Centers of Excellence</a></li>                  <!-- ← LINK -->
-            <li><a href="ai-innovation.html">Frameworks &amp; Accelerators</a></li>          <!-- ← LINK -->
+            <li><a href="centers-of-excellence.html">Centers of Excellence</a></li>                  <!-- ← LINK -->
+            <li><a href="frameworks-accelerators.html">Frameworks &amp; Accelerators</a></li>          <!-- ← LINK -->
           </ul>
         </div>
       </div>
@@ -722,9 +722,9 @@ a.nav-link{text-decoration:none;}
         <div class="mega-col-head">Sectors</div>
         <div class="mega-group">
           <ul class="mega-links">
-            <li><a href="industries.html">Banking &amp; Financial Services</a></li>          <!-- ← LINK -->
-            <li><a href="industries.html">Insurance</a></li>                                 <!-- ← LINK -->
-            <li><a href="industries.html">Healthcare</a></li>                                <!-- ← LINK -->
+            <li><a href="banking-financial-services.html">Banking &amp; Financial Services</a></li>          <!-- ← LINK -->
+            <li><a href="insurance.html">Insurance</a></li>                                 <!-- ← LINK -->
+            <li><a href="healthcare.html">Healthcare</a></li>                                <!-- ← LINK -->
           </ul>
         </div>
       </div>
@@ -757,7 +757,7 @@ a.nav-link{text-decoration:none;}
         <div class="mega-col-head">Alliances</div>
         <div class="mega-group">
           <ul class="mega-links">
-            <li><a href="partner-ecosystem.html">Partners</a></li>                           <!-- ← LINK -->
+            <li><a href="partners.html">Partners</a></li>                           <!-- ← LINK -->
           </ul>
         </div>
         <div class="partner-grid">
@@ -800,9 +800,9 @@ a.nav-link{text-decoration:none;}
         <div class="mega-col-head">Company</div>
         <div class="mega-group">
           <ul class="mega-links">
-            <li><a href="about.html">Who we are + Our Leadership</a></li>                    <!-- ← LINK -->
-            <li><a href="about.html">AI-first Philosophy</a></li>                            <!-- ← LINK -->
-            <li><a href="about.html">Success Stories</a></li>                                <!-- ← LINK -->
+            <li><a href="about-leadership.html">Who we are + Our Leadership</a></li>                    <!-- ← LINK -->
+            <li><a href="ai-first-philosophy.html">AI-first Philosophy</a></li>                            <!-- ← LINK -->
+            <li><a href="success-stories.html">Success Stories</a></li>                                <!-- ← LINK -->
           </ul>
         </div>
       </div>
@@ -812,9 +812,9 @@ a.nav-link{text-decoration:none;}
         <div class="mega-col-head" style="margin-top:26px">News &amp; Careers</div>
         <div class="mega-group">
           <ul class="mega-links">
-            <li><a href="about.html">Blogs</a></li>                                          <!-- ← LINK -->
-            <li><a href="about.html">Careers</a></li>                                        <!-- ← LINK -->
-            <li><a href="about.html">Events &amp; News</a></li>                              <!-- ← LINK -->
+            <li><a href="blogs.html">Blogs</a></li>                                          <!-- ← LINK -->
+            <li><a href="careers.html">Careers</a></li>                                        <!-- ← LINK -->
+            <li><a href="events-news.html">Events &amp; News</a></li>                              <!-- ← LINK -->
           </ul>
         </div>
       </div>
