@@ -369,259 +369,471 @@ a.nav-link{text-decoration:none;}
 
   const drawerDivHTML = `
 
+    <!-- ═══════════════════════════════════════════════════════════
+         MOBILE DRAWER  —  one <a href="..."> per line for easy editing
+         Placeholder links point to the parent page.
+         Search for "/* ← LINK */" to jump to any individual URL.
+         ═══════════════════════════════════════════════════════════ -->
+
+    <!-- ── OUR FOCUS ──────────────────────────────────────────── -->
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-solve">Our Focus<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-solve">
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Priorities</div><a href="Our_Focus.html">AI-First Digital Engineering</a><a href="Our_Focus.html">AI Adoption</a><a href="Our_Focus.html">Risk &amp; Compliance</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Outcomes</div><a href="Our_Focus.html">Cost &amp; Efficiency</a><a href="Our_Focus.html">Digital Experience</a><a href="Our_Focus.html">AI-Led Engineering</a></div>
+
+        <div class="drawer-sub-group">
+          <div class="drawer-sub-head">Priorities</div>
+          <a href="Our_Focus.html">AI-First Digital Engineering</a>   /* ← LINK */
+          <a href="Our_Focus.html">AI Adoption</a>                    /* ← LINK */
+          <a href="Our_Focus.html">Risk &amp; Compliance</a>          /* ← LINK */
+        </div>
+
+        <div class="drawer-sub-group">
+          <div class="drawer-sub-head">Outcomes</div>
+          <a href="Our_Focus.html">Cost &amp; Efficiency</a>          /* ← LINK */
+          <a href="Our_Focus.html">Digital Experience</a>             /* ← LINK */
+        </div>
+
       </div>
     </div>
+
+    <!-- ── CAPABILITIES ───────────────────────────────────────── -->
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-how">Capabilities<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-how">
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Engineering</div><a href="Capabilities.html">Cloud &amp; Infrastructure Engineering</a><a href="Capabilities.html">AI &amp; Data</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Operations</div><a href="Capabilities.html">Digital Operations &amp; Security</a><a href="Capabilities.html">Security &amp; Governance</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Programs</div><a href="Capabilities.html">Managed Programs</a><a href="Capabilities.html">Technology Consulting</a></div>
+
+        <div class="drawer-sub-group">
+          <div class="drawer-sub-head">Engineering</div>
+          <a href="Capabilities.html">AI Led Engineering</a>                       /* ← LINK */
+          <a href="Capabilities.html">Cloud &amp; Infrastructure Engineering</a>  /* ← LINK */
+          <a href="Capabilities.html">AI &amp; Data</a>                           /* ← LINK */
+        </div>
+
+        <div class="drawer-sub-group">
+          <div class="drawer-sub-head">Operations</div>
+          <a href="Capabilities.html">Digital Operations &amp; Security</a>       /* ← LINK */
+          <a href="Capabilities.html">Security &amp; Governance</a>               /* ← LINK */
+        </div>
+
+
+
       </div>
     </div>
+
+    <!-- ── SOLUTIONS ──────────────────────────────────────────── -->
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-deliver">Solutions<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-deliver">
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Global Delivery</div><a href="Solutions.html">GCC &amp; Nearshore</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Talent Models</div><a href="Solutions.html">Teams-as-a-Service</a><a href="Solutions.html">Hire-Train-Deploy</a></div>
+
+        <div class="drawer-sub-group">
+          <div class="drawer-sub-head">Programs</div>
+          <a href="Solutions.html">Managed Programs</a>                           /* ← LINK */
+          <a href="Solutions.html">Technology Consulting</a>                      /* ← LINK */
+        </div>
+
+        <div class="drawer-sub-group">
+          <div class="drawer-sub-head">Global Delivery</div>
+          <a href="Solutions.html">GCC &amp; Nearshore</a>                        /* ← LINK */
+        </div>
+
+        <div class="drawer-sub-group">
+          <div class="drawer-sub-head">Talent Models</div>
+          <a href="Solutions.html">Teams-as-a-Service</a>                         /* ← LINK */
+          <a href="Solutions.html">Hire-Train-Deploy</a>                          /* ← LINK */
+        </div>
+
       </div>
     </div>
+
+    <!-- ── AI & INNOVATION ────────────────────────────────────── -->
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-ai">AI &amp; Innovation<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-ai">
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Products</div><a href="ai-innovation.html">Synthetix</a><a href="ai-innovation.html">Celsior AI Lab</a><a href="ai-innovation.html">Design Lab</a></div>
-        <div class="drawer-sub-group"><div class="drawer-sub-head">Programs</div><a href="ai-innovation.html">Centers of Excellence</a><a href="ai-innovation.html">Frameworks &amp; Accelerators</a></div>
+
+        <div class="drawer-sub-group">
+          <div class="drawer-sub-head">Products</div>
+          <a href="ai-innovation.html">Synthetix</a>                              /* ← LINK */
+          <a href="ai-innovation.html">Celsior AI Lab</a>                         /* ← LINK */
+          <a href="ai-innovation.html">Design Lab</a>                             /* ← LINK */
+        </div>
+
+        <div class="drawer-sub-group">
+          <div class="drawer-sub-head">Programs</div>
+          <a href="ai-innovation.html">Centers of Excellence</a>                  /* ← LINK */
+          <a href="ai-innovation.html">Frameworks &amp; Accelerators</a>          /* ← LINK */
+        </div>
+
       </div>
     </div>
+
+    <!-- ── INDUSTRIES ─────────────────────────────────────────── -->
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-ind">Industries<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-ind">
-        <div class="drawer-sub-group"><a href="industries.html">Banking &amp; Financial Services</a><a href="industries.html">Insurance</a><a href="industries.html">Healthcare</a></div>
+
+        <div class="drawer-sub-group">
+          <a href="industries.html">Banking &amp; Financial Services</a>          /* ← LINK */
+          <a href="industries.html">Insurance</a>                                 /* ← LINK */
+          <a href="industries.html">Healthcare</a>                                /* ← LINK */
+        </div>
+
       </div>
     </div>
+
+    <!-- ── PARTNER ECOSYSTEM ──────────────────────────────────── -->
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-part">Partner Ecosystem<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-part">
-        <div class="drawer-sub-group"><a href="partner-ecosystem.html">Partners</a></div>
+
+        <div class="drawer-sub-group">
+          <a href="partner-ecosystem.html">Partners</a>                           /* ← LINK */
+        </div>
+
       </div>
     </div>
+
+    <!-- ── ABOUT ──────────────────────────────────────────────── -->
     <div class="drawer-item">
       <div class="drawer-link" data-drawer-toggle="d-about">About<svg class="drawer-chevron" viewBox="0 0 16 16" fill="none"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="drawer-sub" id="d-about">
-        <div class="drawer-sub-group"><a href="about.html">Who We Are &amp; Our Leadership</a><a href="about.html">AI-first Philosophy</a><a href="about.html">Success Stories</a><a href="about.html">Blogs</a><a href="about.html">Careers</a><a href="about.html">Events &amp; News</a></div>
+
+        <div class="drawer-sub-group">
+          <a href="about.html">Who we are + Our Leadership</a>                    /* ← LINK */
+          <a href="about.html">AI-first Philosophy</a>                            /* ← LINK */
+          <a href="about.html">Success Stories</a>                                /* ← LINK */
+          <a href="about.html">Blogs</a>                                          /* ← LINK */
+          <a href="about.html">Careers</a>                                        /* ← LINK */
+          <a href="about.html">Events &amp; News</a>                              /* ← LINK */
+        </div>
+
       </div>
     </div>
+
 `;
 
   const megaPanelsHTML = `
 
-  <!-- OUR FOCUS -->
-  <div class="mega-panel" id="menu-solve"><div class="mega-inner">
-    <div class="mega-col">
-      <div class="mega-label">Our Focus</div>
-      <div class="mega-col-head">Priorities</div>
-      <div class="mega-group">
-        <ul class="mega-links">
-          <li><a href="Our_Focus.html">AI-First Digital Engineering</a></li>
-          <li><a href="Our_Focus.html">AI Adoption</a></li>
-          <li><a href="Our_Focus.html">Risk &amp; Compliance</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="mega-col">
-      <div class="mega-col-head" style="margin-top:26px">Outcomes</div>
-      <div class="mega-group">
-        <ul class="mega-links">
-          <li><a href="Our_Focus.html">Cost &amp; Efficiency</a></li>
-          <li><a href="Our_Focus.html">Digital Experience</a></li>
-          <li><a href="Our_Focus.html">AI-Led Engineering</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="mega-col"></div>
-    <div class="mega-featured">
-      <div class="feat-tag">Free Assessment</div>
-      <div class="feat-card"><div class="feat-card-title">Modernization Diagnostic</div><div class="feat-card-desc">2-week assessment of your legacy landscape with a prioritized roadmap.</div></div>
-      <div class="feat-card"><div class="feat-card-title">AI Readiness Index</div><div class="feat-card-desc">Benchmark your AI maturity against industry peers.</div></div>
-    </div>
-  </div></div>
+  <!-- ═══════════════════════════════════════════════════════════════
+       MEGA PANELS  —  one <a href="..."> per line for easy editing.
+       Placeholder hrefs point to the parent page section.
+       Search "/* ← LINK */" to jump to any individual URL.
+       ═══════════════════════════════════════════════════════════════ -->
 
-  <!-- CAPABILITIES -->
-  <div class="mega-panel" id="menu-how"><div class="mega-inner">
-    <div class="mega-col">
-      <div class="mega-label">Capabilities</div>
-      <div class="mega-col-head">Engineering</div>
-      <div class="mega-group">
-        <ul class="mega-links">
-          <li><a href="Capabilities.html">Cloud &amp; Infrastructure Engineering</a></li>
-          <li><a href="Capabilities.html">AI &amp; Data</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="mega-col">
-      <div class="mega-col-head" style="margin-top:26px">Operations</div>
-      <div class="mega-group">
-        <ul class="mega-links">
-          <li><a href="Capabilities.html">Digital Operations &amp; Security</a></li>
-          <li><a href="Capabilities.html">Security &amp; Governance</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="mega-col">
-      <div class="mega-col-head" style="margin-top:26px">Programs</div>
-      <div class="mega-group">
-        <ul class="mega-links">
-          <li><a href="Capabilities.html">Managed Programs</a></li>
-          <li><a href="Capabilities.html">Technology Consulting</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="mega-featured">
-      <div class="feat-tag">Spotlight</div>
-      <div class="feat-card"><div class="feat-card-title">Platform Engineering at Scale</div><div class="feat-card-desc">Golden paths for global banks with 200+ engineering teams.</div></div>
-    </div>
-  </div></div>
+  <!-- ╔══════════════════════════════════════╗
+       ║  OUR FOCUS                           ║
+       ╚══════════════════════════════════════╝ -->
+  <div class="mega-panel" id="menu-solve">
+    <div class="mega-inner">
 
-  <!-- SOLUTIONS -->
-  <div class="mega-panel" id="menu-deliver"><div class="mega-inner">
-    <div class="mega-col">
-      <div class="mega-label">Solutions</div>
-      <div class="mega-col-head">Global Delivery</div>
-      <div class="mega-group">
-        <ul class="mega-links">
-          <li><a href="Solutions.html">GCC &amp; Nearshore</a></li>
-        </ul>
+      <!-- Col 1 — Priorities -->
+      <div class="mega-col">
+        <div class="mega-label">Our Focus</div>
+        <div class="mega-col-head">Priorities</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="Our_Focus.html">AI-First Digital Engineering</a></li>  <!-- ← LINK -->
+            <li><a href="Our_Focus.html">AI Adoption</a></li>                   <!-- ← LINK -->
+            <li><a href="Our_Focus.html">Risk &amp; Compliance</a></li>         <!-- ← LINK -->
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="mega-col">
-      <div class="mega-col-head" style="margin-top:26px">Talent Models</div>
-      <div class="mega-group">
-        <ul class="mega-links">
-          <li><a href="Solutions.html">Teams-as-a-Service</a></li>
-          <li><a href="Solutions.html">Hire-Train-Deploy <span style="display:inline-flex;align-items:center;padding:1px 7px;background:#0d1127;color:#fff;font-size:.58rem;font-weight:700;letter-spacing:.06em;border-radius:3px;text-transform:uppercase;margin-left:4px;">New</span></a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="mega-col"></div>
-    <div class="mega-featured">
-      <div class="feat-tag">Compare Models</div>
-      <div class="feat-card"><div class="feat-card-title">GCC vs. Teams-as-a-Service</div><div class="feat-card-desc">Find the right operating model for your scale and goals.</div></div>
-    </div>
-  </div></div>
 
-  <!-- AI & INNOVATION -->
-  <div class="mega-panel" id="menu-ai"><div class="mega-inner">
-    <div class="mega-col">
-      <div class="mega-label">AI &amp; Innovation</div>
-      <div class="mega-col-head">Products</div>
-      <div class="mega-group">
-        <ul class="mega-links">
-          <li><a href="ai-innovation.html">Synthetix</a></li>
-          <li><a href="ai-innovation.html">Celsior AI Lab</a></li>
-          <li><a href="ai-innovation.html">Design Lab</a></li>
-        </ul>
+      <!-- Col 2 — Outcomes -->
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Outcomes</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="Our_Focus.html">Cost &amp; Efficiency</a></li>         <!-- ← LINK -->
+            <li><a href="Our_Focus.html">Digital Experience</a></li>            <!-- ← LINK -->
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="mega-col">
-      <div class="mega-col-head" style="margin-top:26px">Programs</div>
-      <div class="mega-group">
-        <ul class="mega-links">
-          <li><a href="ai-innovation.html">Centers of Excellence</a></li>
-          <li><a href="ai-innovation.html">Frameworks &amp; Accelerators</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="mega-col"></div>
-    <div class="mega-featured">
-      <div class="feat-tag">Live Demo</div>
-      <div class="feat-card"><div class="feat-card-title">Synthetix in Action</div><div class="feat-card-desc">See how our AI orchestration layer connects policy, claims, and risk in real time.</div></div>
-    </div>
-  </div></div>
 
-  <!-- INDUSTRIES -->
-  <div class="mega-panel" id="menu-industries"><div class="mega-inner">
-    <div class="mega-col">
-      <div class="mega-label">Industries</div>
-      <div class="mega-col-head">Sectors</div>
-      <div class="mega-group">
-        <ul class="mega-links">
-          <li><a href="industries.html">Banking &amp; Financial Services</a></li>
-          <li><a href="industries.html">Insurance</a></li>
-          <li><a href="industries.html">Healthcare</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="mega-col"></div>
-    <div class="mega-col"></div>
-    <div class="mega-featured">
-      <div class="feat-tag">Industry Brief</div>
-      <div class="feat-card"><div class="feat-card-title">Regulated Industry Playbook</div><div class="feat-card-desc">How leading banks, insurers, and health systems modernize without disruption.</div></div>
-    </div>
-  </div></div>
+      <!-- Col 3 — empty spacer -->
+      <div class="mega-col"></div>
 
-  <!-- PARTNER ECOSYSTEM -->
-  <div class="mega-panel" id="menu-partners"><div class="mega-inner">
-    <div class="mega-col">
-      <div class="mega-label">Partner Ecosystem</div>
-      <div class="mega-col-head">Alliances</div>
-      <div class="mega-group">
-        <ul class="mega-links">
-          <li><a href="partner-ecosystem.html">Partners</a></li>
-        </ul>
+      <!-- Featured card -->
+      <div class="mega-featured">
+        <div class="feat-tag">Free Assessment</div>
+        <div class="feat-card">
+          <div class="feat-card-title">Modernization Diagnostic</div>
+          <div class="feat-card-desc">2-week assessment of your legacy landscape with a prioritized roadmap.</div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-card-title">AI Readiness Index</div>
+          <div class="feat-card-desc">Benchmark your AI maturity against industry peers.</div>
+        </div>
       </div>
-      <div class="partner-grid">
-        <span class="partner-pill"><span class="p-dot"></span>ServiceNow</span>
-        <span class="partner-pill"><span class="p-dot"></span>Guidewire</span>
-        <span class="partner-pill"><span class="p-dot"></span>AWS</span>
-        <span class="partner-pill"><span class="p-dot"></span>Azure</span>
-        <span class="partner-pill"><span class="p-dot"></span>Google Cloud</span>
-        <span class="partner-pill"><span class="p-dot"></span>Snowflake</span>
-        <span class="partner-pill"><span class="p-dot"></span>Dynatrace</span>
-        <span class="partner-pill"><span class="p-dot"></span>UiPath</span>
-      </div>
-    </div>
-    <div class="mega-col"></div>
-    <div class="mega-col"></div>
-    <div class="mega-featured">
-      <div class="feat-tag">Partnerships</div>
-      <div class="feat-card"><div class="feat-card-title">Become a Partner</div><div class="feat-card-desc">Join Celsior's ecosystem of technology and implementation partners.</div></div>
-    </div>
-  </div></div>
 
-  <!-- ABOUT -->
-  <div class="mega-panel" id="menu-about"><div class="mega-inner">
-    <div class="mega-col">
-      <div class="mega-label">About</div>
-      <div class="mega-col-head">Company</div>
-      <div class="mega-group">
-        <ul class="mega-links">
-          <li><a href="about.html">Who We Are &amp; Our Leadership</a></li>
-          <li><a href="about.html">AI-first Philosophy</a></li>
-          <li><a href="about.html">Success Stories</a></li>
-        </ul>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗
+       ║  CAPABILITIES                        ║
+       ╚══════════════════════════════════════╝ -->
+  <div class="mega-panel" id="menu-how">
+    <div class="mega-inner">
+
+      <!-- Col 1 — Engineering -->
+      <div class="mega-col">
+        <div class="mega-label">Capabilities</div>
+        <div class="mega-col-head">Engineering</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="Capabilities.html">AI Led Engineering</a></li>                      <!-- ← LINK -->
+            <li><a href="Capabilities.html">Cloud &amp; Infrastructure Engineering</a></li>  <!-- ← LINK -->
+            <li><a href="Capabilities.html">AI &amp; Data</a></li>                           <!-- ← LINK -->
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="mega-col">
-      <div class="mega-col-head" style="margin-top:26px">News &amp; Careers</div>
-      <div class="mega-group">
-        <ul class="mega-links">
-          <li><a href="about.html">Blogs</a></li>
-          <li><a href="about.html">Careers</a></li>
-          <li><a href="about.html">Events &amp; News</a></li>
-        </ul>
+
+      <!-- Col 2 — Operations -->
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Operations</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="Capabilities.html">Digital Operations &amp; Security</a></li>       <!-- ← LINK -->
+            <li><a href="Capabilities.html">Security &amp; Governance</a></li>               <!-- ← LINK -->
+          </ul>
+        </div>
       </div>
+
+      <!-- Col 3 — empty spacer -->
+      <div class="mega-col"></div>
+
+      <!-- Featured card -->
+      <div class="mega-featured">
+        <div class="feat-tag">Spotlight</div>
+        <div class="feat-card">
+          <div class="feat-card-title">Platform Engineering at Scale</div>
+          <div class="feat-card-desc">Golden paths for global banks with 200+ engineering teams.</div>
+        </div>
+      </div>
+
     </div>
-    <div class="mega-col"></div>
-    <div class="mega-featured">
-      <div class="feat-tag">Join Us</div>
-      <div class="feat-card"><div class="feat-card-title">Life at Celsior</div><div class="feat-card-desc">Engineering-first culture, global teams, and a mission that matters.</div></div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗
+       ║  SOLUTIONS                           ║
+       ╚══════════════════════════════════════╝ -->
+  <div class="mega-panel" id="menu-deliver">
+    <div class="mega-inner">
+
+      <!-- Col 1 — Programs & Consulting -->
+      <div class="mega-col">
+        <div class="mega-label">Solutions</div>
+        <div class="mega-col-head">Programs</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="Solutions.html">Managed Programs</a></li>                           <!-- ← LINK -->
+            <li><a href="Solutions.html">Technology Consulting</a></li>                      <!-- ← LINK -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Col 2 — Global Delivery -->
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Global Delivery</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="Solutions.html">GCC &amp; Nearshore</a></li>                        <!-- ← LINK -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Col 3 — Talent Models -->
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Talent Models</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="Solutions.html">Teams-as-a-Service</a></li>                         <!-- ← LINK -->
+            <li><a href="Solutions.html">Hire-Train-Deploy
+              <span style="display:inline-flex;align-items:center;padding:1px 7px;background:#0d1127;color:#fff;font-size:.58rem;font-weight:700;letter-spacing:.06em;border-radius:3px;text-transform:uppercase;margin-left:4px;">New</span>
+            </a></li>                                                                        <!-- ← LINK -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Featured card -->
+      <div class="mega-featured">
+        <div class="feat-tag">Compare Models</div>
+        <div class="feat-card">
+          <div class="feat-card-title">GCC vs. Teams-as-a-Service</div>
+          <div class="feat-card-desc">Find the right operating model for your scale and goals.</div>
+        </div>
+      </div>
+
     </div>
-  </div></div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗
+       ║  AI & INNOVATION                     ║
+       ╚══════════════════════════════════════╝ -->
+  <div class="mega-panel" id="menu-ai">
+    <div class="mega-inner">
+
+      <!-- Col 1 — Products -->
+      <div class="mega-col">
+        <div class="mega-label">AI &amp; Innovation</div>
+        <div class="mega-col-head">Products</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="ai-innovation.html">Synthetix</a></li>                              <!-- ← LINK -->
+            <li><a href="ai-innovation.html">Celsior AI Lab</a></li>                         <!-- ← LINK -->
+            <li><a href="ai-innovation.html">Design Lab</a></li>                             <!-- ← LINK -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Col 2 — Programs -->
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">Programs</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="ai-innovation.html">Centers of Excellence</a></li>                  <!-- ← LINK -->
+            <li><a href="ai-innovation.html">Frameworks &amp; Accelerators</a></li>          <!-- ← LINK -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Col 3 — empty spacer -->
+      <div class="mega-col"></div>
+
+      <!-- Featured card -->
+      <div class="mega-featured">
+        <div class="feat-tag">Live Demo</div>
+        <div class="feat-card">
+          <div class="feat-card-title">Synthetix in Action</div>
+          <div class="feat-card-desc">See how our AI orchestration layer connects policy, claims, and risk in real time.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗
+       ║  INDUSTRIES                          ║
+       ╚══════════════════════════════════════╝ -->
+  <div class="mega-panel" id="menu-industries">
+    <div class="mega-inner">
+
+      <!-- Col 1 — Sectors -->
+      <div class="mega-col">
+        <div class="mega-label">Industries</div>
+        <div class="mega-col-head">Sectors</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="industries.html">Banking &amp; Financial Services</a></li>          <!-- ← LINK -->
+            <li><a href="industries.html">Insurance</a></li>                                 <!-- ← LINK -->
+            <li><a href="industries.html">Healthcare</a></li>                                <!-- ← LINK -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Col 2 & 3 — empty spacers -->
+      <div class="mega-col"></div>
+      <div class="mega-col"></div>
+
+      <!-- Featured card -->
+      <div class="mega-featured">
+        <div class="feat-tag">Industry Brief</div>
+        <div class="feat-card">
+          <div class="feat-card-title">Regulated Industry Playbook</div>
+          <div class="feat-card-desc">How leading banks, insurers, and health systems modernize without disruption.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗
+       ║  PARTNER ECOSYSTEM                   ║
+       ╚══════════════════════════════════════╝ -->
+  <div class="mega-panel" id="menu-partners">
+    <div class="mega-inner">
+
+      <!-- Col 1 — Alliances -->
+      <div class="mega-col">
+        <div class="mega-label">Partner Ecosystem</div>
+        <div class="mega-col-head">Alliances</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="partner-ecosystem.html">Partners</a></li>                           <!-- ← LINK -->
+          </ul>
+        </div>
+        <div class="partner-grid">
+          <span class="partner-pill"><span class="p-dot"></span>ServiceNow</span>
+          <span class="partner-pill"><span class="p-dot"></span>Guidewire</span>
+          <span class="partner-pill"><span class="p-dot"></span>AWS</span>
+          <span class="partner-pill"><span class="p-dot"></span>Azure</span>
+          <span class="partner-pill"><span class="p-dot"></span>Google Cloud</span>
+          <span class="partner-pill"><span class="p-dot"></span>Snowflake</span>
+          <span class="partner-pill"><span class="p-dot"></span>Dynatrace</span>
+          <span class="partner-pill"><span class="p-dot"></span>UiPath</span>
+        </div>
+      </div>
+
+      <!-- Col 2 & 3 — empty spacers -->
+      <div class="mega-col"></div>
+      <div class="mega-col"></div>
+
+      <!-- Featured card -->
+      <div class="mega-featured">
+        <div class="feat-tag">Partnerships</div>
+        <div class="feat-card">
+          <div class="feat-card-title">Become a Partner</div>
+          <div class="feat-card-desc">Join Celsior's ecosystem of technology and implementation partners.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════╗
+       ║  ABOUT                               ║
+       ╚══════════════════════════════════════╝ -->
+  <div class="mega-panel" id="menu-about">
+    <div class="mega-inner">
+
+      <!-- Col 1 — Company -->
+      <div class="mega-col">
+        <div class="mega-label">About</div>
+        <div class="mega-col-head">Company</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="about.html">Who we are + Our Leadership</a></li>                    <!-- ← LINK -->
+            <li><a href="about.html">AI-first Philosophy</a></li>                            <!-- ← LINK -->
+            <li><a href="about.html">Success Stories</a></li>                                <!-- ← LINK -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Col 2 — News & Careers -->
+      <div class="mega-col">
+        <div class="mega-col-head" style="margin-top:26px">News &amp; Careers</div>
+        <div class="mega-group">
+          <ul class="mega-links">
+            <li><a href="about.html">Blogs</a></li>                                          <!-- ← LINK -->
+            <li><a href="about.html">Careers</a></li>                                        <!-- ← LINK -->
+            <li><a href="about.html">Events &amp; News</a></li>                              <!-- ← LINK -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Col 3 — empty spacer -->
+      <div class="mega-col"></div>
+
+      <!-- Featured card -->
+      <div class="mega-featured">
+        <div class="feat-tag">Join Us</div>
+        <div class="feat-card">
+          <div class="feat-card-title">Life at Celsior</div>
+          <div class="feat-card-desc">Engineering-first culture, global teams, and a mission that matters.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 `;
 
   let backdropEl = document.getElementById('mega-backdrop');
