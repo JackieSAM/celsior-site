@@ -52,9 +52,21 @@
     .hero {
       position: relative;
       width: 100%;
-      height: 760px;
+      height: 100dvh;
+      /* true dynamic viewport — adjusts as mobile chrome shows/hides */
+      min-height: 640px;
+      /* never too short even on small phones */
+      max-height: 1080px;
+      /* cap on ultra-wide / 4K so content stays reachable */
       overflow: hidden;
       background: #0b0b0b;
+    }
+
+    /* Fallback for browsers without dvh support (Safari < 15.4) */
+    @supports not (height: 100dvh) {
+      .hero {
+        height: 100vh;
+      }
     }
 
     .hero-bg {
@@ -481,7 +493,8 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      min-width: 128px;
+      width: 164px;
+      text-align: center;
       padding: 6px 14px;
       border-radius: 4px;
       background: #0d1127;
@@ -1322,7 +1335,8 @@
     }
 
     .faq__intro .eyebrow {
-      margin: 0 0 30px;
+      margin: 0 0 16px;
+      /* matches unified eyebrow spacing */
     }
 
     .faq__intro h2 {
@@ -2851,6 +2865,334 @@
       }
     }
   </style>
+
+  <!-- ═══ RESPONSIVE SYSTEM — same approved 3-tier breakpoints ═══ -->
+  <style>
+    /* ── TIER 1 | ≥ 1140px — Full desktop layout ── */
+    @media (min-width: 1140px) {
+
+      /* Stats: hold 4-col */
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+      }
+
+      .stat-col {
+        border-right: 1px solid var(--border) !important;
+        border-bottom: none !important;
+      }
+
+      .stat-col:last-child {
+        border-right: none !important;
+      }
+
+      .stat-col:nth-child(odd) {
+        border-right: 1px solid var(--border) !important;
+      }
+
+      .stat-col:nth-last-child(2):nth-child(odd) {
+        border-bottom: none !important;
+      }
+
+      /* Cost 2-col */
+      .cost-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: clamp(40px, 5vw, 72px) !important;
+      }
+
+      .cost-qxq-cols {
+        grid-template-columns: 1fr 1fr !important;
+        gap: clamp(28px, 4vw, 56px) !important;
+      }
+
+      /* Ops-cost 3-col + restore absolute dividers */
+      .ops-cost-cards {
+        grid-template-columns: 1fr 1fr 1fr !important;
+      }
+
+      .ops-cost-cards>[style*="position:absolute"] {
+        display: block !important;
+      }
+
+      /* Testimonial side-by-side */
+      .test-card {
+        display: grid !important;
+        flex-direction: unset !important;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 36%) !important;
+      }
+
+      .test-right {
+        width: auto !important;
+        margin: clamp(14px, 1.6vw, 24px) !important;
+        margin-left: 0 !important;
+      }
+
+      /* Blog + Insight 3-col */
+      .blog-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+
+      .insight-cards {
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+
+      /* FAQ 2-col split */
+      .faq__inner {
+        grid-template-columns: 1fr 1fr !important;
+      }
+
+      .faq__inner::after {
+        display: block !important;
+      }
+
+      .faq__intro {
+        padding-top: var(--section-pad-v) !important;
+        padding-right: clamp(32px, 4vw, 80px) !important;
+        padding-bottom: clamp(32px, 4vw, 48px) !important;
+        padding-left: 0 !important;
+      }
+
+      .faq__items {
+        padding-left: 52px !important;
+        padding-top: 80px !important;
+      }
+
+      /* Outcomes: restore absolute heading + 4-col cards */
+      .outcomes {
+        min-height: clamp(500px, 88vh, 900px) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-end !important;
+      }
+
+      .outcomes__heading {
+        position: absolute !important;
+      }
+
+      .outcome-cards {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        align-items: end !important;
+      }
+
+      .outcome-card--green {
+        height: clamp(180px, 37vh, 354px) !important;
+      }
+
+      .outcome-card--blue {
+        height: clamp(230px, 48vh, 463px) !important;
+      }
+
+      .outcome-card--gold {
+        height: clamp(320px, 67vh, 652px) !important;
+      }
+
+      .outcome-card--dark {
+        height: clamp(420px, 86vh, 847px) !important;
+      }
+    }
+
+    /* ── TIER 2 | 640px–1139px — Compact mid-state ── */
+    @media (max-width: 1139px) {
+
+      /* Hero: height adapts but keeps dvh */
+      .hero {
+        max-height: none !important;
+        min-height: 580px !important;
+      }
+
+      .hero-heading {
+        white-space: normal !important;
+        font-size: clamp(22px, 3.8vw, 44px) !important;
+      }
+
+      .hero-btns {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      /* Stats 2×2 */
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .stat-col {
+        border-right: none !important;
+        border-bottom: 1px solid var(--border) !important;
+      }
+
+      .stat-col:nth-child(odd) {
+        border-right: 1px solid var(--border) !important;
+      }
+
+      .stat-col:last-child,
+      .stat-col:nth-last-child(2):nth-child(odd) {
+        border-bottom: none !important;
+      }
+
+      /* Cost 1-col */
+      .cost-grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+      }
+
+      .cost-h2 {
+        font-size: clamp(24px, 3.8vw, 48px) !important;
+        line-height: 1.08 !important;
+      }
+
+      .cost-qxq-cols {
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+      }
+
+      .amber-frame {
+        height: auto !important;
+        min-height: 220px;
+      }
+
+      .amber-frame img {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      /* Ops-cost 2-col */
+      .ops-cost-cards {
+        grid-template-columns: 1fr 1fr !important;
+      }
+
+      .ops-cost-cards>[style*="position:absolute"] {
+        display: none !important;
+      }
+
+      .ops-cost-cards>div {
+        padding: clamp(28px, 3.5vw, 48px) clamp(16px, 2.5vw, 32px) clamp(24px, 3vw, 40px) !important;
+      }
+
+      .ops-cost-cards h3 {
+        white-space: normal !important;
+        font-size: clamp(16px, 1.8vw, 22px) !important;
+      }
+
+      /* Testimonial stacked */
+      .test-card {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: unset !important;
+      }
+
+      .test-right {
+        margin: 0 clamp(16px, 2vw, 24px) clamp(16px, 2vw, 24px) !important;
+      }
+
+      /* Blog + Insight 2-col */
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .insight-cards {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      /* FAQ 1-col */
+      .faq__inner {
+        grid-template-columns: 1fr !important;
+      }
+
+      .faq__inner::after {
+        display: none !important;
+      }
+
+      .faq__intro {
+        padding: clamp(40px, 4vw, 60px) 0 clamp(24px, 3vw, 40px) !important;
+      }
+
+      .faq__items {
+        padding-left: 0 !important;
+        padding-top: 0 !important;
+      }
+
+      /* Outcomes: static heading + 2×2 cards */
+      .outcomes {
+        min-height: unset !important;
+        padding-top: clamp(40px, 5vw, 64px) !important;
+        display: block !important;
+      }
+
+      .outcomes__heading {
+        position: static !important;
+        width: auto !important;
+        max-width: 560px;
+        margin-bottom: 28px;
+      }
+
+      .outcome-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        align-items: stretch !important;
+      }
+
+      .outcome-card--green,
+      .outcome-card--blue,
+      .outcome-card--gold,
+      .outcome-card--dark {
+        height: clamp(240px, 38vw, 340px) !important;
+        padding: 28px 22px 24px !important;
+      }
+
+      /* Headings fluid */
+      h2,
+      section h2 {
+        font-size: clamp(22px, 3.4vw, 42px) !important;
+      }
+    }
+
+    /* ── TIER 3 | ≤ 640px — Mobile reinforcement ── */
+    @media (max-width: 640px) {
+      .ops-cost-cards {
+        grid-template-columns: 1fr !important;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
+      .insight-cards {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-ghost,
+      .btn-white {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* ── Global (any width) ── */
+    .cost-h2 {
+      font-size: clamp(24px, 3.8vw, 55px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+
+    h3[style*="white-space"] {
+      white-space: normal !important;
+    }
+
+    /* Eyebrow spacing consistency — ensure CLIENT PROOF + all eyebrows
+       maintain exactly 16px bottom-margin before their h2 */
+    #testimonial-sec .eyebrow {
+      display: block;
+      margin-bottom: 16px;
+    }
+  </style>
 </head>
 
 <body>
@@ -2930,7 +3272,7 @@
   <section id="platform-ops-cost" style="background:#fff;border-top:1px solid rgba(13,17,39,0.08);">
 
     <!-- Heading -->
-    <p class="eyebrow">HOW WE THINK DIFFERENTLY</p>
+    <p class="eyebrow">Consequenses</p>
     <h2
       style="font-size:55px;font-weight:700;letter-spacing:-1px;line-height:55px;color:#09090b;max-width:1048px;margin-bottom:32px;">
       The compounding cost of legacy logic.</h2>
@@ -3470,6 +3812,7 @@
        CSS tag : /* === TESTIMONIAL === */
        ============================================================ -->
   <section id="testimonial-sec" class="sec-border">
+    <p class="eyebrow">Testimonial</p>
     <h2
       style="font-size:clamp(28px, 4.5vw, 58px);font-weight:700;color:#111827;letter-spacing:-0.6px;line-height:1.05;margin-bottom:clamp(20px, 2.4vw, 32px);">
       Delivered at enterprise scale</h2>
@@ -3517,7 +3860,7 @@
   <section class="faq">
     <div class="faq__inner">
       <div class="faq__intro">
-        <p class="eyebrow">QUESTIONS LEADERS ASK BEFORE ENGAGING</p>
+        <p class="eyebrow">FAQ</p>
         <h2>Questions business leaders ask before engaging</h2>
         <p>Covering ROI, risk, timelines, and delivery model — the questions that matter to decision-makers, answered
           directly.</p>
@@ -3965,7 +4308,7 @@
     })();
   </script>
 
-  <script src="/shared.js" defer></script>
+  <script src="shared.js" defer></script>
 </body>
 
 </html>
