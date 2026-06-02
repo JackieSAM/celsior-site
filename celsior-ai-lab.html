@@ -4,7 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Celsior | Solutions — Managed Programs</title>
+  <title>Celsior | AI-First Digital Engineering</title>
+  <meta name="description"
+    content="Celsior applies AI-assisted discovery, modernization engineering, and delivery governance to convert legacy technology into measurable business velocity." />
+  <meta property="og:title" content="Celsior | AI-First Digital Engineering" />
+  <meta property="og:description"
+    content="Celsior applies AI-assisted discovery, modernization engineering, and delivery governance to convert legacy technology into measurable business velocity." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -45,17 +52,27 @@
     .hero {
       position: relative;
       width: 100%;
-      height: 100vh;
-      min-height: 560px;   /* never collapses on tiny screens */
-      max-height: 1080px;  /* never over-extends on tall monitors */
+      height: 100dvh;
+      /* true dynamic viewport — adjusts as mobile chrome shows/hides */
+      min-height: 640px;
+      /* never too short even on small phones */
+      max-height: 1080px;
+      /* cap on ultra-wide / 4K so content stays reachable */
       overflow: hidden;
       background: #0b0b0b;
+    }
+
+    /* Fallback for browsers without dvh support (Safari < 15.4) */
+    @supports not (height: 100dvh) {
+      .hero {
+        height: 100vh;
+      }
     }
 
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1780294215/GCC_b8kqhh.png') center/cover no-repeat;
+      background: url('https://pro-app.co.uk/app/uploads/2025/12/AI-in-schools.png') center/cover no-repeat;
       transform: scale(1.06);
       transform-origin: center;
     }
@@ -80,7 +97,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: clamp(420px, 68vh, 680px);
+      height: 520px;
       background: linear-gradient(to top, #0b0b0b 35%, rgba(11, 11, 11, 0.7) 60%, transparent);
     }
 
@@ -166,8 +183,6 @@
       grid-template-columns: repeat(4, 1fr);
       border-bottom: 1px solid var(--border);
       margin-bottom: 28px;
-      align-items: flex-start;
-      justify-content: flex-start;
     }
 
     .stat-col {
@@ -206,7 +221,7 @@
     }
 
     .stat-note-lbl {
-      font-size: 20px;
+      font-size: 14px;
       font-weight: 500;
       color: #374151;
       margin-bottom: 6px;
@@ -230,7 +245,9 @@
     .sec-border {
       border-top: 1px solid rgba(13, 17, 39, 0.08);
     }
-
+    .sec-border-2 {
+      border-bottom: 1px solid rgba(13, 17, 39, 0.08);
+    }
     /* ============================================================
        === COST Q×Q ===
        Quarter-by-quarter narrative + cost-category accordion.
@@ -333,9 +350,6 @@
       gap: 24px;
     }
 
-    /* ============================================================
-       === BLOG CARDS — TRUNCATE + HOVER EXPAND ===
-       ============================================================ */
     .blog-card {
       border-radius: 18px;
       overflow: hidden;
@@ -344,7 +358,6 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      cursor: pointer;
     }
 
     .blog-card-bg {
@@ -354,31 +367,17 @@
       height: 100%;
       object-fit: cover;
       object-position: top;
-      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .blog-card:hover .blog-card-bg,
-    .blog-card.is-expanded .blog-card-bg {
-      transform: scale(1.04);
     }
 
     .blog-card-overlay {
       position: absolute;
       inset: 0;
-      transition: opacity 0.45s ease;
-    }
-
-    .blog-card:hover .blog-card-overlay,
-    .blog-card.is-expanded .blog-card-overlay {
-      opacity: 1.3;
     }
 
     .blog-card-body {
       position: relative;
       z-index: 2;
       padding: 32px 28px;
-      /* Bottom padding expands on hover to accommodate extra text */
-      transition: padding-bottom 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .blog-card-ttl {
@@ -386,57 +385,12 @@
       font-weight: 700;
       color: #fff;
       margin-bottom: 12px;
-      line-height: 1.3;
-      /* Clamp to 2 lines */
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      transition: -webkit-line-clamp 0s, max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-      max-height: calc(24px * 1.3 * 2 + 2px); /* 2 lines */
     }
 
     .blog-card-txt {
       font-size: 16px;
       color: rgba(255, 255, 255, 0.9);
       line-height: 23px;
-      /* Clamp to 3 lines */
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      max-height: calc(23px * 3 + 2px); /* 3 lines */
-      transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                  -webkit-line-clamp 0s 0s;
-    }
-
-    /* ── Desktop: hover to expand ── */
-    @media (hover: hover) and (pointer: fine) {
-      .blog-card:hover .blog-card-ttl {
-        -webkit-line-clamp: unset;
-        max-height: 300px; /* large enough for any title */
-      }
-
-      .blog-card:hover .blog-card-txt {
-        -webkit-line-clamp: unset;
-        max-height: 400px; /* large enough for any body */
-      }
-
-      .blog-card:hover .blog-card-overlay {
-        /* deepen gradient on hover for readability */
-        filter: brightness(1.15);
-      }
-    }
-
-    /* ── Mobile: tap to expand (JS toggles .is-expanded) ── */
-    .blog-card.is-expanded .blog-card-ttl {
-      -webkit-line-clamp: unset;
-      max-height: 300px;
-    }
-
-    .blog-card.is-expanded .blog-card-txt {
-      -webkit-line-clamp: unset;
-      max-height: 400px;
     }
 
     /* ============================================================
@@ -528,16 +482,12 @@
       align-items: center;
     }
 
-    /* Row-left takes all remaining space; row-right never squishes */
     .explore__row-left {
-      gap: 20px;
-      flex: 1 1 0;
-      min-width: 0;
+      gap: 24px;
     }
 
     .explore__row-right {
       flex-shrink: 0;
-      margin-left: 20px;
     }
 
     .explore__label {
@@ -546,7 +496,6 @@
       justify-content: center;
       flex-shrink: 0;
       width: 164px;
-      min-width: 100px;
       text-align: center;
       padding: 6px 14px;
       border-radius: 4px;
@@ -567,17 +516,15 @@
     }
 
     .explore__text {
-      display: block;
-      min-width: 0;
-      flex: 1 1 0;
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
       color: #0d1127;
-      font-size: clamp(1rem, 1.8vw, 1.55rem);
-      line-height: 1.25;
+      font-size: clamp(1.1rem, 1.8vw, 1.55rem);
+      line-height: 1.12;
       font-weight: 600;
       letter-spacing: -0.02em;
       transition: color 0.3s ease;
-      white-space: normal;
-      word-break: break-word;
     }
 
     .explore__char {
@@ -637,6 +584,15 @@
       border-color: rgba(243, 210, 95, 0.6);
     }
 
+    .explore__links a:nth-child(4)::before {
+      background: linear-gradient(120deg, #3b0764 0%, #7c3aed 50%, #c084fc 100%);
+    }
+
+    .explore__links a:nth-child(4):hover .explore__arrow {
+      background: rgba(192, 132, 252, 0.3);
+      border-color: rgba(192, 132, 252, 0.6);
+    }
+
     .explore__links a:hover .explore__arrow svg {
       animation: exploreArrowStagger 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
@@ -665,51 +621,58 @@
 
     @media (max-width: 720px) {
       .explore {
-        padding: 48px 16px 64px;
+        padding: 64px 20px 72px;
       }
 
       .explore h2 {
-        margin-bottom: 28px;
+        margin-bottom: 30px;
         font-size: clamp(1.5rem, 6.5vw, 2rem);
       }
 
-      /* Stack label above text+arrow on mobile */
       .explore__links a {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "label label"
+          "text  arrow";
+        column-gap: 14px;
+        row-gap: 14px;
+        align-items: center;
         padding: 20px 18px;
       }
 
       .explore__row-left {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        width: 100%;
-        min-width: 0;
+        display: contents;
       }
 
       .explore__row-right {
-        width: 100%;
-        margin-left: 0;
-        justify-content: flex-end;
+        display: contents;
       }
 
       .explore__label {
-        width: auto;
-        min-width: 0;
-        padding: 5px 10px;
-        font-size: 0.58rem;
+        grid-area: label;
+        justify-self: start;
       }
 
       .explore__text {
-        font-size: clamp(0.95rem, 4vw, 1.15rem);
-        line-height: 1.3;
+        grid-area: text;
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+        align-self: center;
       }
 
       .explore__arrow {
+        grid-area: arrow;
         width: 36px;
         height: 36px;
+        align-self: center;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .explore__label {
+        min-width: auto;
+        padding: 5px 10px;
+        font-size: 0.58rem;
       }
     }
 
@@ -1374,7 +1337,8 @@
     }
 
     .faq__intro .eyebrow {
-      margin: 0 0 30px;
+      margin: 0 0 16px;
+      /* matches unified eyebrow spacing */
     }
 
     .faq__intro h2 {
@@ -1686,7 +1650,7 @@
 
     /* Platforms logo bar — compact vertical, same horizontal gutter */
     .platforms {
-      padding: 28px var(--section-pad-h) clamp(32px, 4vw, 56px) !important;
+      padding: 28px var(--section-pad-h) 0 !important;
     }
 
     /* Cost Q×Q */
@@ -1800,7 +1764,6 @@
     .blog-card-txt {
       font-size: 16px !important;
       line-height: 23px !important;
-      /* keep max-height in sync at mobile font-size */
     }
 
     .faq__intro p {
@@ -1829,13 +1792,13 @@
 ═══════════════════════════════════════════════════ */
     .eyebrow {
       display: block;
-      margin: 0 0 14px;
+      margin: 0 0 16px;
       color: #6b7280 !important;
       font-family: 'Inter', system-ui, sans-serif !important;
       font-size: 0.72rem !important;
       line-height: 1 !important;
       font-weight: 600 !important;
-      letter-spacing: 0.13em !important;
+      letter-spacing: 0.12em !important;
       text-transform: uppercase !important;
     }
 
@@ -1847,10 +1810,9 @@
       line-height: 1 !important;
       color: #6b7280 !important;
       font-weight: 600 !important;
-      letter-spacing: 0.13em !important;
+      letter-spacing: 0.12em !important;
       text-transform: uppercase !important;
       font-family: 'Inter', system-ui, sans-serif !important;
-      margin: 0 0 14px !important;
     }
 
     /* Outcomes section intentionally hides its eyebrow */
@@ -2023,8 +1985,7 @@
 
       /* ── Hero ── */
       .hero {
-        height: 100vh;
-        min-height: 520px;
+        min-height: 480px;
       }
 
       .hero-heading {
@@ -2287,14 +2248,720 @@
     }
 
     /* ── Mobile styles consolidated above ── 
+  
+
+/* === Our Focus retained-section styles === */
+    .section-frame {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 clamp(24px, 5.5vw, 80px);
+    }
+
+    .eyebrow {
+      margin: 0 0 25px;
+      color: #52525b;
+      font-size: 13.6px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    /* ── Analysis two-column header ── */
+    .analysis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      gap: clamp(24px, 4vw, 72px);
+      padding-top: clamp(56px, 6vw, 96px);
+      padding-bottom: clamp(32px, 3vw, 48px);
+    }
+
+    .analysis>div:first-child {
+      max-width: 600px;
+    }
+
+    .analysis>div:first-child h2 {
+      font-size: clamp(1.75rem, 3.2vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: #0d1127;
+      margin: 0;
+    }
+
+    .analysis__copy {
+      align-self: center;
+      color: #52525b;
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.7;
+    }
+
+    .analysis__copy p {
+      margin: 0;
+    }
+
+    /* ── Solution cards grid ── */
+    .solution-cards {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(12px, 1.4vw, 20px);
+      margin-top: clamp(16px, 2vw, 28px);
+      align-items: stretch;
+    }
+
+    .solution-cards article {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      /* Fixed height so all 3 cards are identical — content aligns perfectly */
+      height: clamp(460px, 42vw, 580px);
+      overflow: hidden;
+      border-radius: clamp(10px, 1.2vw, 16px);
+      background: #071018;
+      color: #fff;
+      box-shadow: 0 18px 34px rgba(15, 23, 42, 0.22);
+      isolation: isolate;
+      cursor: pointer;
+      /* Smooth card lift on hover */
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .solution-cards article:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 56px rgba(15, 23, 42, 0.38);
+    }
+
+    /* Dark gradient overlay — bottom-heavy for text legibility */
+    .solution-cards article::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg,
+          rgba(2, 8, 18, 0.04) 0%,
+          rgba(2, 8, 18, 0.18) 35%,
+          rgba(2, 8, 18, 0.92) 100%);
+    }
+
+    /* Subtle top gloss */
+    .solution-cards article::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      border-radius: inherit;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+
+    /* Background image — subtle zoom on hover */
+    .solution-cards img {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.88) contrast(0.96);
+      opacity: 0.85;
+      transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.55s ease;
+    }
+
+    .solution-cards article:hover img {
+      transform: scale(1.05);
+      opacity: 0.72;
+    }
+
+    /* ── Inner layout: index top, body pinned to bottom ── */
+    .solution-card-inner {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: clamp(18px, 2vw, 28px);
+    }
+
+    /* Index number — top-left, spacer pushes body down */
+    .solution-index {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      flex-shrink: 0;
+    }
+
+    /* Invisible spacer between index and body — fills available space */
+    .solution-card-spacer {
+      flex: 1;
+    }
+
+    /* Body: h3 + p + link — always anchored to bottom of card */
+    .solution-card-body {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .solution-cards h3 {
+      margin: 0 0 10px;
+      font-size: clamp(17px, 1.5vw, 21px);
+      font-weight: 700;
+      line-height: 1.22;
+      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+      flex-shrink: 0;
+    }
+
+    /* ── Truncated paragraph with expand ── */
+    .solution-card-text {
+      position: relative;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: clamp(13px, 1vw, 14.5px);
+      line-height: 1.65;
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
+
+      /* Clamp to 3 lines by default */
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+
+      /* Smooth height transition */
+      max-height: calc(3 * 1.65 * 14.5px);
+      transition: max-height 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  -webkit-line-clamp 0s 0s;
+    }
+
+    /* Ellipsis fade-out gradient */
+    .solution-card-text::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 28px;
+      background: linear-gradient(to top, rgba(2, 8, 18, 0.92), transparent);
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.45s ease;
+    }
+
+    /* Expanded state — triggered by .is-expanded class (JS) or hover */
+    .solution-cards article.is-expanded .solution-card-text,
+    .solution-cards article:hover .solution-card-text {
+      -webkit-line-clamp: unset;
+      max-height: 260px;
+    }
+
+    .solution-cards article.is-expanded .solution-card-text::after,
+    .solution-cards article:hover .solution-card-text::after {
+      opacity: 0;
+    }
+
+    /* ── Explore link ── */
+    .solution-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: clamp(11px, 0.88vw, 13px);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: color 0.3s ease, gap 0.3s ease;
+    }
+
+    .solution-link:hover {
+      color: #fff;
+      gap: 8px;
+    }
+
+    /* ── Responsive: tablet — keep 3 columns ── */
+    @media (max-width: 900px) {
+      .analysis {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .solution-cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(8px, 1.5vw, 14px);
+      }
+
+      .solution-cards article {
+        height: clamp(400px, 54vw, 520px);
+      }
+    }
+
+    /* ── Responsive: mobile — single column ── */
+    @media (max-width: 640px) {
+      .solution-cards {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .solution-cards article {
+        height: auto;
+        min-height: 320px;
+      }
+
+      /* On mobile, always show full text (no truncation) */
+      .solution-card-text {
+        -webkit-line-clamp: unset !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+
+      .solution-card-text::after {
+        display: none !important;
+      }
+    }
+
+    /* ════════ Capabilities: ported "How We Deliver" (em-section) ════════ */
+    .em-section {
+      display: flex;
+      align-items: flex-start;
+      min-height: 100vh;
+      background: #f7f8fc;
+      border-top: 1px solid rgba(13, 17, 39, .08);
+      position: relative;
+      z-index: 2;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif
+    }
+
+    .em-left {
+      position: sticky;
+      top: 0;
+      width: 50%;
+      flex-shrink: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0b0d14;
+      overflow: hidden
+    }
+
+    #emParticleCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none
+    }
+
+    .em-left-inner {
+      position: relative;
+      z-index: 1;
+      padding: 60px 8%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px
+    }
+
+    .em-pill {
+      display: inline-block;
+      width: fit-content;
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .7);
+      border: 1px solid rgba(255, 255, 255, .25);
+      border-radius: 3px;
+      padding: 5px 13px;
+      background: rgba(255, 255, 255, .07)
+    }
+
+    .em-heading {
+      font-size: clamp(1.6rem, 2.6vw, 2.5rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -.035em;
+      line-height: 1.13;
+      margin: 0
+    }
+
+    .em-desc {
+      font-size: clamp(.82rem, 1vw, .92rem);
+      font-weight: 400;
+      color: rgba(255, 255, 255, .62);
+      line-height: 1.78;
+      max-width: 380px;
+      margin: 0
+    }
+
+    .em-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 26px;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+      border-radius: 6px;
+      border: 1.5px solid #fff;
+      background: transparent;
+      color: #fff;
+      text-decoration: none;
+      width: fit-content;
+      cursor: pointer;
+      transition: background .22s, transform .22s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .em-cta svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0
+    }
+
+    .em-cta:hover {
+      background: rgba(255, 255, 255, .1);
+      transform: translateY(-2px)
+    }
+
+    .em-right {
+      flex: 1;
+      width: 50%;
+      display: flex;
+      flex-direction: column
+    }
+
+    .em-card {
+      position: relative;
+      padding: 48px 8% 44px 52px;
+      border-bottom: 1px solid rgba(13, 17, 39, .1);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: #fff;
+      border-left: 3px solid transparent;
+      transition: background .3s ease, border-left-color .3s ease
+    }
+
+    .em-card:first-child {
+      border-top: 1px solid rgba(13, 17, 39, .1)
+    }
+
+    .em-card[data-index="01"]:hover {
+      background: rgba(243, 210, 95, .07);
+      border-left-color: #F3D25F
+    }
+
+    .em-card[data-index="02"]:hover {
+      background: rgba(18, 186, 160, .07);
+      border-left-color: #12BAA0
+    }
+
+    .em-card[data-index="03"]:hover {
+      background: rgba(54, 117, 188, .07);
+      border-left-color: #3675BC
+    }
+
+    .em-card[data-index="04"]:hover {
+      background: rgba(150, 26, 77, .07);
+      border-left-color: #961A4D
+    }
+
+    .em-card[data-index="05"]:hover {
+      background: rgba(243, 210, 95, .07);
+      border-left-color: #F3D25F
+    }
+
+    .em-bracket {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      transition: border-color .3s ease
+    }
+
+    .em-bracket--tl {
+      top: 14px;
+      left: 14px;
+      border-top: 1.5px solid rgba(13, 17, 39, .15);
+      border-left: 1.5px solid rgba(13, 17, 39, .15)
+    }
+
+    .em-bracket--br {
+      bottom: 14px;
+      right: 14px;
+      border-bottom: 1.5px solid rgba(13, 17, 39, .15);
+      border-right: 1.5px solid rgba(13, 17, 39, .15)
+    }
+
+    .em-card[data-index="01"]:hover .em-bracket--tl,
+    .em-card[data-index="01"]:hover .em-bracket--br {
+      border-color: #F3D25F
+    }
+
+    .em-card[data-index="02"]:hover .em-bracket--tl,
+    .em-card[data-index="02"]:hover .em-bracket--br {
+      border-color: #12BAA0
+    }
+
+    .em-card[data-index="03"]:hover .em-bracket--tl,
+    .em-card[data-index="03"]:hover .em-bracket--br {
+      border-color: #3675BC
+    }
+
+    .em-card[data-index="04"]:hover .em-bracket--tl,
+    .em-card[data-index="04"]:hover .em-bracket--br {
+      border-color: #961A4D
+    }
+
+    .em-card[data-index="05"]:hover .em-bracket--tl,
+    .em-card[data-index="05"]:hover .em-bracket--br {
+      border-color: #F3D25F
+    }
+
+    .em-icon-wrap {
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+      color: #0d1127;
+      overflow: hidden;
+      animation: emIconFloat 4s ease-in-out infinite
+    }
+
+    .em-card:nth-child(2) .em-icon-wrap {
+      animation-duration: 4.6s;
+      animation-delay: .4s
+    }
+
+    .em-card:nth-child(3) .em-icon-wrap {
+      animation-duration: 5.2s;
+      animation-delay: .8s
+    }
+
+    .em-card:nth-child(4) .em-icon-wrap {
+      animation-duration: 5.8s;
+      animation-delay: 1.2s
+    }
+
+    .em-card:nth-child(5) .em-icon-wrap {
+      animation-duration: 6.4s;
+      animation-delay: 1.6s
+    }
+
+    @keyframes emIconFloat {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-4px)
+      }
+    }
+
+    .em-icon {
+      width: 100%;
+      height: 100%;
+      display: block;
+      color: #0d1127;
+      overflow: hidden
+    }
+
+    @keyframes emGlobeRotate {
+      from {
+        transform: rotate(0deg)
+      }
+
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .em-num {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      display: block
+    }
+
+    .em-card[data-index="01"] .em-num {
+      color: #F3D25F
+    }
+
+    .em-card[data-index="02"] .em-num {
+      color: #12BAA0
+    }
+
+    .em-card[data-index="03"] .em-num {
+      color: #3675BC
+    }
+
+    .em-card[data-index="04"] .em-num {
+      color: #961A4D
+    }
+
+    .em-card[data-index="05"] .em-num {
+      color: #F3D25F
+    }
+
+    .em-card-title {
+      font-size: clamp(.88rem, 1.1vw, 1rem);
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #0d1127;
+      line-height: 1.3;
+      margin: 0
+    }
+
+    .em-card-desc {
+      font-size: clamp(.82rem, .95vw, .9rem);
+      font-weight: 400;
+      color: #6b7280;
+      line-height: 1.75;
+      max-width: 440px;
+      margin: 0
+    }
+
+    .em-bar {
+      transform-origin: bottom center;
+      animation: emBarWave 1.8s ease-in-out infinite
+    }
+
+    .em-bars-group rect:nth-child(1) {
+      animation-delay: 0s;
+      animation-duration: 1.6s
+    }
+
+    .em-bars-group rect:nth-child(2) {
+      animation-delay: .18s;
+      animation-duration: 2s
+    }
+
+    .em-bars-group rect:nth-child(3) {
+      animation-delay: .08s;
+      animation-duration: 1.4s
+    }
+
+    .em-bars-group rect:nth-child(4) {
+      animation-delay: .35s;
+      animation-duration: 1.9s
+    }
+
+    .em-bars-group rect:nth-child(5) {
+      animation-delay: .12s;
+      animation-duration: 1.5s
+    }
+
+    .em-bars-group rect:nth-child(6) {
+      animation-delay: .28s;
+      animation-duration: 2.1s
+    }
+
+    .em-bars-group rect:nth-child(7) {
+      animation-delay: .05s;
+      animation-duration: 1.7s
+    }
+
+    @keyframes emBarWave {
+
+      0%,
+      100% {
+        transform: scaleY(1)
+      }
+
+      50% {
+        transform: scaleY(.3)
+      }
+    }
+
+    .em-chevron-group {
+      animation: emChevronPulse 2.2s ease-in-out infinite
+    }
+
+    @keyframes emChevronPulse {
+
+      0%,
+      100% {
+        transform: translateX(0);
+        opacity: 1
+      }
+
+      50% {
+        transform: translateX(-5px);
+        opacity: .65
+      }
+    }
+
+    @media (max-width:1024px) {
+      .em-left-inner {
+        padding: 48px 6%
+      }
+
+      .em-card {
+        padding: 40px 6% 36px 40px
+      }
+    }
+
+    @media (max-width:820px) {
+      .em-section {
+        flex-direction: column
+      }
+
+      .em-left {
+        position: relative;
+        top: auto;
+        width: 100%;
+        height: auto;
+        min-height: 340px
+      }
+
+      .em-left-inner {
+        padding: 56px 8%
+      }
+
+      .em-right {
+        width: 100%
+      }
+
+      .em-card {
+        padding: 36px 6% 32px 6%
+      }
+    }
+
+    @media (max-width:640px) {
+      .em-left-inner {
+        padding: 48px 6%
+      }
+
+      .em-heading {
+        font-size: clamp(1.4rem, 6vw, 1.9rem)
+      }
+
+      .em-card {
+        padding: 28px 5% 24px 5%
+      }
+
+      .em-icon-wrap {
+        width: 64px;
+        height: 64px
+      }
+    }
   </style>
 
-  <!-- Responsive layout system — same approved breakpoints as Our_Focus -->
+  <!-- ═══ RESPONSIVE SYSTEM — same approved 3-tier breakpoints ═══ -->
   <style>
-    /* ─────────────────────────────────────────────────────────────
-       TIER 1  |  ≥ 1140px  — Full desktop, every layout intact
-    ───────────────────────────────────────────────────────────── */
+    /* ── TIER 1 | ≥ 1140px — Full desktop layout ── */
     @media (min-width: 1140px) {
+
+      /* Stats: hold 4-col */
       .stats-grid {
         grid-template-columns: repeat(4, 1fr) !important;
       }
@@ -2316,6 +2983,7 @@
         border-bottom: none !important;
       }
 
+      /* Cost 2-col */
       .cost-grid {
         grid-template-columns: 1fr 1fr !important;
         gap: clamp(40px, 5vw, 72px) !important;
@@ -2326,6 +2994,7 @@
         gap: clamp(28px, 4vw, 56px) !important;
       }
 
+      /* Ops-cost 3-col + restore absolute dividers */
       .ops-cost-cards {
         grid-template-columns: 1fr 1fr 1fr !important;
       }
@@ -2334,10 +3003,11 @@
         display: block !important;
       }
 
+      /* Testimonial side-by-side */
       .test-card {
         display: grid !important;
         flex-direction: unset !important;
-        grid-template-columns: minmax(0, 1fr) minmax(260px, 36%) !important;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 36%) !important;
       }
 
       .test-right {
@@ -2346,6 +3016,7 @@
         margin-left: 0 !important;
       }
 
+      /* Blog + Insight 3-col */
       .blog-grid {
         grid-template-columns: repeat(3, 1fr) !important;
       }
@@ -2354,6 +3025,7 @@
         grid-template-columns: repeat(3, 1fr) !important;
       }
 
+      /* FAQ 2-col split */
       .faq__inner {
         grid-template-columns: 1fr 1fr !important;
       }
@@ -2373,20 +3045,48 @@
         padding-left: 52px !important;
         padding-top: 80px !important;
       }
-    }
 
-    /* ─────────────────────────────────────────────────────────────
-       TIER 2  |  640px – 1139px  — Compact mid-state
-    ───────────────────────────────────────────────────────────── */
-    @media (max-width: 1139px) {
-      :root {
-        --section-pad-h: clamp(16px, 4.5vw, 64px);
-        --section-pad-v: clamp(24px, 3vw, 44px);
+      /* Outcomes: restore absolute heading + 4-col cards */
+      .outcomes {
+        min-height: clamp(500px, 88vh, 900px) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-end !important;
       }
 
+      .outcomes__heading {
+        position: absolute !important;
+      }
+
+      .outcome-cards {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        align-items: end !important;
+      }
+
+      .outcome-card--green {
+        height: clamp(180px, 37vh, 354px) !important;
+      }
+
+      .outcome-card--blue {
+        height: clamp(230px, 48vh, 463px) !important;
+      }
+
+      .outcome-card--gold {
+        height: clamp(320px, 67vh, 652px) !important;
+      }
+
+      .outcome-card--dark {
+        height: clamp(420px, 86vh, 847px) !important;
+      }
+    }
+
+    /* ── TIER 2 | 640px–1139px — Compact mid-state ── */
+    @media (max-width: 1139px) {
+
+      /* Hero: height adapts but keeps dvh */
       .hero {
-        height: 100vh;
-        min-height: 560px;
+        max-height: none !important;
+        min-height: 580px !important;
       }
 
       .hero-heading {
@@ -2399,6 +3099,7 @@
         justify-content: center;
       }
 
+      /* Stats 2×2 */
       .stats-grid {
         grid-template-columns: repeat(2, 1fr) !important;
       }
@@ -2417,6 +3118,7 @@
         border-bottom: none !important;
       }
 
+      /* Cost 1-col */
       .cost-grid {
         grid-template-columns: 1fr !important;
         gap: 32px !important;
@@ -2432,6 +3134,20 @@
         gap: 28px !important;
       }
 
+      .amber-frame {
+        height: auto !important;
+        min-height: 220px;
+      }
+
+      .amber-frame img {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      /* Ops-cost 2-col */
       .ops-cost-cards {
         grid-template-columns: 1fr 1fr !important;
       }
@@ -2444,16 +3160,12 @@
         padding: clamp(28px, 3.5vw, 48px) clamp(16px, 2.5vw, 32px) clamp(24px, 3vw, 40px) !important;
       }
 
-      .ops-cost-cards [style*="margin-bottom: 50px"],
-      .ops-cost-cards [style*="margin-bottom:50px"] {
-        margin-bottom: clamp(20px, 2.8vw, 40px) !important;
-      }
-
       .ops-cost-cards h3 {
         white-space: normal !important;
         font-size: clamp(16px, 1.8vw, 22px) !important;
       }
 
+      /* Testimonial stacked */
       .test-card {
         display: flex !important;
         flex-direction: column !important;
@@ -2464,6 +3176,7 @@
         margin: 0 clamp(16px, 2vw, 24px) clamp(16px, 2vw, 24px) !important;
       }
 
+      /* Blog + Insight 2-col */
       .blog-grid {
         grid-template-columns: repeat(2, 1fr) !important;
       }
@@ -2472,6 +3185,7 @@
         grid-template-columns: repeat(2, 1fr) !important;
       }
 
+      /* FAQ 1-col */
       .faq__inner {
         grid-template-columns: 1fr !important;
       }
@@ -2489,17 +3203,18 @@
         padding-top: 0 !important;
       }
 
-      h2,
-      section h2,
-      .outcomes__heading h2,
-      #cost-qxq h2,
-      #platform-ops-cost h2,
-      #testimonial-sec h2,
-      #insights-sec h2,
-      .faq__intro h2,
-      .explore h2,
-      .cta-banner h2 {
-        font-size: clamp(22px, 3.4vw, 42px) !important;
+      /* Outcomes: static heading + 2×2 cards */
+      .outcomes {
+        min-height: unset !important;
+        padding-top: clamp(40px, 5vw, 64px) !important;
+        display: block !important;
+      }
+
+      .outcomes__heading {
+        position: static !important;
+        width: auto !important;
+        max-width: 560px;
+        margin-bottom: 28px;
       }
 
       .outcome-cards {
@@ -2511,34 +3226,21 @@
       .outcome-card--blue,
       .outcome-card--gold,
       .outcome-card--dark {
-        height: clamp(200px, 32vw, 360px) !important;
-        padding: clamp(20px, 2.5vw, 36px) clamp(14px, 2vw, 28px) 24px !important;
+        height: clamp(240px, 38vw, 340px) !important;
+        padding: 28px 22px 24px !important;
       }
 
-      .amber-frame {
-        height: auto;
-        min-height: 220px;
-      }
-
-      .amber-frame img {
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+      /* Headings fluid */
+      h2,
+      section h2 {
+        font-size: clamp(22px, 3.4vw, 42px) !important;
       }
     }
 
-    /* ─────────────────────────────────────────────────────────────
-       TIER 3  |  ≤ 640px  — Mobile reinforcement
-    ───────────────────────────────────────────────────────────── */
+    /* ── TIER 3 | ≤ 640px — Mobile reinforcement ── */
     @media (max-width: 640px) {
       .ops-cost-cards {
         grid-template-columns: 1fr !important;
-      }
-
-      .ops-cost-cards>div {
-        padding: 32px 20px 28px !important;
       }
 
       .blog-grid {
@@ -2550,9 +3252,20 @@
         grid-template-columns: 1fr !important;
         gap: 16px !important;
       }
+
+      .hero-btns {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-ghost,
+      .btn-white {
+        width: 100%;
+        justify-content: center;
+      }
     }
 
-    /* Global — any width */
+    /* ── Global (any width) ── */
     .cost-h2 {
       font-size: clamp(24px, 3.8vw, 55px);
       line-height: 1.08;
@@ -2563,14 +3276,152 @@
       white-space: normal !important;
     }
 
-    #platform-ops-cost>h2[style] {
-      font-size: clamp(22px, 3.2vw, 48px) !important;
-      line-height: 1.08 !important;
+    /* Eyebrow spacing consistency — ensure CLIENT PROOF + all eyebrows
+       maintain exactly 16px bottom-margin before their h2 */
+    #testimonial-sec .eyebrow {
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    /* ============================================================
+       === APPROACH BAND ===
+       Full-bleed section wrapping a dark image-overlay card.
+       Centered eyebrow / heading / body / white CTA button.
+
+       ── MANUAL ADJUSTMENT GUIDE ─────────────────────────────────
+       CARD HEIGHT     change min-height on .approach-card
+                       Current: 420px. More height -> 520px / 560px
+
+       TOP+BTM PADDING change the first value on .approach-card padding
+                       Current: 120px. Taller feel -> 140px / 160px
+
+       DARK OVERLAY    change alpha on .approach-card-overlay rgba()
+                       Current: 0.50. Darker -> 0.65. Lighter -> 0.35
+
+       BG IMAGE        swap url() inside .approach-card-bg background
+
+       HEADING WIDTH   max-width on .approach-card h2  (current 820px)
+
+       BODY WIDTH      max-width on .approach-card p   (current 620px)
+
+       BUTTON FILL     background on .approach-btn     (current #ffffff)
+       BUTTON TEXT     color on .approach-btn           (current #0d4f45)
+       Ghost variant   background: transparent; color: #fff;
+                       border: 1.5px solid rgba(255,255,255,0.55);
+       ──────────────────────────────────────────────────────────── */
+
+    .approach-band {
+      padding: var(--section-pad-v) var(--section-pad-h); /* outer section rhythm — matches all other sections */
+      background: #fff;
+      border-top: 1px solid rgba(13, 17, 39, 0.08);
+    }
+
+    .approach-card {
+      position: relative;
+      border-radius: 16px;           /* corner radius */
+      overflow: hidden;
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 420px;             /* minimum card height — raise to 520px for taller card */
+      padding: 60px clamp(24px, 8vw, 140px); /* top/bottom 60px | left/right scales with viewport */
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    /* BG IMAGE — swap url() to change image */
+    .approach-card-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1779868480/Div_hq0syu.png') center / cover no-repeat;
+      z-index: 0;
+    }
+
+    /* DARK OVERLAY — adjust 0.50 alpha to darken or lighten */
+    .approach-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.80);
+      z-index: 1;
+    }
+
+    /* Subtle white sheen — keeps text contrast crisp */
+    .approach-card-sheen {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.002);
+      z-index: 2;
+    }
+
+    /* All content sits above the three bg layers */
+    .approach-card > *:not(.approach-card-bg):not(.approach-card-overlay):not(.approach-card-sheen) {
+      position: relative;
+      z-index: 3;
+    }
+
+    /* EYEBROW — opacity 0.6 = subtle, raise to 1.0 for full white */
+    .approach-card .eyebrow {
+      color: rgba(255, 255, 255, 0.6) !important;
+      margin-bottom: 20px;
+    }
+
+    /* HEADING — max-width controls where the line breaks */
+    .approach-card h2 {
+      color: #fff !important;
+      max-width: 820px;              /* heading text block width */
+      margin: 0 auto 24px;           /* gap below heading */
+    }
+
+    /* BODY TEXT — opacity 0.78 = slightly muted white */
+    .approach-card p {
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 620px;              /* body text block width */
+      margin: 0 auto 40px;           /* gap below body before button */
+      font-size: 16px;
+      line-height: 23px;
+    }
+
+    /* BUTTON — solid white fill, teal text
+       To switch to ghost: background: transparent; color: #fff;
+                           border: 1.5px solid rgba(255,255,255,0.55); */
+    .approach-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;                  /* button height */
+      padding: 0 40px;               /* button side padding */
+      border-radius: 8px;            /* button corner radius */
+      border: none;
+      background: #ffffff;           /* button fill */
+      color: #0d4f45;                /* button text colour (site teal) */
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: background 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+    }
+
+    .approach-btn:hover {
+      background: rgba(255, 255, 255, 0.88); /* hover: slightly dimmed white */
+      transform: translateY(-2px);
+    }
+
+    /* MOBILE — reduce padding so card stays proportional */
+    @media (max-width: 640px) {
+      .approach-card {
+        min-height: 320px;           /* mobile min height */
+        padding: 48px 24px;          /* mobile top/bottom padding */
+      }
     }
   </style>
 </head>
 
 <body>
+
 
   <!-- ============================================================
        SECTION: HERO
@@ -2585,17 +3436,18 @@
     <div class="hero-gl"></div>
     <div class="hero-gb"></div>
     <div class="hero-content">
-      <h1 class="hero-heading">The engineering depth your programs need.<br>On the time zone your teams can work with.
+      <h1 class="hero-heading">Stop funding AI programs that stop at the 
+<br>pilot stage.
       </h1>
       <div class="hero-btns">
         <button class="btn-ghost">
-          Explore our delivery models
+          Explore The Lab
           <svg width="17" height="17" fill="none" viewBox="0 0 17 17">
             <path d="M3.5 8.5h10M9.5 5l4 3.5L9.5 12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
         </button>
-        <button class="btn-white">Talk to our nearshore team</button>
+        <button class="btn-white">Schedule a Pilot Review →</button>
       </div>
     </div>
   </section>
@@ -2608,234 +3460,29 @@
   <div class="stats-wrap">
     <div class="stats-grid">
       <div class="stat-col">
-        <div class="stat-num">40–50%</div>
-        <div class="stat-desc">Cost differential that nearshore delivery in Mexico and LATAM consistently produces for enterprise engineering programs </div>
+        <div class="stat-num">88%</div>
+        <div class="stat-desc">AI pilots that ,<br>never reach production </div>
       </div>
       <div class="stat-col">
-        <div class="stat-num">1–2 hrs</div>
-        <div class="stat-desc">Time zone close enough for daily standups, sprint reviews, and real-time problem solving. </div>
+        <div class="stat-num">1.8 Hrs</div>
+        <div class="stat-desc">Time the average employee loses each day searching for information that already exists </div>
       </div>
       <div class="stat-col">
-        <div class="stat-num">700K+</div>
-        <div class="stat-desc">Software engineers active in Mexico, the largest technical talent pool in Latin America and one of the deepest in the Americas. </div>
+        <div class="stat-num">40%+</div>
+        <div class="stat-desc">Agentic AI projects will be canceled by 2027 due to absent governance controls </div>
       </div>
       <div class="stat-col">
-        <div class="stat-num">3 weeks</div>
-        <div class="stat-desc">From engagement start to full nearshore team operational — the ramp timeline Celsior delivered for a mid-market US P&C insurer </div>
+        <div class="stat-num">80%</div>
+        <div class="stat-desc">AI projects that fail to deliver their intended business value </div>
       </div>
     </div>
     <div class="stat-note">
-      <div class="stat-note-lbl">Footnote Sources</div>
-      <div class="stat-note-txt">Strong Forrester Research; Aberdeen Group; McKinsey & Company CX  Excellence research. Outcomes vary by organization and scope.
+      <div class="stat-note-lbl"> </div>
+      <div class="stat-note-txt">Celsior's Frameworks and Accelerators were built for the gap these numbers describe. Most enterprise AI and digital programs do not fail because the underlying technology is wrong. They fail because the structural foundations like agent infrastructure, governance controls, knowledge access, and value measurement are assembled too late, too loosely, or not at all. Celsior brings that foundation to every engagement from day one. 
       </div>
     </div>
   </div>
 
-  <!-- ============================================================
-       SECTION: COST Q×Q
-       Purpose : Quarter-by-quarter narrative + accordion of cost
-                 categories with hero portrait image.
-       CSS tag : /* === COST Q×Q === */
-       ============================================================ -->
-  <!--
-  Figma: Desktop - 6 (node 1:258) — 1440×873
-  Layout:
-    ① Full-width header block  (heading + body text)          → top: 0–247px
-    ② Two-column row           (image left | accordion right) → top: 247–873px
-  Image: imgRectangle24 (e635f926), amber border 3px #f1be56, r:18px
-  Icon boxes: 64×64, border:1px solid #111827, r:12px
-  Accordion: GSAP-powered, single-open, chevron rotates
--->
-  <section id="cost-qxq" style="background:#fff;border-top:1px solid rgba(13,17,39,0.08);"">
-
-  <!-- ① FULL-WIDTH HEADER -->
-  <div style=" padding:0 0 28px;">
-    <p class="eyebrow">THE DELIVERY REALITY</p>
-    <h2 id="cqxq-heading" style="
-      font-size:55px; font-weight:700; line-height:60px; color:#09090b;
-      letter-spacing:0px; margin-bottom:22px; max-width:1100px;
-      opacity:0; transform:translateY(28px);
-    ">Why the strongest enterprise programs are not built where engineering costs the most </h2>
-    <p id="cqxq-body" style="
-      font-size:16px; color:#3f3f46; line-height:23px; max-width:1100px;
-      opacity:0; transform:translateY(20px);
-    ">Nearshore delivery has historically come with trade-offs: time zone gaps, communication friction, and institutional distance from the program. Those trade-offs are a design problem, not an inherent limitation of the model. What Celsior adds is the structure that removes them — pre-certified engineering talent, defined pod operating models, and a Build-Operate-Transfer pathway that converts a vendor engagement into a captive capability your organization owns outright. </p>
-    </div>
-
-    <!-- ② TWO-COLUMN ROW -->
-    <div class="cost-qxq-cols" style="
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:88px;
-    align-items:stretch;
-  ">
-
-      <!-- ── LEFT: Amber-framed image ── -->
-      <div id="cqxq-img" style="
-      border:3px solid transparent;
-      border-radius:18px;
-      overflow:hidden;
-      position:relative;
-      min-height:380px;
-      background:
-        linear-gradient(#fff,#fff) padding-box,
-        linear-gradient(90deg, #f1be56 0%, #52b8d7 50%, #4bc8ad 100%) border-box;
-      opacity:0; transform:translateX(-32px);
-    ">
-        <img
-          src="https://res.cloudinary.com/dden4hawr/image/upload/v1780294854/63f34698f565c005a29820ab6de35ef32cf5ac32_tmpn1s.jpg"
-          alt="" style="
-          position:absolute;
-          width:112.14%; height:111.23%;
-          top:-11.23%; left:-5.91%;
-          object-fit:cover;
-        " />
-      </div>
-
-      <!-- ── RIGHT: Accordion ── -->
-      <div id="cqxq-acc" style="
-      display:flex; flex-direction:column; justify-content:center;
-      opacity:0; transform:translateX(32px);
-    ">
-
-        <!-- ROW 1: Platform Stability -->
-        <div class="gacc-item" style="border-bottom:1px solid #f3f4f6;">
-          <button class="gacc-btn" onclick="gaccToggle(this)" aria-expanded="false" style="
-          width:100%; display:flex; align-items:center; gap:20px;
-          padding:20px 0; background:none; border:none; cursor:pointer; text-align:left;
-        ">
-            <div class="gacc-iconbox" style="
-            width:64px; height:64px; flex-shrink:0;
-            border:1px solid #111827; border-radius:12px;
-            display:flex; align-items:center; justify-content:center;
-            overflow:hidden; background:#fff;
-            transition:border-color 0.3s, box-shadow 0.3s;
-          ">
-              <!-- Platform Stability: exact Figma icon -->
-              <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780295365/49_mxvbe4.png"
-                alt="Platform Stability" width="36" height="36" style="display:block;" />
-            </div>
-            <span class="gacc-label"
-              style="font-size:24px;font-weight:600;color:#111827;letter-spacing:-0.4px;flex:1;text-align:left;transition:color 0.25s;">Talent Access </span>
-            <svg class="gacc-chev" width="20" height="20" viewBox="0 0 20 20" fill="none"
-              style="flex-shrink:0;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);">
-              <path d="M5 8l5 5 5-5" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </button>
-          <div class="gacc-body" style="overflow:hidden;height:0;">
-            <div class="gacc-inner" style="padding:0 0 20px 84px;">
-              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Most enterprise platforms lose a
-                significant portion of their designed capability within two years of go-live due to absence of
-                structured operational ownership. </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- ROW 2: Security & Compliance -->
-        <div class="gacc-item" style="border-bottom:1px solid #f3f4f6;">
-          <button class="gacc-btn" onclick="gaccToggle(this)" aria-expanded="false" style="
-          width:100%; display:flex; align-items:center; gap:20px;
-          padding:20px 0; background:none; border:none; cursor:pointer; text-align:left;
-        ">
-            <div class="gacc-iconbox" style="
-            width:64px; height:64px; flex-shrink:0;
-            border:1px solid #111827; border-radius:12px;
-            display:flex; align-items:center; justify-content:center;
-            overflow:hidden; background:#fff;
-            transition:border-color 0.3s, box-shadow 0.3s;
-          ">
-              <!-- ServiceNow: exact Figma icon -->
-              <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780295365/50_ch93ov.png"
-                alt="Security & Compliance" width="36" height="36" style="display:block;" />
-            </div>
-            <span class="gacc-label"
-              style="font-size:24px;font-weight:600;color:#111827;letter-spacing:-0.4px;flex:1;text-align:left;transition:color 0.25s;">Cost Efficiency </span>
-            <svg class="gacc-chev" width="20" height="20" viewBox="0 0 20 20" fill="none"
-              style="flex-shrink:0;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);">
-              <path d="M5 8l5 5 5-5" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </button>
-          <div class="gacc-body" style="overflow:hidden;height:0;">
-            <div class="gacc-inner" style="padding:0 0 20px 84px;">
-              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">The cost of ungoverned configuration
-                drift, unreviewed access controls, and undocumented changes rarely surfaces until it becomes a
-                compliance event. </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- ROW 3: Cost Optimization -->
-        <div class="gacc-item" style="border-bottom:1px solid #f3f4f6;">
-          <button class="gacc-btn" onclick="gaccToggle(this)" aria-expanded="false" style="
-          width:100%; display:flex; align-items:center; gap:20px;
-          padding:20px 0; background:none; border:none; cursor:pointer; text-align:left;
-        ">
-            <div class="gacc-iconbox" style="
-            width:64px; height:64px; flex-shrink:0;
-            border:1px solid #111827; border-radius:12px;
-            display:flex; align-items:center; justify-content:center;
-            overflow:hidden; background:#fff;
-            transition:border-color 0.3s, box-shadow 0.3s;
-          ">
-              <!-- Cost Optimization: exact Figma icon -->
-              <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780295365/51_vq6100.png"
-                alt="Cost Optimization" width="36" height="36" style="display:block;" />
-            </div>
-            <span class="gacc-label"
-              style="font-size:24px;font-weight:600;color:#111827;letter-spacing:-0.4px;flex:1;text-align:left;transition:color 0.25s;">Time Zone Alignment </span>
-            <svg class="gacc-chev" width="20" height="20" viewBox="0 0 20 20" fill="none"
-              style="flex-shrink:0;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);">
-              <path d="M5 8l5 5 5-5" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </button>
-          <div class="gacc-body" style="overflow:hidden;height:0;">
-            <div class="gacc-inner" style="padding:0 0 20px 84px;">
-              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Reactive platform support feels cheaper
-                than a managed program until accounted for emergency interventions, delayed delivery, and the strategic
-                work that never got done. </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- ROW 4: Upgrade Governance -->
-        <div class="gacc-item">
-          <button class="gacc-btn" onclick="gaccToggle(this)" aria-expanded="false" style="
-          width:100%; display:flex; align-items:center; gap:20px;
-          padding:20px 0; background:none; border:none; cursor:pointer; text-align:left;
-        ">
-            <div class="gacc-iconbox" style="
-            width:64px; height:64px; flex-shrink:0;
-            border:1px solid #111827; border-radius:12px;
-            display:flex; align-items:center; justify-content:center;
-            overflow:hidden; background:#fff;
-            transition:border-color 0.3s, box-shadow 0.3s;
-          ">
-              <!-- Upgrade Governance: exact Figma icon -->
-              <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780295365/52_ycmjl9.png"
-                alt="Upgrade Governance" width="36" height="36" style="display:block;" />
-            </div>
-            <span class="gacc-label"
-              style="font-size:24px;font-weight:600;color:#111827;letter-spacing:-0.4px;flex:1;text-align:left;transition:color 0.25s;">Delivery Governance </span>
-            <svg class="gacc-chev" width="20" height="20" viewBox="0 0 20 20" fill="none"
-              style="flex-shrink:0;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);">
-              <path d="M5 8l5 5 5-5" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </button>
-          <div class="gacc-body" style="overflow:hidden;height:0;">
-            <div class="gacc-inner" style="padding:0 0 20px 84px;">
-              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Deferred upgrades are a governance
-                failure that compounds with every release cycle that passes without structured ownership. </p>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /accordion -->
-    </div><!-- /two-col -->
-  </section>
 
   <!-- ============================================================
        SECTION: PLATFORM OPS COST
@@ -2846,13 +3493,16 @@
   <section id="platform-ops-cost" style="background:#fff;border-top:1px solid rgba(13,17,39,0.08);">
 
     <!-- Heading -->
-    <p class="eyebrow">THE BUSINESS CONSEQUENCES</p>
+    <p class="eyebrow">PROBLEM STATEMENT</p>
     <h2
       style="font-size:55px;font-weight:700;letter-spacing:-1px;line-height:55px;color:#09090b;max-width:1048px;margin-bottom:32px;">
-      How onshore-only delivery models build the constraints that slow every program down </h2>
+      AI debt is structural technical debt 
+<br>with higher stakes.</h2>
 
     <!-- Body -->
-    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">The consequences of a poorly structured talent strategy rarely surface in the first quarter. They accumulate across program cycles — in delayed releases, escalating contractor costs, and the organizational weight of teams too thinly spread to perform at the level the business requires. </p>
+    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">Organizations often pursue AI in isolation rather than as an ecosystem. This creates a predictable gap between a successful proof-of-concept and a durable 
+production environment. Without integrated governance and sustained engineering capacity, these initiatives are eventually abandoned or costly to rebuild. 
+The architectural cost compounds with every siloed project.</p>
 
     <!-- ── Card frame — exact Figma Desktop-31 styles ── -->
     <!--
@@ -2903,13 +3553,12 @@
         margin-bottom: 50px;
         flex-shrink: 0;
       ">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780295659/53_jo5x8m.png" alt=""
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779800255/25_biq55h.png" alt=""
             style="width:35.875px;height:35.875px;display:block;" />
         </div>
-        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Delivery velocity that cannot hold </h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Programs staffed through reactive, onshore-only sourcing move at the pace that available talent allows. When engineering capacity is constrained, timelines stretch and the pressure concentrates on the teams who remain
-
-</p>
+        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Disconnected AI Initiatives</h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Siloed, pilots build a fragmented portfolio lacking shared data or governance. While the capability count grows, the organization's ability to extract
+value remains stagnant.</p>
       </div>
 
       <!-- ── Card 2: Compounding security exposure ── -->
@@ -2926,11 +3575,11 @@
         margin-bottom: 50px;
         flex-shrink: 0;
       ">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780295659/54_xggjcq.png" alt=""
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779800255/26_pxmywa.png" alt=""
             style="width:35.875px;height:35.875px;display:block;" />
         </div>
-        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Cost structures that price out at scale </h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Onshore-only models price organizations out of the program capacity they need for sustained delivery. The unit economics of a single-market talent strategy rarely survive beyond a certain team size. Each hiring cycle widens the gap between what the program requires and what the available budget can fund. </p>
+        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Proof-of-Concept Thinking in Production Environments</h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Models optimized for controlled environments rarely survive production volumes. Conflating evaluation with deployment significantly increases costs across both stages.</p>
       </div>
 
       <!-- ── Card 3: Engineering talent attrition ── -->
@@ -2947,63 +3596,262 @@
         margin-bottom: 50px;
         flex-shrink: 0;
       ">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780295659/55_gjigb4.png" alt=""
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779800255/27_mocsc3.png" alt=""
             style="width:35.875px;height:35.875px;display:block;" />
         </div>
         <h3
           style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;white-space:nowrap;margin-bottom:16px;">
-          Institutional knowledge that leaves with the people </h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Teams built on short-term contractor relationships carry the organizational risk of every departure. Without a structured nearshore model that builds retained, program-aligned talent over time, institutional knowledge moves with the people who hold it.</p>
+          Governance Gaps That Scale With the Program  </h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Scaling AI without foundational governance introduces operational and regulatory risks. Retrofitting controls into a scaled program causes material costs and deep disruption. </p>
       </div>
 
     </div><!-- /card-frame -->
   </section>
 
+
+  
+  <section id="platform-ops-cost" style="background:#fff;border-top:1px solid rgba(13,17,39,0.08);">
+
+    <!-- Heading -->
+    <p class="eyebrow">Our Approach</p>
+    <h2
+      style="font-size:55px;font-weight:700;letter-spacing:-1px;line-height:55px;color:#09090b;max-width:1048px;margin-bottom:32px;">
+      One Integrated Platform.
+
+<br>Four Products That Earn Their Place.</h2>
+
+    <!-- Body -->
+    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">The AI Lab operates as a single end-to-end delivery practice spanning AI Readiness Assessment, agent development, production governance, and human-AI oversight. Celsior brings CX Journey Design, Synthetix, CAFE, PACE, and HALO together into a coherent engagement model. What you receive is a structured AI delivery partner — from the initial data assessment through to governed production operations — with traceable outcomes at every stage. </p>
+
+      <div class="solution-cards">
+      <article>
+        <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779868187/10_gx9hyg.png" alt="" />
+        <div class="solution-card-inner">
+          <span class="solution-index">01</span>
+          <div class="solution-card-spacer"></div>
+          <div class="solution-card-body">
+            <h3>AI-First <br>Digital Engineering Platform </h3>
+            <p class="solution-card-text">AI-powered software delivery, agent development, managed agent runtime, and human-AI governance. </p>
+            <a class="solution-link" href="#">Explore Modernization →</a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779868187/11_yegzhd.png" alt="" />
+        <div class="solution-card-inner">
+          <span class="solution-index">02</span>
+          <div class="solution-card-spacer"></div>
+          <div class="solution-card-body">
+            <h3>3 Industries </h3>
+            <p class="solution-card-text">Regulated industry clients across Banking & Financial Services, Insurance, and Healthcare with sector-specific delivery standards. </p>
+            <a class="solution-link" href="#">Explore Cloud Engineering →</a>
+          </div>
+        </div>
+      </article>
+      <article>
+        <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779868187/12_hobiox.png" alt="" />
+        <div class="solution-card-inner">
+          <span class="solution-index">03</span>
+          <div class="solution-card-spacer"></div>
+          <div class="solution-card-body">
+            <h3>End-to-End </h3>
+            <p class="solution-card-text">From strategy and readiness through governed production deployment, continuous monitoring, and operational support. </p>
+            <a class="solution-link" href="#">Learn About Teams-as-a-Service →</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+
+  </section> 
+
+
+
   <!-- ============================================================
-       SECTION: BLOG TEASERS / ACCELERATORS
-       Purpose : Row of accelerator program cards linking to detail.
-       CSS tag : /* === BLOG TEASERS === */
+       SECTION: APPROACH
+       Purpose : Dark image-overlay band — centered eyebrow, heading,
+                 body copy, and ghost CTA. Mirrors Figma "Approach"
+                 card (1200×420, bg image + 50% black overlay).
+       CSS tag : /* === APPROACH BAND === */
        ============================================================ -->
-  <section class="pad sec-border">
-    <p class="eyebrow">PERSPECTIVES </p>
-    <h2 style="font-size:55px;font-weight:700;line-height:60px;color:#09090b;max-width:1000px;margin-bottom:16px;">
-      See the latest from Celsior on nearshore delivery, GCC strategy, and engineering talent across Mexico and LATAM. </h2>
-      <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">From BOT model engagements to dedicated pod delivery, these are perspectives and client stories from Celsior's GCC and Nearshore teams, drawn from live programs across regulated industries in the United States.</p>
-    <p <br> </p>
-    <div class="blog-grid">
-      <div class="blog-card">
-        <img class="blog-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1780297225/22_ioe0kc.png"
-          alt="" />
-        <div class="blog-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 0%,#0c1b3b 67%);">
-        </div>
-        <div class="blog-card-body">
-          <div class="blog-card-ttl">How Celsior's nearshore pod model helped a top US insurance carrier staff a Guidewire program at 40 percent below onshore market rates</div>
-          <div class="blog-card-txt">A mid-market property and casualty insurer needed Guidewire-certified engineers quickly and at a cost structure the program could sustain. This is how the engagement was structured and what it produced.</div>
+  <section class="approach-band">
+    <div class="approach-card">
+      <div class="approach-card-bg"></div>
+      <div class="approach-card-overlay"></div>
+      <div class="approach-card-sheen"></div>
+      <p class="eyebrow">Approach</p>
+      <h2>Discovery that grounds. Architecture<br>that scales. Delivery that ships</h2>
+      <p>Every AI Readiness Assessment, architecture review, and pilot sprint is a joint exercise and not a deliverable handed over at project close. Your teams carry the same technical grounding and governance logic out of the engagement that we built together, so the program holds when the consultants leave. The institutional knowledge does not walk out with them.</p>
+      <a href="#" class="approach-btn">Read More</a>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION: OUTCOMES
+       Purpose : Heading on the left, three colored outcome stat cards
+                 on the right. Pixel-exact Figma Desktop-30 (1433×894).
+       CSS tag : /* === OUTCOMES === */
+       ============================================================ -->
+  <section class="outcomes-section">
+    <section class="outcomes" aria-label="Outcomes">
+      <div class="outcomes__heading">
+        <p class="eyebrow">WHY AI-FIRST ENGINEERING?</p>
+        <h2>Outcomes we're accountable to</h2>
+        <p>A well-run AI program cuts measurable results from the first sprint. The figures below reflect what the AI Lab is held to across active client engagements — not targets projected at project initiation and revisited at close. </p>
+      </div>
+      <div class="outcome-cards">
+        <article class="outcome-card outcome-card--green" data-stat-card>
+          <strong><span class="stat-num" data-target="50">0</span><span>%</span></strong>
+          <p>Celsior’s AI-first digital engineering platform cuts the time by up to 50% of conventional models. </p>
+          <div class="outcome-card-arrow">
+            <svg viewBox="0 0 18 18" fill="none">
+              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+        </article>
+        <article class="outcome-card outcome-card--blue" data-stat-card>
+          <strong><span class="stat-num" data-target="3-9">0</span><span> Months</span></strong>
+          <p>CAFE’s modular architecture compresses AI deployment from years to months.</p>
+          <div class="outcome-card-arrow">
+            <svg viewBox="0 0 18 18" fill="none">
+              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+        </article>
+        <article class="outcome-card outcome-card--gold" data-stat-card>
+          <strong><span class="stat-num" data-target="171">0</span><span>%</span></strong>
+          <p>Average ROI from governed agentic deployments</p>
+          <div class="outcome-card-arrow">
+            <svg viewBox="0 0 18 18" fill="none">
+              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#000" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+        </article>
+        <article class="outcome-card outcome-card--dark" data-stat-card>
+          <strong><span class="stat-num" data-target="04">0</span><span> </span></strong>
+          <p>AI-First Digital Engineering Platform, CAFE, PACE, and HALO interoperate as a single coherent platform.</p>
+          <div class="outcome-card-arrow">
+            <svg viewBox="0 0 18 18" fill="none">
+              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+
+
+  <!-- ============================================================
+       SECTION: TESTIMONIAL
+       Purpose : Pull-quote with author + result chips on dark panel.
+       CSS tag : /* === TESTIMONIAL === */
+       ============================================================ -->
+  <section id="testimonial-sec" class="sec-border-2">
+    <p class="eyebrow">Testimonial</p>
+    <h2
+      style="font-size:clamp(28px, 4.5vw, 58px);font-weight:700;color:#111827;letter-spacing:-0.6px;line-height:1.05;margin-bottom:clamp(20px, 2.4vw, 32px);">
+      Delivered at enterprise scale</h2>
+    <div class="test-card">
+      <div class="test-left">
+        <svg width="32" height="32" fill="none" viewBox="0 0 32 32" style="opacity:0.3;margin-bottom:16px;">
+          <path
+            d="M8 20c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H8v-8zm12 0c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H20v-8z"
+            fill="#fff" />
+        </svg>
+        <p class="test-quote">"We had completed three prior AI pilots with two different vendors and reached production with none of them. Celsior AI Lab brought an architecture standard and a governance framework we had not encountered in any previous engagement. Our first production deployment has operated at SLA for eleven months. That is the outcome we were paying for." </p>
+        <div class="test-author">
+          <div class="test-avatar">CIO</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#fff;">Major life insurance company</div>
+            <div style="font-size:12px;color:#93c5fd;margin-top:2px;">Agent Portal Modernisation</div>
+          </div>
         </div>
       </div>
-      <div class="blog-card">
-        <img class="blog-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1780297225/23_fpkwrt.png"
-          alt="" />
-        <div class="blog-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 0%,#060606 67%);">
+      <div class="test-right">
+        <div class="test-res-label">Engagement results</div>
+        <div class="test-res-item">
+          <div class="test-dot"></div><span class="test-res-text">52 enterprise AI pilots structured against a production viability standard </span>
         </div>
-        <div class="blog-card-body">
-          <div class="blog-card-ttl">BOT in practice: what the build, operate, and transfer phases actually look like across an 18-month GCC engagement</div>
-          <div class="blog-card-txt">The BOT model is straightforward in principle and operationally detailed in execution. This piece walks through what each phase involves, where programs most often underestimate the requirements, and what a well-structured engagement looks like from kickoff through transfer</div>
+        <div class="test-res-item">
+          <div class="test-dot"></div><span class="test-res-text">4-product ecosystem covering the build, run, and govern lifecycle without gaps </span>
         </div>
-      </div>
-      <div class="blog-card">
-        <img class="blog-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1780297225/24_glizc1.png"
-          alt="" />
-        <div class="blog-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 0%,#060606 67%);">
-        </div>
-        <div class="blog-card-body">
-          <div class="blog-card-ttl">Lorem Ipsum is simply dummy text of the 
-</div>
-          <div class="blog-card-txt">Pre-certified platform talent for regulated industries: why certification depth matters more than headcount at scale</div>
+        <div class="test-res-item" style="margin-bottom:0;">
+          <div class="test-dot"></div><span class="test-res-text">Regulated industry delivery across Banking, Insurance, and Healthcare </span>
         </div>
       </div>
     </div>
   </section>
+  
+
+
+
+
+
+  <!-- ============================================================
+       SECTION: EXPLORE
+       Purpose : Cross-link grid pointing to other focus areas.
+                 Ported from the Our_Focus page.
+       CSS tag : /* === EXPLORE === */
+       ============================================================ -->
+  <section class="explore">
+    <h2>Continue exploring Celsior AI Lab's capabilities </h2>
+    <div class="explore__links">
+      <a href="#">
+        <span class="explore__row-left">
+          <span class="explore__label">AI STRATEGY Capability</span>
+          <span class="explore__text">Enterprise AI Pilots</span>
+        </span>
+        <span class="explore__row-right">
+          <span class="explore__arrow" aria-hidden="true">
+            <svg viewBox="0 0 18 18" fill="none">
+              <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              <polyline points="7,3 15,3 15,11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </span>
+        </span>
+      </a>
+      <a href="#">
+        <span class="explore__row-left">
+          <span class="explore__label">AI DELIVERY Capability</span>
+          <span class="explore__text">Agentic Workflows</span>
+        </span>
+        <span class="explore__row-right">
+          <span class="explore__arrow" aria-hidden="true">
+            <svg viewBox="0 0 18 18" fill="none">
+              <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              <polyline points="7,3 15,3 15,11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </span>
+        </span>
+      </a>
+      <a href="#">
+        <span class="explore__row-left">
+          <span class="explore__label">AI ACCELERATION Capability</span>
+          <span class="explore__text">GenAI Accelerators</span>
+        </span>
+        <span class="explore__row-right">
+          <span class="explore__arrow" aria-hidden="true">
+            <svg viewBox="0 0 18 18" fill="none">
+              <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              <polyline points="7,3 15,3 15,11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </span>
+        </span>
+      </a>
+
+    </div>
+  </section>
+
+
 
   <!-- ============================================================
        SECTION: PLATFORMS STRIP
@@ -3018,200 +3866,47 @@
     <section class="partners" aria-label="Partner ecosystem">
       <div class="partners__track">
         <div class="partners__group">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/GuideWire_logo_color_1_whi7lu.png"
-            alt="GuideWire" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/ServiceNow_1_plissc.png"
-            alt="ServiceNow" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Boomi_1_kvrpcd.png" alt="Boomi"
-            loading="lazy" />
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779995186/12_wodhyv.png"
             alt="AWS" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780028742/17_hpq0sv.png"
-            alt="Microsoft" loading="lazy" />
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779995186/13_gbjllz.png"
             alt="Azure" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/ServiceNow_1_plissc.png"
+            alt="ServiceNow" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/GuideWire_logo_color_1_whi7lu.png"
+            alt="GuideWire" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780302430/LOGOS_1_sfrcxp.png" alt="AgentForce"
+            loading="lazy" />
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778328296/Google_Cloud_logo.svg_cyeo26.png"
             alt="Google Cloud" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/Dynatrace_1_t3ayxc.png"
+            alt="Dynatrace" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780028742/18_rsa7dn.png"
+            alt="UIPATH" loading="lazy" />
         </div>
         <div class="partners__group" aria-hidden="true">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/GuideWire_logo_color_1_whi7lu.png"
-            alt="GuideWire" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/ServiceNow_1_plissc.png"
-            alt="ServiceNow" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Boomi_1_kvrpcd.png" alt="Boomi"
-            loading="lazy" />
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779995186/12_wodhyv.png"
             alt="AWS" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780028742/17_hpq0sv.png"
-            alt="Microsoft" loading="lazy" />
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779995186/13_gbjllz.png"
             alt="Azure" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/ServiceNow_1_plissc.png"
+            alt="ServiceNow" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/GuideWire_logo_color_1_whi7lu.png"
+            alt="GuideWire" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780302430/LOGOS_1_sfrcxp.png" alt="AgentForce"
+            loading="lazy" />
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778328296/Google_Cloud_logo.svg_cyeo26.png"
             alt="Google Cloud" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/Dynatrace_1_t3ayxc.png"
+            alt="Dynatrace" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780028742/18_rsa7dn.png"
+            alt="UIPATH" loading="lazy" />
         </div>
       </div>
     </section>
   </div>
 
 
-  <!-- ============================================================
-       SECTION: OUTCOMES
-       Purpose : Heading on the left, three colored outcome stat cards
-                 on the right. Pixel-exact Figma Desktop-30 (1433×894).
-       CSS tag : /* === OUTCOMES === */
-       ============================================================ -->
-  <section class="outcomes-section">
-    <section class="outcomes" aria-label="Outcomes">
-      <div class="outcomes__heading">
-        <p class="eyebrow">WHY AI-FIRST ENGINEERING?</p>
-        <h2>Outcomes we're accountable to</h2>
-        <p>Celsior structures every GCC and Nearshore engagement around defined delivery outcomes, not time-and-materials activity. The figures below reflect industry-established benchmarks for the model and Celsior engagement data where confirmed. </p>
-      </div>
-      <div class="outcome-cards">
-        <article class="outcome-card outcome-card--green" data-stat-card>
-          <strong><span class="stat-num" data-target="50">0</span><span>%</span></strong>
-          <p>Reduction in the engineering delivery costs enabling organization to spend more on R&D. 
-          </p>
-          <div class="outcome-card-arrow">
-            <svg viewBox="0 0 18 18" fill="none">
-              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </div>
-        </article>
-        <article class="outcome-card outcome-card--blue" data-stat-card>
-          <strong><span class="stat-num" data-target="1-2">0</span><span>-2 Hrs</span></strong>
-          <p>The operational proximity that makes real-time program collaboration viable without offshore coordination overhead 
-          </p>
-          <div class="outcome-card-arrow">
-            <svg viewBox="0 0 18 18" fill="none">
-              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </div>
-        </article>
-        <article class="outcome-card outcome-card--gold" data-stat-card>
-          <strong><span class="stat-num" data-target="700K">0</span><span>+</span></strong>
-          <p>Software engineers active in Mexico, supported by an annual graduate pipeline of 110,000 to 130,000 new engineering professionals entering the market each year 
-          </p>
-          <div class="outcome-card-arrow">
-            <svg viewBox="0 0 18 18" fill="none">
-              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#000" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </div>
-        </article>
-        <article class="outcome-card outcome-card--dark" data-stat-card>
-          <strong><span class="stat-num" data-target="36">0</span><span>Months</span></strong>
-          <p>Typical Build-Operate-Transfer timeline from Celsior-managed nearshore operations to full client-owned GCC capability </p>
-          <div class="outcome-card-arrow">
-            <svg viewBox="0 0 18 18" fill="none">
-              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </div>
-        </article>
-      </div>
-    </section>
-  </section>
 
-  <!-- ============================================================
-       SECTION: TESTIMONIAL
-       Purpose : Pull-quote with author + result chips on dark panel.
-       CSS tag : /* === TESTIMONIAL === */
-       ============================================================ -->
-  <section id="testimonial-sec" class="sec-border">
-    <p class="eyebrow">Testimonials</p>
-    <h2
-      style="font-size:clamp(28px, 4.5vw, 58px);font-weight:700;color:#111827;letter-spacing:-0.6px;line-height:1.05;margin-bottom:clamp(20px, 2.4vw, 32px);">
-      Delivered at enterprise scale</h2>
-    <div class="test-card">
-      <div class="test-left">
-        <svg width="32" height="32" fill="none" viewBox="0 0 32 32" style="opacity:0.3;margin-bottom:16px;">
-          <path
-            d="M8 20c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H8v-8zm12 0c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H20v-8z"
-            fill="#fff" />
-        </svg>
-        <p class="test-quote">We needed Guidewire-certified engineers quickly and at a cost structure our program could sustain. Celsior's nearshore model gave us a team that was productive from week two and has been running alongside our internal team ever since. The cost basis is substantially different from anything we could have built onshore, and the quality has held consistently across the entire engagement.</p>
-        <div class="test-author">
-          <div class="test-avatar">CIO</div>
-          <div>
-            <div style="font-size:14px;font-weight:600;color:#fff;">Director of Technology,</div>
-            <div style="font-size:12px;color:#93c5fd;margin-top:2px;">Mid-Market US Property and Casualty Insurer</div>
-          </div>
-        </div>
-      </div>
-      <div class="test-right">
-        <div class="test-res-label">Engagement results</div>
-        <div class="test-res-item">
-          <div class="test-dot"></div><span class="test-res-text">Full team operational within three weeks of engagement start </span>
-        </div>
-        <div class="test-res-item">
-          <div class="test-dot"></div><span class="test-res-text">44% cost reduction against prior onshore delivery model </span>
-        </div>
-        <div class="test-res-item" style="margin-bottom:0;">
-          <div class="test-dot"></div><span class="test-res-text">Two-year program continuity with the same core nearshore team </span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION: EXPLORE
-       Purpose : Cross-link grid pointing to other focus areas.
-                 Ported from the Our_Focus page.
-       CSS tag : /* === EXPLORE === */
-       ============================================================ -->
-  <section class="explore">
-    <h2>Continue exploring Celsior's capabilities</h2>
-    <div class="explore__links">
-      <a href="#">
-        <span class="explore__row-left">
-          <span class="explore__label">Enterprise AI Enablement </span>
-          <span class="explore__text">BOT Model One-line</span>
-        </span>
-        <span class="explore__row-right">
-          <span class="explore__arrow" aria-hidden="true">
-            <svg viewBox="0 0 18 18" fill="none">
-              <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-              <polyline points="7,3 15,3 15,11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </span>
-        </span>
-      </a>
-      <a href="#">
-        <span class="explore__row-left">
-          <span class="explore__label">Nearshore Delivery</span>
-          <span class="explore__text">Nearshore Delivery: Mexico and LATAM</span>
-        </span>
-        <span class="explore__row-right">
-          <span class="explore__arrow" aria-hidden="true">
-            <svg viewBox="0 0 18 18" fill="none">
-              <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-              <polyline points="7,3 15,3 15,11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </span>
-        </span>
-      </a>
-      <a href="#">
-        <span class="explore__row-left">
-          <span class="explore__label">AI-Led Engineering </span>
-          <span class="explore__text">Dedicated Engineering Pods</span>
-        </span>
-        <span class="explore__row-right">
-          <span class="explore__arrow" aria-hidden="true">
-            <svg viewBox="0 0 18 18" fill="none">
-              <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-              <polyline points="7,3 15,3 15,11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </span>
-        </span>
-      </a>
-    </div>
-  </section>
 
   <!-- ============================================================
        SECTION: INSIGHTS
@@ -3225,7 +3920,8 @@
         <p class="eyebrow">INSIGHTS</p>
         <h2
           style="font-size:40px;font-weight:700;color:#111827;line-height:50px;max-width:900px;letter-spacing:-0.24px;">
-          Thinking on GCC strategy, nearshore delivery, and platform talent for US enterprises </h2>
+          Thinking on customers experience
+and digital product design</h2>
       </div>
       <a href="#"
         style="font-size:14px;font-weight:600;color:var(--teal);display:flex;align-items:center;gap:6px;white-space:nowrap;margin-left:24px;padding-bottom:4px;">All
@@ -3237,13 +3933,13 @@
     <div class="insight-cards">
       <div class="insight-card">
         <div class="insight-img">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780298821/16_yfwmw4.png" alt="" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780303691/19_kdbrye.png" alt="" />
           <div class="insight-img-grad"></div>
-          <span class="insight-tag">GCC Strategy</span>
+          <span class="insight-tag">AI GOVERNANCE</span>
         </div>
         <div class="insight-body">
-          <h4 class="insight-title">Why the BOT model has become the default path for US enterprises building Global Capability Centers</h4>
-          <p class="insight-desc">Organizations building GCCs have moved away from greenfield standalone setups toward a structured Build-Operate-Transfer model that reduces early-stage risk and creates a defined transition to client ownership. This piece examines why the shift happened and what a well-structured BOT engagement requires</p>
+          <h4 class="insight-title">Why most enterprise AI programs stall between the pilot and the production environment Snippet</h4>
+          <p class="insight-desc">Most design handoffs fail not because the prototype was wrong, but because no one mapped what had to be true operationally for the design to work in production. </p>
           <div class="insight-foot"><span>6 min read</span><a href="#" class="insight-readlink">Read <svg width="12"
                 height="12" fill="none" viewBox="0 0 12 12">
                 <path d="M2 6h8M7 4l3 2-3 2" stroke="#0d4f45" stroke-width="1.3" stroke-linecap="round"
@@ -3253,14 +3949,13 @@
       </div>
       <div class="insight-card">
         <div class="insight-img">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780298830/17_pysdef.png" alt="" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780303698/20_yfp8j7.png" alt="" />
           <div class="insight-img-grad"></div>
-          <span class="insight-tag">Nearshore Delivery</span>
+          <span class="insight-tag">REGULATED INDUSTRIES</span>
         </div>
         <div class="insight-body">
-          <h4 class="insight-title">What makes Mexico the strongest nearshore location for US technology programs in 2026
-          </h4>
-          <p class="insight-desc">Time zone alignment is the starting point, not the conclusion. Mexico's combination of talent depth, platform certification capability, cultural proximity, and mature delivery infrastructure makes it a category apart from other LATAM nearshore options. This piece covers the full case.</p>
+          <h4 class="insight-title">What separates a production-grade AI copilot from a compliance liability in financial services</h4>
+          <p class="insight-desc">Generic models deployed without domain calibration, audit trail requirements, or explainability controls are not enterprise copilots. They are proof-of-concept systems operating at production risk. The distinction matters significantly when a regulator asks to review the decision trail.</p>
           <div class="insight-foot"><span>8 min read</span><a href="#" class="insight-readlink">Read <svg width="12"
                 height="12" fill="none" viewBox="0 0 12 12">
                 <path d="M2 6h8M7 4l3 2-3 2" stroke="#0d4f45" stroke-width="1.3" stroke-linecap="round"
@@ -3270,13 +3965,13 @@
       </div>
       <div class="insight-card">
         <div class="insight-img">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780298828/18_ju1rap.png" alt="" style="top:0;" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780303698/21_ktmdre.png" alt="" style="top:0;" />
           <div class="insight-img-grad"></div>
-          <span class="insight-tag">Platform Talent</span>
+          <span class="insight-tag">PLATFORM ENGINEERING</span>
         </div>
         <div class="insight-body">
-          <h4 class="insight-title">Pre-certifying nearshore talent for regulated industries: what it requires and why it changes program risk</h4>
-          <p class="insight-desc">In financial services, healthcare, and insurance, platform certification is not a resume credential — it is a delivery prerequisite. This piece examines what pre-certification actually involves, how it affects ramp time, and why it is the factor most organizations underweight when evaluating nearshore delivery quality</p>
+          <h4 class="insight-title">What a production AI program actually requires — and why a pilot budget does not cover it </h4>
+          <p class="insight-desc">A pilot is a controlled experiment. A production AI program requires data infrastructure, a governance layer, a runtime monitoring capability, and a team with the authority and the framework to act when a model drifts. These are not the same investment, and treating them as interchangeable is where programs lose ground. </p>
           <div class="insight-foot"><span>5 min read</span><a href="#" class="insight-readlink">Read <svg width="12"
                 height="12" fill="none" viewBox="0 0 12 12">
                 <path d="M2 6h8M7 4l3 2-3 2" stroke="#0d4f45" stroke-width="1.3" stroke-linecap="round"
@@ -3286,6 +3981,8 @@
       </div>
     </div>
   </section>
+
+
 
   <!-- ============================================================
        SECTION: FAQ
@@ -3298,101 +3995,81 @@
       <div class="faq__intro">
         <p class="eyebrow">FAQ</p>
         <h2>Questions business leaders ask before engaging</h2>
-        <p>Covering ROI, risk, timelines, and delivery model — the questions that matter to decision-makers, answered
-          directly.</p>
-        <a href="#">Speak to our team <span aria-hidden="true">→</span></a>
+        <p>Tell us where your current AI program stands. We will tell you what it needs.</p>
+        <a href="#">Speak to an AI Lab Architect <span aria-hidden="true">→</span></a>
       </div>
       <div class="faq__items">
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">What is the difference between a GCC and a standard nearshore team?</span>
+            <span class="faq__q">What is the starting point for a Celsior AI Lab engagement? </span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>A nearshore team is a vendor-managed delivery resource. A Global Capability Center is an organizational asset — engineering capability your company owns, governs, and operates directly. The distinction matters because the governance structure, IP ownership, retention model, and long-term cost trajectory are different in each case. Celsior's BOT model is designed to start as a managed nearshore engagement and transition, over a defined timeline, into a GCC that the client controls outright. Most organizations begin with the nearshore engagement and convert when program scale and organizational readiness support it. 
-
-            </p>
+            <p>Every engagement begins with an AI Readiness Assessment — a structured evaluation of your current data infrastructure, governance posture, talent capacity, and existing AI program portfolio. This produces a prioritized program roadmap and a governance architecture, not a capabilities presentation. The assessment takes four to six weeks and delivers a defined phase gate plan with production-readiness criteria built in. </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How do you structure operational accountability — and what does an SLA actually
-              cover?</span>
+            <span class="faq__q">How does the AI Lab differ from a standard implementation partner? </span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Every Managed Program operates under a defined SLA that covers incident response times, platform
-              availability targets, and upgrade delivery windows. Accountability is structured around measurable
-              outcomes, not effort — so you always know what you are entitled to and how performance is being tracked
-              against it.</p>
+            <p>A standard implementation partner executes against a client-defined specification. Celsior AI Lab co-develops the specification, architects the governance framework, builds on a proprietary platform it owns and operates, and runs the program in production post-delivery. The accountability model is structured differently because the scope of involvement is different. One vendor holds the outcome from assessment through to managed operations. </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">Do you manage the platform alongside our internal team, or do you replace that function
-              entirely?</span>
+            <span class="faq__q">At what stage does a program transition to managed operations? </span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>We work alongside your internal team in most engagements, taking on the operational depth and
-              specialist coverage that internal teams typically cannot sustain at scale. The model is designed around
-              your existing structure, not around replacing it. </p>
+            <p>The transition to managed operations is built into the delivery architecture from the start of the engagement — not negotiated at project close. PACE provides the production runtime layer with SLA monitoring and observability. HALO provides the governance and human review oversight. Managed operations is not a separate commercial conversation. It is a defined phase gate within the engagement plan. </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How do you handle platform upgrades without disrupting our production
-              environment? </span>
+            <span class="faq__q">How does the AI Lab address regulatory requirements in Banking and Insurance? </span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Upgrades are planned well in advance, tested in isolated environments, and executed against a
-              structured runbook with defined rollback procedures. Our teams have delivered major Guidewire and
-              ServiceNow upgrades with zero production incidents by treating upgrade governance as a continuous program
-              discipline, not a one-time project. </p>
+            <p>Compliance requirements are embedded at the infrastructure level. CAFE includes Role-Based Access Control, Attribute-Based Access Control, full audit trail logging, and content filtering from day one of deployment. ClaimX carries SHAP explainability for every AI scoring decision in the claims lifecycle. The Financial Risk Profiler generates a documented rationale for every risk assessment it produces. Regulatory review readiness is a design requirement, not a post-delivery retrofit. </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">What happens if our platform requirements change mid-program?</span>
+            <span class="faq__q">Can the AI Lab operate within our existing technology stack? </span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Managed Programs are structured with defined change governance built in. When requirements shift, we
-              assess the scope impact, adjust delivery priorities, and update the SLA framework accordingly — without
-              requiring a new contracting cycle or disrupting what is already running. </p>
+            <p>Yes. CAFE is a modular, plug-and-play platform architecture designed to integrate with existing enterprise systems without requiring infrastructure replacement. PACE operates across AWS, Azure, and Google Cloud runtimes. Synthetix is specifically engineered for brownfield environments — existing, undocumented, and legacy codebases are its primary operating context, not an edge case. </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How does a Managed Program begin — and how long before we see operational
-              stability?</span>
+            <span class="faq__q">What does a typical pilot-to-production timeline look like? </span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Every engagement starts with a platform health assessment that establishes a baseline for performance,
-              governance gaps, and immediate risk areas. Most clients reach full operational stability within 60 to 90
-              days of program start, with measurable SLA performance tracking from week one. </p>
+            <p>For agent deployment programs structured through CAFE, the production timeline runs 3 to 9 months, compared to the industry average of 12 to 24 months. For legacy modernization programs through Synthetix, discovery through handover runs materially faster than conventional approaches as a result of AI-assisted codebase archaeology and automated specification generation. Both timelines include structured human review gates at critical decision points — the speed does not come at the cost of the approval process. </p>
           </div>
-
         </div>
       </div>
     </div>
@@ -3409,9 +4086,8 @@
       <img class="cta-band-logo"
         src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
         alt="Celsior" />
-      <h2 class="cta-band-text" data-text="Most modernization efforts begin with understanding the environment.">Most
-        managed program engagements begin with a platform health assessment.</h2>
-      <a href="#contact" class="cta-btn cta-band-btn">Start the conversation</a>
+      <h2 class="cta-band-text" data-text="Most AI program costs compound the longer a governance gap goes uncorrected.">Most AI program costs compound the longer a governance gap goes uncorrected.</h2>
+      <a href="#contact" class="cta-btn cta-band-btn">Start with an AI Readiness Assessment</a>
     </div>
   </section>
 
@@ -3645,28 +4321,115 @@
       });
     });
   </script>
-  <!-- Blog card mobile tap-to-expand -->
+  <script src="shared.js" defer></script>
+
   <script>
     (function () {
-      function init() {
-        document.querySelectorAll('.blog-card').forEach(function (card) {
-          card.addEventListener('click', function () {
-            var isOpen = card.classList.contains('is-expanded');
-            document.querySelectorAll('.blog-card.is-expanded').forEach(function (c) {
-              c.classList.remove('is-expanded');
+      const canvas = document.getElementById('emParticleCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const LAYERS = [
+        { count: 180, z: .10, speed: .04, maxR: .8, alpha: .20, color: '180,200,255' },
+        { count: 160, z: .28, speed: .10, maxR: 1.2, alpha: .35, color: '190,210,255' },
+        { count: 120, z: .50, speed: .20, maxR: 1.6, alpha: .55, color: '210,225,255' },
+        { count: 80, z: .72, speed: .36, maxR: 2.2, alpha: .75, color: '225,235,255' },
+        { count: 40, z: .90, speed: .55, maxR: 3.0, alpha: .92, color: '240,245,255' }
+      ];
+      const MAX_CONNECT_DIST = 100, FOV = 500;
+      let W, H, scrollVel = 0, scrollBoost = 1, t = 0, stars = [];
+      function resize() { const el = canvas.parentElement; W = canvas.width = el.offsetWidth; H = canvas.height = el.offsetHeight; }
+      function buildStars() {
+        stars = [];
+        for (const L of LAYERS) {
+          for (let i = 0; i < L.count; i++) {
+            stars.push({
+              x3: (Math.random() - .5) * 2, y3: (Math.random() - .5) * 2,
+              z3: L.z * .8 + Math.random() * .2 * L.z, layer: L,
+              driftAngle: Math.random() * Math.PI * 2,
+              driftSpeed: L.speed * (.7 + Math.random() * .6),
+              twinkleOffset: Math.random() * Math.PI * 2,
+              twinkleFreq: Math.random() * .03 + .008,
+              baseR: L.maxR * (.4 + Math.random() * .6)
             });
-            if (!isOpen) {
-              card.classList.add('is-expanded');
+          }
+        }
+        stars.sort((a, b) => a.layer.z - b.layer.z);
+      }
+      function project(s) {
+        const depth = 1 - s.layer.z, scale = FOV / (FOV + depth * 400);
+        return { sx: W * .5 + s.x3 * W * .52 * scale, sy: H * .5 + s.y3 * H * .52 * scale, scale };
+      }
+      function draw() {
+        requestAnimationFrame(draw);
+        t += .016;
+        scrollBoost += (1 - scrollBoost) * .06;
+        ctx.clearRect(0, 0, W, H);
+        const grd = ctx.createRadialGradient(W * .42, H * .5, 0, W * .42, H * .5, W * .8);
+        grd.addColorStop(0, 'rgba(24,60,180,.10)');
+        grd.addColorStop(.45, 'rgba(14,30,100,.06)');
+        grd.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = grd; ctx.fillRect(0, 0, W, H);
+        const proj = stars.map(project);
+        for (let i = 0; i < stars.length; i++) {
+          const si = stars[i], pi = proj[i];
+          if (si.layer.z < .4) continue;
+          for (let j = i + 1; j < stars.length; j++) {
+            const sj = stars[j], pj = proj[j];
+            if (Math.abs(si.layer.z - sj.layer.z) > .3) continue;
+            const dx = pi.sx - pj.sx, dy = pi.sy - pj.sy, d = Math.sqrt(dx * dx + dy * dy);
+            if (d < MAX_CONNECT_DIST) {
+              const da = (si.layer.z + sj.layer.z) * .5;
+              const la = (1 - d / MAX_CONNECT_DIST) * .16 * da;
+              ctx.beginPath(); ctx.moveTo(pi.sx, pi.sy); ctx.lineTo(pj.sx, pj.sy);
+              ctx.strokeStyle = `rgba(160,190,255,${la})`; ctx.lineWidth = pi.scale * .6; ctx.stroke();
             }
-          });
-        });
+          }
+        }
+        for (let i = 0; i < stars.length; i++) {
+          const s = stars[i], L = s.layer, p = proj[i], boost = scrollBoost;
+          const speed = s.driftSpeed * boost;
+          s.x3 += Math.cos(s.driftAngle) * speed * .0008;
+          s.y3 += Math.sin(s.driftAngle) * speed * .0008;
+          s.y3 -= L.z * .00015 * boost * scrollVel;
+          if (s.x3 > 1.05) s.x3 = -1.05; if (s.x3 < -1.05) s.x3 = 1.05;
+          if (s.y3 > 1.05) s.y3 = -1.05; if (s.y3 < -1.05) s.y3 = 1.05;
+          const tw = Math.sin(t * s.twinkleFreq * 60 + s.twinkleOffset);
+          const a = Math.max(.05, Math.min(1, L.alpha + tw * .2));
+          const r = s.baseR * p.scale;
+          if (L.z > .55) {
+            const gR = r * (L.z > .75 ? 5 : 3.5), gA = a * L.z * .4;
+            const g = ctx.createRadialGradient(p.sx, p.sy, 0, p.sx, p.sy, gR);
+            g.addColorStop(0, `rgba(${L.color},${gA})`); g.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.beginPath(); ctx.arc(p.sx, p.sy, gR, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
+          }
+          ctx.beginPath(); ctx.arc(p.sx, p.sy, Math.max(.3, r), 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${L.color},${a})`; ctx.fill();
+        }
       }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-      } else {
-        init();
-      }
+      let lastY = window.scrollY, lastTs = performance.now();
+      window.addEventListener('scroll', () => {
+        const now = performance.now(), dt = Math.max(1, now - lastTs);
+        const v = Math.abs(window.scrollY - lastY) / dt;
+        const raw = (v * 1000) / 800;
+        scrollVel = Math.min(raw, 10);
+        scrollBoost = 1 + Math.min(raw * 1.8, 7);
+        lastY = window.scrollY; lastTs = now;
+      }, { passive: true });
+      resize(); buildStars();
+      window.addEventListener('resize', () => { resize(); buildStars(); });
+      draw();
     })();
+  </script>
+
+  <script>
+    // Solution cards — click to toggle expanded text
+    document.querySelectorAll('.solution-cards article').forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        // Don't toggle if user clicked the link
+        if (e.target.closest('.solution-link')) return;
+        this.classList.toggle('is-expanded');
+      });
+    });
   </script>
   <script src="shared.js" defer></script>
 </body>

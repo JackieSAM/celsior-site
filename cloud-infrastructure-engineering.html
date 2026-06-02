@@ -2743,9 +2743,18 @@
   transition: color 0.4s ease, text-shadow 0.5s ease;
 }
 
-/* LARGE diagonal — TL (50-60%) and BR (35-45%): ~80px @ 1348 = 5.93vw */
+/* LARGE diagonal — TL only now; BR is text so overridden below */
 .mc.tl .mc-n,
 .mc.br .mc-n { font-size: clamp(44px, 5.93vw, 84px); }
+
+/* BR card has text "Days not months" — smaller size + allow wrapping */
+.mc.br .mc-num-row { white-space: normal; flex-wrap: wrap; }
+.mc.br .mc-n {
+  font-size: clamp(28px, 3.2vw, 52px);
+  line-height: 1.1;
+  white-space: normal;
+  word-break: break-word;
+}
 .mc.tl .mc-s,
 .mc.br .mc-s { font-size: clamp(23px, 3.12vw, 44px); }  /* 52.5% ratio */
 
@@ -2811,6 +2820,7 @@
     padding: clamp(20px, 2.8vw, 32px) !important;
   }
   .mc.tl .mc-n, .mc.br .mc-n { font-size: clamp(40px, 6vw, 72px) !important; }
+      .mc.br .mc-n { font-size: clamp(26px, 3.5vw, 44px) !important; white-space: normal !important; }
   .mc.tl .mc-s, .mc.br .mc-s { font-size: clamp(21px, 3.15vw, 38px) !important; }
   .mc.tr .mc-n, .mc.bl .mc-n { font-size: clamp(32px, 5vw, 60px) !important; }
   .mc.tr .mc-s, .mc.bl .mc-s { font-size: clamp(17px, 2.63vw, 31px) !important; }
@@ -2825,6 +2835,7 @@
   .out-body    { font-size: 13px !important; }
   .mc { padding: 18px 16px !important; }
   .mc.tl .mc-n, .mc.br .mc-n { font-size: clamp(30px, 9vw, 44px) !important; }
+      .mc.br .mc-n { font-size: clamp(20px, 5.5vw, 28px) !important; line-height: 1.1; white-space: normal !important; }
   .mc.tl .mc-s, .mc.br .mc-s { font-size: clamp(16px, 4.7vw, 23px) !important; }
   .mc.tr .mc-n, .mc.bl .mc-n { font-size: clamp(26px, 7.5vw, 36px) !important; }
   .mc.tr .mc-s, .mc.bl .mc-s { font-size: clamp(14px, 3.9vw, 19px) !important; }
@@ -3029,25 +3040,25 @@
   <div class="stats-wrap">
     <div class="stats-grid">
       <div class="stat-col">
-        <div class="stat-num">50–60%</div>
-        <div class="stat-desc">Faster delivery cycles with AI-assisted development</div>
+        <div class="stat-num">46%</div>
+        <div class="stat-desc">Faster cloud migration delivery</div>
       </div>
       <div class="stat-col">
-        <div class="stat-num">35–45%</div>
-        <div class="stat-desc">Cost savings through intelligent automation</div>
+        <div class="stat-num">99.9%</div>
+        <div class="stat-desc">Application uptime with SRE</div>
       </div>
       <div class="stat-col">
-        <div class="stat-num">80%</div>
-        <div class="stat-desc">Code generation automated across UI, backend, and database layers</div>
+        <div class="stat-num">35-45%</div>
+        <div class="stat-desc">Lower ongoing cloud operating costs</div>
       </div>
       <div class="stat-col">
-        <div class="stat-num">70%</div>
-        <div class="stat-desc">Less manual effort in test script generation</div>
+        <div class="stat-num">Days not months</div>
+        <div class="stat-desc">Infrastructure provisioning timelines</div>
       </div>
     </div>
     <div class="stat-note">
       <div class="stat-note-lbl"> </div>
-      <div class="stat-note-txt">The gap between legacy and modern engineering is across delivery speed, cost, and automation. The difference is consistent and significant. We help clients don't just modernize their systems but also reclaimed capacity. That's what our AI-led engineering is designed to do.</div>
+      <div class="stat-note-txt">Celsior brings together cloud strategy and advisory, enterprise maturity roadmapping, migration execution, and Cloud FinOps within a single engagement model. The Hyperconverged Cloud Management Framework automates the full migration lifecycle, and SRE practices maintain reliability and resiliency across production environments on an ongoing basis. </div>
     </div>
   </div>
 
@@ -3064,10 +3075,10 @@
     <p class="eyebrow">CONSEQUENCES</p>
     <h2
       style="font-size:55px;font-weight:700;letter-spacing:-1px;line-height:55px;color:#09090b;max-width:1048px;margin-bottom:32px;">
-      What traditional engineering approaches <br><span style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; display:inline;">cost</span> your organization</h2>
+      What aging infrastructure costs your  <br><span style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; display:inline;">organization</span></h2>
 
     <!-- Body -->
-    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">Legacy systems and mounting technical debt are strangling innovation. Engineering teams spend 80% of their time on maintenance rather than growth. We refactor these aging infrastructures into modern, documented, and compliant architectures, clearing the path for high-velocity digital transformation.</p>
+    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">Infrastructure that moves slowly costs you twice. New products sit in limbo waiting for systems that can't handle the load. Features stay in approval queues while competitors ship theirs. Cloud bills grow month after month because nobody owns optimization and there's no clear path to control spending. Then audits arrive and surface the gaps your manual processes were never fast enough to close. </p>
 
     <!-- ── Card frame — exact Figma Desktop-31 styles ── -->
     <!--
@@ -3121,8 +3132,8 @@
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778645514/12_fqkmxq.png" alt=""
             style="width:35.875px;height:35.875px;display:block;" />
         </div>
-        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Slower product cycles</h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Months-long development timelines prevent you from responding to market shifts and customer needs</p>
+        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Slow provisioning</h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Weeks-long approval cycles and manual setups delay every initiative that needs compute, storage, or network resources </p>
       </div>
 
       <!-- ── Card 2: Compounding security exposure ── -->
@@ -3142,8 +3153,8 @@
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778645515/13_otvcxp.png" alt=""
             style="width:35.875px;height:35.875px;display:block;" />
         </div>
-        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Fragmented architecture</h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Disconnected systems create data silos, integration challenges, and operational blind spots</p>
+        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Cost visibility gaps</h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Spending grows faster than usage while teams lack tools to attribute costs, identify waste, or optimize configurations </p>
       </div>
 
       <!-- ── Card 3: Engineering talent attrition ── -->
@@ -3163,8 +3174,8 @@
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778645514/14_vsqdxw.png" alt=""
             style="width:35.875px;height:35.875px;display:block;" />
         </div>
-        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Institutional knowledge loss</h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Undocumented legacy code becomes riskier as experienced engineers retire or move on</p>
+        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Reliability blind spots</h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Incidents take longer to diagnose and resolve when monitoring, logs, and traces exist in separate systems without correlation </p>
       </div>
 
     </div><!-- /card-frame -->
@@ -3173,8 +3184,8 @@
   <!-- CAPABILITIES: INNOVATION WHEEL -->
 <section class="cel" id="cel">
   <div class="cel-copy">
-    <h2 class="cel-h1" id="cel-h1">Innovation, Engineered by Celsior</h2>
-    <p  class="cel-sub" id="cel-sub">Powered by our AI-first digital engineering platform that spans the complete application lifecycle</p>
+    <h2 class="cel-h1" id="cel-h1">Infrastructure, Engineered by Celsior</h2>
+    <p  class="cel-sub" id="cel-sub">Built on the Hyperconverged Cloud Management Framework </p>
 
     <div class="chips-row" id="chips-row">
       <button class="ch-arr" id="ch-prev" aria-label="Previous">
@@ -3294,31 +3305,31 @@
     <section class="partners" aria-label="Partner ecosystem">
       <div class="partners__track">
         <div class="partners__group">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/Dynatrace_1_t3ayxc.png"
-            alt="Dynatrace" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779995186/12_wodhyv.png"
+            alt="AWS" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780028742/17_hpq0sv.png"
+            alt="Microsoft" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/GuideWire_logo_color_1_whi7lu.png" alt="Guidewire"
+            loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780034564/LOGOS_mokrst.png"
+            alt="Salesforce" loading="lazy" />
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/ServiceNow_1_plissc.png"
             alt="ServiceNow" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Boomi_1_kvrpcd.png" alt="Boomi"
-            loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/GuideWire_logo_color_1_whi7lu.png"
-            alt="GuideWire" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/RingCentral_1_zjcj4f.png"
-            alt="RingCentral" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Informatica_1_gkhjs0.png"
-            alt="Informatica" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Boomi_1_kvrpcd.png"
+            alt="Boomi" loading="lazy" />
         </div>
         <div class="partners__group" aria-hidden="true">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/Dynatrace_1_t3ayxc.png" alt=""
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779995186/12_wodhyv.png" alt="AWS"
             loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/ServiceNow_1_plissc.png" alt=""
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780028742/17_hpq0sv.png" alt="Microsoft"
             loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Boomi_1_kvrpcd.png" alt=""
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/GuideWire_logo_color_1_whi7lu.png" alt="Guidewire"
             loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/GuideWire_logo_color_1_whi7lu.png"
-            alt="" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/RingCentral_1_zjcj4f.png" alt=""
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780034564/LOGOS_mokrst.png"
+            alt="Salesforce" loading="lazy" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/ServiceNow_1_plissc.png" alt="ServiceNow"
             loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Informatica_1_gkhjs0.png" alt=""
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Boomi_1_kvrpcd.png" alt="Boomi"
             loading="lazy" />
         </div>
       </div>
@@ -3337,43 +3348,43 @@
   <!-- Left: heading + body, GSAP slide-in from left -->
   <div class="out-left" data-gsap="out-left">
     <h2 class="out-heading">Outcomes<br>we're<br>accountable to</h2>
-    <p class="out-body">These outcomes reflect engagements across banking, insurance, and healthcare organizations. Results vary based on application complexity, technology stack, and organizational readiness.</p>
+    <p class="out-body">These outcomes reflect cloud and infrastructure engagements across regulated industries. Results depend on application complexity, existing architecture, and organizational cloud maturity.</p>
   </div>
 
   <!-- Right: 2×2 grid — LARGE pair on diagonal (TL+BR), MEDIUM pair on diagonal (TR+BL) -->
   <div class="out-grid">
 
-    <!-- TL: LARGE — 50-60% + blue horizontal accent (Figma-exact) -->
+    <!-- TL: LARGE — 46% + blue horizontal accent (Figma-exact) -->
     <div class="mc tl">
       <div class="mc-num-row">
-        <span class="mc-n">50-60</span><span class="mc-s"> %</span>
+        <span class="mc-n">46</span><span class="mc-s"> %</span>
       </div>
-      <p class="mc-label">Faster time-to-market for new features and applications</p>
+      <p class="mc-label">Faster cloud migration delivery</p>
       <div class="mc-accent"></div>
     </div>
 
-    <!-- TR: MEDIUM — 50% — no resting accent -->
+    <!-- TR: MEDIUM — 99.9% — no resting accent -->
     <div class="mc tr">
       <div class="mc-num-row">
-        <span class="mc-n">50</span><span class="mc-s">%</span>
+        <span class="mc-n">99.9</span><span class="mc-s">%</span>
       </div>
-      <p class="mc-label">Reduction in technical debt remediation time</p>
+      <p class="mc-label">Application uptime with SRE</p>
     </div>
 
-    <!-- BL: MEDIUM — 40% — no resting accent -->
+    <!-- BL: MEDIUM — 35-45% — no resting accent -->
     <div class="mc bl">
-      <div class="mc-num-row">
-        <span class="mc-n">40</span><span class="mc-s"> %</span>
-      </div>
-      <p class="mc-label">Faster test case analysis with AI-driven generation</p>
-    </div>
-
-    <!-- BR: LARGE — 35-45% + teal vertical accent on left edge (Figma-exact, via ::before) -->
-    <div class="mc br">
       <div class="mc-num-row">
         <span class="mc-n">35-45</span><span class="mc-s"> %</span>
       </div>
-      <p class="mc-label">Lower engineering costs through intelligent automation</p>
+      <p class="mc-label">Lower ongoing cloud operating costs</p>
+    </div>
+
+    <!-- BR: LARGE — Days not months + teal vertical accent on left edge (Figma-exact, via ::before) -->
+    <div class="mc br">
+      <div class="mc-num-row">
+        <span class="mc-n">Days not months</span><span class="mc-s"></span>
+      </div>
+      <p class="mc-label">Infrastructure provisioning timelines</p>
     </div>
 
   </div>
@@ -3391,7 +3402,7 @@
       <a href="#">
         <span class="explore__row-left">
           <span class="explore__label">AI LAB</span>
-          <span class="explore__text">Application &amp; Platform Engineering</span>
+          <span class="explore__text">Cloud Strategy & Migration</span>
         </span>
         <span class="explore__row-right">
           <span class="explore__arrow" aria-hidden="true">
@@ -3406,7 +3417,7 @@
       <a href="#">
         <span class="explore__row-left">
           <span class="explore__label">COES</span>
-          <span class="explore__text">Microservices &amp; Modern Architectures</span>
+          <span class="explore__text">DevOps & Site Reliability Engineering</span>
         </span>
         <span class="explore__row-right">
           <span class="explore__arrow" aria-hidden="true">
@@ -3421,7 +3432,7 @@
       <a href="#">
         <span class="explore__row-left">
           <span class="explore__label">ACCELERATORS</span>
-          <span class="explore__text">Cloud Engineering &amp; Transformation</span>
+          <span class="explore__text">Observability & Infrastructure Automation</span>
         </span>
         <span class="explore__row-right">
           <span class="explore__arrow" aria-hidden="true">
@@ -3433,23 +3444,56 @@
           </span>
         </span>
       </a>
-      <a href="#">
-        <span class="explore__row-left">
-          <span class="explore__label">INTELLIGENT OPS</span>
-          <span class="explore__text">Cloud Engineering &amp; Transformation</span>
-        </span>
-        <span class="explore__row-right">
-          <span class="explore__arrow" aria-hidden="true">
-            <svg viewBox="0 0 18 18" fill="none">
-              <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-              <polyline points="7,3 15,3 15,11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </span>
-        </span>
-      </a>
+
     </div>
   </section>
+
+
+
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION 7 · CLIENT PROOF
+══════════════════════════════════════════════════════ -->
+  <!-- SOLUTIONS: TESTIMONIAL + EXPLORE + INSIGHTS + FAQ + CTA -->
+<section id="testimonial-sec" class="sec-border">
+    <p class="eyebrow">CLIENT PROOF</p>
+    <h2 style="font-size:clamp(28px, 4.5vw, 58px);font-weight:700;color:#111827;letter-spacing:-0.6px;line-height:1.05;margin-bottom:clamp(20px, 2.4vw, 32px);">
+      Delivered at enterprise scale</h2>
+    <div class="test-card">
+      <div class="test-left">
+        <svg width="32" height="32" fill="none" viewBox="0 0 32 32" style="opacity:0.3;margin-bottom:16px;">
+          <path
+            d="M8 20c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H8v-8zm12 0c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H20v-8z"
+            fill="#fff" />
+        </svg>
+        <p class="test-quote">"Our cloud and infrastructure practice scales from single application migrations to enterprise-wide transformations. Whether you're moving your first workload to the cloud, optimizing multi-cloud spending, or building SRE capabilities, we bring the same discipline: automated provisioning, cost transparency, and operational resilience built into every deployment."</p>
+        <div class="test-author">
+          <div class="test-avatar">CIO</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#fff;">Major life insurance company</div>
+            <div style="font-size:12px;color:#93c5fd;margin-top:2px;">Agent Portal Modernisation</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-right">
+        <div class="test-res-label">DELIVERY APPROACH:</div>
+        <div class="test-res-item">
+          <div class="test-dot"></div><span class="test-res-text">Hyperconverged Cloud Management Framework for accelerated migration</span>
+        </div>
+        <div class="test-res-item">
+          <div class="test-dot"></div><span class="test-res-text">Cloud FinOps for continuous cost optimization and showback </span>
+        </div>
+        <div class="test-res-item">
+          <div class="test-dot"></div><span class="test-res-text">DevOps and CI/CD pipelines with infrastructure as code </span>
+        </div>
+        <div class="test-res-item" style="margin-bottom:0;">
+          <div class="test-dot"></div><span class="test-res-text">Site Reliability Engineering for 99.9%+ uptime targets </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
 
 
   <!-- ============================================================
@@ -3526,47 +3570,7 @@
   </section>
 
 
-<!-- ══════════════════════════════════════════════════════
-     SECTION 7 · CLIENT PROOF
-══════════════════════════════════════════════════════ -->
-  <!-- SOLUTIONS: TESTIMONIAL + EXPLORE + INSIGHTS + FAQ + CTA -->
-<section id="testimonial-sec" class="sec-border">
-    <p class="eyebrow">CLIENT PROOF</p>
-    <h2 style="font-size:clamp(28px, 4.5vw, 58px);font-weight:700;color:#111827;letter-spacing:-0.6px;line-height:1.05;margin-bottom:clamp(20px, 2.4vw, 32px);">
-      Delivered at enterprise scale</h2>
-    <div class="test-card">
-      <div class="test-left">
-        <svg width="32" height="32" fill="none" viewBox="0 0 32 32" style="opacity:0.3;margin-bottom:16px;">
-          <path
-            d="M8 20c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H8v-8zm12 0c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H20v-8z"
-            fill="#fff" />
-        </svg>
-        <p class="test-quote">"We accelerated an insurance carrier's modernization program by implementing a blended delivery model that reduced development costs by 50% while modernizing their agent portal. Six strategic projects completed in 12 months with restored engineering confidence and rapid ROI realization."</p>
-        <div class="test-author">
-          <div class="test-avatar">CIO</div>
-          <div>
-            <div style="font-size:14px;font-weight:600;color:#fff;">Major life insurance company</div>
-            <div style="font-size:12px;color:#93c5fd;margin-top:2px;">Agent Portal Modernisation</div>
-          </div>
-        </div>
-      </div>
-      <div class="test-right">
-        <div class="test-res-label">DELIVERY APPROACH:</div>
-        <div class="test-res-item">
-          <div class="test-dot"></div><span class="test-res-text">Cross-functional engineering pods aligned to business outcomes</span>
-        </div>
-        <div class="test-res-item">
-          <div class="test-dot"></div><span class="test-res-text">Onshore, offshore, and nearshore delivery models for cost optimization</span>
-        </div>
-        <div class="test-res-item">
-          <div class="test-dot"></div><span class="test-res-text">Pre-certified talent on enterprise platforms (ServiceNow, Guidewire, Jack Henry)</span>
-        </div>
-        <div class="test-res-item" style="margin-bottom:0;">
-          <div class="test-dot"></div><span class="test-res-text">Continuous delivery with DevOps, SRE, and observability built in</span>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- ============================================================
        SECTION: FAQ
@@ -3578,82 +3582,84 @@
     <div class="faq__inner">
       <div class="faq__intro">
         <p class="eyebrow">FAQ</p>
-        <h2>Questions business leaders ask before engaging</h2>
-        <p>Covering ROI, risk, timelines, and delivery model — the questions that matter to decision-makers, answered
-          directly.</p>
+        <h2>Questions leaders ask about cloud and infrastructure transformation </h2>
+        <p>Covering ROI, risk, timelines, and delivery model — the
+questions that matter to decision-makers, answered
+directly.</p>
         <a href="#">Speak to our team <span aria-hidden="true">→</span></a>
       </div>
       <div class="faq__items">
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How do you ensure continuity when modernizing critical systems?</span>
+            <span class="faq__q">How do you handle cloud migrations for applications we can't afford to take offline?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>We design transformation programs around your operational constraints. Our approach includes parallel run strategies, incremental migration, automated testing, and rollback capabilities. For regulated industries, we maintain complete audit trails and compliance documentation throughout the modernization journey.</p>
+            <p>We design migration strategies around your availability requirements. Our approaches include parallel run environments, incremental migration with automated rollback, blue-green deployments, and phased cutover windows. For regulated workloads, we maintain compliance documentation and audit trails throughout the migration. </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">What's different about AI-led engineering compared to traditional development?</span>
+            <span class="faq__q">What makes your cloud approach different from working directly with AWS, Azure, or Google Cloud?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Traditional development relies heavily on manual coding, documentation, and testing. Our AI-first digital engineering platform automates software archaeology, generates requirements, accelerates code development, and maintains full traceability &mdash; reducing discovery time by 50&ndash;60% while ensuring regulatory compliance.</p>
+            <p>Hyperscalers provide infrastructure. We provide the architecture, migration methodology, and operational practices that make cloud investments successful. Our Hyperconverged Cloud Management Framework automates assessment, migration, and ongoing optimization across multiple cloud providers. This accelerates delivery by 46% while reducing costs by 57% compared to manual migration approaches. </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">Can you work with our existing technology stack and vendor relationships?</span>
+            <span class="faq__q">Can you help optimize cloud costs for environments already running in production?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Yes. Our platform and services are designed to integrate with your current hyperscaler relationships (AWS, Azure, Google Cloud), enterprise platforms (ServiceNow, Guidewire, Jack Henry), and development toolchains. We complement rather than replace your existing vendor ecosystem.</p>
+            <p>Yes. Our Cloud FinOps services analyze current spending, identify optimization opportunities, implement automated cost controls, and establish showback/chargeback models. Most organizations reduce cloud operating costs by 35-45% within the first quarter through rightsizing, reserved instances, spot instance utilization, and eliminating unused resources. </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How quickly can engineering teams start seeing results?</span>
+            <span class="faq__q">How quickly can we see results from cloud migration initiatives?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Most organizations see initial productivity gains within the first sprint cycle. For modernization programs, we typically deliver the first working increment within 60&ndash;90 days, with measurable cost and speed improvements appearing in quarterly business reviews.</p>
+            <p>First workloads typically migrate within 60-90 days. For larger programs, we deliver in waves with measurable outcomes each quarter. Our Cloud Migration Factory approach provides automated assessment, dependency mapping, and migration execution that moves hundreds of workloads in months rather than years. 
+</p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">Do you provide ongoing support after initial development or modernization?</span>
+            <span class="faq__q">What happens when applications break in cloud environments?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Yes. We offer managed services including application support, platform operations, DevOps and SRE, and continuous improvement programs. Our PACE platform provides ongoing observability and governance for applications we deliver.</p>
+            <p>Our Site Reliability Engineering practices reduce both incident frequency and resolution time. We implement full-stack observability with correlated logs, metrics, and traces. Automated monitoring detects issues before users report them. Runbooks and automation scripts enable fast remediation. Organizations typically see 3× faster incident resolution within the first quarter. </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How do you handle data security and regulatory compliance?</span>
+            <span class="faq__q">Do you provide ongoing infrastructure management after migration?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Security and compliance are embedded in our engineering process. We maintain SOC 2 Type II certification, support HIPAA and GDPR requirements, and provide complete audit trails for all code changes. For regulated industries like banking and healthcare, we include compliance validation in every delivery increment.</p>
+            <p>Yes. We offer managed services including cloud platform operations, continuous optimization, DevOps pipeline management, observability and monitoring, security and compliance management, and cost governance. Our approach ensures infrastructure scales with demand while costs remain predictable and controlled. </p>
           </div>
         </div>
       </div>
@@ -3672,9 +3678,10 @@
       <img class="cta-band-logo"
         src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
         alt="Celsior" />
-      <h2 class="cta-band-text" data-text="Most modernization efforts begin with understanding the environment.">Most
-        managed program engagements begin with a platform health assessment.</h2>
-      <a href="#contact" class="cta-btn cta-band-btn">Start the conversation</a>
+      <h2 class="cta-band-text" data-text="Most modernization efforts begin with
+understanding the environment.">Most modernization efforts begin with
+understanding the environment.</h2>
+      <a href="#contact" class="cta-btn cta-band-btn">Explore Our Framework</a>
     </div>
   </section>
 
@@ -3779,10 +3786,9 @@
 
         /* 3. Number counter roll-up */
         const counterDefs = [
-          { cell: cells[0], prefix: '50-', to: 60, delay: 0.5  },
-          { cell: cells[1], prefix: '',    to: 50, delay: 0.62 },
-          { cell: cells[2], prefix: '',    to: 40, delay: 0.74 },
-          { cell: cells[3], prefix: '35-', to: 45, delay: 0.86 }
+          { cell: cells[0], prefix: '',    to: 46,   delay: 0.5,  suffix: '' },
+          { cell: cells[1], prefix: '',    to: 99.9, delay: 0.62, suffix: '' },
+          { cell: cells[2], prefix: '35-', to: 45,  delay: 0.74, suffix: '' }
         ];
         counterDefs.forEach(function(def) {
           if (!def.cell) return;
@@ -3795,10 +3801,14 @@
             ease: 'power4.out',
             delay: def.delay,
             scrollTrigger: { trigger: section, start: 'top 75%', once: true },
-            onUpdate: function() { numEl.textContent = def.prefix + Math.round(obj.val); },
+            onUpdate: function() {
+              var v = def.to % 1 === 0 ? Math.round(obj.val) : obj.val.toFixed(1);
+              numEl.textContent = def.prefix + v;
+            },
             onComplete: function() { numEl.textContent = def.prefix + def.to; }
           });
         });
+        /* BR card is static text — no counter needed */
 
         /* 4. Magnetic 3D tilt on hover */
         cells.forEach(function(cell) {
