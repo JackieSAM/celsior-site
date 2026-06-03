@@ -1,0 +1,5118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Celsior | AI-First Digital Engineering</title>
+  <meta name="description"
+    content="Celsior applies AI-assisted discovery, modernization engineering, and delivery governance to convert legacy technology into measurable business velocity." />
+  <meta property="og:title" content="Celsior | AI-First Digital Engineering" />
+  <meta property="og:description"
+    content="Celsior applies AI-assisted discovery, modernization engineering, and delivery governance to convert legacy technology into measurable business velocity." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --teal: #0d4f45;
+      --border: #f3f4f6;
+      --text-dark: #111827;
+      --text-muted: #6b7280;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+
+
+
+
+
+        /* ============================================================
+       === OUTCOMES ===
+       Heading floats over whitespace above the left cards;
+       four gradient outcome cards (green / blue / gold / dark)
+       with animated counters (GSAP ScrollTrigger).
+       ============================================================ */
+    .outcomes-section {
+      background: #fff;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .outcomes {
+      position: relative;
+      max-width: 1440px;
+      margin: 0 auto;
+      /* height = tallest card; heading floats in whitespace above short cards */
+      min-height: clamp(500px, 88vh, 900px);
+      padding: 0 clamp(24px, 5.5vw, 80px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      /* cards anchor to bottom */
+    }
+
+    /* ── Heading: absolutely positioned over top-left whitespace ── */
+    .outcomes__heading {
+      position: absolute;
+      top: clamp(32px, 7%, 112px);
+      left: clamp(24px, 5.5vw, 80px);
+      width: clamp(280px, 32%, 460px);
+      z-index: 2;
+    }
+
+    .outcomes__heading .eyebrow {
+      display: none;
+    }
+
+    .outcomes__heading h2 {
+      width: auto;
+      font-family: "DM Sans", Inter, sans-serif;
+      font-size: clamp(28px, 3.2vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      color: #09090b;
+      margin: 0 0 16px;
+    }
+
+    .outcomes__heading p:last-child {
+      width: auto;
+      color: #3f3f46;
+      font-size: 16px;
+      line-height: 23px;
+      margin: 0;
+    }
+
+    /* ── Cards: 4-col grid, bottom-aligned, full section width ── */
+    .outcome-cards {
+      position: static;
+      inset: auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: end;
+      /* stagger — shortest left, tallest right */
+      gap: clamp(6px, 1vw, 14px);
+    }
+
+    /* Base card */
+    .outcome-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      width: auto;
+      left: auto;
+      top: auto;
+      border-radius: 14px;
+      color: #fff;
+      isolation: isolate;
+    }
+
+    /* Base card */
+    .outcome-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      width: auto;
+      left: auto;
+      top: auto;
+      border-radius: 14px;
+      color: #fff;
+      isolation: isolate;
+    }
+
+    /* ── Card textures — permanent Cloudinary URLs ── */
+
+    /* GREEN */
+    .outcome-card--green::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1778494918/Texture1_ph4sfl.png') center / cover no-repeat;
+      mix-blend-mode: soft-light;
+      opacity: 0.7;
+    }
+
+    /* BLUE — "Plus darker" in Figma = color-burn in CSS */
+    .outcome-card--blue::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1778494917/Texture2_bnwhq1.png') center / cover no-repeat;
+      mix-blend-mode: color-burn;
+      opacity: 0.85;
+    }
+
+    /* GOLD */
+    .outcome-card--gold::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1778494918/Texture3_n1xdqe.png') center / cover no-repeat;
+      mix-blend-mode: soft-light;
+      opacity: 0.8;
+    }
+
+    /* DARK */
+    .outcome-card--dark::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1778494917/Texture4_cji9fh.png') center / cover no-repeat;
+      mix-blend-mode: soft-light;
+      opacity: 0.5;
+    }
+
+    /* Card content always above texture */
+    .outcome-card>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Exact Figma gradients — from design spec ── */
+    .outcome-card--green {
+      height: clamp(180px, 37vh, 354px);
+      padding: clamp(20px, 3vh, 48px) clamp(14px, 1.8vw, 24px) 24px;
+      /* Figma: complex multi-radial — teal top, deep forest bottom-left */
+      background:
+        radial-gradient(ellipse at 18% 80%, rgba(0, 70, 58, 0.6) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 18%, rgba(195, 230, 220, 0.1) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 50%, #008e7e 0%, #067060 45%, #0b524c 100%);
+    }
+
+    .outcome-card--blue {
+      height: clamp(230px, 48vh, 463px);
+      padding: clamp(20px, 2.6vh, 36px) clamp(14px, 1.8vw, 24px) 24px;
+      /* Figma: linear-gradient(to top) — bright blue at bottom, deep navy at top */
+      background: linear-gradient(to top, #0e62c2 21.4%, #004080 66.1%);
+    }
+
+    .outcome-card--gold {
+      height: clamp(320px, 67vh, 652px);
+      padding: clamp(20px, 3vh, 40px) clamp(14px, 2vw, 28px) 24px;
+      color: #000;
+      /* Figma: linear-gradient(to top) — bright yellow-gold at bottom, amber at top */
+      background: linear-gradient(to top, #f0bd57 8.7%, #dea31b 77.2%);
+    }
+
+    .outcome-card--dark {
+      height: clamp(420px, 86vh, 847px);
+      padding: clamp(20px, 3vh, 40px) clamp(16px, 2.4vw, 32px) 24px;
+      /* Figma: radial — near-black core, dark steel edges */
+      background: radial-gradient(ellipse 72% 62% at 50% 38%,
+          rgba(5, 8, 19, 1) 0%,
+          rgba(14, 18, 29, 1) 28%,
+          rgba(24, 29, 39, 1) 55%,
+          rgba(42, 49, 58, 1) 100%);
+    }
+
+    /* Numbers */
+    .outcome-card strong {
+      display: block;
+      font-size: clamp(36px, 5vw, 96px);
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .outcome-card--gold strong {
+      color: #000;
+    }
+
+    .outcome-card--dark strong {
+      font-size: clamp(32px, 4.5vw, 80px);
+    }
+
+    .outcome-card strong span,
+    .outcome-card strong .stat-num {
+      color: inherit;
+      font-size: 1em;
+    }
+
+    .outcome-card strong>span:not(.stat-num) {
+      font-size: 0.67em;
+    }
+
+    /* Descriptions */
+    .outcome-card p {
+      max-width: 240px;
+      margin: clamp(12px, 2vh, 32px) 0 0;
+      font-size: 16px;
+      line-height: 23px;
+      font-weight: 500;
+    }
+
+    .outcome-card--gold p {
+      color: #000;
+    }
+
+    /* ── Arrow button — absolute bottom-right ── */
+    .outcome-card-arrow {
+      position: absolute;
+      bottom: clamp(16px, 2.5vh, 28px);
+      right: clamp(16px, 1.8vw, 24px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.55);
+      background: transparent;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: pointer;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .outcome-card-arrow svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .outcome-card-arrow:hover {
+      border-color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .outcome-card--gold .outcome-card-arrow {
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .outcome-card--gold .outcome-card-arrow:hover {
+      border-color: rgba(0, 0, 0, 0.65);
+      background: rgba(0, 0, 0, 0.07);
+    }
+
+    /* ════════════════════════
+   RESPONSIVE BREAKPOINTS
+════════════════════════ */
+
+    /* Tablet ≤960px — heading back in flow, 2×2 card grid */
+    @media (max-width: 960px) {
+      .outcomes {
+        min-height: 0;
+        display: block;
+        padding-top: clamp(40px, 5vw, 64px);
+      }
+
+      .outcomes__heading {
+        position: static;
+        width: auto;
+        max-width: 560px;
+        margin-bottom: 28px;
+      }
+
+      .outcome-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: stretch;
+      }
+
+      .outcome-card--green,
+      .outcome-card--blue,
+      .outcome-card--gold,
+      .outcome-card--dark {
+        height: clamp(240px, 38vw, 340px);
+        padding: 28px 22px 24px;
+      }
+    }
+
+    /* ── 390px safety net: tighten further but keep 2×2 ── */
+    @media (max-width: 390px) {
+
+      .outcome-card--green,
+      .outcome-card--blue,
+      .outcome-card--gold,
+      .outcome-card--dark {
+        height: clamp(140px, 42vw, 180px) !important;
+        padding: 12px 10px 10px !important;
+      }
+
+      .outcome-card strong {
+        font-size: clamp(22px, 8vw, 34px) !important;
+      }
+
+      .outcome-card p {
+        font-size: 10px !important;
+        line-height: 13px !important;
+      }
+    }
+
+
+
+    /* ============================================================
+       === HERO ===
+       Full-bleed hero with image background + dark gradient overlays.
+       ============================================================ */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100dvh;
+      /* true dynamic viewport — adjusts as mobile chrome shows/hides */
+      min-height: 640px;
+      /* never too short even on small phones */
+      max-height: 1080px;
+      /* cap on ultra-wide / 4K so content stays reachable */
+      overflow: hidden;
+      background: #0b0b0b;
+    }
+
+    /* Fallback for browsers without dvh support (Safari < 15.4) */
+    @supports not (height: 100dvh) {
+      .hero {
+        height: 100vh;
+      }
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1780422451/Hero_Slide_1_tt2ggs.png') center/cover no-repeat;
+      transform: scale(1.06);
+      transform-origin: center;
+    }
+
+    .hero-gt {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: linear-gradient(to bottom, #0b0b0b, transparent);
+    }
+
+    .hero-gl {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(11, 11, 11, 0.95) 0%, rgba(11, 11, 11, 0.55) 35%, transparent 60%);
+    }
+
+    .hero-gb {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 520px;
+      background: linear-gradient(to top, #0b0b0b 35%, rgba(11, 11, 11, 0.7) 60%, transparent);
+    }
+
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 24px clamp(48px, 7vh, 88px);
+    }
+
+    .hero-heading {
+      font-size: clamp(28px, 3.6vw, 52px);
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      line-height: 1.1 !important;
+      letter-spacing: -0.03em !important;
+      max-width: min(94vw, 1400px);
+      width: 100%;
+      white-space: nowrap;
+    }
+
+    .hero-eyebrow {
+      font-size: clamp(20px, 3.6vw, 20px);
+      font-weight: 300;
+      color: #fff;
+      text-align: center;
+      line-height: 1.1 !important;
+      letter-spacing: -0.03em !important;
+      max-width: min(94vw, 1400px);
+      width: 100%;
+      white-space: nowrap;
+      font-family: 'Courier New', Courier, monospace;
+      padding-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .hero-heading {
+        white-space: normal;
+        font-size: clamp(24px, 5vw, 40px) !important;
+      }
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .btn-ghost {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(4.5px);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1.1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 9px;
+      height: 55px;
+      padding: 0 20px;
+      font-size: 15.6px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-white {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-radius: 9px;
+      height: 55px;
+      padding: 0 32px;
+      font-size: 15.6px;
+      font-weight: 600;
+      color: var(--teal);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       === STATS ===
+       Three highlight stat cards with animated counters.
+       ============================================================ */
+    .stats-wrap {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 0 112px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .stat-col {
+      padding: 32px 32px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .stat-col:last-child {
+      border-right: none;
+    }
+
+    .stat-num {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: -0.72px;
+      line-height: 40px;
+    }
+
+    .stat-desc {
+      font-size: 14px;
+      color: #4b5563;
+      line-height: 19px;
+      margin-top: 8px;
+    }
+
+    .stat-note {
+      background: rgba(13, 79, 69, 0.06);
+      border: 1px solid rgba(13, 79, 69, 0.1);
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-bottom: 28px;
+    }
+
+    .stat-note-lbl {
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 6px;
+    }
+
+    .stat-note-txt {
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 19.5px;
+    }
+
+    /* ── SHARED ── */
+    .pad {
+      padding: 72px 112px;
+    }
+
+    .pad-sm {
+      padding: 60px 112px;
+    }
+
+    .sec-border {
+      border-top: 1px solid rgba(13, 17, 39, 0.08);
+    }
+    .sec-border-2 {
+      border-bottom: 1px solid rgba(13, 17, 39, 0.08);
+    }
+    /* ============================================================
+       === COST Q×Q ===
+       Quarter-by-quarter narrative + cost-category accordion.
+       ============================================================ */
+    .cost-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .cost-h2 {
+      font-size: 55px;
+      font-weight: 700;
+      line-height: 60px;
+      color: #09090b;
+    }
+
+    .cost-p {
+      font-size: 16px;
+      color: #3f3f46;
+      line-height: 23px;
+      margin-top: 20px;
+    }
+
+    .amber-frame {
+      margin-top: 36px;
+      border: 3px solid #f1be56;
+      border-radius: 18px;
+      overflow: hidden;
+      height: 320px;
+      position: relative;
+    }
+
+    .amber-frame img {
+      width: 112%;
+      height: 112%;
+      object-fit: cover;
+      position: absolute;
+      top: -6%;
+      left: -6%;
+    }
+
+    .cost-rows {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cost-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cost-row:last-child {
+      border-bottom: none;
+    }
+
+    .icon-box {
+      width: 64px;
+      height: 64px;
+      border: 1px solid #111827;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .icon-box img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
+
+    .row-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #111827;
+      letter-spacing: -0.4px;
+    }
+
+    .row-chev {
+      margin-left: auto;
+      color: #9ca3af;
+    }
+
+    /* platform-ops-cards CSS replaced by inline styles */
+
+    /* ============================================================
+       === BLOG TEASERS / ACCELERATORS ===
+       Row of accelerator cards with chip + arrow CTA.
+       ============================================================ */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .blog-card {
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      min-height: 514px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .blog-card-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .blog-card-overlay {
+      position: absolute;
+      inset: 0;
+    }
+
+    .blog-card-body {
+      position: relative;
+      z-index: 2;
+      padding: 32px 28px;
+    }
+
+    .blog-card-ttl {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .blog-card-txt {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 23px;
+    }
+
+    /* ============================================================
+       === EXPLORE ===
+       Cross-link grid pointing to other focus areas.
+       ============================================================ */
+    .explore {
+      background: #ffffff;
+      max-width: none;
+      margin: 0;
+    }
+
+    .explore h2 {
+      max-width: 1100px;
+      margin: 0 auto 56px;
+      color: #0d1127;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      font-weight: 700;
+    }
+
+    .explore__links {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      max-width: 1100px;
+      margin: 0 auto;
+      border: 1.5px solid rgba(13, 17, 39, 0.12);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .explore__links a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 0;
+      padding: 32px 36px;
+      border-bottom: 1.5px solid rgba(13, 17, 39, 0.09);
+      border-radius: 0;
+      background: #ffffff;
+      color: #0d1127;
+      text-decoration: none;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .explore__links a::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .explore__links a:nth-child(1)::before {
+      background: linear-gradient(120deg, #07574a 0%, #12baa0 50%, #2ed8be 100%);
+    }
+
+    .explore__links a:nth-child(2)::before {
+      background: linear-gradient(120deg, #005aaf 0%, #002aff 50%, #008cff 100%);
+    }
+
+    .explore__links a:nth-child(3)::before {
+      background: linear-gradient(120deg, #8a6200 0%, #c99010 40%, #f3d25f 100%);
+    }
+
+    .explore__links a:hover::before {
+      opacity: 1;
+    }
+
+    .explore__links a:last-child {
+      border-bottom: 0;
+    }
+
+    .explore__row-left,
+    .explore__row-right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .explore__row-left {
+      gap: 24px;
+    }
+
+    .explore__row-right {
+      flex-shrink: 0;
+    }
+
+    .explore__label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 164px;
+      text-align: center;
+      padding: 6px 14px;
+      border-radius: 4px;
+      background: #0d1127;
+      color: #ffffff;
+      font-size: 0.65rem;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .explore__links a:hover .explore__label {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    .explore__text {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      color: #0d1127;
+      font-size: clamp(1.1rem, 1.8vw, 1.55rem);
+      line-height: 1.12;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      transition: color 0.3s ease;
+    }
+
+    .explore__char {
+      display: inline-block;
+      color: currentColor;
+      transition: transform 0.48s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+      transition-delay: calc(var(--i) * 0.02s);
+    }
+
+    .explore__links a:hover .explore__text {
+      color: #ffffff;
+    }
+
+    .explore__links a:hover .explore__char {
+      transform: translateY(-4px);
+    }
+
+    .explore__arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border: 1.5px solid rgba(13, 17, 39, 0.14);
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.95);
+      color: #0d1127;
+      overflow: hidden;
+      transition: background 0.28s ease, border-color 0.28s ease, color 0.28s ease;
+    }
+
+    .explore__arrow svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .explore__links a:hover .explore__arrow {
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.5);
+      color: #ffffff;
+    }
+
+    .explore__links a:nth-child(1):hover .explore__arrow {
+      background: rgba(18, 186, 160, 0.3);
+      border-color: rgba(18, 186, 160, 0.55);
+    }
+
+    .explore__links a:nth-child(2):hover .explore__arrow {
+      background: rgba(34, 211, 238, 0.28);
+      border-color: rgba(34, 211, 238, 0.55);
+    }
+
+    .explore__links a:nth-child(3):hover .explore__arrow {
+      background: rgba(243, 210, 95, 0.3);
+      border-color: rgba(243, 210, 95, 0.6);
+    }
+
+    .explore__links a:nth-child(4)::before {
+      background: linear-gradient(120deg, #3b0764 0%, #7c3aed 50%, #c084fc 100%);
+    }
+
+    .explore__links a:nth-child(4):hover .explore__arrow {
+      background: rgba(192, 132, 252, 0.3);
+      border-color: rgba(192, 132, 252, 0.6);
+    }
+
+    .explore__links a:hover .explore__arrow svg {
+      animation: exploreArrowStagger 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes exploreArrowStagger {
+      0% {
+        transform: translate(0, 0);
+        opacity: 1;
+      }
+
+      40% {
+        transform: translate(8px, -8px);
+        opacity: 0;
+      }
+
+      41% {
+        transform: translate(-8px, 8px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translate(0, 0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .explore {
+        padding: 64px 20px 72px;
+      }
+
+      .explore h2 {
+        margin-bottom: 30px;
+        font-size: clamp(1.5rem, 6.5vw, 2rem);
+      }
+
+      .explore__links a {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "label label"
+          "text  arrow";
+        column-gap: 14px;
+        row-gap: 14px;
+        align-items: center;
+        padding: 20px 18px;
+      }
+
+      .explore__row-left {
+        display: contents;
+      }
+
+      .explore__row-right {
+        display: contents;
+      }
+
+      .explore__label {
+        grid-area: label;
+        justify-self: start;
+      }
+
+      .explore__text {
+        grid-area: text;
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+        align-self: center;
+      }
+
+      .explore__arrow {
+        grid-area: arrow;
+        width: 36px;
+        height: 36px;
+        align-self: center;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .explore__label {
+        min-width: auto;
+        padding: 5px 10px;
+        font-size: 0.58rem;
+      }
+    }
+
+    /* ============================================================
+       === PARTNERS / PLATFORMS ===
+       Headline + horizontally scrolling partner-logo strip.
+       ============================================================ */
+    .platforms {
+      background: #fff;
+      padding: 32px 112px 0;
+      border-top: 1px solid rgba(13, 17, 39, 0.08);
+    }
+
+    .platforms h3 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.24px;
+      margin-bottom: 24px;
+    }
+
+    .partners {
+      position: relative;
+      overflow: hidden;
+      min-height: 86px;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0;
+      color: #5c6168;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      border-bottom: 1px solid rgba(13, 17, 39, 0.08);
+      background: #fff;
+      mask-image: linear-gradient(90deg, transparent 0%, #000 11%, #000 89%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 11%, #000 89%, transparent 100%);
+    }
+
+    .partners::before,
+    .partners::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 2;
+      width: 140px;
+      pointer-events: none;
+    }
+
+    .partners::before {
+      left: 0;
+      background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    .partners::after {
+      right: 0;
+      background: linear-gradient(270deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    .partners__track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      min-height: 86px;
+      animation: logo-loop 24s linear infinite;
+    }
+
+    .partners:hover .partners__track {
+      animation-play-state: paused;
+    }
+
+    .partners__group {
+      display: flex;
+      align-items: center;
+      gap: clamp(44px, 6vw, 84px);
+      padding: 0 clamp(22px, 3vw, 42px);
+    }
+
+    .partners img {
+      flex: 0 0 auto;
+      height: 38px;
+      width: auto;
+      max-width: 170px;
+      object-fit: contain;
+      opacity: 0.95;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .partners img:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+    @keyframes logo-loop {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ============================================================
+       === OUTCOMES ===
+       Heading floats over whitespace above the left cards;
+       four gradient outcome cards (green / blue / gold / dark)
+       with animated counters (GSAP ScrollTrigger).
+       ============================================================ */
+    .outcomes-section {
+      background: #fff;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .outcomes {
+      position: relative;
+      max-width: 1440px;
+      margin: 0 auto;
+      /* height = tallest card; heading floats in whitespace above short cards */
+      min-height: clamp(500px, 88vh, 900px);
+      padding: 0 clamp(24px, 5.5vw, 80px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      /* cards anchor to bottom */
+    }
+
+    /* ── Heading: absolutely positioned over top-left whitespace ── */
+    .outcomes__heading {
+      position: absolute;
+      top: clamp(32px, 7%, 112px);
+      left: clamp(24px, 5.5vw, 80px);
+      width: clamp(280px, 32%, 460px);
+      z-index: 2;
+    }
+
+    .outcomes__heading .eyebrow {
+      display: none;
+    }
+
+    .outcomes__heading h2 {
+      width: auto;
+      font-family: "DM Sans", Inter, sans-serif;
+      font-size: clamp(28px, 3.2vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      color: #09090b;
+      margin: 0 0 16px;
+    }
+
+    .outcomes__heading p:last-child {
+      width: auto;
+      color: #3f3f46;
+      font-size: 16px;
+      line-height: 23px;
+      margin: 0;
+    }
+
+    /* ── Cards: 4-col grid, bottom-aligned, full section width ── */
+    .outcome-cards {
+      position: static;
+      inset: auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      align-items: end;
+      /* stagger — shortest left, tallest right */
+      gap: clamp(6px, 1vw, 14px);
+    }
+
+    /* Base card */
+    .outcome-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      width: auto;
+      left: auto;
+      top: auto;
+      border-radius: 14px;
+      color: #fff;
+      isolation: isolate;
+    }
+
+    /* Base card */
+    .outcome-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      width: auto;
+      left: auto;
+      top: auto;
+      border-radius: 14px;
+      color: #fff;
+      isolation: isolate;
+    }
+
+    /* ── Card textures — permanent Cloudinary URLs ── */
+
+    /* GREEN */
+    .outcome-card--green::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1778494918/Texture1_ph4sfl.png') center / cover no-repeat;
+      mix-blend-mode: soft-light;
+      opacity: 0.7;
+    }
+
+    /* BLUE — "Plus darker" in Figma = color-burn in CSS */
+    .outcome-card--blue::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1778494917/Texture2_bnwhq1.png') center / cover no-repeat;
+      mix-blend-mode: color-burn;
+      opacity: 0.85;
+    }
+
+    /* GOLD */
+    .outcome-card--gold::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1778494918/Texture3_n1xdqe.png') center / cover no-repeat;
+      mix-blend-mode: soft-light;
+      opacity: 0.8;
+    }
+
+    /* DARK */
+    .outcome-card--dark::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1778494917/Texture4_cji9fh.png') center / cover no-repeat;
+      mix-blend-mode: soft-light;
+      opacity: 0.5;
+    }
+
+    /* Card content always above texture */
+    .outcome-card>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Exact Figma gradients — from design spec ── */
+    .outcome-card--green {
+      height: clamp(180px, 37vh, 354px);
+      padding: clamp(20px, 3vh, 48px) clamp(14px, 1.8vw, 24px) 24px;
+      /* Figma: complex multi-radial — teal top, deep forest bottom-left */
+      background:
+        radial-gradient(ellipse at 18% 80%, rgba(0, 70, 58, 0.6) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 18%, rgba(195, 230, 220, 0.1) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 50%, #008e7e 0%, #067060 45%, #0b524c 100%);
+    }
+
+    .outcome-card--blue {
+      height: clamp(230px, 48vh, 463px);
+      padding: clamp(20px, 2.6vh, 36px) clamp(14px, 1.8vw, 24px) 24px;
+      /* Figma: linear-gradient(to top) — bright blue at bottom, deep navy at top */
+      background: linear-gradient(to top, #0e62c2 21.4%, #004080 66.1%);
+    }
+
+    .outcome-card--gold {
+      height: clamp(320px, 67vh, 652px);
+      padding: clamp(20px, 3vh, 40px) clamp(14px, 2vw, 28px) 24px;
+      color: #000;
+      /* Figma: linear-gradient(to top) — bright yellow-gold at bottom, amber at top */
+      background: linear-gradient(to top, #f0bd57 8.7%, #dea31b 77.2%);
+    }
+
+    .outcome-card--dark {
+      height: clamp(420px, 86vh, 847px);
+      padding: clamp(20px, 3vh, 40px) clamp(16px, 2.4vw, 32px) 24px;
+      /* Figma: radial — near-black core, dark steel edges */
+      background: radial-gradient(ellipse 72% 62% at 50% 38%,
+          rgba(5, 8, 19, 1) 0%,
+          rgba(14, 18, 29, 1) 28%,
+          rgba(24, 29, 39, 1) 55%,
+          rgba(42, 49, 58, 1) 100%);
+    }
+
+    /* Numbers */
+    .outcome-card strong {
+      display: block;
+      font-size: clamp(36px, 5vw, 96px);
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .outcome-card--gold strong {
+      color: #000;
+    }
+
+    .outcome-card--dark strong {
+      font-size: clamp(32px, 4.5vw, 80px);
+    }
+
+    .outcome-card strong span,
+    .outcome-card strong .stat-num {
+      color: inherit;
+      font-size: 1em;
+    }
+
+    .outcome-card strong>span:not(.stat-num) {
+      font-size: 0.67em;
+    }
+
+    /* Descriptions */
+    .outcome-card p {
+      max-width: 240px;
+      margin: clamp(12px, 2vh, 32px) 0 0;
+      font-size: 16px;
+      line-height: 23px;
+      font-weight: 500;
+    }
+
+    .outcome-card--gold p {
+      color: #000;
+    }
+
+    /* ── Arrow button — absolute bottom-right ── */
+    .outcome-card-arrow {
+      position: absolute;
+      bottom: clamp(16px, 2.5vh, 28px);
+      right: clamp(16px, 1.8vw, 24px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.55);
+      background: transparent;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: pointer;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .outcome-card-arrow svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .outcome-card-arrow:hover {
+      border-color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .outcome-card--gold .outcome-card-arrow {
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .outcome-card--gold .outcome-card-arrow:hover {
+      border-color: rgba(0, 0, 0, 0.65);
+      background: rgba(0, 0, 0, 0.07);
+    }
+
+    /* ════════════════════════
+   RESPONSIVE BREAKPOINTS
+════════════════════════ */
+
+    /* Tablet ≤960px — heading back in flow, 2×2 card grid */
+    @media (max-width: 960px) {
+      .outcomes {
+        min-height: 0;
+        display: block;
+        padding-top: clamp(40px, 5vw, 64px);
+      }
+
+      .outcomes__heading {
+        position: static;
+        width: auto;
+        max-width: 560px;
+        margin-bottom: 28px;
+      }
+
+      .outcome-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: stretch;
+      }
+
+      .outcome-card--green,
+      .outcome-card--blue,
+      .outcome-card--gold,
+      .outcome-card--dark {
+        height: clamp(240px, 38vw, 340px);
+        padding: 28px 22px 24px;
+      }
+    }
+
+    /* ── 390px safety net: tighten further but keep 2×2 ── */
+    @media (max-width: 390px) {
+
+      .outcome-card--green,
+      .outcome-card--blue,
+      .outcome-card--gold,
+      .outcome-card--dark {
+        height: clamp(140px, 42vw, 180px) !important;
+        padding: 12px 10px 10px !important;
+      }
+
+      .outcome-card strong {
+        font-size: clamp(22px, 8vw, 34px) !important;
+      }
+
+      .outcome-card p {
+        font-size: 10px !important;
+        line-height: 13px !important;
+      }
+    }
+
+
+
+    /* ============================================================
+       === TESTIMONIAL ===
+       Pull-quote + author + result chips on dark panel.
+       ============================================================ */
+    .test-card {
+      background: linear-gradient(135deg, #0a1f3d 0%, #0d2d55 50%, #0f3566 100%);
+      border-radius: 16px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 36%);
+      align-items: stretch;
+    }
+
+    .test-left {
+      padding: clamp(28px, 3.5vw, 44px) clamp(24px, 3.8vw, 52px);
+      min-width: 0;
+    }
+
+    .test-right {
+      margin: clamp(16px, 1.8vw, 24px);
+      margin-left: 0;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: clamp(20px, 2.2vw, 30px) clamp(20px, 2.4vw, 32px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .test-quote {
+      font-size: clamp(14px, 1.1vw, 17px);
+      font-style: italic;
+      color: #fff;
+      line-height: 1.55;
+      opacity: 0.95;
+    }
+
+    .test-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .test-avatar {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .test-res-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #93c5fd;
+      margin-bottom: 20px;
+    }
+
+    .test-res-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .test-dot {
+      width: 6px;
+      height: 6px;
+      background: #34d399;
+      border-radius: 999px;
+      margin-top: 9px;
+      flex-shrink: 0;
+    }
+
+    .test-res-text {
+      font-size: clamp(12px, 0.92vw, 14px);
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.45;
+      white-space: normal;
+    }
+
+    /* ============================================================
+       === INSIGHTS ===
+       Three-column thought-leadership card grid.
+       ============================================================ */
+    .insight-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .insight-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      transform: translateY(0);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.45s ease;
+      will-change: transform, box-shadow;
+    }
+
+    .insight-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(15, 23, 42, 0.12);
+      box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04), 0 12px 24px -8px rgba(15, 23, 42, 0.12), 0 30px 60px -20px rgba(15, 23, 42, 0.18);
+    }
+
+    .insight-img {
+      height: 176px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .insight-img img {
+      width: 100%;
+      height: 140%;
+      object-fit: cover;
+      object-position: top;
+      position: absolute;
+      top: -18%;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .insight-card:hover .insight-img img {
+      transform: scale(1.04);
+    }
+
+    .insight-img-grad {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+    }
+
+    .insight-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--teal);
+    }
+
+    .insight-body {
+      padding: 20px;
+    }
+
+    .insight-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #111827;
+      line-height: 19px;
+      margin-bottom: 10px;
+    }
+
+    .insight-desc {
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 18px;
+      margin-bottom: 16px;
+    }
+
+    .insight-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .insight-readlink {
+      color: var(--teal);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ============================================================
+       === FAQ ===
+       Two-column FAQ — intro left, accordion right.
+       ============================================================ */
+    .faq {
+      position: relative;
+      z-index: 2;
+      isolation: isolate;
+      background: #fff;
+      margin: 0;
+      padding: 0 52px 120px;
+      border-top: 1px solid rgba(13, 17, 39, 0.08);
+    }
+
+    .faq__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: center;
+      position: relative;
+      border-top: 1px solid rgba(13, 17, 39, 0.12);
+    }
+
+    .faq__inner::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: rgba(13, 17, 39, 0.12);
+      pointer-events: none;
+    }
+
+    .faq__intro {
+      text-align: left;
+      padding: 80px 80px 80px 0;
+    }
+
+    .faq__intro .eyebrow {
+      margin: 0 0 16px;
+      /* matches unified eyebrow spacing */
+    }
+
+    .faq__intro h2 {
+      margin: 0;
+      color: #0d1127;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      line-height: 1.12;
+      letter-spacing: -0.036em;
+      font-weight: 700;
+    }
+
+    .faq__intro p {
+      margin: 44px 0 20px;
+      color: #6b7280;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: clamp(0.83rem, 1.05vw, 0.92rem);
+      line-height: 1.82;
+      font-weight: 400;
+    }
+
+    .faq__intro a {
+      color: var(--teal);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.4;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .faq__items {
+      padding-left: 52px;
+      padding-top: 80px;
+    }
+
+    .faq__item {
+      border-bottom: 1px solid rgba(13, 17, 39, 0.1);
+    }
+
+    .faq__item:first-child {
+      border-top: 1px solid rgba(13, 17, 39, 0.1);
+    }
+
+    .faq__trigger {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .faq__q {
+      color: #0d1127;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: clamp(0.88rem, 1.2vw, 1rem);
+      line-height: 1.5;
+      font-weight: 500;
+      letter-spacing: -0.012em;
+      transition: color 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .faq__arrow {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      margin-top: 2px;
+      color: #0d1127;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+    }
+
+    .faq__arrow svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .faq__item.is-open .faq__arrow {
+      transform: rotate(180deg);
+    }
+
+    .faq__item:nth-child(5n + 1):hover .faq__q,
+    .faq__item:nth-child(5n + 1).is-open .faq__q,
+    .faq__item:nth-child(5n + 1).is-open .faq__arrow {
+      color: #e8834a;
+    }
+
+    .faq__item:nth-child(5n + 2):hover .faq__q,
+    .faq__item:nth-child(5n + 2).is-open .faq__q,
+    .faq__item:nth-child(5n + 2).is-open .faq__arrow {
+      color: #12baa0;
+    }
+
+    .faq__item:nth-child(5n + 3):hover .faq__q,
+    .faq__item:nth-child(5n + 3).is-open .faq__q,
+    .faq__item:nth-child(5n + 3).is-open .faq__arrow {
+      color: #3675bc;
+    }
+
+    .faq__item:nth-child(5n + 4):hover .faq__q,
+    .faq__item:nth-child(5n + 4).is-open .faq__q,
+    .faq__item:nth-child(5n + 4).is-open .faq__arrow {
+      color: #961a4d;
+    }
+
+    .faq__item:nth-child(5n + 5):hover .faq__q,
+    .faq__item:nth-child(5n + 5).is-open .faq__q,
+    .faq__item:nth-child(5n + 5).is-open .faq__arrow {
+      color: #6b3fa0;
+    }
+
+    .faq__body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .faq__item.is-open .faq__body {
+      max-height: 400px;
+    }
+
+    .faq__body p {
+      margin: 0;
+      padding: 0 0 28px;
+      color: #6b7280;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: clamp(0.83rem, 1.05vw, 0.92rem);
+      line-height: 1.82;
+      font-weight: 400;
+    }
+
+    @media (max-width: 1024px) {
+      .faq {
+        padding: 0 32px 80px;
+      }
+
+      .faq__inner {
+        grid-template-columns: 1fr;
+      }
+
+      .faq__inner::after {
+        display: none;
+      }
+
+      .faq__intro {
+        position: static;
+        padding: 60px 0 40px;
+      }
+
+      .faq__items {
+        padding-left: 0;
+        padding-top: 0;
+      }
+    }
+
+    /* ── Mobile styles consolidated below ── */
+
+    /* ============================================================
+       === CTA BANNER ===
+       Closing call-to-action band with pull-quote + button.
+       ============================================================ */
+    .cta-banner {
+      background: #fff;
+      border-top: 1px solid rgba(13, 17, 39, 0.08);
+      padding: 100px 52px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-banner-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .cta-banner img.cta-band-logo {
+      height: 42px;
+      width: auto;
+      margin: 0;
+      display: block;
+      filter: brightness(0);
+      opacity: 0.85;
+    }
+
+    .cta-banner h2.cta-band-text {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+      font-size: clamp(1.3rem, 2.6vw, 2rem);
+      font-weight: 500;
+      color: #0d1127;
+      line-height: 1.45;
+      letter-spacing: -0.025em;
+      position: relative;
+      display: inline-block;
+      margin: 0;
+    }
+
+    .cta-banner h2.cta-band-text::before,
+    .cta-banner h2.cta-band-text::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .cta-banner h2.cta-band-text::before {
+      color: #2254f4;
+    }
+
+    .cta-banner h2.cta-band-text::after {
+      color: #e11d48;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 28px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s;
+    }
+
+    .cta-btn:hover {
+      opacity: 0.88;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.32);
+    }
+
+    @media (max-width: 640px) {
+      .cta-banner {
+        padding: 72px 24px;
+      }
+
+      .cta-banner h2.cta-band-text {
+        font-size: clamp(1.1rem, 5vw, 1.4rem);
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════
+   MOVING GRADIENT BORDER — ops-cost-cards
+   conic-gradient with @property gives true colour
+   travel around the border — silky smooth, no bleed.
+═══════════════════════════════════════════════════ */
+    @property --g-angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    @keyframes border-travel {
+      to {
+        --g-angle: 360deg;
+      }
+    }
+
+    .ops-cost-cards {
+      background:
+        linear-gradient(157.85deg, rgb(248, 248, 248) 5.73%, rgb(252, 250, 250) 26.77%) padding-box,
+        conic-gradient(from var(--g-angle), #f1be56, #52b8d7, #4bc8ad, #f1be56) border-box !important;
+      animation: border-travel 6s linear infinite;
+      box-shadow:
+        14px 9px 36px 0px rgba(0, 0, 0, 0.10),
+        55px 35px 65px 0px rgba(0, 0, 0, 0.09),
+        123px 78px 87px 0px rgba(0, 0, 0, 0.05);
+    }
+
+    /* ═══════════════════════════════════════════════════
+   UNIFORM SECTION SPACING
+   Each section contributes HALF the desired gap on top
+   and HALF on bottom, so adjacent sections sum to one
+   clean rhythm value (no 144px dead zones).
+   Desired gap between sections ≈ 96px desktop.
+═══════════════════════════════════════════════════ */
+    :root {
+      --section-pad-v: clamp(36px, 3.4vw, 48px);
+      --section-pad-h: clamp(24px, 7.8vw, 112px);
+    }
+
+    /* Stats strip — keep the note visually connected to the next section */
+    .stats-wrap {
+      padding-left: var(--section-pad-h) !important;
+      padding-right: var(--section-pad-h) !important;
+    }
+
+    .stats-wrap .stat-note {
+      margin-bottom: clamp(16px, 1.6vw, 24px) !important;
+    }
+
+    /* Platforms logo bar — compact vertical, same horizontal gutter */
+    .platforms {
+      padding: 28px var(--section-pad-h) 0 !important;
+    }
+
+    /* Cost Q×Q */
+    #cost-qxq {
+      padding: clamp(56px, 5vw, 80px) var(--section-pad-h) var(--section-pad-v) !important;
+    }
+
+    #cost-qxq>div:first-child {
+      padding: 0 0 clamp(40px, 4vw, 64px) !important;
+    }
+
+    /* Platform ops cost */
+    #platform-ops-cost {
+      padding: var(--section-pad-v) var(--section-pad-h) !important;
+    }
+
+    /* Testimonial */
+    #testimonial-sec {
+      padding: var(--section-pad-v) var(--section-pad-h) !important;
+    }
+
+    /* Insights */
+    #insights-sec {
+      padding: var(--section-pad-v) var(--section-pad-h) !important;
+    }
+
+    /* Explore / blog */
+    .explore {
+      padding: var(--section-pad-v) var(--section-pad-h) !important;
+    }
+
+    /* FAQ */
+    .faq {
+      padding: 0 clamp(20px, 3.6vw, 52px) var(--section-pad-v) !important;
+    }
+
+    .faq__intro {
+      padding: var(--section-pad-v) clamp(32px, 4vw, 64px) clamp(32px, 4vw, 48px) 0 !important;
+    }
+
+    /* CTA banner — intentionally 20% more breathing room as a finale */
+    .cta-banner {
+      padding: calc(var(--section-pad-v) * 1.2) var(--section-pad-h) !important;
+    }
+
+    /* .pad utility */
+    .pad {
+      padding: var(--section-pad-v) var(--section-pad-h) !important;
+    }
+
+    .pad-sm {
+      padding: calc(var(--section-pad-v) * 0.75) var(--section-pad-h) !important;
+    }
+
+    /* ── Tablet 960–1280px: tighten slightly ── */
+    @media (max-width: 1280px) {
+      :root {
+        --section-pad-v: clamp(28px, 3.4vw, 40px);
+        --section-pad-h: clamp(20px, 5.5vw, 80px);
+      }
+    }
+
+    /* ── Mobile: handled by the 640px block below ── */
+    /* ═══════════════════════════════════════════════════
+   BODY TEXT STANDARDIZATION — 16px / 23px everywhere
+═══════════════════════════════════════════════════ */
+    p,
+    li,
+    td,
+    th,
+    blockquote {
+      font-size: 16px;
+      line-height: 23px;
+    }
+
+    .stat-desc {
+      font-size: 16px !important;
+      line-height: 23px !important;
+    }
+
+    .stat-note-txt {
+      font-size: 16px !important;
+      line-height: 23px !important;
+    }
+
+    .test-quote {
+      font-size: 16px !important;
+      line-height: 23px !important;
+    }
+
+    .test-res-text {
+      font-size: clamp(12px, 0.95vw, 15px) !important;
+      line-height: 1.45 !important;
+    }
+
+    .insight-title {
+      font-size: 16px !important;
+      line-height: 23px !important;
+    }
+
+    .insight-desc {
+      font-size: 16px !important;
+      line-height: 23px !important;
+    }
+
+    .insight-foot {
+      font-size: 16px !important;
+      line-height: 23px !important;
+    }
+
+    .blog-card-txt {
+      font-size: 16px !important;
+      line-height: 23px !important;
+    }
+
+    .faq__intro p {
+      font-size: 16px !important;
+      line-height: 23px !important;
+    }
+
+    .faq__body p {
+      font-size: 16px !important;
+      line-height: 23px !important;
+    }
+
+    .gacc-inner p {
+      font-size: 16px !important;
+      line-height: 23px !important;
+    }
+
+    .acc-body p {
+      font-size: 16px !important;
+      line-height: 23px !important;
+    }
+
+    /* ═══════════════════════════════════════════════════
+   UNIFIED EYEBROW STYLE
+   Single source of truth for all section eyebrows.
+═══════════════════════════════════════════════════ */
+    .eyebrow {
+      display: block;
+      margin: 0 0 16px;
+      color: #6b7280 !important;
+      font-family: 'Inter', system-ui, sans-serif !important;
+      font-size: 0.72rem !important;
+      line-height: 1 !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase !important;
+    }
+
+    /* Beat parent paragraph overrides (e.g. .faq__intro p { font-size:16px }) */
+    p.eyebrow,
+    .faq__intro p.eyebrow,
+    section p.eyebrow {
+      font-size: 0.72rem !important;
+      line-height: 1 !important;
+      color: #6b7280 !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase !important;
+      font-family: 'Inter', system-ui, sans-serif !important;
+    }
+
+    /* Outcomes section intentionally hides its eyebrow */
+    .outcomes__heading .eyebrow {
+      display: none !important;
+    }
+
+    /* ═══════════════════════════════════════════════════
+   UNIFIED HEADING TYPOGRAPHY
+   Font:          SF Pro Display → system UI on Windows (best match)
+   Size:          clamp(28px, 3.2vw, 48px) — one size, all sections
+   Kerning:       -0.03em (Stripe / Linear / Vercel standard)
+   Line-height:   1.08 — tight, contemporary
+═══════════════════════════════════════════════════ */
+    h1,
+    h2,
+    h3 {
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", system-ui, sans-serif !important;
+      font-weight: 700;
+      letter-spacing: -0.03em !important;
+      line-height: 1.08 !important;
+    }
+
+    /* Hero h1 — same font, slightly larger scale */
+    .hero-heading {
+      font-size: clamp(28px, 3.8vw, 56px) !important;
+      letter-spacing: -0.03em !important;
+      line-height: 1.06 !important;
+      max-width: min(94vw, 1400px) !important;
+    }
+
+    /* ALL section h2 — single unified size, no exceptions */
+    h2,
+    section h2,
+    .outcomes__heading h2,
+    #cost-qxq h2,
+    #platform-ops-cost h2,
+    #testimonial-sec h2,
+    #insights-sec h2,
+    .faq__intro h2,
+    .explore h2,
+    .cta-banner h2 {
+      font-size: clamp(28px, 3.2vw, 48px) !important;
+      letter-spacing: -0.03em !important;
+      line-height: 1.08 !important;
+      font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", system-ui, sans-serif !important;
+    }
+
+    /* CTA banner — intentionally smaller, it's a pull-quote style */
+    .cta-banner h2.cta-band-text {
+      font-size: clamp(1.2rem, 2.4vw, 1.9rem) !important;
+      letter-spacing: -0.025em !important;
+      font-weight: 500 !important;
+    }
+
+
+    /* ═══════════════════════════════════════════════════
+   RESPONSIVE PADDING — all sections scale correctly
+   across Mac / Windows / tablet / phone
+═══════════════════════════════════════════════════ */
+
+    /* Shared padding utility classes — now handled by CSS custom properties above */
+
+    /* ── Medium screens 1024–1280px ── */
+    @media (max-width: 1280px) {
+
+      /* Hero */
+      .hero {
+        height: auto;
+        min-height: 600px;
+      }
+
+      .hero-btns {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      /* Stats grid */
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat-col {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .stat-col:nth-child(odd) {
+        border-right: 1px solid var(--border);
+      }
+
+      .stat-col:last-child,
+      .stat-col:nth-last-child(2):nth-child(odd) {
+        border-bottom: none;
+      }
+
+      /* Cost section two-col → single col */
+      .cost-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      /* Blog grid */
+      .blog-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      /* Insight cards */
+      .insight-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      /* Testimonial */
+      .test-card {
+        grid-template-columns: 1fr;
+      }
+
+      .test-right {
+        width: auto;
+        margin: 0 24px 24px;
+      }
+
+      /* Cost Q×Q two-col → single col */
+      .cost-qxq-cols {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+      }
+
+      /* Platform ops cost 3-col → 1-col */
+      .ops-cost-cards {
+        grid-template-columns: 1fr !important;
+      }
+
+      .ops-cost-cards>[style*="position:absolute"] {
+        display: none;
+      }
+
+      /* FAQ */
+      .faq__intro {
+        padding-right: 0 !important;
+      }
+    }
+
+    /* ── Tablet 768–1024px ── */
+    @media (max-width: 1024px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .insight-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── Mobile ── */
+    /* ════════════════════════════════════════════════════
+   MOBILE — comprehensive styles for all sections
+   Targets real device widths: 375px (SE), 390px (14),
+   412px (Android), 430px (15 Pro Max).
+   Single breakpoint at 640px catches all phones.
+════════════════════════════════════════════════════ */
+    @media (max-width: 640px) {
+
+      /* ── Global ── */
+      body {
+        font-size: 16px;
+      }
+
+      /* ── Hero ── */
+      .hero {
+        min-height: 480px;
+      }
+
+      .hero-heading {
+        font-size: clamp(22px, 6.5vw, 30px) !important;
+        padding: 0 20px;
+        line-height: 1.1 !important;
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 0 20px;
+      }
+
+      .btn-ghost,
+      .btn-white {
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+      }
+
+      /* ── Stats strip ── */
+      .stats-wrap {
+        padding: 0 20px !important;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat-col {
+        border-right: none !important;
+        border-bottom: 1px solid var(--border);
+        padding: 24px 0;
+      }
+
+      .stat-col:nth-child(odd) {
+        border-right: 1px solid var(--border) !important;
+        padding-right: 16px;
+      }
+
+      .stat-col:last-child,
+      .stat-col:nth-last-child(2):nth-child(odd) {
+        border-bottom: none;
+      }
+
+      .stat-num {
+        font-size: clamp(24px, 7vw, 32px);
+      }
+
+      .stat-desc {
+        font-size: 13px !important;
+        line-height: 18px !important;
+      }
+
+      /* ── Outcomes — keep 2×2 grid, scale everything down ── */
+      .outcomes {
+        padding: 32px 16px 0 !important;
+      }
+
+      .outcomes__heading {
+        margin-bottom: 16px;
+      }
+
+      .outcomes__heading h2 {
+        font-size: clamp(22px, 6.5vw, 30px) !important;
+        margin-bottom: 8px;
+      }
+
+      .outcomes__heading p:last-child {
+        font-size: 13px !important;
+        line-height: 19px !important;
+      }
+
+      .outcome-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        align-items: stretch !important;
+        gap: 8px !important;
+      }
+
+      .outcome-card--green,
+      .outcome-card--blue,
+      .outcome-card--gold,
+      .outcome-card--dark {
+        height: clamp(160px, 44vw, 220px) !important;
+        padding: 16px 14px 14px !important;
+        border-radius: 12px !important;
+      }
+
+      .outcome-card strong {
+        font-size: clamp(26px, 9vw, 44px) !important;
+        line-height: 0.9 !important;
+      }
+
+      .outcome-card--dark strong {
+        font-size: clamp(22px, 8vw, 38px) !important;
+      }
+
+      .outcome-card strong>span:not(.stat-num) {
+        font-size: 0.6em !important;
+      }
+
+      .outcome-card p {
+        font-size: 11px !important;
+        line-height: 15px !important;
+        margin-top: 8px !important;
+        max-width: 100% !important;
+      }
+
+      /* ── Section spacing on mobile ── */
+      :root {
+        --section-pad-v: 48px;
+        --section-pad-h: 20px;
+      }
+
+      .faq__intro {
+        padding-top: 40px !important;
+      }
+
+      .cost-qxq-cols {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+      }
+
+      #cost-qxq h2 {
+        font-size: clamp(24px, 7vw, 36px) !important;
+      }
+
+      /* ── Platform ops ── */
+      #platform-ops-cost {
+        padding: 48px 20px 64px !important;
+      }
+
+      #platform-ops-cost h2 {
+        font-size: clamp(24px, 7vw, 36px) !important;
+        line-height: 1.08 !important;
+      }
+
+      .ops-cost-cards {
+        grid-template-columns: 1fr !important;
+      }
+
+      /* ── Testimonial ── */
+      #testimonial-sec {
+        padding: 40px 20px !important;
+      }
+
+      #testimonial-sec h2 {
+        font-size: clamp(24px, 7vw, 36px) !important;
+        margin-bottom: 20px;
+      }
+
+      .test-card {
+        display: flex;
+        flex-direction: column;
+        border-radius: 14px;
+      }
+
+      .test-left {
+        padding: 28px 20px 20px;
+      }
+
+      .test-quote {
+        font-size: 14px !important;
+        line-height: 22px !important;
+      }
+
+      .test-right {
+        width: auto;
+        margin: 0 16px 16px;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .test-res-text {
+        font-size: 13px !important;
+        line-height: 20px !important;
+      }
+
+      /* ── Insights ── */
+      #insights-sec {
+        padding: 40px 20px !important;
+      }
+
+      #insights-sec h2 {
+        font-size: clamp(22px, 6.5vw, 32px) !important;
+      }
+
+      .insight-cards {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+      }
+
+      .insight-title {
+        font-size: 14px !important;
+      }
+
+      .insight-desc {
+        font-size: 12px !important;
+      }
+
+      /* ── Blog / Explore ── */
+      .explore {
+        padding: 40px 20px !important;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
+      /* ── FAQ ── */
+      .faq {
+        padding: 0 20px 56px !important;
+      }
+
+      .faq__intro {
+        padding: 40px 0 28px;
+      }
+
+      .faq__intro h2 {
+        font-size: clamp(22px, 6.5vw, 32px) !important;
+      }
+
+      .faq__trigger {
+        padding: 20px 0;
+        gap: 14px;
+      }
+
+      .faq__q {
+        font-size: 14px !important;
+      }
+
+      .faq__body p {
+        font-size: 14px !important;
+        line-height: 22px !important;
+      }
+
+      .faq__arrow {
+        width: 18px;
+        height: 18px;
+      }
+
+      /* FAQ grid → single col */
+      .faq__inner {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+      }
+
+      /* ── CTA Banner ── */
+      .cta-banner {
+        padding: 60px 20px !important;
+      }
+
+      .cta-banner h2.cta-band-text {
+        font-size: clamp(1.1rem, 5.5vw, 1.4rem) !important;
+      }
+
+    }
+
+    /* ── Mobile styles consolidated above ── 
+  
+
+/* === Our Focus retained-section styles === */
+    .section-frame {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 clamp(24px, 5.5vw, 80px);
+    }
+
+    .eyebrow {
+      margin: 0 0 25px;
+      color: #52525b;
+      font-size: 13.6px;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    /* ── Analysis two-column header ── */
+    .analysis {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      gap: clamp(24px, 4vw, 72px);
+      padding-top: clamp(56px, 6vw, 96px);
+      padding-bottom: clamp(32px, 3vw, 48px);
+    }
+
+    .analysis>div:first-child {
+      max-width: 600px;
+    }
+
+    .analysis>div:first-child h2 {
+      font-size: clamp(1.75rem, 3.2vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: #0d1127;
+      margin: 0;
+    }
+
+    .analysis__copy {
+      align-self: center;
+      color: #52525b;
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.7;
+    }
+
+    .analysis__copy p {
+      margin: 0;
+    }
+
+    /* ── Solution cards grid ── */
+    .solution-cards {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(12px, 1.4vw, 20px);
+      margin-top: clamp(16px, 2vw, 28px);
+      align-items: stretch;
+    }
+
+    .solution-cards article {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      /* Fixed height so all 3 cards are identical — content aligns perfectly */
+      height: clamp(460px, 42vw, 580px);
+      overflow: hidden;
+      border-radius: clamp(10px, 1.2vw, 16px);
+      background: #071018;
+      color: #fff;
+      box-shadow: 0 18px 34px rgba(15, 23, 42, 0.22);
+      isolation: isolate;
+      cursor: pointer;
+      /* Smooth card lift on hover */
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .solution-cards article:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 56px rgba(15, 23, 42, 0.38);
+    }
+
+    /* Dark gradient overlay — bottom-heavy for text legibility */
+    .solution-cards article::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg,
+          rgba(2, 8, 18, 0.04) 0%,
+          rgba(2, 8, 18, 0.18) 35%,
+          rgba(2, 8, 18, 0.92) 100%);
+    }
+
+    /* Subtle top gloss */
+    .solution-cards article::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      border-radius: inherit;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+
+    /* Background image — subtle zoom on hover */
+    .solution-cards img {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.88) contrast(0.96);
+      opacity: 0.85;
+      transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                  opacity 0.55s ease;
+    }
+
+    .solution-cards article:hover img {
+      transform: scale(1.05);
+      opacity: 0.72;
+    }
+
+    /* ── Inner layout: index top, body pinned to bottom ── */
+    .solution-card-inner {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: clamp(18px, 2vw, 28px);
+    }
+
+    /* Index number — top-left, spacer pushes body down */
+    .solution-index {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      flex-shrink: 0;
+    }
+
+    /* Invisible spacer between index and body — fills available space */
+    .solution-card-spacer {
+      flex: 1;
+    }
+
+    /* Body: h3 + p + link — always anchored to bottom of card */
+    .solution-card-body {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .solution-cards h3 {
+      margin: 0 0 10px;
+      font-size: clamp(17px, 1.5vw, 21px);
+      font-weight: 700;
+      line-height: 1.22;
+      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+      flex-shrink: 0;
+    }
+
+    /* ── Truncated paragraph with expand ── */
+    .solution-card-text {
+      position: relative;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: clamp(13px, 1vw, 14.5px);
+      line-height: 1.65;
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
+
+      /* Clamp to 3 lines by default */
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+
+      /* Smooth height transition */
+      max-height: calc(3 * 1.65 * 14.5px);
+      transition: max-height 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  -webkit-line-clamp 0s 0s;
+    }
+
+    /* Ellipsis fade-out gradient */
+    .solution-card-text::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 28px;
+      background: linear-gradient(to top, rgba(2, 8, 18, 0.92), transparent);
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.45s ease;
+    }
+
+    /* Expanded state — triggered by .is-expanded class (JS) or hover */
+    .solution-cards article.is-expanded .solution-card-text,
+    .solution-cards article:hover .solution-card-text {
+      -webkit-line-clamp: unset;
+      max-height: 260px;
+    }
+
+    .solution-cards article.is-expanded .solution-card-text::after,
+    .solution-cards article:hover .solution-card-text::after {
+      opacity: 0;
+    }
+
+    /* ── Explore link ── */
+    .solution-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: clamp(11px, 0.88vw, 13px);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: color 0.3s ease, gap 0.3s ease;
+    }
+
+    .solution-link:hover {
+      color: #fff;
+      gap: 8px;
+    }
+
+    /* ── Responsive: tablet — keep 3 columns ── */
+    @media (max-width: 900px) {
+      .analysis {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .solution-cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(8px, 1.5vw, 14px);
+      }
+
+      .solution-cards article {
+        height: clamp(400px, 54vw, 520px);
+      }
+    }
+
+    /* ── Responsive: mobile — single column ── */
+    @media (max-width: 640px) {
+      .solution-cards {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .solution-cards article {
+        height: auto;
+        min-height: 320px;
+      }
+
+      /* On mobile, always show full text (no truncation) */
+      .solution-card-text {
+        -webkit-line-clamp: unset !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+
+      .solution-card-text::after {
+        display: none !important;
+      }
+    }
+
+    /* ════════ Capabilities: ported "How We Deliver" (em-section) ════════ */
+    .em-section {
+      display: flex;
+      align-items: flex-start;
+      min-height: 100vh;
+      background: #f7f8fc;
+      border-top: 1px solid rgba(13, 17, 39, .08);
+      position: relative;
+      z-index: 2;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, Inter, system-ui, sans-serif
+    }
+
+    .em-left {
+      position: sticky;
+      top: 0;
+      width: 50%;
+      flex-shrink: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0b0d14;
+      overflow: hidden
+    }
+
+    #emParticleCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none
+    }
+
+    .em-left-inner {
+      position: relative;
+      z-index: 1;
+      padding: 60px 8%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px
+    }
+
+    .em-pill {
+      display: inline-block;
+      width: fit-content;
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .7);
+      border: 1px solid rgba(255, 255, 255, .25);
+      border-radius: 3px;
+      padding: 5px 13px;
+      background: rgba(255, 255, 255, .07)
+    }
+
+    .em-heading {
+      font-size: clamp(1.6rem, 2.6vw, 2.5rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -.035em;
+      line-height: 1.13;
+      margin: 0
+    }
+
+    .em-desc {
+      font-size: clamp(.82rem, 1vw, .92rem);
+      font-weight: 400;
+      color: rgba(255, 255, 255, .62);
+      line-height: 1.78;
+      max-width: 380px;
+      margin: 0
+    }
+
+    .em-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 26px;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+      border-radius: 6px;
+      border: 1.5px solid #fff;
+      background: transparent;
+      color: #fff;
+      text-decoration: none;
+      width: fit-content;
+      cursor: pointer;
+      transition: background .22s, transform .22s cubic-bezier(.16, 1, .3, 1)
+    }
+
+    .em-cta svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0
+    }
+
+    .em-cta:hover {
+      background: rgba(255, 255, 255, .1);
+      transform: translateY(-2px)
+    }
+
+    .em-right {
+      flex: 1;
+      width: 50%;
+      display: flex;
+      flex-direction: column
+    }
+
+    .em-card {
+      position: relative;
+      padding: 48px 8% 44px 52px;
+      border-bottom: 1px solid rgba(13, 17, 39, .1);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: #fff;
+      border-left: 3px solid transparent;
+      transition: background .3s ease, border-left-color .3s ease
+    }
+
+    .em-card:first-child {
+      border-top: 1px solid rgba(13, 17, 39, .1)
+    }
+
+    .em-card[data-index="01"]:hover {
+      background: rgba(243, 210, 95, .07);
+      border-left-color: #F3D25F
+    }
+
+    .em-card[data-index="02"]:hover {
+      background: rgba(18, 186, 160, .07);
+      border-left-color: #12BAA0
+    }
+
+    .em-card[data-index="03"]:hover {
+      background: rgba(54, 117, 188, .07);
+      border-left-color: #3675BC
+    }
+
+    .em-card[data-index="04"]:hover {
+      background: rgba(150, 26, 77, .07);
+      border-left-color: #961A4D
+    }
+
+    .em-card[data-index="05"]:hover {
+      background: rgba(243, 210, 95, .07);
+      border-left-color: #F3D25F
+    }
+
+    .em-bracket {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      transition: border-color .3s ease
+    }
+
+    .em-bracket--tl {
+      top: 14px;
+      left: 14px;
+      border-top: 1.5px solid rgba(13, 17, 39, .15);
+      border-left: 1.5px solid rgba(13, 17, 39, .15)
+    }
+
+    .em-bracket--br {
+      bottom: 14px;
+      right: 14px;
+      border-bottom: 1.5px solid rgba(13, 17, 39, .15);
+      border-right: 1.5px solid rgba(13, 17, 39, .15)
+    }
+
+    .em-card[data-index="01"]:hover .em-bracket--tl,
+    .em-card[data-index="01"]:hover .em-bracket--br {
+      border-color: #F3D25F
+    }
+
+    .em-card[data-index="02"]:hover .em-bracket--tl,
+    .em-card[data-index="02"]:hover .em-bracket--br {
+      border-color: #12BAA0
+    }
+
+    .em-card[data-index="03"]:hover .em-bracket--tl,
+    .em-card[data-index="03"]:hover .em-bracket--br {
+      border-color: #3675BC
+    }
+
+    .em-card[data-index="04"]:hover .em-bracket--tl,
+    .em-card[data-index="04"]:hover .em-bracket--br {
+      border-color: #961A4D
+    }
+
+    .em-card[data-index="05"]:hover .em-bracket--tl,
+    .em-card[data-index="05"]:hover .em-bracket--br {
+      border-color: #F3D25F
+    }
+
+    .em-icon-wrap {
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+      color: #0d1127;
+      overflow: hidden;
+      animation: emIconFloat 4s ease-in-out infinite
+    }
+
+    .em-card:nth-child(2) .em-icon-wrap {
+      animation-duration: 4.6s;
+      animation-delay: .4s
+    }
+
+    .em-card:nth-child(3) .em-icon-wrap {
+      animation-duration: 5.2s;
+      animation-delay: .8s
+    }
+
+    .em-card:nth-child(4) .em-icon-wrap {
+      animation-duration: 5.8s;
+      animation-delay: 1.2s
+    }
+
+    .em-card:nth-child(5) .em-icon-wrap {
+      animation-duration: 6.4s;
+      animation-delay: 1.6s
+    }
+
+    @keyframes emIconFloat {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-4px)
+      }
+    }
+
+    .em-icon {
+      width: 100%;
+      height: 100%;
+      display: block;
+      color: #0d1127;
+      overflow: hidden
+    }
+
+    @keyframes emGlobeRotate {
+      from {
+        transform: rotate(0deg)
+      }
+
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .em-num {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      display: block
+    }
+
+    .em-card[data-index="01"] .em-num {
+      color: #F3D25F
+    }
+
+    .em-card[data-index="02"] .em-num {
+      color: #12BAA0
+    }
+
+    .em-card[data-index="03"] .em-num {
+      color: #3675BC
+    }
+
+    .em-card[data-index="04"] .em-num {
+      color: #961A4D
+    }
+
+    .em-card[data-index="05"] .em-num {
+      color: #F3D25F
+    }
+
+    .em-card-title {
+      font-size: clamp(.88rem, 1.1vw, 1rem);
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #0d1127;
+      line-height: 1.3;
+      margin: 0
+    }
+
+    .em-card-desc {
+      font-size: clamp(.82rem, .95vw, .9rem);
+      font-weight: 400;
+      color: #6b7280;
+      line-height: 1.75;
+      max-width: 440px;
+      margin: 0
+    }
+
+    .em-bar {
+      transform-origin: bottom center;
+      animation: emBarWave 1.8s ease-in-out infinite
+    }
+
+    .em-bars-group rect:nth-child(1) {
+      animation-delay: 0s;
+      animation-duration: 1.6s
+    }
+
+    .em-bars-group rect:nth-child(2) {
+      animation-delay: .18s;
+      animation-duration: 2s
+    }
+
+    .em-bars-group rect:nth-child(3) {
+      animation-delay: .08s;
+      animation-duration: 1.4s
+    }
+
+    .em-bars-group rect:nth-child(4) {
+      animation-delay: .35s;
+      animation-duration: 1.9s
+    }
+
+    .em-bars-group rect:nth-child(5) {
+      animation-delay: .12s;
+      animation-duration: 1.5s
+    }
+
+    .em-bars-group rect:nth-child(6) {
+      animation-delay: .28s;
+      animation-duration: 2.1s
+    }
+
+    .em-bars-group rect:nth-child(7) {
+      animation-delay: .05s;
+      animation-duration: 1.7s
+    }
+
+    @keyframes emBarWave {
+
+      0%,
+      100% {
+        transform: scaleY(1)
+      }
+
+      50% {
+        transform: scaleY(.3)
+      }
+    }
+
+    .em-chevron-group {
+      animation: emChevronPulse 2.2s ease-in-out infinite
+    }
+
+    @keyframes emChevronPulse {
+
+      0%,
+      100% {
+        transform: translateX(0);
+        opacity: 1
+      }
+
+      50% {
+        transform: translateX(-5px);
+        opacity: .65
+      }
+    }
+
+    @media (max-width:1024px) {
+      .em-left-inner {
+        padding: 48px 6%
+      }
+
+      .em-card {
+        padding: 40px 6% 36px 40px
+      }
+    }
+
+    @media (max-width:820px) {
+      .em-section {
+        flex-direction: column
+      }
+
+      .em-left {
+        position: relative;
+        top: auto;
+        width: 100%;
+        height: auto;
+        min-height: 340px
+      }
+
+      .em-left-inner {
+        padding: 56px 8%
+      }
+
+      .em-right {
+        width: 100%
+      }
+
+      .em-card {
+        padding: 36px 6% 32px 6%
+      }
+    }
+
+    @media (max-width:640px) {
+      .em-left-inner {
+        padding: 48px 6%
+      }
+
+      .em-heading {
+        font-size: clamp(1.4rem, 6vw, 1.9rem)
+      }
+
+      .em-card {
+        padding: 28px 5% 24px 5%
+      }
+
+      .em-icon-wrap {
+        width: 64px;
+        height: 64px
+      }
+    }
+  </style>
+
+  <!-- ═══ RESPONSIVE SYSTEM — same approved 3-tier breakpoints ═══ -->
+  <style>
+    /* ── TIER 1 | ≥ 1140px — Full desktop layout ── */
+    @media (min-width: 1140px) {
+
+      /* Stats: hold 4-col */
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+      }
+
+      .stat-col {
+        border-right: 1px solid var(--border) !important;
+        border-bottom: none !important;
+      }
+
+      .stat-col:last-child {
+        border-right: none !important;
+      }
+
+      .stat-col:nth-child(odd) {
+        border-right: 1px solid var(--border) !important;
+      }
+
+      .stat-col:nth-last-child(2):nth-child(odd) {
+        border-bottom: none !important;
+      }
+
+      /* Cost 2-col */
+      .cost-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: clamp(40px, 5vw, 72px) !important;
+      }
+
+      .cost-qxq-cols {
+        grid-template-columns: 1fr 1fr !important;
+        gap: clamp(28px, 4vw, 56px) !important;
+      }
+
+      /* Ops-cost 3-col + restore absolute dividers */
+      .ops-cost-cards {
+        grid-template-columns: 1fr 1fr 1fr !important;
+      }
+
+      .ops-cost-cards>[style*="position:absolute"] {
+        display: block !important;
+      }
+
+      /* Testimonial side-by-side */
+      .test-card {
+        display: grid !important;
+        flex-direction: unset !important;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 36%) !important;
+      }
+
+      .test-right {
+        width: auto !important;
+        margin: clamp(14px, 1.6vw, 24px) !important;
+        margin-left: 0 !important;
+      }
+
+      /* Blog + Insight 3-col */
+      .blog-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+
+      .insight-cards {
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+
+      /* FAQ 2-col split */
+      .faq__inner {
+        grid-template-columns: 1fr 1fr !important;
+      }
+
+      .faq__inner::after {
+        display: block !important;
+      }
+
+      .faq__intro {
+        padding-top: var(--section-pad-v) !important;
+        padding-right: clamp(32px, 4vw, 80px) !important;
+        padding-bottom: clamp(32px, 4vw, 48px) !important;
+        padding-left: 0 !important;
+      }
+
+      .faq__items {
+        padding-left: 52px !important;
+        padding-top: 80px !important;
+      }
+
+      /* Outcomes: restore absolute heading + 4-col cards */
+      .outcomes {
+        min-height: clamp(500px, 88vh, 900px) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-end !important;
+      }
+
+      .outcomes__heading {
+        position: absolute !important;
+      }
+
+      .outcome-cards {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        align-items: end !important;
+      }
+
+      .outcome-card--green {
+        height: clamp(180px, 37vh, 354px) !important;
+      }
+
+      .outcome-card--blue {
+        height: clamp(230px, 48vh, 463px) !important;
+      }
+
+      .outcome-card--gold {
+        height: clamp(320px, 67vh, 652px) !important;
+      }
+
+      .outcome-card--dark {
+        height: clamp(420px, 86vh, 847px) !important;
+      }
+    }
+
+    /* ── TIER 2 | 640px–1139px — Compact mid-state ── */
+    @media (max-width: 1139px) {
+
+      /* Hero: height adapts but keeps dvh */
+      .hero {
+        max-height: none !important;
+        min-height: 580px !important;
+      }
+
+      .hero-heading {
+        white-space: normal !important;
+        font-size: clamp(22px, 3.8vw, 44px) !important;
+      }
+
+      .hero-btns {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      /* Stats 2×2 */
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .stat-col {
+        border-right: none !important;
+        border-bottom: 1px solid var(--border) !important;
+      }
+
+      .stat-col:nth-child(odd) {
+        border-right: 1px solid var(--border) !important;
+      }
+
+      .stat-col:last-child,
+      .stat-col:nth-last-child(2):nth-child(odd) {
+        border-bottom: none !important;
+      }
+
+      /* Cost 1-col */
+      .cost-grid {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+      }
+
+      .cost-h2 {
+        font-size: clamp(24px, 3.8vw, 48px) !important;
+        line-height: 1.08 !important;
+      }
+
+      .cost-qxq-cols {
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+      }
+
+      .amber-frame {
+        height: auto !important;
+        min-height: 220px;
+      }
+
+      .amber-frame img {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      /* Ops-cost 2-col */
+      .ops-cost-cards {
+        grid-template-columns: 1fr 1fr !important;
+      }
+
+      .ops-cost-cards>[style*="position:absolute"] {
+        display: none !important;
+      }
+
+      .ops-cost-cards>div {
+        padding: clamp(28px, 3.5vw, 48px) clamp(16px, 2.5vw, 32px) clamp(24px, 3vw, 40px) !important;
+      }
+
+      .ops-cost-cards h3 {
+        white-space: normal !important;
+        font-size: clamp(16px, 1.8vw, 22px) !important;
+      }
+
+      /* Testimonial stacked */
+      .test-card {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: unset !important;
+      }
+
+      .test-right {
+        margin: 0 clamp(16px, 2vw, 24px) clamp(16px, 2vw, 24px) !important;
+      }
+
+      /* Blog + Insight 2-col */
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      .insight-cards {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      /* FAQ 1-col */
+      .faq__inner {
+        grid-template-columns: 1fr !important;
+      }
+
+      .faq__inner::after {
+        display: none !important;
+      }
+
+      .faq__intro {
+        padding: clamp(40px, 4vw, 60px) 0 clamp(24px, 3vw, 40px) !important;
+      }
+
+      .faq__items {
+        padding-left: 0 !important;
+        padding-top: 0 !important;
+      }
+
+      /* Outcomes: static heading + 2×2 cards */
+      .outcomes {
+        min-height: unset !important;
+        padding-top: clamp(40px, 5vw, 64px) !important;
+        display: block !important;
+      }
+
+      .outcomes__heading {
+        position: static !important;
+        width: auto !important;
+        max-width: 560px;
+        margin-bottom: 28px;
+      }
+
+      .outcome-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        align-items: stretch !important;
+      }
+
+      .outcome-card--green,
+      .outcome-card--blue,
+      .outcome-card--gold,
+      .outcome-card--dark {
+        height: clamp(240px, 38vw, 340px) !important;
+        padding: 28px 22px 24px !important;
+      }
+
+      /* Headings fluid */
+      h2,
+      section h2 {
+        font-size: clamp(22px, 3.4vw, 42px) !important;
+      }
+    }
+
+    /* ── TIER 3 | ≤ 640px — Mobile reinforcement ── */
+    @media (max-width: 640px) {
+      .ops-cost-cards {
+        grid-template-columns: 1fr !important;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
+      .insight-cards {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-ghost,
+      .btn-white {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* ── Global (any width) ── */
+    .cost-h2 {
+      font-size: clamp(24px, 3.8vw, 55px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+
+    h3[style*="white-space"] {
+      white-space: normal !important;
+    }
+
+    /* Eyebrow spacing consistency — ensure CLIENT PROOF + all eyebrows
+       maintain exactly 16px bottom-margin before their h2 */
+    #testimonial-sec .eyebrow {
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    /* ============================================================
+       === APPROACH BAND ===
+       Full-bleed section wrapping a dark image-overlay card.
+       Centered eyebrow / heading / body / white CTA button.
+
+       ── MANUAL ADJUSTMENT GUIDE ─────────────────────────────────
+       CARD HEIGHT     change min-height on .approach-card
+                       Current: 420px. More height -> 520px / 560px
+
+       TOP+BTM PADDING change the first value on .approach-card padding
+                       Current: 120px. Taller feel -> 140px / 160px
+
+       DARK OVERLAY    change alpha on .approach-card-overlay rgba()
+                       Current: 0.50. Darker -> 0.65. Lighter -> 0.35
+
+       BG IMAGE        swap url() inside .approach-card-bg background
+
+       HEADING WIDTH   max-width on .approach-card h2  (current 820px)
+
+       BODY WIDTH      max-width on .approach-card p   (current 620px)
+
+       BUTTON FILL     background on .approach-btn     (current #ffffff)
+       BUTTON TEXT     color on .approach-btn           (current #0d4f45)
+       Ghost variant   background: transparent; color: #fff;
+                       border: 1.5px solid rgba(255,255,255,0.55);
+       ──────────────────────────────────────────────────────────── */
+
+    .approach-band {
+      padding: var(--section-pad-v) var(--section-pad-h); /* outer section rhythm — matches all other sections */
+      background: #fff;
+      border-top: 1px solid rgba(13, 17, 39, 0.08);
+    }
+
+    .approach-card {
+      position: relative;
+      border-radius: 16px;           /* corner radius */
+      overflow: hidden;
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 420px;             /* minimum card height — raise to 520px for taller card */
+      padding: 60px clamp(24px, 8vw, 140px); /* top/bottom 60px | left/right scales with viewport */
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    /* BG IMAGE — swap url() to change image */
+    .approach-card-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1779868480/Div_hq0syu.png') center / cover no-repeat;
+      z-index: 0;
+    }
+
+    /* DARK OVERLAY — adjust 0.50 alpha to darken or lighten */
+    .approach-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.80);
+      z-index: 1;
+    }
+
+    /* Subtle white sheen — keeps text contrast crisp */
+    .approach-card-sheen {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.002);
+      z-index: 2;
+    }
+
+    /* All content sits above the three bg layers */
+    .approach-card > *:not(.approach-card-bg):not(.approach-card-overlay):not(.approach-card-sheen) {
+      position: relative;
+      z-index: 3;
+    }
+
+    /* EYEBROW — opacity 0.6 = subtle, raise to 1.0 for full white */
+    .approach-card .eyebrow {
+      color: rgba(255, 255, 255, 0.6) !important;
+      margin-bottom: 20px;
+    }
+
+    /* HEADING — max-width controls where the line breaks */
+    .approach-card h2 {
+      color: #fff !important;
+      max-width: 820px;              /* heading text block width */
+      margin: 0 auto 24px;           /* gap below heading */
+    }
+
+    /* BODY TEXT — opacity 0.78 = slightly muted white */
+    .approach-card p {
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 620px;              /* body text block width */
+      margin: 0 auto 40px;           /* gap below body before button */
+      font-size: 16px;
+      line-height: 23px;
+    }
+
+    /* BUTTON — solid white fill, teal text
+       To switch to ghost: background: transparent; color: #fff;
+                           border: 1.5px solid rgba(255,255,255,0.55); */
+    .approach-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;                  /* button height */
+      padding: 0 40px;               /* button side padding */
+      border-radius: 8px;            /* button corner radius */
+      border: none;
+      background: #ffffff;           /* button fill */
+      color: #0d4f45;                /* button text colour (site teal) */
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: background 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+    }
+
+    .approach-btn:hover {
+      background: rgba(255, 255, 255, 0.88); /* hover: slightly dimmed white */
+      transform: translateY(-2px);
+    }
+
+    /* MOBILE — reduce padding so card stays proportional */
+    @media (max-width: 640px) {
+      .approach-card {
+        min-height: 320px;           /* mobile min height */
+        padding: 48px 24px;          /* mobile top/bottom padding */
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- ============================================================
+       SECTION: HERO
+       Purpose : Full-bleed hero with background image, dark overlays,
+                 centered headline + supporting copy.
+       CSS tag : /* === HERO === */
+       Reusable: copy this <section class="hero"> + .hero* styles.
+       ============================================================ -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-gt"></div>
+    <div class="hero-gl"></div>
+    <div class="hero-gb"></div>
+    <div class="hero-content">
+      <h6>Design Lab · CX Journey Design</h6>
+      <h1 class = "hero-eyebrow">Frameworks and Accelerators </h1>
+      <h1 class="hero-heading">SAI pilots are easy. Getting them to production<br> without rebuilding everything is the hard part.
+      </h1>
+      <div class="hero-btns">
+        <button class="btn-ghost">
+          Request a Briefing
+          <svg width="17" height="17" fill="none" viewBox="0 0 17 17">
+            <path d="M3.5 8.5h10M9.5 5l4 3.5L9.5 12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+        <button class="btn-white">Explore the Portfolio</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION: STATS STRIP
+       Purpose : Three highlight stat cards with animated counters.
+       CSS tag : /* === STATS === */
+       ============================================================ -->
+  <div class="stats-wrap">
+    <div class="stats-grid">
+      <div class="stat-col">
+        <div class="stat-num">3-9 months</div>
+        <div class="stat-desc">Time to enterprise AI adoption, versus the industry norm of 12-24 months</div>
+      </div>
+      <div class="stat-col">
+        <div class="stat-num">60-70%</div>
+        <div class="stat-desc">Reduction in BI migration effort</div>
+      </div>
+      <div class="stat-col">
+        <div class="stat-num">40-50%</div>
+        <div class="stat-desc">Less manual data preparation time</div>
+      </div>
+      <div class="stat-col">
+        <div class="stat-num">10+</div>
+        <div class="stat-desc">Production-ready accelerators across AI, data, and quality engineering</div>
+      </div>
+    </div>
+    <div class="stat-note">
+      <div class="stat-note-lbl"> </div>
+      <div class="stat-note-txt">Celsior builds production-grade frameworks and accelerators that compress delivery timelines across legacy modernization, AI adoption, data engineering, and quality assurance. Enterprises stop rebuilding from scratch and start shipping outcomes in weeks, not quarters.   
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       SECTION: PLATFORM OPS COST
+       Purpose : Two-column comparison (unmanaged vs managed) with
+                 stat tiles. Pixel-mirror of Figma Desktop-31.
+       CSS tag : /* === PLATFORM OPS COST === */
+       ============================================================ -->
+  <section id="platform-ops-cost" style="background:#fff;border-top:1px solid rgba(13,17,39,0.08);">
+
+    <!-- Heading -->
+    <p class="eyebrow">The Friction Points</p>
+    <h2
+      style="font-size:55px;font-weight:700;letter-spacing:-1px;line-height:55px;color:#09090b;max-width:1048px;margin-bottom:32px;">
+      Enterprise AI investments rarely fail on ambition. They fail on execution.</h2>
+
+    <!-- Body -->
+    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">Most organizations have the intent and the budget. What they lack is the infrastructure to move fast without accumulating risk. The gap between a working pilot and a governed, production-grade system is where timelines stretch and programs lose momentum. </p>
+
+    <!-- ── Card frame — exact Figma Desktop-31 styles ── -->
+    <!--
+    Figma:
+      border: 3px solid #f1be56
+      border-radius: 7px
+      background: linear-gradient(157.85deg, #f8f8f8 5.73%, #fcfafa 26.77%)
+      box-shadow: 14px 9px 36px 0px rgba(0,0,0,0.10),
+                  55px 35px 65px 0px rgba(0,0,0,0.09),
+                  123px 78px 87px 0px rgba(0,0,0,0.05),
+                  219px 138px 104px 0px rgba(0,0,0,0.01),
+                  342px 216px 113px 0px rgba(0,0,0,0)
+  -->
+    <div class="ops-cost-cards" style="
+    border: 3px solid transparent;
+    border-radius: 7px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    min-height: 345px;
+    position: relative;
+  ">
+
+      <!-- Vertical divider 1 (between col 1 & 2) -->
+      <div style="position:absolute;top:0;bottom:0;left:33.37%;width:1px;background:#e5e7eb;"></div>
+      <!-- Vertical divider 2 (between col 2 & 3) -->
+      <div style="position:absolute;top:0;bottom:0;left:66.73%;width:1px;background:#e5e7eb;"></div>
+
+      <!-- ── Card 1: Slower product cycles ── -->
+      <div style="padding: 58px 38px 48px;">
+        <!--
+        Icon btn:
+          size: 50.1px
+          bg: #0d0d0f
+          border-radius: 6.26px
+          drop-shadow: 1.044px 1.044px 0px rgba(255,255,255,0.08)
+          inset-shadow: inset 2.088px 2.088px 6.263px rgba(0,0,0,0.9),
+                        inset -1.044px -1.044px 2.088px rgba(0,0,0,0.4)
+      -->
+        <div style="
+        width: 50.1px; height: 50.1px;
+        background: #0d0d0f;
+        border-radius: 6.26px;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow:
+          1.044px 1.044px 0px rgba(255,255,255,0.08),
+          inset 2.088px 2.088px 6.263px rgba(0,0,0,0.9),
+          inset -1.044px -1.044px 2.088px rgba(0,0,0,0.4);
+        margin-bottom: 50px;
+        flex-shrink: 0;
+      ">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780423060/59_a7lyva.png" alt=""
+            style="width:35.875px;height:35.875px;display:block;" />
+        </div>
+        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">AI adoption that stalls</h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">The average enterprise spends 12 to 24 months standing up AI infrastructure. By the time the foundation is ready, the business case has shifted. </p>
+      </div>
+
+      <!-- ── Card 2: Compounding security exposure ── -->
+      <div style="padding: 58px 38px 48px;">
+        <div style="
+        width: 50.1px; height: 50.1px;
+        background: #0d0d0f;
+        border-radius: 6.26px;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow:
+          1.044px 1.044px 0px rgba(255,255,255,0.08),
+          inset 2.088px 2.088px 6.263px rgba(0,0,0,0.9),
+          inset -1.044px -1.044px 2.088px rgba(0,0,0,0.4);
+        margin-bottom: 50px;
+        flex-shrink: 0;
+      ">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780423060/60_jcxpo2.png" alt=""
+            style="width:35.875px;height:35.875px;display:block;" />
+        </div>
+        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Legacy with no map</h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Undocumented codebases block modernization programs before they begin. Discovery alone consumes months of engineering effort that should go toward delivery.</p>
+      </div>
+
+      <!-- ── Card 3: Engineering talent attrition ── -->
+      <div style="padding: 58px 38px 48px;">
+        <div style="
+        width: 50.1px; height: 50.1px;
+        background: #0d0d0f;
+        border-radius: 6.26px;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow:
+          1.044px 1.044px 0px rgba(255,255,255,0.08),
+          inset 2.088px 2.088px 6.263px rgba(0,0,0,0.9),
+          inset -1.044px -1.044px 2.088px rgba(0,0,0,0.4);
+        margin-bottom: 50px;
+        flex-shrink: 0;
+      ">
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780423060/61_xnlpoi.png" alt=""
+            style="width:35.875px;height:35.875px;display:block;" />
+        </div>
+        <h3
+          style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;white-space:nowrap;margin-bottom:16px;">
+          Data that arrives broken</h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Teams spend 60 to 80 percent of their time on manual preparation, leaving almost no capacity for actual analysis.</p>
+      </div>
+
+    </div><!-- /card-frame -->
+  </section>
+
+
+  
+  <!-- ============================================================
+       SECTION: FRICTION POINTS — FILTERABLE ACCELERATOR CARDS
+       Matches Figma: segment control + 3-col product cards grid
+       ============================================================ -->
+  <style>
+    /* ── Filter Pill Bar ── */
+    .fp-section {
+      background: #fff;
+      border-top: 1px solid rgba(13,17,39,0.08);
+    }
+
+    .fp-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .fp-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1.5px solid transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      white-space: nowrap;
+      background: #f3f4f6;
+      color: #6b7280;
+    }
+
+    .fp-pill:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Green pill — Automation & Intelligence */
+    .fp-pill[data-filter="automation"] {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border-color: rgba(22, 163, 74, 0.25);
+      color: #15803d;
+    }
+    .fp-pill[data-filter="automation"].is-active,
+    .fp-pill[data-filter="automation"]:hover {
+      background: linear-gradient(135deg, #16a34a 0%, #059669 55%, #0d9488 100%);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35), 0 1px 4px rgba(16, 185, 129, 0.2);
+    }
+
+    /* Blue pill — Vertical AI */
+    .fp-pill[data-filter="vertical"] {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border-color: rgba(37, 99, 235, 0.22);
+      color: #1d4ed8;
+    }
+    .fp-pill[data-filter="vertical"].is-active,
+    .fp-pill[data-filter="vertical"]:hover {
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 55%, #0ea5e9 100%);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35), 0 1px 4px rgba(37, 99, 235, 0.2);
+    }
+
+    /* Gold pill — AI Enterprise Platforms */
+    .fp-pill[data-filter="enterprise"] {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border-color: rgba(217, 119, 6, 0.25);
+      color: #b45309;
+    }
+    .fp-pill[data-filter="enterprise"].is-active,
+    .fp-pill[data-filter="enterprise"]:hover {
+      background: linear-gradient(135deg, #d97706 0%, #f59e0b 55%, #fbbf24 100%);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.38), 0 1px 4px rgba(245, 158, 11, 0.22);
+    }
+
+    .fp-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: background 0.22s;
+    }
+    .fp-pill[data-filter="automation"] .fp-pill-dot { background: #16a34a; }
+    .fp-pill[data-filter="vertical"]   .fp-pill-dot { background: #2563eb; }
+    .fp-pill[data-filter="enterprise"] .fp-pill-dot { background: #d97706; }
+    .fp-pill.is-active .fp-pill-dot,
+    .fp-pill:hover .fp-pill-dot { background: rgba(255,255,255,0.85); }
+
+    /* ── Card Grid ── */
+    .fp-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(14px, 1.6vw, 22px);
+    }
+
+    .fp-card {
+      background: #fff;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 16px;
+      padding: clamp(24px, 2.4vw, 36px) clamp(20px, 2vw, 30px);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.3s ease;
+      will-change: transform, box-shadow;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fp-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .fp-card[data-category="automation"]::before {
+      background: linear-gradient(135deg, rgba(16,185,129,0.04) 0%, rgba(13,148,136,0.02) 100%);
+    }
+    .fp-card[data-category="vertical"]::before {
+      background: linear-gradient(135deg, rgba(37,99,235,0.04) 0%, rgba(14,165,233,0.02) 100%);
+    }
+    .fp-card[data-category="enterprise"]::before {
+      background: linear-gradient(135deg, rgba(217,119,6,0.04) 0%, rgba(251,191,36,0.02) 100%);
+    }
+
+    .fp-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 2px 4px rgba(15,23,42,0.04),
+                  0 10px 24px -6px rgba(15,23,42,0.11),
+                  0 24px 48px -16px rgba(15,23,42,0.14);
+    }
+    .fp-card:hover::before { opacity: 1; }
+
+    .fp-card[data-category="automation"]:hover { border-color: rgba(16,185,129,0.3); }
+    .fp-card[data-category="vertical"]:hover   { border-color: rgba(37,99,235,0.28); }
+    .fp-card[data-category="enterprise"]:hover { border-color: rgba(217,119,6,0.3); }
+
+    .fp-card-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      width: fit-content;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .fp-card[data-category="automation"] .fp-card-chip {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      color: #15803d;
+      border: 1px solid rgba(22,163,74,0.18);
+    }
+    .fp-card[data-category="vertical"] .fp-card-chip {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      color: #1d4ed8;
+      border: 1px solid rgba(37,99,235,0.18);
+    }
+    .fp-card[data-category="enterprise"] .fp-card-chip {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      color: #b45309;
+      border: 1px solid rgba(217,119,6,0.18);
+    }
+
+    .fp-card-name {
+      font-size: clamp(20px, 1.8vw, 26px);
+      font-weight: 700;
+      color: #09090b;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin: 0 0 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .fp-card-descriptor {
+      font-size: 14px;
+      font-weight: 500;
+      color: #52525b;
+      line-height: 1.5;
+      margin: 0 0 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .fp-card-body {
+      font-size: 14.5px;
+      color: #71717a;
+      line-height: 1.65;
+      margin: 0 0 22px;
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+
+    .fp-card-divider {
+      height: 1px;
+      background: #f3f4f6;
+      margin: 0 0 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .fp-card-caps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .fp-card-caps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 13px;
+      color: #3f3f46;
+      line-height: 1.45;
+    }
+
+    .fp-cap-check {
+      flex-shrink: 0;
+      margin-top: 1px;
+      width: 15px;
+      height: 15px;
+    }
+
+    .fp-card[data-category="automation"] .fp-cap-check { color: #16a34a; }
+    .fp-card[data-category="vertical"]   .fp-cap-check { color: #2563eb; }
+    .fp-card[data-category="enterprise"] .fp-cap-check { color: #d97706; }
+
+    .fp-card.fp-hidden { display: none; }
+
+    @keyframes fpCardIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fp-card.fp-visible {
+      animation: fpCardIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .fp-card.fp-visible:nth-child(2) { animation-delay: 0.07s; }
+    .fp-card.fp-visible:nth-child(3) { animation-delay: 0.14s; }
+    .fp-card.fp-visible:nth-child(4) { animation-delay: 0.06s; }
+    .fp-card.fp-visible:nth-child(5) { animation-delay: 0.12s; }
+    .fp-card.fp-visible:nth-child(6) { animation-delay: 0.18s; }
+
+    @media (max-width: 1024px) {
+      .fp-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 600px) {
+      .fp-cards-grid { grid-template-columns: 1fr; }
+      .fp-filter-bar { gap: 8px; }
+      .fp-pill { font-size: 12px; padding: 9px 16px; }
+    }
+  </style>
+
+  <section id="fp-accelerators" class="fp-section pad">
+
+    <p class="eyebrow">THE FRICTION POINTS</p>
+    <h2 style="font-size:clamp(30px,3.8vw,55px);font-weight:700;letter-spacing:-1px;line-height:1.08;color:#09090b;max-width:1048px;margin-bottom:24px;">
+      Pre-built infrastructure. Governed from day one. Deployed in weeks, not quarters.
+    </h2>
+    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:40px;">
+      Celsior's frameworks and accelerators are production-grade from the start. They connect directly into existing enterprise systems, carry security and compliance controls by default, and are purpose-built for regulated industries. Rather than contracting for bespoke builds on every engagement, organizations deploy tested, traceable components and direct their teams toward work that moves the business forward.
+    </p>
+
+    <div class="fp-filter-bar" role="tablist" aria-label="Filter accelerators by category">
+      <button class="fp-pill is-active" data-filter="automation" role="tab" aria-selected="true">
+        <span class="fp-pill-dot"></span>
+        Automation and Intelligence Tools
+      </button>
+      <button class="fp-pill" data-filter="vertical" role="tab" aria-selected="false">
+        <span class="fp-pill-dot"></span>
+        Vertical AI Solutions
+      </button>
+      <button class="fp-pill" data-filter="enterprise" role="tab" aria-selected="false">
+        <span class="fp-pill-dot"></span>
+        AI Enterprise Platforms
+      </button>
+    </div>
+
+    <div class="fp-cards-grid" id="fpCardsGrid">
+
+      <!-- ═══ AUTOMATION AND INTELLIGENCE TOOLS ═══ -->
+      <div class="fp-card fp-visible" data-category="automation">
+        <span class="fp-card-chip">Automation &amp; Intelligence</span>
+        <h3 class="fp-card-name">AIDeviser</h3>
+        <p class="fp-card-descriptor">Requirements go in. Test cases, scripts, and reports come out.</p>
+        <p class="fp-card-body">Links requirements, code, test cases, execution, and reporting into one automated framework. Cuts delivery timelines by 50 to 60 percent while reducing defect rates through autonomous test generation and adaptive CI/CD integration.</p>
+        <div class="fp-card-divider"></div>
+        <ul class="fp-card-caps">
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>AI-driven test case generation from requirement documents</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Automated script generation with 70% less manual effort</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Unified dashboards with root cause analysis</li>
+        </ul>
+      </div>
+
+      <div class="fp-card fp-visible" data-category="automation">
+        <span class="fp-card-chip">Automation &amp; Intelligence</span>
+        <h3 class="fp-card-name">Agentic API Testing</h3>
+        <p class="fp-card-descriptor">API specs in. Tests generated, executed, and reported — automatically.</p>
+        <p class="fp-card-body">An autonomous framework that reads Swagger and OpenAPI specifications and generates, runs, and reports API tests without any manual scripting. Stays synchronized with API changes and integrates natively into CI/CD pipelines.</p>
+        <div class="fp-card-divider"></div>
+        <ul class="fp-card-caps">
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Zero-scripting test generation from API specifications</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Automatic regression testing on API changes</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Edge case and negative scenario coverage included</li>
+        </ul>
+      </div>
+
+      <div class="fp-card fp-visible" data-category="automation">
+        <span class="fp-card-chip">Automation &amp; Intelligence</span>
+        <h3 class="fp-card-name">Tableau to Power BI</h3>
+        <p class="fp-card-descriptor">BI platform migration at scale, with 60 to 70 percent less effort.</p>
+        <p class="fp-card-body">Automates schema-aware field mapping, DAX calculation translation, data model reconstruction, and Power Query script generation for Tableau-to-Power BI migrations — removing the manual work from the first three migration steps entirely.</p>
+        <div class="fp-card-divider"></div>
+        <ul class="fp-card-caps">
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Schema-aware field mapping with intelligent alignment</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>DAX translation from Tableau LOD expressions</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Batch migration with AI-validated report fidelity</li>
+        </ul>
+      </div>
+
+      <!-- ═══ VERTICAL AI SOLUTIONS ═══ -->
+      <div class="fp-card fp-hidden" data-category="vertical">
+        <span class="fp-card-chip">Vertical AI Solutions</span>
+        <h3 class="fp-card-name">ClaimX</h3>
+        <p class="fp-card-descriptor">AI across the full claims lifecycle, with a human in the loop.</p>
+        <p class="fp-card-body">Applies composite risk scoring from first notice of loss through adjudication, with SHAP-powered explainability on every flag. Acts as the intelligence layer for claims teams — not the decision layer.</p>
+        <div class="fp-card-divider"></div>
+        <ul class="fp-card-caps">
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Sub-0.1-second fraud scoring at intake</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>SIU prioritization with ranked investigation queue</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Fully auditable decision trails</li>
+        </ul>
+      </div>
+
+      <div class="fp-card fp-hidden" data-category="vertical">
+        <span class="fp-card-chip">Vertical AI Solutions</span>
+        <h3 class="fp-card-name">Multi-Modal RAG</h3>
+        <p class="fp-card-descriptor">One query across text, tables, images, and diagrams.</p>
+        <p class="fp-card-body">A retrieval platform that processes unstructured content in any format and returns contextual, structured responses. Deployable across cloud, on-premise, or hybrid environments via standard API.</p>
+        <div class="fp-card-divider"></div>
+        <ul class="fp-card-caps">
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Semantic NLP pipeline for document text</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Table pipeline preserving numeric accuracy</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Image pipeline interpreting charts and diagrams</li>
+        </ul>
+      </div>
+
+      <div class="fp-card fp-hidden" data-category="vertical">
+        <span class="fp-card-chip">Vertical AI Solutions</span>
+        <h3 class="fp-card-name">Agentic RAG</h3>
+        <p class="fp-card-descriptor">Structured databases and document repositories, queried as one.</p>
+        <p class="fp-card-body">A Router Agent navigates both SQL databases and unstructured repositories in a single query, combining Hybrid RAG, Text2SQL, and language model reasoning — with no manual query routing required.</p>
+        <div class="fp-card-divider"></div>
+        <ul class="fp-card-caps">
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Intent-based routing to SQL or document stores</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>BM25 and vector similarity retrieval</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Single search interface across all enterprise knowledge sources</li>
+        </ul>
+      </div>
+
+      <div class="fp-card fp-hidden" data-category="vertical">
+        <span class="fp-card-chip">Vertical AI Solutions</span>
+        <h3 class="fp-card-name">Smart Data Ingestion</h3>
+        <p class="fp-card-descriptor">Vendor data arrives inconsistent. It leaves analytics-ready.</p>
+        <p class="fp-card-body">Transforms CSV and XLSX vendor data into clean, structured datasets through semantic embedding, ensemble mapping, and row-level confidence scoring — cutting manual data preparation effort by 40 to 50 percent.</p>
+        <div class="fp-card-divider"></div>
+        <ul class="fp-card-caps">
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Auto-mapping engine with rules-based logic and embeddings</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Smart normalization for addresses, dates, and numeric fields</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Data lineage tracking across vendor runs</li>
+        </ul>
+      </div>
+
+      <!-- ═══ AI ENTERPRISE PLATFORMS ═══ -->
+      <div class="fp-card fp-hidden" data-category="enterprise">
+        <span class="fp-card-chip">AI Enterprise Platforms</span>
+        <h3 class="fp-card-name">CAFE</h3>
+        <p class="fp-card-descriptor">From proof of concept to production AI in 3 to 9 months.</p>
+        <p class="fp-card-body">A modular AI platform that connects to existing enterprise systems and compresses AI adoption timelines. Security controls, compliance layers, and governance are built in from the start — not added after deployment.</p>
+        <div class="fp-card-divider"></div>
+        <ul class="fp-card-caps">
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>LLM and RAG deployment</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Agentic workflow orchestration</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Multi-tenant AI services</li>
+        </ul>
+      </div>
+
+      <div class="fp-card fp-hidden" data-category="enterprise">
+        <span class="fp-card-chip">AI Enterprise Platforms</span>
+        <h3 class="fp-card-name">AI-First Digital Engineering Platform</h3>
+        <p class="fp-card-descriptor">Undocumented legacy systems, reverse-engineered and development-ready.</p>
+        <p class="fp-card-body">An orchestration platform that automates software archaeology; converting aging, undocumented codebases into traceable, governed artifacts that engineering teams can work with.</p>
+        <div class="fp-card-divider"></div>
+        <ul class="fp-card-caps">
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>AI-assisted codebase analysis</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Multi-agent SDLC orchestration</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Air-gapped deployment with full audit trails</li>
+        </ul>
+      </div>
+
+      <div class="fp-card fp-hidden" data-category="enterprise">
+        <span class="fp-card-chip">AI Enterprise Platforms</span>
+        <h3 class="fp-card-name">MCP Forge</h3>
+        <p class="fp-card-descriptor">Production-ready MCP servers in days, not the standard 4 to 8 weeks.</p>
+        <p class="fp-card-body">Celsior's proprietary platform generates secure MCP servers from configuration, giving AI agents governed access to enterprise databases across five major platforms without months of custom engineering.</p>
+        <div class="fp-card-divider"></div>
+        <ul class="fp-card-caps">
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Zero-trust security by default</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Query-level audit trails</li>
+          <li><svg class="fp-cap-check" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="7" fill="currentColor" opacity=".12"/><path d="M4.5 7.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>GDPR, HIPAA, and SOX compliance ready</li>
+        </ul>
+      </div>
+
+    </div><!-- /fp-cards-grid -->
+
+  </section>
+
+  <script>
+    (function () {
+      var pills = document.querySelectorAll('.fp-pill');
+      var cards = document.querySelectorAll('.fp-card');
+
+      function setFilter(filter) {
+        pills.forEach(function (p) {
+          var isActive = p.getAttribute('data-filter') === filter;
+          p.classList.toggle('is-active', isActive);
+          p.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        cards.forEach(function (card) {
+          card.classList.remove('fp-visible');
+          if (card.getAttribute('data-category') === filter) {
+            card.classList.remove('fp-hidden');
+            requestAnimationFrame(function () {
+              requestAnimationFrame(function () {
+                card.classList.add('fp-visible');
+              });
+            });
+          } else {
+            card.classList.add('fp-hidden');
+          }
+        });
+      }
+
+      pills.forEach(function (pill) {
+        pill.addEventListener('click', function () {
+          setFilter(this.getAttribute('data-filter'));
+        });
+      });
+    })();
+  </script>
+
+  
+
+  <!-- ============================================================
+       SECTION: OUTCOMES
+       Purpose : Heading on the left, three colored outcome stat cards
+                 on the right. Pixel-exact Figma Desktop-30 (1433×894).
+       CSS tag : /* === OUTCOMES === */
+       ============================================================ -->
+  <section class="outcomes-section">
+    <section class="outcomes" aria-label="Outcomes">
+      <div class="outcomes__heading">
+        <p class="eyebrow">WHY AI-FIRST ENGINEERING?</p>
+        <h2>Outcomes we're accountable to</h2>
+        <p>Celsior designs AI Upskilling programs around specific roles, real workflows, and documented outcomes. These figures reflect what structured delivery produces when the program is built to measure from day one. </p>
+      </div>
+      <div class="outcome-cards">
+        <article class="outcome-card outcome-card--green" data-stat-card>
+          <strong><span class="stat-num" data-target="3">0</span><span>- 9 Months</span></strong>
+          <p>Time to enterprise AI adoption with CAFE, versus the 12-24 month industry baseline
+          </p>
+          <div class="outcome-card-arrow">
+            <svg viewBox="0 0 18 18" fill="none">
+              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+        </article>
+        <article class="outcome-card outcome-card--blue" data-stat-card>
+          <strong><span class="stat-num" data-target="60-70">0</span><span>-70%</span></strong>
+          <p>Reduction in Tableau-to-Power BI migration effort versus fully manual approaches
+          </p>
+          <div class="outcome-card-arrow">
+            <svg viewBox="0 0 18 18" fill="none">
+              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+        </article>
+        <article class="outcome-card outcome-card--gold" data-stat-card>
+          <strong><span class="stat-num" data-target="50-60">0</span><span>-60%</span></strong>
+          <p>Faster software delivery with AiDeviser across CI/CD-integrated quality engineering programs
+          </p>
+          <div class="outcome-card-arrow">
+            <svg viewBox="0 0 18 18" fill="none">
+              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#000" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+        </article>
+        <article class="outcome-card outcome-card--dark" data-stat-card>
+          <strong><span class="stat-num" data-target="40-50">0</span><span>-50%</span></strong>
+          <p>Less manual data preparation time with Smart Data Ingestion across multi-vendor pipelines</p>
+          <div class="outcome-card-arrow">
+            <svg viewBox="0 0 18 18" fill="none">
+              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+
+
+
+
+  <!-- ============================================================
+       SECTION: FAQ
+       Purpose : Two-column FAQ — intro on the left, accordion of
+                 questions on the right, separated by vertical rule.
+       CSS tag : /* === FAQ === */
+       ============================================================ -->
+  <section class="faq">
+    <div class="faq__inner">
+      <div class="faq__intro">
+        <p class="eyebrow">FAQ</p>
+        <h2>Questions leaders ask before they engage.</h2>
+        <p>Tell us where your program stands today. We will identify which accelerators apply and what a realistic timeline looks like.</p>
+        <a href="#">Speak to a specialist<span aria-hidden="true"> →</span></a>
+      </div>
+      <div class="faq__items">
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">What is the starting point for a Design Lab engagement? </span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>
+          </button>
+          <div class="faq__body">
+            <p>Most engagements begin with a CX discovery session — a structured workshop where we map the current customer journey, identify the highest-friction points, and define what a better experience needs to accomplish. From there, we determine which combination of services applies: a focused journey audit, a full service blueprint, or an end-to-end engagement through to validated prototype.  </p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">How long does a typical Design Lab engagement take?</span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>
+          </button>
+          <div class="faq__body">
+            <p>Scope determines timeline. A focused CX journey audit runs two to three weeks. A full engagement covering research, service blueprinting, and a validated interactive prototype typically runs six to eight weeks. Every engagement is scoped to your business timeline, not a generic delivery framework.  </p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">What does a service blueprint actually contain?</span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>
+          </button>
+          <div class="faq__body">
+            <p>A service blueprint maps every customer-facing action in a given journey alongside the back-stage processes, systems, and people that support it. The output is a documented, cross-functional view of how the experience actually works — not how it was intended to work. Engineering teams use it to scope the build accurately from day one. </p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">At what stage in a program should we bring in the Design Lab?</span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>
+          </button>
+          <div class="faq__body">
+            <p>Before your delivery team has committed to a technical approach. The Design Lab is most effective when it shapes product direction rather than validates decisions already made. That said, we regularly step in at later stages to course-correct journeys that have drifted from customer needs during delivery. </p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">How does the Design Lab hand off to engineering?</span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>
+          </button>
+          <div class="faq__body">
+            <p>Every engagement closes with an engineer-ready artifact package — annotated prototypes, interaction specifications, journey documentation, and a service blueprint scoped to build. If Celsior's engineering teams are delivering the build, the Design Lab and delivery teams work in an overlapping model to keep the handoff tight and the build accurate.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">Does the Design Lab work within regulated industries? </span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>
+          </button>
+          <div class="faq__body">
+            <p>Yes. We have active practices across banking, insurance, and healthcare — industries where customer experience design intersects directly with compliance requirements. Our blueprinting process accounts for regulatory constraints from the outset, so the service design is both customer-centric and operationally viable. </p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">What delivery model do you use — project-based, embedded, or managed service?</span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>
+          </button>
+          <div class="faq__body">
+            <p>Primarily project-based with an embedded working model. Our teams work directly inside your product organization — not alongside it. For clients requiring ongoing design support post-engagement, we offer a retained model that keeps the Design Lab embedded through delivery.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">What does knowledge transfer look like, and how do we retain capability after you leave? </span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></span>
+          </button>
+          <div class="faq__body">
+            <p>Every Design Lab engagement closes with a full documentation package — journey maps, service blueprints, prototype annotations, and a design rationale document. All workshops are run with your team co-facilitating, so the practice transfers as well as the artifacts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION: CTA BANNER
+       Purpose : Closing call-to-action band with pull-quote + button.
+       CSS tag : /* === CTA BANNER === */
+       ============================================================ -->
+  <style>
+    /* ── Pre-footer CTA Band (Figma Desktop-38 match) ── */
+    .cta-banner {
+      background: #fff !important;
+      border-top: 1px solid rgba(13,17,39,0.08) !important;
+      padding: clamp(56px, 6vw, 100px) clamp(24px, 7.8vw, 112px) !important;
+      text-align: center !important;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-banner-inner {
+      max-width: 780px !important;
+      margin: 0 auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 0 !important;
+    }
+
+    .cta-band-logo {
+      height: 46px !important;
+      width: auto !important;
+      margin: 0 0 20px !important;
+      display: block !important;
+      filter: brightness(0) !important;
+      opacity: 1 !important;
+    }
+
+    .cta-band-eyebrow {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin: 0 0 22px;
+    }
+
+    .cta-banner h2.cta-band-text {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif !important;
+      font-size: clamp(1.55rem, 3.2vw, 2.6rem) !important;
+      font-weight: 700 !important;
+      color: #0d1127 !important;
+      line-height: 1.18 !important;
+      letter-spacing: -0.032em !important;
+      max-width: 700px !important;
+      margin: 0 auto 20px !important;
+      position: relative;
+      display: inline-block !important;
+    }
+
+ 
+
+    .cta-band-sub {
+      font-size: clamp(14px, 1.1vw, 16px);
+      color: #52525b;
+      line-height: 1.65;
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+
+    .cta-band-btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .cta-band-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      padding: 0 28px;
+      background: #0d1127;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.22s cubic-bezier(0.16,1,0.3,1), box-shadow 0.22s;
+      white-space: nowrap;
+    }
+
+    .cta-band-btn-primary:hover {
+      background: #1e293b;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(13,17,39,0.28);
+    }
+
+    .cta-band-btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      padding: 0 28px;
+      background: transparent;
+      color: #0d1127;
+      border: 1.5px solid rgba(13,17,39,0.22);
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.22s cubic-bezier(0.16,1,0.3,1);
+      white-space: nowrap;
+    }
+
+    .cta-band-btn-outline:hover {
+      border-color: rgba(13,17,39,0.5);
+      background: rgba(13,17,39,0.04);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 640px) {
+      .cta-band-btns {
+        flex-direction: column;
+        width: 100%;
+      }
+      .cta-band-btn-primary,
+      .cta-band-btn-outline {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+
+  <section class="cta-banner" id="ctaBand">
+    <div class="cta-banner-inner">
+      <img class="cta-band-logo"
+        src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
+        alt="Celsior" />
+      <span class="cta-band-eyebrow">Get Started</span>
+      <h2 class="cta-band-text" data-text="The right accelerator shortens your timeline. Finding it takes one conversation.">
+        <span class="cta-band-underline">The right accelerator shortens your timeline.</span> Finding it takes one conversation.
+      </h2>
+      <p class="cta-band-sub">Share where your program stands today and we will identify which frameworks apply, what a deployment looks like, and what a realistic outcome timeline is.</p>
+      <div class="cta-band-btns">
+        <a href="#contact" class="cta-band-btn-primary cta-band-btn">Talk to Our Healthcare Team</a>
+        <a href="#" class="cta-band-btn-outline">Download Our Capabilities Overview</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /* ═══════════════════════════════════════════════════
+       GSAP Accordion — gaccToggle()
+       Uses gsap.to() on height for butter-smooth expand/collapse.
+       Chevron rotates, label colour shifts, single-open behaviour.
+    ═══════════════════════════════════════════════════ */
+    function gaccToggle(btn) {
+      var item = btn.parentElement;
+      var body = item.querySelector('.gacc-body');
+      var inner = item.querySelector('.gacc-inner');
+      var chev = btn.querySelector('.gacc-chev');
+      var label = btn.querySelector('.gacc-label');
+      var iconBox = btn.querySelector('.gacc-iconbox');
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+      /* Close all siblings first */
+      document.querySelectorAll('.gacc-item').forEach(function (it) {
+        if (it === item) return;
+        var b = it.querySelector('.gacc-btn');
+        var bd = it.querySelector('.gacc-body');
+        var c = it.querySelector('.gacc-chev');
+        var l = it.querySelector('.gacc-label');
+        var ib = it.querySelector('.gacc-iconbox');
+        if (b.getAttribute('aria-expanded') === 'true') {
+          b.setAttribute('aria-expanded', 'false');
+          gsap.to(bd, { height: 0, duration: 0.45, ease: 'power3.inOut' });
+          gsap.to(c, { rotation: 0, duration: 0.4, ease: 'power2.inOut' });
+          gsap.to(l, { color: '#111827', duration: 0.25 });
+          gsap.to(ib, { borderColor: '#111827', boxShadow: 'none', duration: 0.3 });
+        }
+      });
+
+      if (isOpen) {
+        /* Collapse this one */
+        btn.setAttribute('aria-expanded', 'false');
+        gsap.to(body, { height: 0, duration: 0.45, ease: 'power3.inOut' });
+        gsap.to(chev, { rotation: 0, duration: 0.4, ease: 'power2.inOut' });
+        gsap.to(label, { color: '#111827', duration: 0.25 });
+        gsap.to(iconBox, { borderColor: '#111827', boxShadow: 'none', duration: 0.3 });
+      } else {
+        /* Expand this one — measure natural height first */
+        btn.setAttribute('aria-expanded', 'true');
+        gsap.set(body, { height: 'auto' });
+        var naturalH = body.offsetHeight;
+        gsap.fromTo(body,
+          { height: 0 },
+          { height: naturalH, duration: 0.5, ease: 'power3.inOut' }
+        );
+        gsap.to(chev, { rotation: 180, duration: 0.4, ease: 'power2.inOut' });
+        gsap.to(label, { color: '#0d4f45', duration: 0.25 });
+        gsap.to(iconBox, {
+          borderColor: '#0d4f45',
+          boxShadow: '0 0 0 3px rgba(13,79,69,0.12)',
+          duration: 0.3
+        });
+      }
+    }
+
+    /* Legacy toggleAcc used elsewhere */
+    function toggleAcc(btn) { gaccToggle(btn); }
+
+    /* ═══════════════════════════════════════════════════
+       GSAP ScrollTrigger — entrance animations
+       Runs once when each section scrolls into view.
+    ═══════════════════════════════════════════════════ */
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof gsap === 'undefined') return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* Cost Q×Q section — staggered entrance */
+      var cqHead = document.getElementById('cqxq-heading');
+      var cqBody = document.getElementById('cqxq-body');
+      var cqImg = document.getElementById('cqxq-img');
+      var cqAcc = document.getElementById('cqxq-acc');
+
+      if (cqHead) {
+        var tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#cost-qxq',
+            start: 'top 78%',
+            once: true
+          }
+        });
+        tl.to(cqHead, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' })
+          .to(cqBody, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.45')
+          .to(cqImg, { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4')
+          .to(cqAcc, { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out' }, '-=0.55');
+
+        /* Stagger-in each accordion row */
+        gsap.fromTo('.gacc-item',
+          { opacity: 0, y: 16 },
+          {
+            opacity: 1, y: 0,
+            stagger: 0.1,
+            duration: 0.5,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '#cqxq-acc',
+              start: 'top 80%',
+              once: true
+            }
+          }
+        );
+      }
+    });
+
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const body = btn.nextElementSibling;
+      const chev = btn.querySelector('.acc-chevron');
+      const isOpen = body.style.display !== 'none';
+      // Close all others in same parent
+      const allItems = document.querySelectorAll('.acc-item');
+      allItems.forEach(function (it) {
+        it.querySelector('.acc-body').style.display = 'none';
+        const c = it.querySelector('.acc-chevron');
+        if (c) c.style.transform = 'rotate(0deg)';
+        it.querySelector('button').style.color = '';
+      });
+      if (!isOpen) {
+        body.style.display = 'block';
+        if (chev) chev.style.transform = 'rotate(180deg)';
+        btn.style.color = '#0d4f45';
+      }
+    }
+
+    // FAQ accordion (ported from Our_Focus) — single open at a time
+    document.querySelectorAll('.faq__trigger').forEach((button) => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq__item');
+        const isOpen = item.classList.contains('is-open');
+        document.querySelectorAll('.faq__item.is-open').forEach((openItem) => {
+          openItem.classList.remove('is-open');
+          openItem.querySelector('.faq__trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('is-open');
+          button.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    (function () {
+      if (!window.gsap || !window.ScrollTrigger) return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      const cards = gsap.utils.toArray("[data-stat-card]");
+      if (!cards.length) return;
+
+      const ordered = cards.map((card) => {
+        const numEl = card.querySelector(".stat-num");
+        return {
+          card,
+          numEl,
+          target: parseFloat(numEl.dataset.target) || 0,
+          suffix: numEl.dataset.suffix || "",
+        };
+      }).sort((a, b) => b.target - a.target);
+
+      gsap.set(cards, { y: 90, opacity: 0, rotateX: -8, transformOrigin: "50% 100%" });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".outcome-cards",
+          start: "top 82%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      ordered.forEach((entry, i) => {
+        const { card, numEl, target, suffix } = entry;
+        const counter = { val: 0 };
+        const offset = i * 0.22;
+
+        tl.to(card, {
+          y: 0, opacity: 1, rotateX: 0,
+          duration: 1.4, ease: "expo.out",
+        }, offset)
+          .to(counter, {
+            val: target,
+            duration: 1.6,
+            ease: "power4.out",
+            onUpdate: () => {
+              const v = target % 1 === 0 ? Math.round(counter.val) : counter.val.toFixed(1);
+              numEl.textContent = v + suffix;
+            },
+          }, offset + 0.1);
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      if (!window.gsap || !window.ScrollTrigger) return;
+      gsap.from('.cta-band-logo', { opacity: 0, y: 18, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
+      gsap.from('.cta-band-text', { opacity: 0, y: 22, duration: 0.9, ease: 'power3.out', delay: 0.12, scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
+      gsap.from('.cta-band-btn', { opacity: 0, y: 18, duration: 0.7, ease: 'power3.out', delay: 0.26, scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
+      const el = document.querySelector('.cta-band-text');
+      if (!el) return;
+      function glitch() {
+        const chars = '!<>-_\\/[]{}—=+*^?#________';
+        const original = el.innerHTML;
+        const tl = gsap.timeline({ onComplete: () => { el.innerHTML = original; gsap.delayedCall(gsap.utils.random(2.5, 5), glitch); } });
+        tl.to(el, { duration: 0.04, onStart() { el.style.textShadow = '-4px 2px 0 rgba(34,84,244,0.7), 4px -2px 0 rgba(225,29,72,0.7)'; } })
+          .to(el, { duration: 0.06, onStart() { const txt = el.textContent; let out = ''; for (let i = 0; i < txt.length; i++) { if (txt[i] !== ' ' && txt[i] !== '\n' && Math.random() < 0.18) { out += chars[Math.floor(Math.random() * chars.length)]; } else { out += txt[i]; } } el.textContent = out; el.style.textShadow = '3px -2px 0 rgba(34,84,244,0.6), -3px 2px 0 rgba(225,29,72,0.6)'; el.style.transform = `translate(${gsap.utils.random(-2, 2)}px, ${gsap.utils.random(-1, 1)}px)`; } })
+          .to(el, { duration: 0.05, onStart() { const txt = el.getAttribute('data-text'); let out = ''; for (let i = 0; i < txt.length; i++) { if (txt[i] !== ' ' && txt[i] !== '\n' && Math.random() < 0.28) { out += chars[Math.floor(Math.random() * chars.length)]; } else { out += txt[i]; } } el.textContent = out; el.style.textShadow = '-5px 0 0 rgba(34,84,244,0.8), 5px 0 0 rgba(225,29,72,0.8)'; el.style.transform = `translate(${gsap.utils.random(-3, 3)}px,0)`; el.style.clipPath = `inset(${gsap.utils.random(10, 40)}% 0 ${gsap.utils.random(10, 40)}% 0)`; } })
+          .to(el, { duration: 0.04, onStart() { el.textContent = el.getAttribute('data-text'); el.style.textShadow = '2px 1px 0 rgba(34,84,244,0.4), -2px -1px 0 rgba(225,29,72,0.4)'; el.style.transform = ''; el.style.clipPath = ''; } })
+          .to(el, { duration: 0.06, onStart() { el.innerHTML = original; el.style.textShadow = ''; el.style.transform = ''; el.style.clipPath = ''; } });
+      }
+      gsap.delayedCall(1.4, glitch);
+    })();
+  </script>
+  <script>
+    // Explore links — split text into per-character spans for staggered hover
+    document.querySelectorAll(".explore__text").forEach((node) => {
+      const text = node.textContent;
+      node.textContent = "";
+      Array.from(text).forEach((char, index) => {
+        const span = document.createElement("span");
+        span.className = "explore__char";
+        span.style.setProperty("--i", index);
+        span.textContent = char === " " ? "\u00a0" : char;
+        node.appendChild(span);
+      });
+    });
+  </script>
+  <script src="shared.js" defer></script>
+
+  <script>
+    (function () {
+      const canvas = document.getElementById('emParticleCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const LAYERS = [
+        { count: 180, z: .10, speed: .04, maxR: .8, alpha: .20, color: '180,200,255' },
+        { count: 160, z: .28, speed: .10, maxR: 1.2, alpha: .35, color: '190,210,255' },
+        { count: 120, z: .50, speed: .20, maxR: 1.6, alpha: .55, color: '210,225,255' },
+        { count: 80, z: .72, speed: .36, maxR: 2.2, alpha: .75, color: '225,235,255' },
+        { count: 40, z: .90, speed: .55, maxR: 3.0, alpha: .92, color: '240,245,255' }
+      ];
+      const MAX_CONNECT_DIST = 100, FOV = 500;
+      let W, H, scrollVel = 0, scrollBoost = 1, t = 0, stars = [];
+      function resize() { const el = canvas.parentElement; W = canvas.width = el.offsetWidth; H = canvas.height = el.offsetHeight; }
+      function buildStars() {
+        stars = [];
+        for (const L of LAYERS) {
+          for (let i = 0; i < L.count; i++) {
+            stars.push({
+              x3: (Math.random() - .5) * 2, y3: (Math.random() - .5) * 2,
+              z3: L.z * .8 + Math.random() * .2 * L.z, layer: L,
+              driftAngle: Math.random() * Math.PI * 2,
+              driftSpeed: L.speed * (.7 + Math.random() * .6),
+              twinkleOffset: Math.random() * Math.PI * 2,
+              twinkleFreq: Math.random() * .03 + .008,
+              baseR: L.maxR * (.4 + Math.random() * .6)
+            });
+          }
+        }
+        stars.sort((a, b) => a.layer.z - b.layer.z);
+      }
+      function project(s) {
+        const depth = 1 - s.layer.z, scale = FOV / (FOV + depth * 400);
+        return { sx: W * .5 + s.x3 * W * .52 * scale, sy: H * .5 + s.y3 * H * .52 * scale, scale };
+      }
+      function draw() {
+        requestAnimationFrame(draw);
+        t += .016;
+        scrollBoost += (1 - scrollBoost) * .06;
+        ctx.clearRect(0, 0, W, H);
+        const grd = ctx.createRadialGradient(W * .42, H * .5, 0, W * .42, H * .5, W * .8);
+        grd.addColorStop(0, 'rgba(24,60,180,.10)');
+        grd.addColorStop(.45, 'rgba(14,30,100,.06)');
+        grd.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = grd; ctx.fillRect(0, 0, W, H);
+        const proj = stars.map(project);
+        for (let i = 0; i < stars.length; i++) {
+          const si = stars[i], pi = proj[i];
+          if (si.layer.z < .4) continue;
+          for (let j = i + 1; j < stars.length; j++) {
+            const sj = stars[j], pj = proj[j];
+            if (Math.abs(si.layer.z - sj.layer.z) > .3) continue;
+            const dx = pi.sx - pj.sx, dy = pi.sy - pj.sy, d = Math.sqrt(dx * dx + dy * dy);
+            if (d < MAX_CONNECT_DIST) {
+              const da = (si.layer.z + sj.layer.z) * .5;
+              const la = (1 - d / MAX_CONNECT_DIST) * .16 * da;
+              ctx.beginPath(); ctx.moveTo(pi.sx, pi.sy); ctx.lineTo(pj.sx, pj.sy);
+              ctx.strokeStyle = `rgba(160,190,255,${la})`; ctx.lineWidth = pi.scale * .6; ctx.stroke();
+            }
+          }
+        }
+        for (let i = 0; i < stars.length; i++) {
+          const s = stars[i], L = s.layer, p = proj[i], boost = scrollBoost;
+          const speed = s.driftSpeed * boost;
+          s.x3 += Math.cos(s.driftAngle) * speed * .0008;
+          s.y3 += Math.sin(s.driftAngle) * speed * .0008;
+          s.y3 -= L.z * .00015 * boost * scrollVel;
+          if (s.x3 > 1.05) s.x3 = -1.05; if (s.x3 < -1.05) s.x3 = 1.05;
+          if (s.y3 > 1.05) s.y3 = -1.05; if (s.y3 < -1.05) s.y3 = 1.05;
+          const tw = Math.sin(t * s.twinkleFreq * 60 + s.twinkleOffset);
+          const a = Math.max(.05, Math.min(1, L.alpha + tw * .2));
+          const r = s.baseR * p.scale;
+          if (L.z > .55) {
+            const gR = r * (L.z > .75 ? 5 : 3.5), gA = a * L.z * .4;
+            const g = ctx.createRadialGradient(p.sx, p.sy, 0, p.sx, p.sy, gR);
+            g.addColorStop(0, `rgba(${L.color},${gA})`); g.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.beginPath(); ctx.arc(p.sx, p.sy, gR, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
+          }
+          ctx.beginPath(); ctx.arc(p.sx, p.sy, Math.max(.3, r), 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${L.color},${a})`; ctx.fill();
+        }
+      }
+      let lastY = window.scrollY, lastTs = performance.now();
+      window.addEventListener('scroll', () => {
+        const now = performance.now(), dt = Math.max(1, now - lastTs);
+        const v = Math.abs(window.scrollY - lastY) / dt;
+        const raw = (v * 1000) / 800;
+        scrollVel = Math.min(raw, 10);
+        scrollBoost = 1 + Math.min(raw * 1.8, 7);
+        lastY = window.scrollY; lastTs = now;
+      }, { passive: true });
+      resize(); buildStars();
+      window.addEventListener('resize', () => { resize(); buildStars(); });
+      draw();
+    })();
+  </script>
+
+  <script>
+    // Solution cards — click to toggle expanded text
+    document.querySelectorAll('.solution-cards article').forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        // Don't toggle if user clicked the link
+        if (e.target.closest('.solution-link')) return;
+        this.classList.toggle('is-expanded');
+      });
+    });
+  </script>
+  <script src="shared.js" defer></script>
+</body>
+
+</html>
