@@ -137,7 +137,7 @@
     }
 
     .btn-ghost {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 10px;
       backdrop-filter: blur(4.5px);
@@ -151,10 +151,15 @@
       color: #fff;
       cursor: pointer;
       white-space: nowrap;
+      transition: background 0.3s ease;
+    }
+    
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
 
     .btn-white {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       background: #fff;
@@ -166,6 +171,11 @@
       color: var(--teal);
       cursor: pointer;
       white-space: nowrap;
+      transition: background 0.3s ease;
+    }
+    
+    .btn-white:hover {
+      background: #f3f4f6;
     }
 
     /* ============================================================
@@ -402,7 +412,7 @@
     }
 
     .explore h2 {
-      max-width: 1100px;
+
       margin: 0 auto 56px;
       color: #0d1127;
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
@@ -416,7 +426,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      max-width: 1100px;
+
       margin: 0 auto;
       border: 1.5px solid rgba(13, 17, 39, 0.12);
       border-radius: 16px;
@@ -582,7 +592,7 @@
       border-color: rgba(243, 210, 95, 0.6);
     }
 
-    .explore__links a:nth-child(4)::before {
+    .explore__links a:nth-child(4):'before' {
       background: linear-gradient(120deg, #3b0764 0%, #7c3aed 50%, #c084fc 100%);
     }
 
@@ -858,21 +868,6 @@
       isolation: isolate;
     }
 
-    /* Base card */
-    .outcome-card {
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      width: auto;
-      left: auto;
-      top: auto;
-      border-radius: 14px;
-      color: #fff;
-      isolation: isolate;
-    }
-
     /* ── Card textures — permanent Cloudinary URLs ── */
 
     /* GREEN */
@@ -1098,8 +1093,6 @@
         line-height: 13px !important;
       }
     }
-
-
 
     /* ============================================================
        === TESTIMONIAL ===
@@ -1545,6 +1538,7 @@
       position: relative;
       display: inline-block;
       margin: 0;
+      text-align: center; /* Slide 41 Text Realignment Fix */
     }
 
     .cta-banner h2.cta-band-text::before,
@@ -1867,7 +1861,6 @@
       letter-spacing: -0.025em !important;
       font-weight: 500 !important;
     }
-
 
     /* ═══════════════════════════════════════════════════
    RESPONSIVE PADDING — all sections scale correctly
@@ -2749,7 +2742,7 @@
 
     .em-card:nth-child(5) .em-icon-wrap {
       animation-duration: 6.4s;
-      animation-delay: 1.6s
+      animation-delay: .1.6s
     }
 
     @keyframes emIconFloat {
@@ -2954,7 +2947,6 @@
     }
   </style>
 
-  <!-- ═══ RESPONSIVE SYSTEM — same approved 3-tier breakpoints ═══ -->
   <style>
     /* ── TIER 1 | ≥ 1140px — Full desktop layout ── */
     @media (min-width: 1140px) {
@@ -3286,13 +3278,6 @@
 <body>
 
 
-  <!-- ============================================================
-       SECTION: HERO
-       Purpose : Full-bleed hero with background image, dark overlays,
-                 centered headline + supporting copy.
-       CSS tag : /* === HERO === */
-       Reusable: copy this <section class="hero"> + .hero* styles.
-       ============================================================ -->
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="hero-gt"></div>
@@ -3304,23 +3289,18 @@
         </span>
       </h1>
       <div class="hero-btns">
-        <button class="btn-ghost">
+        <a href="https://celsior-assessment-tools.netlify.app/modernization-readiness/" class="btn-ghost" role="button">
           Assess Your Readiness
           <svg width="17" height="17" fill="none" viewBox="0 0 17 17">
             <path d="M3.5 8.5h10M9.5 5l4 3.5L9.5 12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
-        </button>
-        <button class="btn-white">Explore Our Approach</button>
+        </a>
+        <a href="https://dev.celsiortech.us/contact-us" class="btn-white" role="button">Explore Our Approach</a>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       SECTION: STATS STRIP
-       Purpose : Three highlight stat cards with animated counters.
-       CSS tag : /* === STATS === */
-       ============================================================ -->
   <div class="stats-wrap">
     <div class="stats-grid">
       <div class="stat-col">
@@ -3329,7 +3309,7 @@
       </div>
       <div class="stat-col">
         <div class="stat-num">40%</div>
-        <div class="stat-desc">Of AI projects fail without human-in-the-loop governance </div>
+        <div class="stat-desc">Of AI projects fail without human-in-the-loop governance </div>
       </div>
       <div class="stat-col">
         <div class="stat-num">171%</div>
@@ -3337,46 +3317,27 @@
       </div>
       <div class="stat-col">
         <div class="stat-num">3X</div>
-        <div class="stat-desc">Faster resolution with human-AI collaboration </div>
+        <div class="stat-desc">Faster resolution with human-AI collaboration </div>
       </div>
     </div>
     <div class="stat-note">
       <div class="stat-note-lbl"> </div>
-      <div class="stat-note-txt">Only 4% of companies reach AI at scale. The other 96% stall at the pilot stage. The gap isn't capability — it's governance, accountability, and human-AI collaboration. Our clients crossed that gap, and the returns reflect it. This is what AI adoption looks like when it's built to last.
+      <div class="stat-note-txt">Only 4% of companies reach AI at scale. The other 96% stall at the pilot stage.
+The gap isn't capability — it's governance, accountability, and human-AI collaboration. Our clients crossed that gap, and the returns reflect it. This is what AI adoption looks like when it's built to last.
       </div>
     </div>
   </div>
 
 
-  <!-- ============================================================
-       SECTION: PLATFORM OPS COST
-       Purpose : Two-column comparison (unmanaged vs managed) with
-                 stat tiles. Pixel-mirror of Figma Desktop-31.
-       CSS tag : /* === PLATFORM OPS COST === */
-       ============================================================ -->
   <section id="platform-ops-cost" style="background:#fff;border-top:1px solid rgba(13,17,39,0.08);">
 
-    <!-- Heading -->
     <p class="eyebrow">Consequenses</p>
     <h2
       style="font-size:55px;font-weight:700;letter-spacing:-1px;line-height:55px;color:#09090b;max-width:1048px;margin-bottom:32px;">
       The Problem isn’t buying AI. It is making<br> it work at Enterprise scale.</h2>
 
-    <!-- Body -->
-    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">Most AI pilots produce impressive demos that never scale or deliver ROI. The constraint is structured governance: frameworks ensuring human accountability, maintaining compliance at scale, and connecting strategy to execution. Without this, AI accumulates technical debt faster than business value. </p>
+    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">Most AI pilots produce impressive demos that never scale or deliver ROI. The constraint is structured governance: frameworks ensuring human accountability, maintaining compliance at scale, and connecting strategy to execution. Without this, AI accumulates technical debt faster than business value. </p>
 
-    <!-- ── Card frame — exact Figma Desktop-31 styles ── -->
-    <!--
-    Figma:
-      border: 3px solid #f1be56
-      border-radius: 7px
-      background: linear-gradient(157.85deg, #f8f8f8 5.73%, #fcfafa 26.77%)
-      box-shadow: 14px 9px 36px 0px rgba(0,0,0,0.10),
-                  55px 35px 65px 0px rgba(0,0,0,0.09),
-                  123px 78px 87px 0px rgba(0,0,0,0.05),
-                  219px 138px 104px 0px rgba(0,0,0,0.01),
-                  342px 216px 113px 0px rgba(0,0,0,0)
-  -->
     <div class="ops-cost-cards" style="
     border: 3px solid transparent;
     border-radius: 7px;
@@ -3386,22 +3347,10 @@
     position: relative;
   ">
 
-      <!-- Vertical divider 1 (between col 1 & 2) -->
       <div style="position:absolute;top:0;bottom:0;left:33.37%;width:1px;background:#e5e7eb;"></div>
-      <!-- Vertical divider 2 (between col 2 & 3) -->
       <div style="position:absolute;top:0;bottom:0;left:66.73%;width:1px;background:#e5e7eb;"></div>
 
-      <!-- ── Card 1: Slower product cycles ── -->
       <div style="padding: 58px 38px 48px;">
-        <!--
-        Icon btn:
-          size: 50.1px
-          bg: #0d0d0f
-          border-radius: 6.26px
-          drop-shadow: 1.044px 1.044px 0px rgba(255,255,255,0.08)
-          inset-shadow: inset 2.088px 2.088px 6.263px rgba(0,0,0,0.9),
-                        inset -1.044px -1.044px 2.088px rgba(0,0,0,0.4)
-      -->
         <div style="
         width: 50.1px; height: 50.1px;
         background: #0d0d0f;
@@ -3417,11 +3366,10 @@
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779989036/31_qlbnw3.png" alt=""
             style="width:35.875px;height:35.875px;display:block;" />
         </div>
-        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Fragmented agent estates </h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Agents operate without unified observability or cross-platform accountability. Each business unit builds in isolation, creating governance gaps that block enterprise scaling. </p>
+        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Fragmented agent estates </h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Agents operate without unified observability or cross-platform accountability. Each business unit builds in isolation, creating governance gaps that block enterprise scaling. </p>
       </div>
 
-      <!-- ── Card 2: Compounding security exposure ── -->
       <div style="padding: 58px 38px 48px;">
         <div style="
         width: 50.1px; height: 50.1px;
@@ -3438,12 +3386,10 @@
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779989036/32_yii8gx.png" alt=""
             style="width:35.875px;height:35.875px;display:block;" />
         </div>
-        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Compliance without
-architecture</h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Explainability and human oversight is treated as post-deployment additions rather than embedded operational requirements. When audit trails or decisions require justification, the infrastructure doesn't exist to provide answers. </p>
+        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Compliance without architecture</h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Explainability and human oversight is treated as post-deployment additions rather than embedded operational requirements. When audit trails or decisions require justification, the infrastructure doesn't exist to provide answers. </p>
       </div>
 
-      <!-- ── Card 3: Engineering talent attrition ── -->
       <div style="padding: 58px 38px 48px;">
         <div style="
         width: 50.1px; height: 50.1px;
@@ -3462,22 +3408,16 @@ architecture</h3>
         </div>
         <h3
           style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;white-space:nowrap;margin-bottom:16px;">
-          Pilot-to-production failure </h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Proof-of-concept successes don't translate to enterprise deployment because security, governance, and compliance were scoped as future work. The technical gap between "it works in the lab" and "it runs under regulatory scrutiny" stops momentum. </p>
+          Pilot-to-production failure </h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Proof-of-concept successes don't translate to enterprise deployment because security, governance, and compliance were scoped as future work. The technical gap between "it works in the lab" and "it runs under regulatory scrutiny" stops momentum. </p>
       </div>
 
-    </div><!-- /card-frame -->
-  </section>
+    </div></section>
 
 
 
 
 
-  <!-- ============================================================
-       SECTION: TESTIMONIAL
-       Purpose : Pull-quote with author + result chips on dark panel.
-       CSS tag : /* === TESTIMONIAL === */
-       ============================================================ -->
   <section id="testimonial-sec" class="sec-border">
     <p class="eyebrow">Testimonial</p>
     <h2
@@ -3490,7 +3430,7 @@ architecture</h3>
             d="M8 20c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H8v-8zm12 0c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H20v-8z"
             fill="#fff" />
         </svg>
-        <p class="test-quote">“We deployed responsible AI across an insurance carrier's claims lifecycle—from FNOL intake through SIU investigation. ClaimX delivers composite fraud risk scoring in under 0.1 seconds with SHAP-powered explainability for every flag. The system acts as intelligence layer, not decision layer, maintaining human accountability while accelerating legitimate claims processing.”</p>
+        <p class="test-quote">“We deployed responsible AI across an insurance carrier's claims lifecycle—from FNOL intake through SIU investigation. ClaimX delivers composite fraud risk scoring in under 0.1 seconds with SHAP-powered explainability for every flag. The system acts as intelligence layer, not decision layer, maintaining human accountability while accelerating legitimate claims processing.”</p>
         <div class="test-author">
           <div class="test-avatar">CIO</div>
           <div>
@@ -3523,70 +3463,62 @@ architecture</h3>
 
 
 
-  <!-- ===== Retained from Our Focus: Analysis ===== -->
-  <section class="analysis section-frame">
+  <section id="our-solution" class="analysis section-frame">
     <div>
       <p class="eyebrow">OUR AI-FIRST SOLUTION</p>
       <h2>Readiness and responsibility,<br>
-engineered as  <span
+engineered as <span
           style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; display:inline;">one system.</span></h2>
     </div>
     <div class="analysis__copy">
-      <p>Celsior approach integrates strategy, development, governance, and accountability: We identify where AI creates measurable value, accelerate legacy modernization through our AI-first digital engineering platform. Compress development timelines from 12-24 months to 3-9 months, provide runtime governance across platforms, and ensure human oversight at critical decision points.</p>
+      <p>Celsior approach integrates strategy, development, governance, and accountability: We identify where AI creates measurable value, accelerate legacy modernization through our AI-first digital engineering platform. Compress development timelines from 12-24 months to 3-9 months, provide runtime governance across platforms, and ensure human oversight at critical decision points.</p>
     </div>
     <div class="solution-cards">
-      <article>
+      <article onclick="window.location.href='https://dev.celsiortech.us/ai-innovation/frameworks-accelerators'">
         <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779989575/18_bzeen4.png" alt="" />
         <div class="solution-card-inner">
           <span class="solution-index">01</span>
           <div class="solution-card-spacer"></div>
           <div class="solution-card-body">
-            <h3>Enterprise AI Pilots </h3>
-            <p class="solution-card-text">Go from concept to production-ready in 3-9 months instead of 12-24. Blueprint-driven development with pre-built RAG tools, integration connectors, and governance hooks. Security and compliance embedded from day one. </p>
-            <a class="solution-link" href="#">Explore CAFE Framework →</a>
+            <h3>Enterprise AI Pilots </h3>
+            <p class="solution-card-text">Go from concept to production-ready in 3-9 months instead of 12-24. Blueprint-driven development with pre-built RAG tools, integration connectors, and governance hooks. Security and compliance embedded from day one. </p>
+            <a class="solution-link" href="https://dev.celsiortech.us/ai-innovation/frameworks-accelerators">Explore CAFE™ Framework →</a>
           </div>
         </div>
       </article>
-      <article>
+      <article onclick="window.location.href='https://dev.celsiortech.us/ai-innovation/frameworks-accelerators'">
         <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779989575/17_ssgwl4.png" alt="" />
         <div class="solution-card-inner">
           <span class="solution-index">02</span>
           <div class="solution-card-spacer"></div>
           <div class="solution-card-body">
             <h3>AI Copilots & Agentic Workflows</h3>
-            <p class="solution-card-text">Autonomous processing for routine decisions with human
-in-the-loop review gates for consequential outcomes. Escalation workflows, capacity intelligence, and accountability audits ensure regulatory compliance while maintaining velocity.</p>
-            <a class="solution-link" href="#">Explore HALO Framework →</a>
+            <p class="solution-card-text">Autonomous processing for routine decisions with human in-the-loop review gates for consequential outcomes. Escalation workflows, capacity intelligence, and accountability audits ensure regulatory compliance while maintaining velocity.</p>
+            <a class="solution-link" href="https://dev.celsiortech.us/ai-innovation/frameworks-accelerators">Explore HALO™ Framework →</a>
           </div>
         </div>
       </article>
-      <article>
+      <article onclick="window.location.href='https://dev.celsiortech.us/ai-innovation/frameworks-accelerators'">
         <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779989575/16_ya8u5c.png" alt="" />
         <div class="solution-card-inner">
           <span class="solution-index">03</span>
           <div class="solution-card-spacer"></div>
           <div class="solution-card-body">
             <h3>Governance & Observability</h3>
-            <p class="solution-card-text">Unified governance across fragmented agent estates. Platform-agnostic runtime connects Agentforce, Azure AI, Bedrock, and CAFE agents. Real-time observability, unified policy enforcement, drift detection with auto-remediation, and SLA-based accountability. </p>
-            <a class="solution-link" href="#">Explore PACE Platform →</a>
+            <p class="solution-card-text">Unified governance across fragmented agent estates. Platform-agnostic runtime connects Agentforce, Azure AI, Bedrock, and CAFE agents. Real-time observability, unified policy enforcement, drift detection with auto-remediation, and SLA-based accountability. </p>
+            <a class="solution-link" href="https://dev.celsiortech.us/ai-innovation/frameworks-accelerators">Explore PACE™ Platform →</a>
           </div>
         </div>
       </article>
     </div>
   </section>
 
-  <!-- ============================================================
-       SECTION: OUTCOMES
-       Purpose : Heading on the left, three colored outcome stat cards
-                 on the right. Pixel-exact Figma Desktop-30 (1433×894).
-       CSS tag : /* === OUTCOMES === */
-       ============================================================ -->
   <section class="outcomes-section">
     <section class="outcomes" aria-label="Outcomes">
       <div class="outcomes__heading">
         <p class="eyebrow">WHY AI-FIRST ENGINEERING?</p>
-        <h2>Outcomes that move AI from pilot to production </h2>
-        <p>Most enterprises are not short on AI activity. They are short on AI outcomes. Adoption is not the bottleneck. Governance, data readiness, and workflow integration are. These figures, define the gap Celsior was built to close. </p>
+        <h2>Outcomes that move AI from pilot to production </h2>
+        <p>Most enterprises are not short on AI activity. They are short on AI outcomes. Adoption is not the bottleneck. Governance, data readiness, and workflow integration are. These figures, define the gap Celsior was built to close. </p>
       </div>
       <div class="outcome-cards">
         <article class="outcome-card outcome-card--green" data-stat-card>
@@ -3601,7 +3533,7 @@ in-the-loop review gates for consequential outcomes. Escalation workflows, cap
         </article>
         <article class="outcome-card outcome-card--blue" data-stat-card>
           <strong><span class="stat-num" data-target="60">0</span><span>%</span></strong>
-          <p>Organizations will abandon 60% of AI projects that are not backed by AI-ready data governance and infrastructure before they reach production. </p>
+          <p>Organizations will abandon 60% of AI projects that are not backed by AI-ready data governance and infrastructure before they reach production. </p>
           <div class="outcome-card-arrow">
             <svg viewBox="0 0 18 18" fill="none">
               <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
@@ -3621,7 +3553,7 @@ in-the-loop review gates for consequential outcomes. Escalation workflows, cap
         </article>
         <article class="outcome-card outcome-card--dark" data-stat-card>
           <strong><span class="stat-num" data-target="51">0</span><span>%</span></strong>
-          <p>Better customer retention at organizations that structure all operations around the customer experience. </p>
+          <p>Better customer retention at organizations that structure all operations around the customer experience. </p>
           <div class="outcome-card-arrow">
             <svg viewBox="0 0 18 18" fill="none">
               <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
@@ -3634,12 +3566,9 @@ in-the-loop review gates for consequential outcomes. Escalation workflows, cap
   </section>
 
 
-  <!-- ===== Retained from Our Focus: Partners (logos removed, spacer kept) ===== -->
   <div aria-hidden="true" style="height:86px;background:#fff;border-bottom:1px solid rgba(13,17,39,0.08);"></div>
 
 
-  <!-- ===== Retained from Our Focus: Capabilities (em-section) ===== -->
-  <!-- ===== CAPABILITIES (em-section style ported from home) ===== -->
   <section class="em-section" id="emSection">
     <div class="em-left">
       <canvas id="emParticleCanvas"></canvas>
@@ -3647,9 +3576,9 @@ in-the-loop review gates for consequential outcomes. Escalation workflows, cap
         <span class="em-pill">Our Engineering Stack</span>
         <h2 class="em-heading"> <span
         style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; display:inline;">Four</span> platforms. One integrated
-architecture for enterprise AI. </h2>
-        <p class="em-desc">Celsior’s proprietary platforms are purpose-built to eliminate the gaps between strategy, development, deployment, and governance. They're production systems managing autonomous agents across banking, insurance, and healthcare enterprises. </p>
-        <a href="#consultation" class="em-cta">Get Started
+architecture for enterprise AI. </h2>
+        <p class="em-desc">Celsior’s proprietary platforms are purpose-built to eliminate the gaps between strategy, development, deployment, and governance. They're production systems managing autonomous agents across banking, insurance, and healthcare enterprises. </p>
+        <a href="https://dev.celsiortech.us/ai-innovation/frameworks-accelerators/synthetix" class="em-cta">Get Started
           <svg viewBox="0 0 16 16" fill="none">
             <line x1="2" y1="14" x2="14" y2="2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
             <polyline points="6,2 14,2 14,10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
@@ -3677,8 +3606,8 @@ architecture for enterprise AI. </h2>
           </svg>
         </div>
         <span class="em-num">01</span>
-        <h3 class="em-card-title">CAFE: Agent Framework for Enterprises </h3>
-        <p class="em-card-desc">Accelerate AI adoption from 12-24 months down to 3-9 months. Blueprint-driven agent development with pre-built RAG, LLM gateway, and integration connectors. Deploy production-ready agents from YAML specifications with security and compliance baked in from day one.</p>
+        <h3 class="em-card-title">CAFE™: Agent Framework for Enterprises </h3>
+        <p class="em-card-desc">Accelerate AI adoption from 12-24 months down to 3-9 months. Blueprint-driven agent development with pre-built RAG, LLM gateway, and integration connectors. Deploy production-ready agents from YAML specifications with security and compliance baked in from day one.</p>
       </div>
 
       <div class="em-card" data-index="02">
@@ -3698,8 +3627,8 @@ architecture for enterprise AI. </h2>
           </svg>
         </div>
         <span class="em-num">02</span>
-        <h3 class="em-card-title">PACE: Managed AI Agents-as-a-Service </h3>
-        <p class="em-card-desc">Platform-agnostic runtime and governance layer. Connects Agentforce, Azure AI, Bedrock, and CAFE agents through unified fabric. Real-time observability, policy enforcement, drift detection, and auto-remediation with SLA-based accountability. </p>
+        <h3 class="em-card-title">PACE™: Managed AI Agents-as-a-Service </h3>
+        <p class="em-card-desc">Platform-agnostic runtime and governance layer. Connects Agentforce, Azure AI, Bedrock, and CAFE™ agents through unified fabric. Real-time observability, policy enforcement, drift detection, and auto-remediation with SLA-based accountability. </p>
       </div>
 
       <div class="em-card" data-index="03">
@@ -3720,19 +3649,14 @@ architecture for enterprise AI. </h2>
           </svg>
         </div>
         <span class="em-num">03</span>
-        <h3 class="em-card-title">HALO: Human-AI Loop Orchestration </h3>
-        <p class="em-card-desc">Governance layer orchestrating human and agent capacity. Provides HITL review gates for critical outputs, escalation workflows, and accountability audit trails. Ensures compliance with EU AI Act through documented human oversight at decision points. </p>
+        <h3 class="em-card-title">HALO™: Human-AI Loop Orchestration </h3>
+        <p class="em-card-desc">Governance layer orchestrating human and agent capacity. Provides HITL review gates for critical outputs, escalation workflows, and accountability audit trails. Ensures compliance with EU AI Act through documented human oversight at decision points. </p>
       </div>
     </div>
   </section>
 
 
 
-  <!-- ============================================================
-       SECTION: PLATFORMS STRIP
-       Purpose : Headline + horizontally scrolling partner-logo strip.
-       CSS tag : /* === PARTNERS / PLATFORMS === */
-       ============================================================ -->
   <div class="platforms" style="background:#FFFFFF;">
 
     <h3>Delivered on the platforms your enterprise already <span
@@ -3774,16 +3698,10 @@ architecture for enterprise AI. </h2>
 
 
 
-  <!-- ============================================================
-       SECTION: EXPLORE
-       Purpose : Cross-link grid pointing to other focus areas.
-                 Ported from the Our_Focus page.
-       CSS tag : /* === EXPLORE === */
-       ============================================================ -->
   <section class="explore">
     <h2>Continue exploring Celsior's capabilities</h2>
     <div class="explore__links">
-      <a href="#">
+      <a href="https://dev.celsiortech.us/ai-innovation/celsior-ai-lab">
         <span class="explore__row-left">
           <span class="explore__label">AI LAB</span>
           <span class="explore__text">AI Readiness & Strategic Planning</span>
@@ -3798,10 +3716,10 @@ architecture for enterprise AI. </h2>
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://celsior-assessment-tools.netlify.app/modernization-readiness/">
         <span class="explore__row-left">
           <span class="explore__label">CoEs</span>
-          <span class="explore__text">Responsible AI & Production Governance </span>
+          <span class="explore__text">Responsible AI & Production Governance </span>
         </span>
         <span class="explore__row-right">
           <span class="explore__arrow" aria-hidden="true">
@@ -3813,7 +3731,7 @@ architecture for enterprise AI. </h2>
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://dev.celsiortech.us/ai-innovation/frameworks-accelerators">
         <span class="explore__row-left">
           <span class="explore__label">Accelerators</span>
           <span class="explore__text">Enterprise AI Pilots</span>
@@ -3832,19 +3750,13 @@ architecture for enterprise AI. </h2>
     </div>
   </section>
 
-  <!-- ============================================================
-       SECTION: INSIGHTS
-       Purpose : Three-column thought-leadership card grid with tag
-                 chip, image, headline, and excerpt.
-       CSS tag : /* === INSIGHTS === */
-       ============================================================ -->
   <section id="insights-sec" style="border-top:1px solid #f3f4f6;">
     <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;">
       <div>
         <p class="eyebrow">INSIGHTS</p>
         <h2
           style="font-size:40px;font-weight:700;color:#111827;line-height:50px;max-width:900px;letter-spacing:-0.24px;">
-          Thinking on AI adoption and enterprise governance </h2>
+          Thinking on AI adoption and enterprise governance </h2>
       </div>
       <a href="#"
         style="font-size:14px;font-weight:600;color:var(--teal);display:flex;align-items:center;gap:6px;white-space:nowrap;margin-left:24px;padding-bottom:4px;">All
@@ -3861,8 +3773,8 @@ architecture for enterprise AI. </h2>
           <span class="insight-tag">Technical Debt</span>
         </div>
         <div class="insight-body">
-          <h4 class="insight-title">Why 96% of AI initiatives never reach production scale </h4>
-          <p class="insight-desc">The gap between pilot success and enterprise deployment isn't technical capability—it's governance architecture. Here's what the 4% do differently. </p>
+          <h4 class="insight-title">Why 96% of AI initiatives never reach production scale </h4>
+          <p class="insight-desc">The gap between pilot success and enterprise deployment isn't technical capability—it's governance architecture. Here's what the 4% do differently. </p>
           <div class="insight-foot"><span>6 min read</span><a href="#" class="insight-readlink">Read <svg width="12"
                 height="12" fill="none" viewBox="0 0 12 12">
                 <path d="M2 6h8M7 4l3 2-3 2" stroke="#0d4f45" stroke-width="1.3" stroke-linecap="round"
@@ -3877,8 +3789,9 @@ architecture for enterprise AI. </h2>
           <span class="insight-tag">Modernisation</span>
         </div>
         <div class="insight-body">
-          <h4 class="insight-title">The EU AI Act and human-in-the-loop <br>requirements </h4>
-          <p class="insight-desc">Regulatory frameworks are codifying what responsible AI deployment requires: documented human oversight at critical decision points. What compliance looks like in practice.  </p>
+          <h4 class="insight-title">The EU AI Act and human-in-the-loop <br>requirements </h4>
+          <p class="insight-desc">Regulatory frameworks are codifying what responsible AI deployment requires: documented human oversight at critical decision points. What compliance looks like in practice.  
+</p>
           <div class="insight-foot"><span>8 min read</span><a href="#" class="insight-readlink">Read <svg width="12"
                 height="12" fill="none" viewBox="0 0 12 12">
                 <path d="M2 6h8M7 4l3 2-3 2" stroke="#0d4f45" stroke-width="1.3" stroke-linecap="round"
@@ -3893,8 +3806,9 @@ architecture for enterprise AI. </h2>
           <span class="insight-tag">Engineering Leadership</span>
         </div>
         <div class="insight-body">
-          <h4 class="insight-title">From 12 months to 90 days: accelerating agent development </h4>
-          <p class="insight-desc">Traditional AI development cycles treat governance as post-deployment work. Blueprint-driven approaches with embedded compliance compress timelines without cutting corners.  </p>
+          <h4 class="insight-title">From 12 months to 90 days: accelerating agent development </h4>
+          <p class="insight-desc">Traditional AI development cycles treat governance as post-deployment work. Blueprint-driven approaches with embedded compliance compress timelines without cutting corners.  
+</p>
           <div class="insight-foot"><span>5 min read</span><a href="#" class="insight-readlink">Read <svg width="12"
                 height="12" fill="none" viewBox="0 0 12 12">
                 <path d="M2 6h8M7 4l3 2-3 2" stroke="#0d4f45" stroke-width="1.3" stroke-linecap="round"
@@ -3907,17 +3821,11 @@ architecture for enterprise AI. </h2>
 
 
 
-  <!-- ============================================================
-       SECTION: FAQ
-       Purpose : Two-column FAQ — intro on the left, accordion of
-                 questions on the right, separated by vertical rule.
-       CSS tag : /* === FAQ === */
-       ============================================================ -->
   <section class="faq">
     <div class="faq__inner">
       <div class="faq__intro">
         <p class="eyebrow">FAQ</p>
-        <h2>Questions executives ask about scaling AI </h2>
+        <h2>Questions executives ask about scaling AI </h2>
         <p>Covering ROI, risk, timelines, and delivery model — the
 questions that matter to decision-makers, answered
 directly.</p>
@@ -3926,14 +3834,14 @@ directly.</p>
       <div class="faq__items">
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How is enterprise AI adoption different from running pilots? </span>
+            <span class="faq__q">How is enterprise AI adoption different from running pilots? </span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Pilots prove technical feasibility in controlled environments. Enterprise adoption means agents operating across departments with different data sources, security requirements, and compliance obligations. The difference is governance infrastructure—unified observability, policy enforcement, and human accountability that works across multi-vendor agent estates. PACE and HALO provide this operational layer. </p>
+            <p>Pilots prove technical feasibility in controlled environments. Enterprise adoption means agents operating across departments with different data sources, security requirements, and compliance obligations. The difference is governance infrastructure—unified observability, policy enforcement, and human accountability that works across multi-vendor agent estates. PACE™ and HALO™ provide this operational layer. </p>
           </div>
         </div>
         <div class="faq__item">
@@ -3950,26 +3858,26 @@ directly.</p>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">We already have agents deployed. Why would we need PACE? </span>
+            <span class="faq__q">We already have agents deployed. Why would we need PACE™? </span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>If your agents come from different vendors (Salesforce Agentforce, Azure AI, AWS Bedrock), you have fragmented governance. PACE provides unified observability and policy enforcement across platforms. Real-time monitoring catches drift and anomalies. SLA-based accountability means one throat to choke when something breaks. Most enterprises discover they can't answer "what are all our agents doing right now?"—PACE answers that. </p>
+            <p>If your agents come from different vendors (Salesforce Agentforce, Azure AI, AWS Bedrock), you have fragmented governance. PACE™ provides unified observability and policy enforcement across platforms. Real-time monitoring catches drift and anomalies. SLA-based accountability means one throat to choke when something breaks. Most enterprises discover they can't answer "what are all our agents doing right now?"—PACE™ answers that. </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How does CAFE compress development from 12 months to 90 days?</span>
+            <span class="faq__q">How does CAFE™ compress development from 12 months to 90 days?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Traditional agent development treats each use case as greenfield. CAFE uses blueprint-driven build—YAML specifications define purpose, modality, and LLM selection. Pre-built RAG tools, integration connectors, and governance hooks eliminate reinvention. Security, compliance, and monitoring are embedded from day one, not added at the end. You build once and reuse across projects. </p>
+            <p>Traditional agent development treats each use case as greenfield. CAFE™ uses blueprint-driven build—YAML specifications define purpose, modality, and LLM selection. Pre-built RAG tools, integration connectors, and governance hooks eliminate reinvention. Security, compliance, and monitoring are embedded from day one, not added at the end. You build once and reuse across projects. </p>
           </div>
         </div>
         <div class="faq__item">
@@ -3981,7 +3889,7 @@ directly.</p>
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Strategic clarity on business priorities and use case selection. Access to data sources and existing systems for integration. Subject matter expertise to validate agent logic and review outputs during HALO gates. Our platforms handle architecture, development, and operational governance—but your institutional knowledge determines whether agents solve the right problems correctly. </p>
+            <p>Strategic clarity on business priorities and use case selection. Access to data sources and existing systems for integration. Subject matter expertise to validate agent logic and review outputs during HALO™ gates. Our platforms handle architecture, development, and operational governance—but your institutional knowledge determines whether agents solve the right problems correctly. </p>
           </div>
         </div>
         <div class="faq__item">
@@ -3993,26 +3901,20 @@ directly.</p>
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Compliance requirements are embedded in platform architecture, not added through audits. HALO provides mandatory human-in-the-loop review gates for high-risk decisions. PACE maintains audit trails showing who approved what logic and when. SHAP explainability documents the reasoning behind every agent output. For regulated industries (BFSI, healthcare), we implement air-gapped deployment with role-based access controls.</p>
+            <p>Compliance requirements are embedded in platform architecture, not added through audits. HALO™ provides mandatory human-in-the-loop review gates for high-risk decisions. PACE™ maintains audit trails showing who approved what logic and when. SHAP explainability documents the reasoning behind every agent output. For regulated industries (BFSI, healthcare), we implement air-gapped deployment with role-based access controls.</p>
           </div>
         </div>
       </div>
     </div>
-    </div>
   </section>
 
-  <!-- ============================================================
-       SECTION: CTA BANNER
-       Purpose : Closing call-to-action band with pull-quote + button.
-       CSS tag : /* === CTA BANNER === */
-       ============================================================ -->
   <section class="cta-banner" id="ctaBand">
     <div class="cta-banner-inner">
       <img class="cta-band-logo"
         src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
         alt="Celsior" />
-      <h2 class="cta-band-text" data-text="Most AI transformations start with understanding<br>where you are.">Most AI transformations start with understanding<br>where you are. </h2>
-      <a href="#contact" class="cta-btn cta-band-btn">Start the conversation</a>
+      <h2 class="cta-band-text" data-text="Most AI transformations start with understanding<br>where you are.">Most AI transformations start with understanding<br>where you are. </h2>
+      <a href="https://dev.celsiortech.us/contact-us" class="cta-btn cta-band-btn">Start the conversation</a>
     </div>
   </section>
 
@@ -4159,11 +4061,10 @@ directly.</p>
     });
   </script>
 
-  <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script>
-    (function () {
+    (document.ready || function(f){if(document.readyState!='loading')f();else document.addEventListener('DOMContentLoaded',f)}) (function () {
       if (!window.gsap || !window.ScrollTrigger) return;
       gsap.registerPlugin(ScrollTrigger);
 
@@ -4209,7 +4110,7 @@ directly.</p>
             },
           }, offset + 0.1);
       });
-    })();
+    });
   </script>
   <script>
     (function () {

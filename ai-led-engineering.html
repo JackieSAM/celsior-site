@@ -391,7 +391,7 @@
     }
 
     .explore h2 {
-      max-width: 1100px;
+
       margin: 0 auto 56px;
       color: #0d1127;
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
@@ -405,7 +405,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      max-width: 1100px;
+
       margin: 0 auto;
       border: 1.5px solid rgba(13, 17, 39, 0.12);
       border-radius: 16px;
@@ -3012,12 +3012,17 @@
     <div class="hero-content">
       <h1 class="hero-heading">Legacy systems slow you down. AI-led<br>engineering gets you ahead.
       </h1>
-      <div class="hero-btns">
-        <button class="btn-ghost">
-          Start Your Transformation →
-        </button>
-        <button class="btn-white">Book a Discovery Call</button>
-      </div>
+<div class="hero-btns">
+  <a href="https://celsior-assessment-tools.netlify.app/codebase-assessment/"
+     class="btn-ghost">
+    Start Assessment →
+  </a>
+
+  <a href="https://dev.celsiortech.us/contact-us"
+     class="btn-white">
+    Book a Discovery Call
+  </a>
+</div>
     </div>
   </section>
 
@@ -3204,6 +3209,13 @@
 ══════════════════════════════════════════════════════ -->
 <section class="acc-section" id="acc-section" aria-label="Client case studies">
 
+  <!-- Section heading -->
+  <div style="padding: 56px clamp(28px, 4vw, 56px) 0;">
+    <p class="eyebrow">CASE STUDIES</p>
+    <h2 style="font-size:clamp(28px,3.2vw,48px);font-weight:700;letter-spacing:-0.03em;line-height:1.08;color:#09090b;max-width:900px;margin-bottom:20px;">The Case for AI-Led Engineering: Results Across the Enterprise</h2>
+    <p style="font-size:16px;color:#3f3f46;line-height:1.6;max-width:860px;margin-bottom:40px;">Organizations that embed AI into the engineering lifecycle don't just ship faster — they build differently. Every proof point below reflects a program where AI-assisted delivery changed the outcome: compressing timelines that had stalled for years, enabling architectural shifts that legacy constraints had made impossible, and reducing the technical debt that was quietly limiting growth.</p>
+  </div>
+
   <!-- ROW 1 — Breaking Through Years of Delivery Gridlock (default active) -->
   <div class="acc-row active" data-index="0" tabindex="0">
     <div class="acc-header">
@@ -3215,12 +3227,6 @@
         <div class="acc-body-text">
           <h3 class="acc-big-title">Breaking Through Years of Delivery Gridlock</h3>
           <p class="acc-desc">Major life insurance carrier modernized legacy agent portal, achieving 50% cost reduction and completing six strategic projects in 12 months after years of stalled delivery.</p>
-          <a class="acc-readmore" href="#">
-            Read more
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M3.5 5l3.5 3.5L10.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
         </div>
         <div class="acc-img2">
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778642203/ChatGPT_Image_Apr_20_2026_02_38_12_PM_3_myikvs.png" alt="Executive in modern enterprise office">
@@ -3240,12 +3246,6 @@
         <div class="acc-body-text">
           <h3 class="acc-big-title">Enabling Digital Growth Through Modern Architecture</h3>
           <p class="acc-desc">Global retailer re-platformed onto a cloud-native, event-driven architecture, unlocking 40% faster release cycles and powering double-digit digital revenue growth across channels.</p>
-          <a class="acc-readmore" href="#">
-            Read more
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M3.5 5l3.5 3.5L10.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
         </div>
         <div class="acc-img2">
           <img src="https://images.pexels.com/photos/2599538/pexels-photo-2599538.jpeg" alt="Modern enterprise workspace" style="object-position:center 30%;">
@@ -3265,12 +3265,6 @@
         <div class="acc-body-text">
           <h3 class="acc-big-title">Accelerating Innovation While Reducing Technical Debt</h3>
           <p class="acc-desc">Tier-1 bank consolidated fragmented core systems through AI-led modernization, cutting technical debt by 65% while shipping new digital experiences three times faster than before.</p>
-          <a class="acc-readmore" href="#">
-            Read more
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M3.5 5l3.5 3.5L10.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
         </div>
         <div class="acc-img2">
           <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=1400&q=80&fit=crop" alt="Engineering team collaborating" style="object-position:center 40%;">
@@ -3388,7 +3382,7 @@
   <section class="explore">
     <h2>Continue exploring Celsior's <span style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; display:inline;">capabilities</span></h2>
     <div class="explore__links">
-      <a href="#">
+      <a href="https://dev.celsiortech.us/solutions/managed-programs">
         <span class="explore__row-left">
           <span class="explore__label">AI LAB</span>
           <span class="explore__text">Application &amp; Platform Engineering</span>
@@ -3403,7 +3397,7 @@
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://dev.celsiortech.us/solutions/technology-consulting">
         <span class="explore__row-left">
           <span class="explore__label">COES</span>
           <span class="explore__text">Microservices &amp; Modern Architectures</span>
@@ -3418,7 +3412,7 @@
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://dev.celsiortech.us/capabilities/cloud-and-infrastructure-engineering">
         <span class="explore__row-left">
           <span class="explore__label">ACCELERATORS</span>
           <span class="explore__text">Cloud Engineering &amp; Transformation</span>
@@ -3433,10 +3427,10 @@
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://dev.celsiortech.us/capabilities/digital-operations-and-security">
         <span class="explore__row-left">
           <span class="explore__label">INTELLIGENT OPS</span>
-          <span class="explore__text">Cloud Engineering &amp; Transformation</span>
+          <span class="explore__text">Digital Operations</span>
         </span>
         <span class="explore__row-right">
           <span class="explore__arrow" aria-hidden="true">
@@ -3672,9 +3666,8 @@
       <img class="cta-band-logo"
         src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
         alt="Celsior" />
-      <h2 class="cta-band-text" data-text="Most modernization efforts begin with understanding the environment.">Most
-        managed program engagements begin with a platform health assessment.</h2>
-      <a href="#contact" class="cta-btn cta-band-btn">Start the conversation</a>
+      <h2 class="cta-band-text" data-text="Most AI-led engineering programs begin with the delivery bottleneck. The highest-impact ones begin with the architecture.">Most AI-led engineering programs begin with the delivery bottleneck. The highest-impact ones begin with the architecture.</h2>
+      <a href="https://dev.celsiortech.us/contact-us" class="cta-btn cta-band-btn">Start the conversation</a>
     </div>
   </section>
 

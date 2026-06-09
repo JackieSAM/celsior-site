@@ -137,7 +137,7 @@
     }
 
     .btn-ghost {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 10px;
       backdrop-filter: blur(4.5px);
@@ -151,10 +151,11 @@
       color: #fff;
       cursor: pointer;
       white-space: nowrap;
+      text-decoration: none;
     }
 
     .btn-white {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       background: #fff;
@@ -166,6 +167,7 @@
       color: var(--teal);
       cursor: pointer;
       white-space: nowrap;
+      text-decoration: none;
     }
 
     /* ============================================================
@@ -402,7 +404,7 @@
     }
 
     .explore h2 {
-      max-width: 1100px;
+
       margin: 0 auto 56px;
       color: #0d1127;
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
@@ -416,7 +418,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      max-width: 1100px;
+
       margin: 0 auto;
       border: 1.5px solid rgba(13, 17, 39, 0.12);
       border-radius: 16px;
@@ -788,11 +790,11 @@
 
     .outcomes {
       position: relative;
-      max-width: 1440px;
-      margin: 0 auto;
+      width: 100%;
+      /* Removed max-width:1440px + margin:0 auto per spacing-system.json */
       /* height = tallest card; heading floats in whitespace above short cards */
       min-height: clamp(500px, 88vh, 900px);
-      padding: 0 clamp(24px, 5.5vw, 80px);
+      padding: var(--section-pad-v) var(--section-pad-h);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -802,8 +804,8 @@
     /* ── Heading: absolutely positioned over top-left whitespace ── */
     .outcomes__heading {
       position: absolute;
-      top: clamp(32px, 7%, 112px);
-      left: clamp(24px, 5.5vw, 80px);
+      top: var(--section-pad-v);
+      left: var(--section-pad-h);
       width: clamp(280px, 32%, 460px);
       z-index: 2;
     }
@@ -1054,7 +1056,7 @@
       .outcomes {
         min-height: 0;
         display: block;
-        padding-top: clamp(40px, 5vw, 64px);
+        padding: var(--section-pad-v) var(--section-pad-h);
       }
 
       .outcomes__heading {
@@ -1586,6 +1588,38 @@
       box-shadow: 0 10px 32px rgba(0, 0, 0, 0.32);
     }
 
+    .cta-band-btns {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cta-btn-outline {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 28px;
+      background: transparent;
+      color: #0d1127;
+      border: 1.5px solid #0d1127;
+      border-radius: 5px;
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s;
+    }
+
+    .cta-btn-outline:hover {
+      background: #0d1127;
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.18);
+    }
+
     @media (max-width: 640px) {
       .cta-banner {
         padding: 72px 24px;
@@ -2042,7 +2076,7 @@
 
       /* ── Outcomes — keep 2×2 grid, scale everything down ── */
       .outcomes {
-        padding: 32px 16px 0 !important;
+        padding: 48px 20px 0 !important;
       }
 
       .outcomes__heading {
@@ -2362,10 +2396,10 @@
       inset: 0;
       z-index: 0;
       width: 100%;
-      height: 100%;
+
       object-fit: cover;
       filter: saturate(0.88) contrast(0.96);
-      opacity: 0.85;
+
       transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
                   opacity 0.55s ease;
     }
@@ -3305,14 +3339,14 @@
         engineering that evolves<br>at the speed of your business.
       </h1>
       <div class="hero-btns">
-        <button class="btn-ghost">
+        <a href="https://dev.celsiortech.us/capabilities/ai-led-engineering" class="btn-ghost">
           Explore Our Approach
           <svg width="17" height="17" fill="none" viewBox="0 0 17 17">
             <path d="M3.5 8.5h10M9.5 5l4 3.5L9.5 12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
-        </button>
-        <button class="btn-white">Schedule Consultation →</button>
+        </a>
+        <a href="https://dev.celsiortech.us/contact-us" class="btn-white">Schedule Consultation →</a>
       </div>
     </div>
   </section>
@@ -3494,7 +3528,7 @@
     </div>
     <div class="solution-cards">
       <article>
-        <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778615984/1_rsqe5e.png" alt="" />
+        <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1781015134/CARDS_2_n5d5cf.png" alt="" />
         <div class="solution-card-inner">
           <span class="solution-index">01</span>
           <div class="solution-card-spacer"></div>
@@ -3504,12 +3538,12 @@
               logic. Our AI-assisted software archaeology reverse-engineers legacy codebases into traceable
               specifications. We execute incremental transformation through strangler fig patterns, ensuring seamless
               business continuity and compliance-ready audit trails from day one.</p>
-            <a class="solution-link" href="#">Explore Modernization →</a>
+            <a class="solution-link" href="https://dev.celsiortech.us/capabilities/ai-led-engineering">Explore Modernization →</a>
           </div>
         </div>
       </article>
       <article>
-        <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778615985/2_rqynuj.png" alt="" />
+        <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1781015132/CARDS_1_mwokjf.png" alt="" />
         <div class="solution-card-inner">
           <span class="solution-index">02</span>
           <div class="solution-card-spacer"></div>
@@ -3519,12 +3553,12 @@
               infrastructure automation with FinOps discipline to deliver environments that scale production velocity
               while controlling costs. DevOps pipelines, SRE practices, and observability frameworks are embedded from
               day one.</p>
-            <a class="solution-link" href="#">Explore Cloud Engineering →</a>
+            <a class="solution-link" href="https://dev.celsiortech.us/capabilities/cloud-and-infrastructure-engineering">Explore Cloud Engineering →</a>
           </div>
         </div>
       </article>
       <article>
-        <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778615983/3_gt3g7i.png" alt="" />
+        <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1781015130/CARDS_mrciqj.png" alt="" />
         <div class="solution-card-inner">
           <span class="solution-index">03</span>
           <div class="solution-card-spacer"></div>
@@ -3534,7 +3568,7 @@
               combine platform expertise with AI-powered quality frameworks to sustain delivery velocity as your systems
               evolve. From observability to automated testing, we embed the practices that prevent future technical
               debt.</p>
-            <a class="solution-link" href="#">Learn About Teams-as-a-Service →</a>
+            <a class="solution-link" href="https://dev.celsiortech.us/solutions/teams-as-a-service">Learn About Teams-as-a-Service →</a>
           </div>
         </div>
       </article>
@@ -3558,9 +3592,8 @@
       </div>
       <div class="outcome-cards">
         <article class="outcome-card outcome-card--green" data-stat-card>
-          <strong><span class="stat-num" data-target="3" data-suffix="X">0X</span></strong>
-          <p>Faster platform upgrade cycles delivered through managed operations versus unstructured self-managed
-            approaches</p>
+          <strong><span class="stat-num" data-target="2" data-suffix="X">0X</span></strong>
+          <p>Faster modernization timelines with AI-assisted transformation platforms</p>
           <div class="outcome-card-arrow">
             <svg viewBox="0 0 18 18" fill="none">
               <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
@@ -3569,8 +3602,8 @@
           </div>
         </article>
         <article class="outcome-card outcome-card--blue" data-stat-card>
-          <strong><span class="stat-num" data-target="40">0</span><span>%</span></strong>
-          <p>Reduction in operational support costs compared to in-house management models</p>
+          <strong><span class="stat-num" data-target="46">0</span><span>%</span></strong>
+          <p>Reduction in cloud migration costs through automation</p>
           <div class="outcome-card-arrow">
             <svg viewBox="0 0 18 18" fill="none">
               <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
@@ -3580,7 +3613,7 @@
         </article>
         <article class="outcome-card outcome-card--gold" data-stat-card>
           <strong><span class="stat-num" data-target="50">0</span><span>%</span></strong>
-          <p>Faster incident resolution times on managed platform engagements</p>
+          <p>Reduction in development and support costs through optimized delivery models</p>
           <div class="outcome-card-arrow">
             <svg viewBox="0 0 18 18" fill="none">
               <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#000" stroke-width="1.6" stroke-linecap="round"
@@ -3589,8 +3622,8 @@
           </div>
         </article>
         <article class="outcome-card outcome-card--dark" data-stat-card>
-          <strong><span class="stat-num" data-target="99.5">0</span><span>%</span></strong>
-          <p>Platform availability maintained across managed program SLAs</p>
+          <strong><span class="stat-num" data-target="55">0</span><span>%</span></strong>
+          <p>Decrease in infrastructure operations costs with managed cloud services</p>
           <div class="outcome-card-arrow">
             <svg viewBox="0 0 18 18" fill="none">
               <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
@@ -3618,7 +3651,7 @@
         <p class="em-desc">Celsior's AI-powered platforms eliminate the gaps between strategy, development, deployment,
           and governance. Purpose-built to compress transformation timelines and sustain operational velocity across
           your engineering organization.</p>
-        <a href="#consultation" class="em-cta">Get Started
+        <a href="https://dev.celsiortech.us/ai-innovation/frameworks-accelerators/synthetix" class="em-cta">Get Started
           <svg viewBox="0 0 16 16" fill="none">
             <line x1="2" y1="14" x2="14" y2="2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
             <polyline points="6,2 14,2 14,10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
@@ -3757,7 +3790,7 @@
   <section class="explore">
     <h2>Continue exploring Celsior's capabilities</h2>
     <div class="explore__links">
-      <a href="#">
+      <a href="https://dev.celsiortech.us/ai-innovation/frameworks-accelerators/synthetix">
         <span class="explore__row-left">
           <span class="explore__label">Modernization Hub</span>
           <span class="explore__text">Core &amp; Legacy Modernization</span>
@@ -3772,7 +3805,7 @@
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://dev.celsiortech.us/capabilities/cloud-and-infrastructure-engineering">
         <span class="explore__row-left">
           <span class="explore__label">Cloud CoE</span>
           <span class="explore__text">Cloud Transformation &amp; Continuous Modernization</span>
@@ -3787,7 +3820,7 @@
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://dev.celsiortech.us/ai-innovation/celsior-ai-lab">
         <span class="explore__row-left">
           <span class="explore__label">AI Accelerators</span>
           <span class="explore__text">Enterprise AI Enablement</span>
@@ -3802,7 +3835,7 @@
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://dev.celsiortech.us/capabilities/digital-operations-and-security">
         <span class="explore__row-left">
           <span class="explore__label">Intelligent Ops</span>
           <span class="explore__text">Digital Operations</span>
@@ -4062,9 +4095,11 @@
       <img class="cta-band-logo"
         src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
         alt="Celsior" />
-      <h2 class="cta-band-text" data-text="Most modernization efforts begin with understanding the environment.">Most
-        managed program engagements begin with a platform health assessment.</h2>
-      <a href="#contact" class="cta-btn cta-band-btn">Start the conversation</a>
+      <h2 class="cta-band-text" data-text="Most compliance programs begin with the audit. The strongest ones begin with the architecture.">Most compliance programs begin with the audit. The strongest ones begin with the architecture.</h2>
+      <div class="cta-band-btns">
+        <a href="https://dev.celsiortech.us/contact-us" class="cta-btn cta-band-btn">Speak with Our R&amp;C Practice</a>
+        <a href="https://dev.celsiortech.us/contact-us" class="cta-btn-outline cta-band-btn">Assess Your Control Environment &rarr;</a>
+      </div>
     </div>
   </section>
 
@@ -4268,7 +4303,7 @@
       if (!window.gsap || !window.ScrollTrigger) return;
       gsap.from('.cta-band-logo', { opacity: 0, y: 18, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
       gsap.from('.cta-band-text', { opacity: 0, y: 22, duration: 0.9, ease: 'power3.out', delay: 0.12, scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
-      gsap.from('.cta-band-btn', { opacity: 0, y: 18, duration: 0.7, ease: 'power3.out', delay: 0.26, scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
+      gsap.from('.cta-band-btn', { opacity: 0, y: 18, duration: 0.7, ease: 'power3.out', delay: 0.26, stagger: 0.1, scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
       const el = document.querySelector('.cta-band-text');
       if (!el) return;
       function glitch() {
