@@ -682,7 +682,7 @@
        ============================================================ */
     .platforms {
       background: #fff;
-      padding: 32px 112px 0;
+      padding: 52px 112px 0;
       border-top: 1px solid rgba(13, 17, 39, 0.08);
     }
 
@@ -1594,6 +1594,11 @@
       align-items: center;
       flex-wrap: wrap;
       justify-content: center;
+    }
+
+    /* Ensure CTA band buttons are always visible even if GSAP doesn't animate them in */
+    .cta-band-btn {
+      opacity: 1 !important;
     }
 
     .cta-btn-outline {
@@ -3586,9 +3591,7 @@
       <div class="outcomes__heading">
         <p class="eyebrow">WHY AI-FIRST ENGINEERING?</p>
         <h2>Outcomes we're accountable to</h2>
-        <p>These numbers come from managed program engagements across enterprise platforms. They reflect what structured
-          operational accountability including defined scope, measurable SLAs, and platform-specific delivery teams
-          produce in practice.</p>
+        <p>Measured results from AI-powered engineering engagements across regulated industries. </p>
       </div>
       <div class="outcome-cards">
         <article class="outcome-card outcome-card--green" data-stat-card>
@@ -4303,7 +4306,7 @@
       if (!window.gsap || !window.ScrollTrigger) return;
       gsap.from('.cta-band-logo', { opacity: 0, y: 18, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
       gsap.from('.cta-band-text', { opacity: 0, y: 22, duration: 0.9, ease: 'power3.out', delay: 0.12, scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
-      gsap.from('.cta-band-btn', { opacity: 0, y: 18, duration: 0.7, ease: 'power3.out', delay: 0.26, stagger: 0.1, scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
+      gsap.fromTo('.cta-band-btn', { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: 0.26, stagger: 0.1, scrollTrigger: { trigger: '#ctaBand', start: 'top 82%', once: true } });
       const el = document.querySelector('.cta-band-text');
       if (!el) return;
       function glitch() {

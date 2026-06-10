@@ -391,7 +391,7 @@
     }
 
     .explore h2 {
-      max-width: 1100px;
+  
       margin: 0 auto 56px;
       color: #0d1127;
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
@@ -405,7 +405,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      max-width: 1100px;
+
       margin: 0 auto;
       border: 1.5px solid rgba(13, 17, 39, 0.12);
       border-radius: 16px;
@@ -690,7 +690,7 @@
       font-size: 12px;
       font-weight: 800;
       letter-spacing: 0;
-      border-bottom: 1px solid rgba(13, 17, 39, 0.08);
+
       background: #fff;
       mask-image: linear-gradient(90deg, transparent 0%, #000 11%, #000 89%, transparent 100%);
       -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 11%, #000 89%, transparent 100%);
@@ -2500,6 +2500,13 @@
   width: 100%;
   margin-top: 0;
 }
+
+/* Intro heading block above the accordion rows */
+.acc-intro-head {
+  padding: var(--section-pad-v) var(--section-pad-h) calc(var(--section-pad-v) * 0.75);
+  border-bottom: 1px solid #f3f4f6;
+}
+
 .acc-row {
   position: relative;
   border-bottom: 1px solid #e5e7eb;
@@ -2511,7 +2518,7 @@
 .acc-header {
   display: flex;
   align-items: center;
-  padding: 26px clamp(28px, 4vw, 56px);
+  padding: 26px var(--section-pad-h);
   gap: 22px;
   position: relative;
   z-index: 2;
@@ -2557,7 +2564,7 @@
   display: grid;
   grid-template-columns: 1fr 1.05fr;
   gap: clamp(32px, 5vw, 80px);
-  padding: 0 clamp(28px, 4vw, 56px) clamp(40px, 5vw, 72px);
+  padding: 0 var(--section-pad-h) var(--section-pad-v);
   align-items: stretch;
 }
 .acc-body-text {
@@ -3013,9 +3020,9 @@
       <h1 class="hero-heading">Make decisions in hours, not weeks.
       </h1>
       <div class="hero-btns">
-        <button class="btn-ghost">
+        <a href="https://dev.celsiortech.us/contact-us" class="btn-ghost">
           Transform Your Data Estate →
-        </button>
+        </a>
         
       </div>
     </div>
@@ -3205,6 +3212,11 @@
 ══════════════════════════════════════════════════════ -->
 <section class="acc-section" id="acc-section" aria-label="Client case studies">
 
+  <div class="acc-intro-head">
+    <h2 style="font-size: clamp(22px, 2.4vw, 34px); font-weight: 700; color: #09090b; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 20px;">AI and Data Engineering: Turning Fragmented Data Into a Strategic Advantage</h2>
+    <p style="font-size: 16px; color: #3f3f46; line-height: 1.65; max-width: 860px;">Organizations that unify their data infrastructure don't just report faster — they decide better. Every proof point below reflects a program where intentional data architecture changed the outcome: integration bottlenecks eliminated so clinical and operational teams could act on information in real time, fragmented policy and claims data consolidated into platforms that enabled pricing and retention decisions at scale, and financial reporting cycles compressed by removing the manual reconciliation work that legacy system sprawl had made inevitable.</p>
+  </div>
+
   <!-- ROW 1 — Breaking Through Years of Delivery Gridlock (default active) -->
   <div class="acc-row active" data-index="0" tabindex="0">
     <div class="acc-header">
@@ -3216,12 +3228,6 @@
         <div class="acc-body-text">
           <h3 class="acc-big-title">Eliminating Integration Bottlenecks Across Diagnostics Network </h3>
           <p class="acc-desc">A leading medical testing vendor eliminated manual data integration work, reducing turnaround time by 30% and report development by 40% while improving dashboard performance by 60%. </p>
-          <a class="acc-readmore" href="#">
-            Read more
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M3.5 5l3.5 3.5L10.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
         </div>
         <div class="acc-img2">
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779994644/CARDS-2_nfsvrw.png" alt="Executive in modern enterprise office">
@@ -3243,12 +3249,6 @@
           <h3 class="acc-big-title">Turning Fragmented Policy and Claims Data Into a Live Decision-Making Engine 
 </h3>
           <p class="acc-desc">A national insurance carrier consolidated fragmented policy and claims data into a unified analytics platform, enabling real-time pricing optimization and retention analysis across product lines. </p>
-          <a class="acc-readmore" href="#">
-            Read more
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M3.5 5l3.5 3.5L10.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
         </div>
         <div class="acc-img2">
           <img src="https://plus.unsplash.com/premium_photo-1681487178876-a1156952ec60?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Modern enterprise workspace" style="object-position:center 30%;">
@@ -3268,12 +3268,6 @@
         <div class="acc-body-text">
           <h3 class="acc-big-title">Accelerating Financial Reporting Accuracy for a Regional Banking Group</h3>
           <p class="acc-desc">A regional bank was reconciling financial data manually across disparate core systems, introducing delays and errors in month-end reporting cycles. Celsior built a centralized data integration layer connecting lending, deposits, and treasury operations into a single governed reporting environment, cutting close cycle time by 35% and reducing data discrepancy incidents by over 50%. </p>
-          <a class="acc-readmore" href="#">
-            Read more
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M3.5 5l3.5 3.5L10.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
         </div>
         <div class="acc-img2">
           <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Engineering team collaborating" style="object-position:center 40%;">
@@ -3391,7 +3385,7 @@
   <section class="explore">
     <h2>Continue exploring Celsior's <span style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; display:inline;">capabilities</span></h2>
     <div class="explore__links">
-      <a href="#">
+      <a href="https://dev.celsiortech.us/solutions/managed-programs">
         <span class="explore__row-left">
           <span class="explore__label">AI LAB</span>
           <span class="explore__text">Data Strategy & Engineering </span>
@@ -3406,7 +3400,7 @@
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://dev.celsiortech.us/ai-innovation/design-lab">
         <span class="explore__row-left">
           <span class="explore__label">COES</span>
           <span class="explore__text">Advanced Analytics & AI</span>
@@ -3421,7 +3415,7 @@
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://dev.celsiortech.us/ai-innovation/frameworks-accelerators">
         <span class="explore__row-left">
           <span class="explore__label">ACCELERATORS</span>
           <span class="explore__text">Visualization & Decision-Making</span>
@@ -3662,7 +3656,7 @@
         src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
         alt="Celsior" />
       <h2 class="cta-band-text" data-text="Most data transformations begin with understanding the current state ">Most data transformations begin with understanding the current state </h2>
-      <a href="#contact" class="cta-btn cta-band-btn">Request a Data Assessment</a>
+      <a href="https://celsior-assessment-tools.netlify.app/modernization-readiness/" class="cta-btn cta-band-btn">Request Assessment</a>
     </div>
   </section>
 
@@ -4053,10 +4047,8 @@
       chip:'Healthcare',
       logo:{img:'https://res.cloudinary.com/dden4hawr/image/upload/v1779293592/C1_yailh3.png', alt:'Healthcare icon'},
       title:'Healthcare',
-      desc:'Patient care platform integrating EHR, billing, and care coordination workflows.',
-      stats:[{n:'40%',l:'reduction in admin overhead'},{n:'98%',l:'patient satisfaction score'}],
-      bg:'#f0fdf4', titleC:'#14532d', descC:'#4a7a5a', statC:'#14532d', lblC:'#5a9a6a',
-      ctaBg:'rgba(20,83,45,.88)', ctaC:'#fff', ctaBorder:'',
+      desc:'Healthcare data lake consolidating EHR, claims, and care coordination data with HIPAA-compliant governance',
+      bg:'#f0fdf4', titleC:'#14532d', descC:'#4a7a5a',
       shadow:'0 22px 44px rgba(0,0,0,.32)',
       footBg:'#1a2a1a', footR:'120px 120px 0 0', foot:'dashboard',
       imgs:{dash:'https://res.cloudinary.com/dden4hawr/image/upload/v1778640517/dashboard_qni0pr.png'},
@@ -4065,10 +4057,8 @@
       chip:'Banking & Financial Services',
       logo:{img:'https://res.cloudinary.com/dden4hawr/image/upload/v1779293592/C2_o3sbq2.png', alt:'Banking and financial services icon'},
       title:'Banking & Financial Services',
-      desc:'Digital lending platform with real-time underwriting and omnichannel customer experience.',
-      stats:[{n:'50%',l:'reduction in development costs'},{n:'6',l:'strategic projects in 12 months'}],
-      bg:'#fff9e6', titleC:'#111', descC:'#666', statC:'#111', lblC:'#999',
-      ctaBg:'rgba(0,0,0,.82)', ctaC:'#fff', ctaBorder:'',
+      desc:'Customer intelligence platform integrating transaction data, credit history, and behavioral signals for real-time underwriting',
+      bg:'#fff9e6', titleC:'#111', descC:'#666',
       shadow:'0 28px 56px rgba(0,0,0,.52)',
       footBg:'#18181a', footR:'130px 130px 0 0', foot:'phones',
       imgs:{p1:'https://res.cloudinary.com/dden4hawr/image/upload/v1778640733/app_screen_left_3_yqug1b.png',
@@ -4078,10 +4068,8 @@
       chip:'Insurance',
       logo:{img:'https://res.cloudinary.com/dden4hawr/image/upload/v1779293592/C3_jgcxl3.png', alt:'Insurance icon'},
       title:'Insurance',
-      desc:'Reduce technical debt while maintaining business logic continuity.',
-      stats:[{n:'65%',l:'reduction in quote-to-policy time'},{n:'3×',l:'faster claims resolution'}],
-      bg:'#e0fcfa', titleC:'#0f2f3a', descC:'#4a7a8a', statC:'#0f2f3a', lblC:'#6aaabb',
-      ctaBg:'rgba(14,46,58,.85)', ctaC:'#fff', ctaBorder:'',
+      desc:'Predictive claims analytics identifying fraud patterns and optimizing settlement processes across policy lines',
+      bg:'#e0fcfa', titleC:'#0f2f3a', descC:'#4a7a8a',
       shadow:'0 22px 44px rgba(0,0,0,.35)',
       footBg:'transparent', footR:'0', foot:'shield',
       imgs:{shield:'https://res.cloudinary.com/dden4hawr/image/upload/v1778640518/Shield_iarrdm.png'},
@@ -4178,7 +4166,6 @@
       wrap.className = 'cw';
       wrap.dataset.i = i;
       wrap.dataset.k = k - 1;
-      const bdr = d.ctaBorder ? `border:${d.ctaBorder};` : '';
       wrap.innerHTML = `
         <div class="card" style="background:${d.bg};box-shadow:${d.shadow};">
           <div class="c-head">
@@ -4188,18 +4175,6 @@
             <div class="c-title" style="color:${d.titleC};">${d.title}</div>
           </div>
           <p class="c-desc" style="color:${d.descC};">${d.desc}</p>
-          <div class="c-stats">
-            ${d.stats.map(s=>`<div class="stat">
-              <div class="stat-n" style="color:${d.statC};">${s.n}</div>
-              <div class="stat-l" style="color:${d.lblC};">${s.l}</div>
-            </div>`).join('')}
-          </div>
-          <button class="c-cta" style="background:${d.ctaBg};color:${d.ctaC};${bdr}">
-            View case study
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
           ${buildFoot(d)}
         </div>`;
       pivot.appendChild(wrap);

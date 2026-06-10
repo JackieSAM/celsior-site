@@ -450,7 +450,7 @@
     }
 
     .explore h2 {
-      max-width: 1100px;
+
       margin: 0 auto 56px;
       color: #0d1127;
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
@@ -464,7 +464,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      max-width: 1100px;
+
       margin: 0 auto;
       border: 1.5px solid rgba(13, 17, 39, 0.12);
       border-radius: 16px;
@@ -545,7 +545,7 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      width: 164px;
+      width: 200px;
       min-width: 100px;
       text-align: center;
       padding: 6px 14px;
@@ -830,18 +830,17 @@
       max-width: 1440px;
       margin: 0 auto;
       /* height = tallest card; heading floats in whitespace above short cards */
-      min-height: clamp(500px, 88vh, 900px);
+      min-height: clamp(420px, 87vh, 847px);
       padding: 0 clamp(24px, 5.5vw, 80px);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      /* cards anchor to bottom */
     }
 
     /* ── Heading: absolutely positioned over top-left whitespace ── */
     .outcomes__heading {
       position: absolute;
-      top: clamp(32px, 7%, 112px);
+      top: 0;
       left: clamp(24px, 5.5vw, 80px);
       width: clamp(280px, 32%, 460px);
       z-index: 2;
@@ -1035,11 +1034,13 @@
 
     /* Descriptions */
     .outcome-card p {
-      max-width: 240px;
+      max-width: min(240px, 100%);
       margin: clamp(12px, 2vh, 32px) 0 0;
-      font-size: 16px;
-      line-height: 23px;
+      font-size: clamp(13px, 1.1vw, 16px);
+      line-height: 1.45;
       font-weight: 500;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     .outcome-card--gold p {
@@ -1088,7 +1089,20 @@
    RESPONSIVE BREAKPOINTS
 ════════════════════════ */
 
-    /* Tablet ≤960px — heading back in flow, 2×2 card grid */
+    /* Mid-range 961px–1200px — 4-col still but tighter */
+    @media (min-width: 961px) and (max-width: 1200px) {
+      .outcome-card p {
+        font-size: clamp(12px, 1vw, 14px);
+        line-height: 1.4;
+      }
+      .outcome-card strong { font-size: clamp(30px, 4vw, 72px); }
+      .outcome-card--green { padding: clamp(16px, 2vh, 32px) clamp(12px, 1.4vw, 18px) 20px; }
+      .outcome-card--blue  { padding: clamp(16px, 2vh, 28px) clamp(12px, 1.4vw, 18px) 20px; }
+      .outcome-card--gold  { padding: clamp(16px, 2.4vh, 32px) clamp(12px, 1.6vw, 22px) 20px; }
+      .outcome-card--dark  { padding: clamp(16px, 2.4vh, 32px) clamp(12px, 1.8vw, 24px) 20px; }
+    }
+
+        /* Tablet ≤960px — heading back in flow, 2×2 card grid */
     @media (max-width: 960px) {
       .outcomes {
         min-height: 0;
@@ -1104,6 +1118,7 @@
       }
 
       .outcome-cards {
+        display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         align-items: stretch;
       }
@@ -1114,6 +1129,12 @@
       .outcome-card--dark {
         height: clamp(240px, 38vw, 340px);
         padding: 28px 22px 24px;
+      }
+
+      .outcome-card p {
+        font-size: clamp(13px, 1.8vw, 15px);
+        line-height: 1.42;
+        max-width: 100%;
       }
     }
 
@@ -2625,8 +2646,9 @@
       </div>
     </div>
     <div class="stat-note">
-      <div class="stat-note-lbl">Footnote Sources</div>
-      <div class="stat-note-txt">Strong Forrester Research; Aberdeen Group; McKinsey & Company CX  Excellence research. Outcomes vary by organization and scope.
+      <div class="stat-note-lbl"></div>
+      <div class="stat-note-txt">For organizations carrying the cost and coordination burden of US onshore delivery, Celsior's nearshore model offers a structured alternative. Engineering pods built from Latin America's largest talent pool are active within three weeks and work in full schedule alignment with US teams, without the friction of offshore time zone separation.
+ 
       </div>
     </div>
   </div>
@@ -2725,9 +2747,7 @@
           </button>
           <div class="gacc-body" style="overflow:hidden;height:0;">
             <div class="gacc-inner" style="padding:0 0 20px 84px;">
-              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Most enterprise platforms lose a
-                significant portion of their designed capability within two years of go-live due to absence of
-                structured operational ownership. </p>
+              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">The technical capacity enterprise programs require exists at volume. It is geographically concentrated in markets that most delivery architectures are not configured to source from at scale. </p>
             </div>
           </div>
         </div>
@@ -2759,9 +2779,7 @@
           </button>
           <div class="gacc-body" style="overflow:hidden;height:0;">
             <div class="gacc-inner" style="padding:0 0 20px 84px;">
-              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">The cost of ungoverned configuration
-                drift, unreviewed access controls, and undocumented changes rarely surfaces until it becomes a
-                compliance event. </p>
+              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">A 50% cost reduction at team scale represents the difference between a program that can sustain its engineering depth across a multi-year cycle and one that cannot. </p>
             </div>
           </div>
         </div>
@@ -2793,9 +2811,7 @@
           </button>
           <div class="gacc-body" style="overflow:hidden;height:0;">
             <div class="gacc-inner" style="padding:0 0 20px 84px;">
-              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Reactive platform support feels cheaper
-                than a managed program until accounted for emergency interventions, delayed delivery, and the strategic
-                work that never got done. </p>
+              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">One to two hours of time zone differential ensures daily standups, live sprint reviews, and real-time escalation function without structural modification to the client's operating cadence. </p>
             </div>
           </div>
         </div>
@@ -2827,8 +2843,7 @@
           </button>
           <div class="gacc-body" style="overflow:hidden;height:0;">
             <div class="gacc-inner" style="padding:0 0 20px 84px;">
-              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Deferred upgrades are a governance
-                failure that compounds with every release cycle that passes without structured ownership. </p>
+              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Teams that sustain delivery consistency across extended cycles are structured and certified to a defined operating model at engagement initiation; not after the first delivery review identifies a gap.</p>
             </div>
           </div>
         </div>
@@ -2953,7 +2968,7 @@
         <h3
           style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;white-space:nowrap;margin-bottom:16px;">
           Institutional knowledge that leaves with the people </h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Teams built on short-term contractor relationships carry the organizational risk of every departure. Without a structured nearshore model that builds retained, program-aligned talent over time, institutional knowledge moves with the people who hold it.</p>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Each unplanned departure resets the institutional knowledge that the individual holds. Without a retained, program-aligned nearshore model, organizations absorb that reset as a recurring cost. The Build-Operate-Transfer model converts that risk into a documented, governed asset the client owns outright.</p>
       </div>
 
     </div><!-- /card-frame -->
@@ -2997,9 +3012,9 @@
         <div class="blog-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 0%,#060606 67%);">
         </div>
         <div class="blog-card-body">
-          <div class="blog-card-ttl">Lorem Ipsum is simply dummy text of the 
+          <div class="blog-card-ttl">Pre-certified platform talent for regulated industries: why certification depth is a delivery prerequisite, not a hiring credential. 
 </div>
-          <div class="blog-card-txt">Pre-certified platform talent for regulated industries: why certification depth matters more than headcount at scale</div>
+          <div class="blog-card-txt">In regulated industries, deploying engineers who are not platform-certified on the systems the program runs on introduces delivery risk before it adds capacity. This piece examines what pre-certification requires, how Celsior structures it, and the measurable effect on program ramp timelines. Read Post → </div>
         </div>
       </div>
     </div>
@@ -3103,7 +3118,7 @@
         </article>
         <article class="outcome-card outcome-card--dark" data-stat-card>
           <strong><span class="stat-num" data-target="36">0</span><span>Months</span></strong>
-          <p>Typical Build-Operate-Transfer timeline from Celsior-managed nearshore operations to full client-owned GCC capability </p>
+          <p>Defined Build-Operate-Transfer timeline from Celsior.</p>
           <div class="outcome-card-arrow">
             <svg viewBox="0 0 18 18" fill="none">
               <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
@@ -3312,70 +3327,59 @@
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>A nearshore team is a vendor-managed delivery resource. A Global Capability Center is an organizational asset — engineering capability your company owns, governs, and operates directly. The distinction matters because the governance structure, IP ownership, retention model, and long-term cost trajectory are different in each case. Celsior's BOT model is designed to start as a managed nearshore engagement and transition, over a defined timeline, into a GCC that the client controls outright. Most organizations begin with the nearshore engagement and convert when program scale and organizational readiness support it. 
+            <p>A nearshore team is a vendor-managed delivery resource. A Global Capability Center is an organizational asset -- engineering capability the client owns, governs, and operates as an internal function. IP ownership, employment relationships, and long-term cost trajectory differ materially between the two models. Celsior's BOT model initiates as a managed nearshore engagement and transitions, on a defined timeline, to a GCC the client controls outright.  
 
             </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How do you structure operational accountability — and what does an SLA actually
-              cover?</span>
+            <span class="faq__q">How does the BOT model work, and when does it produce better outcomes than a traditional nearshore engagement?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Every Managed Program operates under a defined SLA that covers incident response times, platform
-              availability targets, and upgrade delivery windows. Accountability is structured around measurable
-              outcomes, not effort — so you always know what you are entitled to and how performance is being tracked
-              against it.</p>
+            <p>For standard seniority levels, Celsior has a core pod operational within two to four weeks of engagement initiation. The timeline depends on platform certifications required and client onboarding complexity. For engagements where Celsior maintains pre-built talent pipelines -- Guidewire, ServiceNow, Boomi, and others -- initial team composition is typically operational within two weeks. </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">Do you manage the platform alongside our internal team, or do you replace that function
-              entirely?</span>
+            <span class="faq__q">How do you protect IP and address data security requirements for clients in regulated industries? 
+</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>We work alongside your internal team in most engagements, taking on the operational depth and
-              specialist coverage that internal teams typically cannot sustain at scale. The model is designed around
-              your existing structure, not around replacing it. </p>
+            <p>IP protection and data security governance are configured into the engagement structure prior to program initiation. For clients in healthcare, financial services, and insurance, Celsior configures engagements against the client's data governance frameworks, access control specifications, and regulatory obligations -- including HIPAA-aligned data handling, SOC 2-compatible operating environments, and IP assignment agreements that establish ownership terms from day one. </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How do you handle platform upgrades without disrupting our production
-              environment? </span>
+            <span class="faq__q">What does pre-certified platform talent mean operationally, and how does it affect program ramp time? </span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Upgrades are planned well in advance, tested in isolated environments, and executed against a
-              structured runbook with defined rollback procedures. Our teams have delivered major Guidewire and
-              ServiceNow upgrades with zero production incidents by treating upgrade governance as a continuous program
-              discipline, not a one-time project. </p>
+            <p>Pre-certified means engineers hold active certifications on the program's platforms prior to deployment -- not during the ramp period. A Guidewire-certified engineer contributes in week two. An engineer beginning certification at engagement start requires months to reach productive output. Celsior maintains pre-certified talent pipelines for regulated-industry platforms, producing a two-to-three-week ramp timeline rather than a multi-month one. </p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">What happens if our platform requirements change mid-program?</span>
+            <span class="faq__q">How do you maintain team continuity and address the attrition that nearshore models are frequently cited for? 
+</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Managed Programs are structured with defined change governance built in. When requirements shift, we
-              assess the scope impact, adjust delivery priorities, and update the SLA framework accordingly — without
-              requiring a new contracting cycle or disrupting what is already running. </p>
+            <p>Nearshore attrition is a compensation and career development failure -- not a geographic one. Celsior benchmarks engineer compensation against Mexico and LATAM market rates for the specific certification level deployed. Career development is structured and tracked. The BOT pathway provides a defined long-term trajectory. Core team composition holds across Celsior's active programs because retention is governed, not assumed. </p>
           </div>
         </div>
         <div class="faq__item">
@@ -3409,9 +3413,8 @@
       <img class="cta-band-logo"
         src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
         alt="Celsior" />
-      <h2 class="cta-band-text" data-text="Most modernization efforts begin with understanding the environment.">Most
-        managed program engagements begin with a platform health assessment.</h2>
-      <a href="#contact" class="cta-btn cta-band-btn">Start the conversation</a>
+      <h2 class="cta-band-text" data-text="Most GCC and nearshore engagements begin with a talent and delivery model assessment.">Most GCC and nearshore engagements begin with a talent and delivery model assessment.</h2>
+      <a href="https://dev.celsiortech.us/contact-us" class="cta-btn cta-band-btn">Start the conversation</a>
     </div>
   </section>
 

@@ -391,7 +391,7 @@
     }
 
     .explore h2 {
-      max-width: 1100px;
+
       margin: 0 auto 56px;
       color: #0d1127;
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
@@ -405,7 +405,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      max-width: 1100px;
+
       margin: 0 auto;
       border: 1.5px solid rgba(13, 17, 39, 0.12);
       border-radius: 16px;
@@ -690,7 +690,7 @@
       font-size: 12px;
       font-weight: 800;
       letter-spacing: 0;
-      border-bottom: 1px solid rgba(13, 17, 39, 0.08);
+
       background: #fff;
       mask-image: linear-gradient(90deg, transparent 0%, #000 11%, #000 89%, transparent 100%);
       -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 11%, #000 89%, transparent 100%);
@@ -2508,10 +2508,14 @@
   outline: none;
 }
 .acc-row:last-child { border-bottom: none; }
+.acc-intro-head {
+  padding: var(--section-pad-v) var(--section-pad-h) calc(var(--section-pad-v) * 0.75);
+  border-bottom: 1px solid #f3f4f6;
+}
 .acc-header {
   display: flex;
   align-items: center;
-  padding: 26px clamp(28px, 4vw, 56px);
+  padding: 26px var(--section-pad-h);
   gap: 22px;
   position: relative;
   z-index: 2;
@@ -2557,7 +2561,7 @@
   display: grid;
   grid-template-columns: 1fr 1.05fr;
   gap: clamp(32px, 5vw, 80px);
-  padding: 0 clamp(28px, 4vw, 56px) clamp(40px, 5vw, 72px);
+  padding: 0 var(--section-pad-h) var(--section-pad-v);
   align-items: stretch;
 }
 .acc-body-text {
@@ -3013,9 +3017,7 @@
       <h1 class="hero-heading">Resolve incidents in minutes, not hours. Prevent <br>breaches before they happen. 
       </h1>
       <div class="hero-btns">
-        <button class="btn-ghost">
-          Strengthen Your Operations →
-        </button>
+        <a href="https://dev.celsiortech.us/contact-us" class="btn-ghost">Strengthen Your Operations →</a>
         
       </div>
     </div>
@@ -3204,6 +3206,11 @@
 ══════════════════════════════════════════════════════ -->
 <section class="acc-section" id="acc-section" aria-label="Client case studies">
 
+  <div class="acc-intro-head">
+    <h2 style="font-size: clamp(22px, 2.4vw, 34px); font-weight: 700; color: #09090b; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 20px;">Digital Operations: Enterprise Efficiency Delivered Through Intelligent Automation</h2>
+    <p style="font-size: 16px; color: #3f3f46; line-height: 1.65; max-width: 860px;">Organizations that modernize their operational layer don't just reduce ticket volumes — they reclaim the engineering capacity that manual process overhead was quietly consuming. Every proof point below reflects a program where automation and governance discipline changed the outcome: incident resolution cycles compressed so dramatically that compliance gaps closed without dedicated remediation effort, identity provisioning workflows that once took two weeks reduced to a four-hour standard without sacrificing audit integrity.</p>
+  </div>
+
   <!-- ROW 1 — Breaking Through Years of Delivery Gridlock (default active) -->
   <div class="acc-row active" data-index="0" tabindex="0">
     <div class="acc-header">
@@ -3215,12 +3222,6 @@
         <div class="acc-body-text">
           <h3 class="acc-big-title">Automated Incident Resolution Cuts Downtime and Closes Every Audit Gap</h3>
           <p class="acc-desc">A national insurance carrier implemented ServiceNow ITSM with intelligent automation, reducing incident resolution time by 65% while achieving 100% audit compliance across policy administration and claims systems. </p>
-          <a class="acc-readmore" href="#">
-            Read more
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M3.5 5l3.5 3.5L10.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
         </div>
         <div class="acc-img2">
           <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780027496/CARDS-2_1_ayyliw.png" alt="Executive in modern enterprise office">
@@ -3240,12 +3241,6 @@
         <div class="acc-body-text">
           <h3 class="acc-big-title">A Regional Healthcare Provider Moves Identity Provisioning from a Two-Week Backlog to a Four-Hour Workflow</h3>
           <p class="acc-desc">A regional healthcare provider deployed automated identity governance, cutting access provisioning from 14 days to 4 hours while maintaining HIPAA compliance and complete audit trails for all access changes.</p>
-          <a class="acc-readmore" href="#">
-            Read more
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M3.5 5l3.5 3.5L10.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
         </div>
         <div class="acc-img2">
           <img src="https://plus.unsplash.com/premium_photo-1698421947098-d68176a8f5b2?q=80&w=752&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Modern enterprise workspace" style="object-position:center 30%;">
@@ -3265,12 +3260,6 @@
         <div class="acc-body-text">
           <h3 class="acc-big-title">Eliminating Manual Security Reviews Across a Multi-Entity Financial Services Group</h3>
           <p class="acc-desc">Celsior introduced an automated security review pipeline with standardized control frameworks, continuous policy validation, and centralized reporting across all entities. Manual review overhead dropped by 60%, audit findings were reduced in the subsequent cycle, and compliance posture became consistent across every line of business. </p>
-          <a class="acc-readmore" href="#">
-            Read more
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M3.5 5l3.5 3.5L10.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
         </div>
         <div class="acc-img2">
           <img src="https://plus.unsplash.com/premium_photo-1683120730432-b5ea74bd9047?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Engineering team collaborating" style="object-position:center 40%;">
@@ -3388,7 +3377,7 @@
   <section class="explore">
     <h2>Continue exploring Celsior's <span style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; display:inline;">capabilities</span></h2>
     <div class="explore__links">
-      <a href="#">
+      <a href="https://dev.celsiortech.us/solutions/managed-programs">
         <span class="explore__row-left">
           <span class="explore__label">AI LAB</span>
           <span class="explore__text">IT Service Management & Automation </span>
@@ -3403,7 +3392,7 @@
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://dev.celsiortech.us/capabilities/security-and-governance">
         <span class="explore__row-left">
           <span class="explore__label">COES</span>
           <span class="explore__text">Security & Governance</span>
@@ -3418,7 +3407,7 @@
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://dev.celsiortech.us/ai-innovation/frameworks-accelerators">
         <span class="explore__row-left">
           <span class="explore__label">ACCELERATORS</span>
           <span class="explore__text">Identity & Access Management</span>
@@ -3746,12 +3735,12 @@ understanding current maturity.
 
 <div class="cta-btn-group">
 
-<a href="#contact"
+<a href="https://celsior-assessment-tools.netlify.app/grc-assessment/"
 class="cta-btn cta-band-btn">
 Request an Operations Assessment
 </a>
 
-<a href="#assessment"
+<a href="https://dev.celsiortech.us/contact-us"
 class="cta-btn cta-band-btn-white">
 Explore Our Frameworks
 </a>
@@ -4148,10 +4137,8 @@ Explore Our Frameworks
       chip:'Healthcare',
       logo:{img:'https://res.cloudinary.com/dden4hawr/image/upload/v1779293592/C1_yailh3.png', alt:'Healthcare icon'},
       title:'Healthcare',
-      desc:'Patient care platform integrating EHR, billing, and care coordination workflows.',
-      stats:[{n:'40%',l:'reduction in admin overhead'},{n:'98%',l:'patient satisfaction score'}],
-      bg:'#f0fdf4', titleC:'#14532d', descC:'#4a7a5a', statC:'#14532d', lblC:'#5a9a6a',
-      ctaBg:'rgba(20,83,45,.88)', ctaC:'#fff', ctaBorder:'',
+      desc:'Real-time threat detection and automated response protecting patient data across HIPAA-regulated environments',
+      bg:'#f0fdf4', titleC:'#14532d', descC:'#4a7a5a',
       shadow:'0 22px 44px rgba(0,0,0,.32)',
       footBg:'#1a2a1a', footR:'120px 120px 0 0', foot:'dashboard',
       imgs:{dash:'https://res.cloudinary.com/dden4hawr/image/upload/v1778640517/dashboard_qni0pr.png'},
@@ -4160,10 +4147,8 @@ Explore Our Frameworks
       chip:'Banking & Financial Services',
       logo:{img:'https://res.cloudinary.com/dden4hawr/image/upload/v1779293592/C2_o3sbq2.png', alt:'Banking and financial services icon'},
       title:'Banking & Financial Services',
-      desc:'Digital lending platform with real-time underwriting and omnichannel customer experience.',
-      stats:[{n:'50%',l:'reduction in development costs'},{n:'6',l:'strategic projects in 12 months'}],
-      bg:'#fff9e6', titleC:'#111', descC:'#666', statC:'#111', lblC:'#999',
-      ctaBg:'rgba(0,0,0,.82)', ctaC:'#fff', ctaBorder:'',
+      desc:'ServiceNow implementation automating incident routing and resolution for regulatory compliance and SOX controls',
+      bg:'#fff9e6', titleC:'#111', descC:'#666',
       shadow:'0 28px 56px rgba(0,0,0,.52)',
       footBg:'#18181a', footR:'130px 130px 0 0', foot:'phones',
       imgs:{p1:'https://res.cloudinary.com/dden4hawr/image/upload/v1778640733/app_screen_left_3_yqug1b.png',
@@ -4173,10 +4158,8 @@ Explore Our Frameworks
       chip:'Insurance',
       logo:{img:'https://res.cloudinary.com/dden4hawr/image/upload/v1779293592/C3_jgcxl3.png', alt:'Insurance icon'},
       title:'Insurance',
-      desc:'Reduce technical debt while maintaining business logic continuity.',
-      stats:[{n:'65%',l:'reduction in quote-to-policy time'},{n:'3×',l:'faster claims resolution'}],
-      bg:'#e0fcfa', titleC:'#0f2f3a', descC:'#4a7a8a', statC:'#0f2f3a', lblC:'#6aaabb',
-      ctaBg:'rgba(14,46,58,.85)', ctaC:'#fff', ctaBorder:'',
+      desc:'Automated identity provisioning reducing onboarding time from weeks to hours across policy, claims, and billing systems',
+      bg:'#e0fcfa', titleC:'#0f2f3a', descC:'#4a7a8a',
       shadow:'0 22px 44px rgba(0,0,0,.35)',
       footBg:'transparent', footR:'0', foot:'shield',
       imgs:{shield:'https://res.cloudinary.com/dden4hawr/image/upload/v1778640518/Shield_iarrdm.png'},
@@ -4273,7 +4256,6 @@ Explore Our Frameworks
       wrap.className = 'cw';
       wrap.dataset.i = i;
       wrap.dataset.k = k - 1;
-      const bdr = d.ctaBorder ? `border:${d.ctaBorder};` : '';
       wrap.innerHTML = `
         <div class="card" style="background:${d.bg};box-shadow:${d.shadow};">
           <div class="c-head">
@@ -4283,18 +4265,6 @@ Explore Our Frameworks
             <div class="c-title" style="color:${d.titleC};">${d.title}</div>
           </div>
           <p class="c-desc" style="color:${d.descC};">${d.desc}</p>
-          <div class="c-stats">
-            ${d.stats.map(s=>`<div class="stat">
-              <div class="stat-n" style="color:${d.statC};">${s.n}</div>
-              <div class="stat-l" style="color:${d.lblC};">${s.l}</div>
-            </div>`).join('')}
-          </div>
-          <button class="c-cta" style="background:${d.ctaBg};color:${d.ctaC};${bdr}">
-            View case study
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <path d="M2.5 6.5h8M7 3.5l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
           ${buildFoot(d)}
         </div>`;
       pivot.appendChild(wrap);

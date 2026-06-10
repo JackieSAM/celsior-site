@@ -124,15 +124,16 @@
     }
 
     .hero-eyebrow {
-      font-size: clamp(20px, 3.6vw, 20px);
+      font-size: clamp(12px, 2.2vw, 20px);
       font-weight: 300;
       color: #fff;
       text-align: center;
-      line-height: 1.1 !important;
-      letter-spacing: -0.03em !important;
+      line-height: 1.4 !important;
+      letter-spacing: -0.02em !important;
       max-width: min(94vw, 1400px);
       width: 100%;
-      white-space: nowrap;
+      white-space: normal;
+      word-break: break-word;
       font-family: 'Courier New', Courier, monospace;
       padding-bottom: 20px;
     }
@@ -141,6 +142,17 @@
       .hero-heading {
         white-space: normal;
         font-size: clamp(24px, 5vw, 40px) !important;
+      }
+
+      .hero-eyebrow {
+        font-size: clamp(11px, 3.5vw, 16px);
+        letter-spacing: -0.01em !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-eyebrow {
+        font-size: clamp(10px, 3.2vw, 14px);
       }
     }
 
@@ -420,7 +432,7 @@
     }
 
     .explore h2 {
-      max-width: 1100px;
+
       margin: 0 auto 56px;
       color: #0d1127;
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
@@ -434,7 +446,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      max-width: 1100px;
+
       margin: 0 auto;
       border: 1.5px solid rgba(13, 17, 39, 0.12);
       border-radius: 16px;
@@ -536,10 +548,26 @@
       align-items: center;
       flex-wrap: wrap;
       color: #0d1127;
-      font-size: clamp(1.1rem, 1.8vw, 1.55rem);
-      line-height: 1.12;
+      font-size: clamp(1rem, 1.6vw, 1.5rem);
+      line-height: 1.25;
       font-weight: 600;
       letter-spacing: -0.02em;
+      transition: color 0.3s ease;
+    }
+
+    .explore__text--multiline {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      line-height: 1.35;
+    }
+
+    .explore__text-inner {
+      display: block;
+      color: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      letter-spacing: inherit;
       transition: color 0.3s ease;
     }
 
@@ -550,7 +578,8 @@
       transition-delay: calc(var(--i) * 0.02s);
     }
 
-    .explore__links a:hover .explore__text {
+    .explore__links a:hover .explore__text,
+    .explore__links a:hover .explore__text-inner {
       color: #ffffff;
     }
 
@@ -635,6 +664,27 @@
       }
     }
 
+
+    @media (max-width: 1024px) and (min-width: 721px) {
+      .explore__label {
+        width: 130px;
+        font-size: 0.6rem;
+      }
+      .explore__text {
+        font-size: clamp(0.95rem, 1.5vw, 1.3rem);
+      }
+      .explore__links a {
+        padding: 24px 28px;
+        gap: 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .explore__text {
+        font-size: clamp(0.82rem, 3.5vw, 1rem);
+      }
+    }
+
     @media (max-width: 720px) {
       .explore {
         padding: 64px 20px 72px;
@@ -672,8 +722,19 @@
 
       .explore__text {
         grid-area: text;
-        font-size: clamp(0.9rem, 4vw, 1.1rem);
+        font-size: clamp(0.85rem, 3.8vw, 1.05rem);
         align-self: center;
+        line-height: 1.35;
+      }
+
+      .explore__text--multiline {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+      }
+
+      .explore__text-inner {
+        font-size: inherit;
       }
 
       .explore__arrow {
@@ -3623,7 +3684,7 @@
         <div class="stat-desc">Lesser development time by defining user needs upfront through design research. </div>
       </div>
       <div class="stat-col">
-        <div class="stat-num">32%+</div>
+        <div class="stat-num">32%</div>
         <div class="stat-desc">Companies that lead with design see 32% faster revenue growth. </div>
       </div>
       <div class="stat-col">
@@ -3788,14 +3849,9 @@ understanding.</span>
         <div class="acc-body-grid">
           <div class="acc-body-text">
             <p class="eyebrow">Do-it-together model </p>
-            <h3 class="acc-big-title">Automated Incident Resolution Cuts Downtime and Closes Every Audit Gap</h3>
-            <p class="acc-desc">Every workshop, blueprint session, and prototype review is a shared exercise. Your teams leave with the same understanding we do, so the design doesn't lose fidelity when it changes hands. </p>
-            <a class="acc-readmore" href="#">
-              Read more
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M3.5 5l3.5 3.5L10.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
+            <h3 class="acc-big-title">Your teams and ours. Same room. Same understanding. </h3>
+            <p class="acc-desc">Every workshop, blueprint session, and prototype review is a shared exercise. Your teams leave with the same understanding we do, so the design doesn't lose fidelity when it changes hands. </p>
+          
           </div>
           <div class="acc-img2">
             <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780470940/image_1_yp23at.jpg" alt="Executive in modern enterprise office">
@@ -3808,19 +3864,15 @@ understanding.</span>
     <div class="acc-row" data-index="1" tabindex="0">
       <div class="acc-header">
         <div class="acc-icon" aria-hidden="true"></div>
-        <span class="acc-title">A Regional Healthcare Provider Moves Identity Provisioning from a Two-Week Backlog to a Four-Hour Workflow</span>
+        <span class="acc-title">Design thinking and user research across every channel.</span>
       </div>
       <div class="acc-body">
         <div class="acc-body-grid">
           <div class="acc-body-text">
-            <h3 class="acc-big-title">A Regional Healthcare Provider Moves Identity Provisioning from a Two-Week Backlog to a Four-Hour Workflow</h3>
-            <p class="acc-desc">A regional healthcare provider deployed automated identity governance, cutting access provisioning from 14 days to 4 hours while maintaining HIPAA compliance and complete audit trails for all access changes.</p>
-            <a class="acc-readmore" href="#">
-              Read more
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M3.5 5l3.5 3.5L10.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
+            <p class="eyebrow">Human-centered from day one</p>
+            <h3 class="acc-big-title">Design thinking and user research across every channel. </h3>
+            <p class="acc-desc">We combine design thinking with user research across web, mobile, desktop, and IoT — so the experience holds together regardless of where a customer enters it. </p>
+            
           </div>
           <div class="acc-img2">
             <img src="https://plus.unsplash.com/premium_photo-1698421947098-d68176a8f5b2?q=80&w=752&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Modern enterprise workspace" style="object-position:center 30%;">
@@ -3838,14 +3890,10 @@ understanding.</span>
       <div class="acc-body">
         <div class="acc-body-grid">
           <div class="acc-body-text">
+            <p class="eyebrow">Engineer-ready artifacts. No translation layer required.</p>
             <h3 class="acc-big-title">Eliminating Manual Security Reviews Across a Multi-Entity Financial Services Group</h3>
-            <p class="acc-desc">Celsior introduced an automated security review pipeline with standardized control frameworks, continuous policy validation, and centralized reporting across all entities. Manual review overhead dropped by 60%, audit findings were reduced in the subsequent cycle, and compliance posture became consistent across every line of business.</p>
-            <a class="acc-readmore" href="#">
-              Read more
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M3.5 5l3.5 3.5L10.5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
+            <p class="acc-desc">Every engagement closes with annotated prototypes, interaction specifications, and a service blueprint scoped to build. No interpretation needed between design and engineering.</p>
+          
           </div>
           <div class="acc-img2">
             <img src="https://plus.unsplash.com/premium_photo-1683120730432-b5ea74bd9047?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Engineering team collaborating" style="object-position:center 40%;">
@@ -3978,13 +4026,15 @@ understanding.</span>
        CSS tag : /* === EXPLORE === */
        ============================================================ -->
   <section class="explore">
-    <h2>One connected practice. Three Discipline that earn their keep</h2>
+    <h2>One connected practice. Three Disciplines<br>that earn their keep</h2>
     <div class="explore__links">
       <a href="#">
         <span class="explore__row-left">
           <span class="explore__label">3 Disciplines</span>
-          <span class="explore__text">CX Journey Design, Service Blueprinting
-Digital Product Prototyping </span>
+          <span class="explore__text explore__text--multiline">
+            <span class="explore__text-inner">CX Journey Design, Service Blueprinting</span>
+            <span class="explore__text-inner">Digital Product Prototyping</span>
+          </span>
         </span>
         <span class="explore__row-right">
           <span class="explore__arrow" aria-hidden="true">
@@ -4014,7 +4064,10 @@ Digital Product Prototyping </span>
       <a href="#">
         <span class="explore__row-left">
           <span class="explore__label">End-to-End</span>
-          <span class="explore__text">From strategy and research to managed delivery and user support </span>
+          <span class="explore__text explore__text--multiline">
+            <span class="explore__text-inner">From strategy and research to managed</span>
+            <span class="explore__text-inner">delivery and user support</span>
+          </span>
         </span>
         <span class="explore__row-right">
           <span class="explore__arrow" aria-hidden="true">
@@ -4512,7 +4565,12 @@ and digital product design</h2>
   </script>
   <script>
     // Explore links — split text into per-character spans for staggered hover
-    document.querySelectorAll(".explore__text").forEach((node) => {
+    // Target .explore__text-inner (multiline rows) and plain .explore__text (single-line rows)
+    const exploreTextNodes = [
+      ...document.querySelectorAll(".explore__text-inner"),
+      ...document.querySelectorAll(".explore__text:not(.explore__text--multiline)")
+    ];
+    exploreTextNodes.forEach((node) => {
       const text = node.textContent;
       node.textContent = "";
       Array.from(text).forEach((char, index) => {

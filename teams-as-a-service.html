@@ -55,7 +55,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1778578701/Hero_Slide_tf9bvf.jpg') center/cover no-repeat;
+      background: url('https://images.pexels.com/photos/19400118/pexels-photo-19400118.jpeg') center/cover no-repeat;
       transform: scale(1.06);
       transform-origin: center;
     }
@@ -162,10 +162,11 @@
     }
 
     .stats-grid {
-      display: grid;
+      display: flex;
       grid-template-columns: repeat(4, 1fr);
       border-bottom: 1px solid var(--border);
       margin-bottom: 28px;
+      justify-content: flex-start;
     }
 
     .stat-col {
@@ -385,7 +386,7 @@
     }
 
     .explore h2 {
-      max-width: 1100px;
+
       margin: 0 auto 56px;
       color: #0d1127;
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
@@ -399,7 +400,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      max-width: 1100px;
+
       margin: 0 auto;
       border: 1.5px solid rgba(13, 17, 39, 0.12);
       border-radius: 16px;
@@ -476,7 +477,7 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      width: 164px;
+      width: 200px;
       text-align: center;
       padding: 6px 14px;
       border-radius: 4px;
@@ -765,19 +766,17 @@
       position: relative;
       max-width: 1440px;
       margin: 0 auto;
-      /* height = tallest card; heading floats in whitespace above short cards */
-      min-height: clamp(500px, 88vh, 900px);
+      min-height: clamp(420px, 87vh, 847px);
       padding: 0 clamp(24px, 5.5vw, 80px);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      /* cards anchor to bottom */
     }
 
-    /* ── Heading: absolutely positioned over top-left whitespace ── */
+    /* ── Heading: absolutely positioned, flush to top of section ── */
     .outcomes__heading {
       position: absolute;
-      top: clamp(32px, 7%, 112px);
+      top: 0;
       left: clamp(24px, 5.5vw, 80px);
       width: clamp(280px, 32%, 460px);
       z-index: 2;
@@ -814,7 +813,6 @@
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       align-items: end;
-      /* stagger — shortest left, tallest right */
       gap: clamp(6px, 1vw, 14px);
     }
 
@@ -971,11 +969,13 @@
 
     /* Descriptions */
     .outcome-card p {
-      max-width: 240px;
+      max-width: min(240px, 100%);
       margin: clamp(12px, 2vh, 32px) 0 0;
-      font-size: 16px;
-      line-height: 23px;
+      font-size: clamp(13px, 1.1vw, 16px);
+      line-height: 1.45;
       font-weight: 500;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     .outcome-card--gold p {
@@ -1024,6 +1024,34 @@
    RESPONSIVE BREAKPOINTS
 ════════════════════════ */
 
+    /* Mid-range 960px–1200px — 4-col still but tighter, shrink text further */
+    @media (min-width: 961px) and (max-width: 1200px) {
+      .outcome-card p {
+        font-size: clamp(12px, 1vw, 14px);
+        line-height: 1.4;
+      }
+
+      .outcome-card strong {
+        font-size: clamp(30px, 4vw, 72px);
+      }
+
+      .outcome-card--green {
+        padding: clamp(16px, 2vh, 32px) clamp(12px, 1.4vw, 18px) 20px;
+      }
+
+      .outcome-card--blue {
+        padding: clamp(16px, 2vh, 28px) clamp(12px, 1.4vw, 18px) 20px;
+      }
+
+      .outcome-card--gold {
+        padding: clamp(16px, 2.4vh, 32px) clamp(12px, 1.6vw, 22px) 20px;
+      }
+
+      .outcome-card--dark {
+        padding: clamp(16px, 2.4vh, 32px) clamp(12px, 1.8vw, 24px) 20px;
+      }
+    }
+
     /* Tablet ≤960px — heading back in flow, 2×2 card grid */
     @media (max-width: 960px) {
       .outcomes {
@@ -1037,9 +1065,12 @@
         width: auto;
         max-width: 560px;
         margin-bottom: 28px;
+        padding-bottom: 0;
+        padding-right: 0;
       }
 
       .outcome-cards {
+        display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         align-items: stretch;
       }
@@ -1050,6 +1081,12 @@
       .outcome-card--dark {
         height: clamp(240px, 38vw, 340px);
         padding: 28px 22px 24px;
+      }
+
+      .outcome-card p {
+        font-size: clamp(13px, 1.8vw, 15px);
+        line-height: 1.42;
+        max-width: 100%;
       }
     }
 
@@ -2036,6 +2073,7 @@
       }
 
       .outcome-cards {
+        display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         align-items: stretch !important;
         gap: 8px !important;
@@ -2520,17 +2558,17 @@
     <div class="hero-gl"></div>
     <div class="hero-gb"></div>
     <div class="hero-content">
-      <h1 class="hero-heading">Your platforms should deliver what they<br>promised on day one. We make sure they do.
+      <h1 class="hero-heading">Delivery teams structured around<br>program requirements. Not assembled around<br>resource availability.
       </h1>
       <div class="hero-btns">
         <button class="btn-ghost">
-          Explore our managed programs
+          Explore our team models
           <svg width="17" height="17" fill="none" viewBox="0 0 17 17">
             <path d="M3.5 8.5h10M9.5 5l4 3.5L9.5 12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
         </button>
-        <button class="btn-white">Book a Discovery Call</button>
+        <button class="btn-white">Talk to our delivery team</button>
       </div>
     </div>
   </section>
@@ -2544,26 +2582,24 @@
     <div class="stats-grid">
       <div class="stat-col">
         <div class="stat-num">50–60%</div>
-        <div class="stat-desc">Faster delivery cycles with AI-assisted development</div>
+        <div class="stat-desc">Reduction in team deployment lead time versus traditional hiring cycles</div>
       </div>
       <div class="stat-col">
-        <div class="stat-num">35–45%</div>
-        <div class="stat-desc">Cost savings through intelligent automation</div>
+        <div class="stat-num">74%</div>
+        <div class="stat-desc">Of employers report persistent difficulty sourcing specialized technology roles through conventional channels</div>
       </div>
       <div class="stat-col">
-        <div class="stat-num">46%</div>
-        <div class="stat-desc">Faster migration with our Cloud Management Framework</div>
+        <div class="stat-num">3 Weeks</div>
+        <div class="stat-desc">Average elapsed time from program brief to a fully operational, pre-certified delivery team</div>
       </div>
       <div class="stat-col">
-        <div class="stat-num">50%</div>
-        <div class="stat-desc">Reduction in development and training costs</div>
+        <div class="stat-num">$17K+</div>
+        <div class="stat-desc">Average organizational cost of a single misaligned hire, before downstream rework and schedule impact</div>
       </div>
     </div>
     <div class="stat-note">
       <div class="stat-note-lbl"> </div>
-      <div class="stat-note-txt">Strong program outcomes are a result from deliberate structure, disciplined execution,
-        and clear accountability at every stage. Across delivery, migration, and cost optimization, we bring the
-        operational rigor and intelligent tooling that keep programs on track and on budget.
+      <div class="stat-note-txt">Celsior's Teams-as-a-Service model is designed to address each variable directly. Pre-certified talent networks and structured mobilization compress deployment windows from months to weeks. Multi-stage skills assessments validate platform depth before placement, not after a gap surfaces in production. By consolidating performance accountability within a single engagement structure, Celsior eliminates the organizational cost that reactive, role-by-role team construction consistently produces. 
       </div>
     </div>
   </div>
@@ -2587,19 +2623,16 @@
 
   <!-- ① FULL-WIDTH HEADER -->
   <div style=" padding:0 0 28px;">
+    <p class="eyebrow" >THE DELIVERY REALITY</p>
     <h2 id="cqxq-heading" style="
       font-size:55px; font-weight:700; line-height:60px; color:#09090b;
       letter-spacing:0px; margin-bottom:22px; max-width:1100px;
       opacity:0; transform:translateY(28px);
-    ">What unmanaged platforms cost<br> your organization; <span
-        style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; display: inline;">quarter
-        by quarter.</span></h2>
+    ">The operational cost of fragmented team construction on program velocity and delivery integrity</h2>
     <p id="cqxq-body" style="
       font-size:16px; color:#3f3f46; line-height:23px; max-width:1100px;
       opacity:0; transform:translateY(20px);
-    ">Enterprise platforms are acquired with a clear business case. But once live, accountability for their health and
-      evolution quietly fragments. Celsior's Managed Programs are structured to close that gap, with defined scope,
-      measurable SLAs, and teams who carry platform-specific depth rather than general IT support. </p>
+    ">Celsior's Teams-as-a-Service model structures skills-verified, platform-certified delivery teams against defined program requirements, consolidating performance management, bandwidth allocation, and delivery accountability within a single engagement framework. The operating model is designed to place a fully functional, program-ready team against your requirements within a defined mobilization window -- without the ramp variability, sourcing latency, or attrition exposure inherent in conventional staffing approaches. </p>
     </div>
 
     <!-- ② TWO-COLUMN ROW -->
@@ -2623,7 +2656,7 @@
       opacity:0; transform:translateX(-32px);
     ">
         <img
-          src="https://res.cloudinary.com/dden4hawr/image/upload/v1778577642/e635f926-6c6b-4155-928d-bdf0cb79d91a_yjbpnl.jpg"
+          src="https://res.cloudinary.com/dden4hawr/image/upload/v1780856757/e8964eb9b47f9e980c22bb2f36ac2ca9f031cb5f_gqkoit.jpg"
           alt="" style="
           position:absolute;
           width:112.14%; height:111.23%;
@@ -2651,13 +2684,12 @@
             overflow:hidden; background:#fff;
             transition:border-color 0.3s, box-shadow 0.3s;
           ">
-              <!-- Platform Stability: exact Figma icon -->
-              <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778578106/1_vgbbod.png"
-                alt="Platform Stability" width="36" height="36" style="display:block;" />
+              <!-- Team Assembly: exact Figma icon -->
+              <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780856943/74_swgyd4.png"
+                alt="Team Assembly" width="36" height="36" style="display:block;" />
             </div>
             <span class="gacc-label"
-              style="font-size:24px;font-weight:600;color:#111827;letter-spacing:-0.4px;flex:1;text-align:left;transition:color 0.25s;">Platform
-              Stability</span>
+              style="font-size:24px;font-weight:600;color:#111827;letter-spacing:-0.4px;flex:1;text-align:left;transition:color 0.25s;">Team Assembly</span>
             <svg class="gacc-chev" width="20" height="20" viewBox="0 0 20 20" fill="none"
               style="flex-shrink:0;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);">
               <path d="M5 8l5 5 5-5" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"
@@ -2666,14 +2698,12 @@
           </button>
           <div class="gacc-body" style="overflow:hidden;height:0;">
             <div class="gacc-inner" style="padding:0 0 20px 84px;">
-              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Most enterprise platforms lose a
-                significant portion of their designed capability within two years of go-live due to absence of
-                structured operational ownership. </p>
+              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Skills assessments establish what a team can actually deliver against live program requirements. </p>
             </div>
           </div>
         </div>
 
-        <!-- ROW 2: Security & Compliance -->
+        <!-- ROW 2: Platform Certification -->
         <div class="gacc-item" style="border-bottom:1px solid #f3f4f6;">
           <button class="gacc-btn" onclick="gaccToggle(this)" aria-expanded="false" style="
           width:100%; display:flex; align-items:center; gap:20px;
@@ -2686,13 +2716,12 @@
             overflow:hidden; background:#fff;
             transition:border-color 0.3s, box-shadow 0.3s;
           ">
-              <!-- ServiceNow: exact Figma icon -->
-              <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778578107/2_qd20cc.png"
-                alt="Security & Compliance" width="36" height="36" style="display:block;" />
+              <!-- Platform Certification: exact Figma icon -->
+              <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780856943/75_ehu7f1.png"
+                alt="Platform Certification" width="36" height="36" style="display:block;" />
             </div>
             <span class="gacc-label"
-              style="font-size:24px;font-weight:600;color:#111827;letter-spacing:-0.4px;flex:1;text-align:left;transition:color 0.25s;">Security
-              & Compliance</span>
+              style="font-size:24px;font-weight:600;color:#111827;letter-spacing:-0.4px;flex:1;text-align:left;transition:color 0.25s;">Platform Certification</span>
             <svg class="gacc-chev" width="20" height="20" viewBox="0 0 20 20" fill="none"
               style="flex-shrink:0;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);">
               <path d="M5 8l5 5 5-5" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"
@@ -2701,9 +2730,7 @@
           </button>
           <div class="gacc-body" style="overflow:hidden;height:0;">
             <div class="gacc-inner" style="padding:0 0 20px 84px;">
-              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">The cost of ungoverned configuration
-                drift, unreviewed access controls, and undocumented changes rarely surfaces until it becomes a
-                compliance event. </p>
+              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Generalist resources placed on specialized platforms carry a productivity deficit. </p>
             </div>
           </div>
         </div>
@@ -2721,12 +2748,12 @@
             overflow:hidden; background:#fff;
             transition:border-color 0.3s, box-shadow 0.3s;
           ">
-              <!-- Cost Optimization: exact Figma icon -->
-              <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778578107/3_sgpvfw.png"
-                alt="Cost Optimization" width="36" height="36" style="display:block;" />
+              <!-- Regulated Industries: exact Figma icon -->
+              <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780856944/76_dih1aq.png"
+                alt="Regulated Industries" width="36" height="36" style="display:block;" />
             </div>
             <span class="gacc-label"
-              style="font-size:24px;font-weight:600;color:#111827;letter-spacing:-0.4px;flex:1;text-align:left;transition:color 0.25s;">Cost Optimization</span>
+              style="font-size:24px;font-weight:600;color:#111827;letter-spacing:-0.4px;flex:1;text-align:left;transition:color 0.25s;">Regulated Industries</span>
             <svg class="gacc-chev" width="20" height="20" viewBox="0 0 20 20" fill="none"
               style="flex-shrink:0;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);">
               <path d="M5 8l5 5 5-5" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"
@@ -2735,14 +2762,12 @@
           </button>
           <div class="gacc-body" style="overflow:hidden;height:0;">
             <div class="gacc-inner" style="padding:0 0 20px 84px;">
-              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Reactive platform support feels cheaper
-                than a managed program until accounted for emergency interventions, delayed delivery, and the strategic
-                work that never got done. </p>
+              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Platform depth, egulatory fluency, and industry-specific operating familiarity represent years of accumulated domain capital</p>
             </div>
           </div>
         </div>
 
-        <!-- ROW 4: Upgrade Governance -->
+        <!-- ROW 4: Team Continuity -->
         <div class="gacc-item">
           <button class="gacc-btn" onclick="gaccToggle(this)" aria-expanded="false" style="
           width:100%; display:flex; align-items:center; gap:20px;
@@ -2755,13 +2780,12 @@
             overflow:hidden; background:#fff;
             transition:border-color 0.3s, box-shadow 0.3s;
           ">
-              <!-- Upgrade Governance: exact Figma icon -->
-              <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778578106/4_fwh49h.png"
+              <!-- Team Continuity: exact Figma icon -->
+              <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780856944/77_fdhzed.png"
                 alt="Upgrade Governance" width="36" height="36" style="display:block;" />
             </div>
             <span class="gacc-label"
-              style="font-size:24px;font-weight:600;color:#111827;letter-spacing:-0.4px;flex:1;text-align:left;transition:color 0.25s;">Upgrade
-              Governance</span>
+              style="font-size:24px;font-weight:600;color:#111827;letter-spacing:-0.4px;flex:1;text-align:left;transition:color 0.25s;">Team Continuity</span>
             <svg class="gacc-chev" width="20" height="20" viewBox="0 0 20 20" fill="none"
               style="flex-shrink:0;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);">
               <path d="M5 8l5 5 5-5" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round"
@@ -2770,8 +2794,7 @@
           </button>
           <div class="gacc-body" style="overflow:hidden;height:0;">
             <div class="gacc-inner" style="padding:0 0 20px 84px;">
-              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Deferred upgrades are a governance
-                failure that compounds with every release cycle that passes without structured ownership. </p>
+              <p style="font-size:14px;color:#6b7280;line-height:23px;margin:0;">Absence of continuity resets institutional knowledge, compounds attrition risk, and erodes program capacity. </p>
             </div>
           </div>
         </div>
@@ -2792,12 +2815,10 @@
     <p class="eyebrow">THE BUSINESS CONSEQUENCES</p>
     <h2
       style="font-size:55px;font-weight:700;letter-spacing:-1px;line-height:55px;color:#09090b;max-width:1048px;margin-bottom:32px;">
-      How enterprise platforms lose <br>operational ownership after go-live</h2>
+      What poorly structured team models cost enterprise programs before delivery begins. </h2>
 
     <!-- Body -->
-    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">Platform problems
-      accumulate in deferred upgrades, ungoverned configuration changes, and incidents that get closed rather than
-      resolved. By the time the cost surfaces, it has already shifted from an operational issue to a strategic one. </p>
+    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">The consequences of reactive, role-by-role team construction accumulate faster than most program timelines can absorb. These are the patterns Celsior's Teams-as-a-Service model is specifically structured to prevent. </p>
 
     <!-- ── Card frame — exact Figma Desktop-31 styles ── -->
     <!--
@@ -2848,13 +2869,11 @@
         margin-bottom: 50px;
         flex-shrink: 0;
       ">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778579833/5_ohhyvq.png" alt=""
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780857589/78_k24i5k.png" alt=""
             style="width:35.875px;height:35.875px;display:block;" />
         </div>
-        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Slower
-          product cycles</h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Incident backlogs and deferred upgrades
-          consume the teams who should be building new features. Stability management crowds out delivery.</p>
+        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Weeks, Not Months </h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Conventional sourcing cycles cost programs two to three months before delivery begins. Celsior's mobilization model closes that gap in three weeks. </p>
       </div>
 
       <!-- ── Card 2: Compounding security exposure ── -->
@@ -2871,13 +2890,11 @@
         margin-bottom: 50px;
         flex-shrink: 0;
       ">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778579833/6_hfcvls.png" alt=""
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780857589/79_n3ijt4.png" alt=""
             style="width:35.875px;height:35.875px;display:block;" />
         </div>
-        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Compounding
-          security exposure</h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Ungoverned platforms drift from their
-          original security posture quietly, and without anyone tracking the cumulative risk.</p>
+        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Certified Before Placement </h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Generalist sourcing leaves platform skill gaps that only surface under live program conditions. Celsior's CoE-backed assessment model validates depth before a single resource is placed. </p>
       </div>
 
       <!-- ── Card 3: Engineering talent attrition ── -->
@@ -2894,14 +2911,13 @@
         margin-bottom: 50px;
         flex-shrink: 0;
       ">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778579832/7_qpjayv.png" alt=""
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780857590/80_yojmql.png" alt=""
             style="width:35.875px;height:35.875px;display:block;" />
         </div>
         <h3
           style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;white-space:nowrap;margin-bottom:16px;">
-          Engineering talent attrition</h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Platform knowledge concentrated in a few
-          individuals leaves organizations exposed the moment those people move on.</p>
+          Continuity by Design</h3>
+        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Mid-program departures reset institutional knowledge that took months to build. Celsior embeds continuity provisions into the engagement model from day one, not after attrition has already cost the program. </p>
       </div>
 
     </div><!-- /card-frame -->
@@ -2913,42 +2929,39 @@
        CSS tag : /* === BLOG TEASERS === */
        ============================================================ -->
   <section class="pad sec-border">
+    <p class="eyebrow">See the latest from Celsior </p>
     <h2 style="font-size:55px;font-weight:700;line-height:60px;color:#09090b;max-width:1000px;margin-bottom:16px;">
-      See the latest from Celsior on managed platform operations and continuous delivery.</h2>
-    <p <br> </p>
+      See the latest from Celsior on team delivery models and program resourcing. </h2>
+    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">From pre-certified platform talent to regulated industry delivery, these are operational perspectives and program-level observations from Celsior's Teams-as-a-Service practice, drawn from active engagements across Insurance, Banking, and Healthcare in the United States. </p>
     <div class="blog-grid">
       <div class="blog-card">
-        <img class="blog-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1778585914/1_hkqc4o.jpg"
+        <img class="blog-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1780888996/f02fa9920172715841947c4d2793b4c44127dac8_xqw7jp.jpg"
           alt="" />
         <div class="blog-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 0%,#0c1b3b 67%);">
         </div>
         <div class="blog-card-body">
-          <div class="blog-card-ttl">Celsior delivers Guidewire managed operations for a Top 10 U.S. P&C insurer.</div>
-          <div class="blog-card-txt">Maintaining 99.8% platform availability through a major policy system upgrade
-            cycle </div>
+          <div class="blog-card-ttl">Team Assembly</div>
+          <div class="blog-card-txt">How Celsior's skills-based team model reduced deployment lead time by 55% for a mid-market US insurer executing a Guidewire modernization program.</div>
         </div>
       </div>
       <div class="blog-card">
-        <img class="blog-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1778585913/2_sniefj.jpg"
+        <img class="blog-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1780888997/f9236a73a1e7212d4de7780e6ca189cde4b1290e_uvzcuk.jpg"
           alt="" />
         <div class="blog-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 0%,#060606 67%);">
         </div>
         <div class="blog-card-body">
-          <div class="blog-card-ttl">How Celsior's Managed SNOW Operations model</div>
-          <div class="blog-card-txt">Reduced service desk resolution time by 47% for a mid-market financial services
-            firm.</div>
+          <div class="blog-card-ttl">Platform Certification</div>
+          <div class="blog-card-txt">Pre-certified versus generalist sourcing: what the distinction means for program economics when a platform engagement moves into production.</div>
         </div>
       </div>
       <div class="blog-card">
-        <img class="blog-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1778585914/3_oi980a.jpg"
+        <img class="blog-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1780888998/864f6a045f575f5cb8b80690fd935dca48e4c5e9_ixnpag.jpg"
           alt="" />
         <div class="blog-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 0%,#060606 67%);">
         </div>
         <div class="blog-card-body">
-          <div class="blog-card-ttl">Celsior's Continuous
-            Modernization Factory</div>
-          <div class="blog-card-txt">Delivering 14 releases in 12 months for a legacy-heavy insurance carrier without a
-            single production outage </div>
+          <div class="blog-card-ttl">Regulated Industry Delivery</div>
+          <div class="blog-card-txt">Assembling delivery teams for regulated industries: the certification depth and compliance fluency that conventional sourcing channels cannot consistently produce at program scale.</div>
         </div>
       </div>
     </div>
@@ -3009,15 +3022,12 @@
       <div class="outcomes__heading">
         <p class="eyebrow">WHY AI-FIRST ENGINEERING?</p>
         <h2>Outcomes we're accountable to</h2>
-        <p>These numbers come from managed program engagements across enterprise platforms. They reflect what structured
-          operational accountability including defined scope, measurable SLAs, and platform-specific delivery teams
-          produce in practice.</p>
+        <p>These benchmarks reflect established performance standards for structured managed team delivery models. They offer senior program stakeholders a fact-based accountability framework, and will be updated with verified Celsior engagement data as outcomes are confirmed across active client portfolios.</p>
       </div>
       <div class="outcome-cards">
         <article class="outcome-card outcome-card--green" data-stat-card>
-          <strong><span class="stat-num" data-target="3" data-suffix="X">0X</span></strong>
-          <p>Greater on-time, on-budget program delivery for enterprises that operationalize structured governance
-            frameworks with measurable performance accountability
+          <strong><span class="stat-num" data-target="95">0</span><span>%</span></strong>
+          <p>Program milestone completion rate achieved through skills-based team assembly.
           </p>
           <div class="outcome-card-arrow">
             <svg viewBox="0 0 18 18" fill="none">
@@ -3027,9 +3037,8 @@
           </div>
         </article>
         <article class="outcome-card outcome-card--blue" data-stat-card>
-          <strong><span class="stat-num" data-target="40">0</span><span>%</span></strong>
-          <p>Uplift in enterprise compliance pass rates achieved through proactive risk governance and continuously
-            managed regulatory alignment
+          <strong><span class="stat-num" data-target="86">0</span><span>%</span></strong>
+          <p>Of CIOs report intensifying competition for qualified technology candidates.
           </p>
           <div class="outcome-card-arrow">
             <svg viewBox="0 0 18 18" fill="none">
@@ -3039,9 +3048,8 @@
           </div>
         </article>
         <article class="outcome-card outcome-card--gold" data-stat-card>
-          <strong><span class="stat-num" data-target="35">0</span><span>%</span></strong>
-          <p>Reduction in operational disruption risk for organizations that transition from reactive, self-managed IT
-            models to structured, outcome-driven managed program delivery
+          <strong><span class="stat-num" data-target="29">0</span><span>%</span></strong>
+          <p>Share of IT professionals with strong intent to remain with their current employer.
           </p>
           <div class="outcome-card-arrow">
             <svg viewBox="0 0 18 18" fill="none">
@@ -3051,9 +3059,8 @@
           </div>
         </article>
         <article class="outcome-card outcome-card--dark" data-stat-card>
-          <strong><span class="stat-num" data-target="55%">0</span><span>%</span></strong>
-          <p>Acceleration in enterprise digital transformation velocity for organizations operating under dedicated
-            managed program engagement models versus unmanaged alternatives</p>
+          <strong><span class="stat-num" data-target="1.2" data-suffix="M">0M</span></strong>
+          <p>Projected shortfall in available technology talent across the United States by 2026.</p>
           <div class="outcome-card-arrow">
             <svg viewBox="0 0 18 18" fill="none">
               <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
@@ -3071,7 +3078,7 @@
        CSS tag : /* === TESTIMONIAL === */
        ============================================================ -->
   <section id="testimonial-sec" class="sec-border">
-    <p class="eyebrow">Testimonials</p>
+    <p class="eyebrow">ENGAGEMENT OUTCOME</p>
     <h2
       style="font-size:clamp(28px, 4.5vw, 58px);font-weight:700;color:#111827;letter-spacing:-0.6px;line-height:1.05;margin-bottom:clamp(20px, 2.4vw, 32px);">
       Delivered at enterprise scale</h2>
@@ -3082,29 +3089,25 @@
             d="M8 20c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H8v-8zm12 0c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H20v-8z"
             fill="#fff" />
         </svg>
-        <p class="test-quote">We had a capable team and a well-implemented Guidewire environment — but we didn't have
-          the depth to sustain it through a major upgrade cycle while also delivering new business capability. Celsior's
-          managed programme gave us that depth without asking us to rebuild our internal team. The upgrade completed on
-          schedule, and our production environment stayed fully operational throughout.</p>
+        <p class="test-quote">We had a Guidewire program running against a hard go-live date and a team that was not fully staffed. Celsior deployed pre-certified resources who understood the platform, understood the industry context, and were contributing within the first week. We did not concede ground on the timeline. The team they assembled has remained consistent across the full engagement.</p>
         <div class="test-author">
           <div class="test-avatar">CIO</div>
           <div>
-            <div style="font-size:14px;font-weight:600;color:#fff;">VP of Technology Operations</div>
-            <div style="font-size:12px;color:#93c5fd;margin-top:2px;">Large U.S. Property &amp; Casualty Insurer</div>
+            <div style="font-size:14px;font-weight:600;color:#fff;">VP of Technology Delivery</div>
+            <div style="font-size:12px;color:#93c5fd;margin-top:2px;">Large US Property and Casualty Insurer</div>
           </div>
         </div>
       </div>
       <div class="test-right">
-        <div class="test-res-label">Engagement results</div>
+        <div class="test-res-label">ENGAGEMENT RESULTS</div>
         <div class="test-res-item">
-          <div class="test-dot"></div><span class="test-res-text">99.8% platform availability maintained</span>
+          <div class="test-dot"></div><span class="test-res-text">Full team operational within 18 days of engagement commencement</span>
         </div>
         <div class="test-res-item">
-          <div class="test-dot"></div><span class="test-res-text">Zero production incidents during upgrade window</span>
+          <div class="test-dot"></div><span class="test-res-text">Zero unplanned attrition across a 14-month program lifecycle</span>
         </div>
         <div class="test-res-item" style="margin-bottom:0;">
-          <div class="test-dot"></div><span class="test-res-text">6-month engagement to full operational
-            stability</span>
+          <div class="test-dot"></div><span class="test-res-text">Program go-live delivered on the original delivery schedule</span>
         </div>
       </div>
     </div>
@@ -3121,8 +3124,8 @@
     <div class="explore__links">
       <a href="#">
         <span class="explore__row-left">
-          <span class="explore__label">AI Lab</span>
-          <span class="explore__text">Managed Platform Operations</span>
+          <span class="explore__label">ENTERPRISE AI ENABLEMENT</span>
+          <span class="explore__text">Skills-Based Teams</span>
         </span>
         <span class="explore__row-right">
           <span class="explore__arrow" aria-hidden="true">
@@ -3136,8 +3139,8 @@
       </a>
       <a href="#">
         <span class="explore__row-left">
-          <span class="explore__label">CoEs</span>
-          <span class="explore__text">Continuous Modernisation Factory</span>
+          <span class="explore__label">NEARSHORE DELIVERY</span>
+          <span class="explore__text">Pre-Certified Platform Talent</span>
         </span>
         <span class="explore__row-right">
           <span class="explore__arrow" aria-hidden="true">
@@ -3151,8 +3154,8 @@
       </a>
       <a href="#">
         <span class="explore__row-left">
-          <span class="explore__label">Accelerators</span>
-          <span class="explore__text">Managed SNOW Operations</span>
+          <span class="explore__label">AI-LED ENGINEERING</span>
+          <span class="explore__text">Regulated Industry Delivery</span>
         </span>
         <span class="explore__row-right">
           <span class="explore__arrow" aria-hidden="true">
@@ -3179,7 +3182,7 @@
         <p class="eyebrow">INSIGHTS</p>
         <h2
           style="font-size:40px;font-weight:700;color:#111827;line-height:50px;max-width:900px;letter-spacing:-0.24px;">
-          Thinking on managed operations and enterprise platform accountability</h2>
+          Thinking on team delivery models and enterprise program resourcing</h2>
       </div>
       <a href="#"
         style="font-size:14px;font-weight:600;color:var(--teal);display:flex;align-items:center;gap:6px;white-space:nowrap;margin-left:24px;padding-bottom:4px;">All
@@ -3191,15 +3194,14 @@
     <div class="insight-cards">
       <div class="insight-card">
         <div class="insight-img">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778587408/1_d2ouxt.jpg" alt="" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780888792/8b9cda6debf87b9a80c32f18445e0f66232cf2a3_asidqw.jpg" alt="" />
           <div class="insight-img-grad"></div>
-          <span class="insight-tag">Platform Operations</span>
+          <span class="insight-tag">Team Models</span>
         </div>
         <div class="insight-body">
-          <h4 class="insight-title">How to quantify platform drift before it becomes a remediation project</h4>
-          <p class="insight-desc">P&C insurer, maintaining 99.8% platform availability through a major policy system
-            upgrade cycle</p>
-          <div class="insight-foot"><span>6 min read</span><a href="#" class="insight-readlink">Read <svg width="12"
+          <h4 class="insight-title">Why the conventional hire-to-deploy resourcing model introduces structural risk to enterprise technology programs, and what a managed delivery alternative looks like at scale</h4>
+          <p class="insight-desc"></p>
+          <div class="insight-foot"><span>6 min read</span><a href="#" class="insight-readlink">Read more <svg width="12"
                 height="12" fill="none" viewBox="0 0 12 12">
                 <path d="M2 6h8M7 4l3 2-3 2" stroke="#0d4f45" stroke-width="1.3" stroke-linecap="round"
                   stroke-linejoin="round" />
@@ -3208,15 +3210,14 @@
       </div>
       <div class="insight-card">
         <div class="insight-img">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778587414/3_lwxxsk.jpg" alt="" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780888873/9db86bd030d3279c77e7cbe389486b302fecd828_h4pzwc.jpg" alt="" />
           <div class="insight-img-grad"></div>
-          <span class="insight-tag">Managed Services</span>
+          <span class="insight-tag">Platform Talent</span>
         </div>
         <div class="insight-body">
-          <h4 class="insight-title">The two-tiered approach: running platforms without taking engineers off product work
-          </h4>
-          <p class="insight-desc">desk resolution time by 47% for a mid-market financial services firm</p>
-          <div class="insight-foot"><span>8 min read</span><a href="#" class="insight-readlink">Read <svg width="12"
+          <h4 class="insight-title">What pre-certification substantively means for a Guidewire or ServiceNow engagement, and how it restructures the delivery calculus before the program begins</h4>
+          <p class="insight-desc"></p>
+          <div class="insight-foot"><span>6 min read</span><a href="#" class="insight-readlink">Read more <svg width="12"
                 height="12" fill="none" viewBox="0 0 12 12">
                 <path d="M2 6h8M7 4l3 2-3 2" stroke="#0d4f45" stroke-width="1.3" stroke-linecap="round"
                   stroke-linejoin="round" />
@@ -3225,16 +3226,14 @@
       </div>
       <div class="insight-card">
         <div class="insight-img">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1778587408/2_jp1pcn.jpg" alt="" style="top:0;" />
+          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780888902/6d7c0cf32ec82fc21639e634d4e0568488b12f99_d0jusk.jpg" alt="" style="top:0;" />
           <div class="insight-img-grad"></div>
-          <span class="insight-tag">ServiceNow</span>
+          <span class="insight-tag">Regulated Industries</span>
         </div>
         <div class="insight-body">
-          <h4 class="insight-title">Why platform architecture decisions from day one determine your long-term governance
-            posture</h4>
-          <p class="insight-desc">for a legacy-heavy insurance carrier without a single production outage Card 4: Inside
-            the Boomi managed operations practice: keeping enterprise integration estates....</p>
-          <div class="insight-foot"><span>5 min read</span><a href="#" class="insight-readlink">Read <svg width="12"
+          <h4 class="insight-title">The compliance depth, domain fluency, and regulatory awareness that regulated industry programs require from delivery teams operating at enterprise program scale</h4>
+          <p class="insight-desc"></p>
+          <div class="insight-foot"><span>6 min read</span><a href="#" class="insight-readlink">Read more <svg width="12"
                 height="12" fill="none" viewBox="0 0 12 12">
                 <path d="M2 6h8M7 4l3 2-3 2" stroke="#0d4f45" stroke-width="1.3" stroke-linecap="round"
                   stroke-linejoin="round" />
@@ -3255,104 +3254,81 @@
       <div class="faq__intro">
         <p class="eyebrow">FAQ</p>
         <h2>Questions business leaders ask before engaging</h2>
-        <p>Covering ROI, risk, timelines, and delivery model — the questions that matter to decision-makers, answered
-          directly.</p>
+        <p>The decision to move from conventional staffing to a managed team delivery model raises legitimate questions about accountability structure, certification methodology, and engagement governance. These are the questions Celsior's program leadership addresses at the outset of every client conversation. </p>
         <a href="#">Speak to our team <span aria-hidden="true">→</span></a>
       </div>
       <div class="faq__items">
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">What's the difference between a Managed Program and a traditional support
-              contract?</span>
+            <span class="faq__q">How does Teams-as-a-Service differ from conventional staff augmentation at the engagement model and delivery accountability structure levels?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>A support contract responds to problems after they occur. A Managed Program carries proactive operational
-              accountability — covering governance, continuous improvement, upgrade planning, and performance management
-              — so issues are addressed before they affect your business. 
-
-            </p>
+            <p>Staff augmentation places individual resources. Teams-as-a-Service delivers a structured, accountable engagement model. Celsior owns performance management, attrition response, and bandwidth allocation for the duration of the program. The client organization engages a single delivery partner accountable to outcomes, not a collection of contractors accountable only to their individual statements of work.</p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How do you structure operational accountability — and what does an SLA actually
-              cover?</span>
+            <span class="faq__q">What verification methodology governs platform certification depth assessments prior to team placement on an active program?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Every Managed Program operates under a defined SLA that covers incident response times, platform
-              availability targets, and upgrade delivery windows. Accountability is structured around measurable
-              outcomes, not effort — so you always know what you are entitled to and how performance is being tracked
-              against it.</p>
+            <p>Every candidate undergoes a structured, multi-stage assessment protocol that evaluates platform-specific technical depth, not generalist proficiency. For Guidewire, ServiceNow, and other enterprise platforms, assessments are designed in partnership with practitioners who have delivered on those platforms under live program conditions. Certification is validated before placement, not assumed from a resume.</p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">Do you manage the platform alongside our internal team, or do you replace that function
-              entirely?</span>
+            <span class="faq__q">What is the realistic elapsed time from initial program brief to a fully operational, skills-verified delivery team under the TaaS engagement model?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>We work alongside your internal team in most engagements, taking on the operational depth and
-              specialist coverage that internal teams typically cannot sustain at scale. The model is designed around
-              your existing structure, not around replacing it. </p>
+            <p>Most programs move from initial brief to a fully operational, skills-verified delivery team within three weeks. That window covers requirements scoping, skills assessment, platform certification validation, and team mobilization. For programs with defined timelines and hard go-live dates, the structured mobilization model is designed to protect the schedule from day one.</p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How do you handle platform upgrades without disrupting our production
-              environment? </span>
+            <span class="faq__q">Where does accountability for performance management, attrition response, and bandwidth calibration reside once the team is deployed against program requirements?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Upgrades are planned well in advance, tested in isolated environments, and executed against a
-              structured runbook with defined rollback procedures. Our teams have delivered major Guidewire and
-              ServiceNow upgrades with zero production incidents by treating upgrade governance as a continuous program
-              discipline, not a one-time project. </p>
+            <p>Accountability resides with Celsior for the full duration of the engagement. Performance management, attrition response, and bandwidth calibration are handled within the delivery structure, not escalated to the client organization. Program leadership receives visibility into team performance through structured governance cadences without absorbing the operational burden of managing individual contributors.</p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">What happens if our platform requirements change mid-program?</span>
+            <span class="faq__q">How are delivery teams structured for regulated industries where compliance awareness and domain fluency carry equivalent weight to technical proficiency?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Managed Programs are structured with defined change governance built in. When requirements shift, we
-              assess the scope impact, adjust delivery priorities, and update the SLA framework accordingly — without
-              requiring a new contracting cycle or disrupting what is already running. </p>
+            <p>Teams for Insurance, Banking, and Healthcare programs are assembled against a three-dimensional requirements model covering platform certification, regulatory fluency, and industry operating context. Candidates are assessed on compliance awareness and domain familiarity alongside technical proficiency. The result is a team that understands the regulatory environment it is delivering into, not one that needs to learn it on the program.</p>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How does a Managed Program begin — and how long before we see operational
-              stability?</span>
+            <span class="faq__q">Can the team model scale in either direction as program scope and resource requirements evolve, without disrupting delivery continuity or institutional knowledge retention?</span>
             <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg></span>
           </button>
           <div class="faq__body">
-            <p>Every engagement starts with a platform health assessment that establishes a baseline for performance,
-              governance gaps, and immediate risk areas. Most clients reach full operational stability within 60 to 90
-              days of program start, with measurable SLA performance tracking from week one. </p>
+            <p>The TaaS engagement model is structured to absorb scope changes in either direction without resetting the delivery baseline. Bandwidth adjustments are managed within the existing engagement framework, preserving institutional knowledge, team continuity, and program momentum. Scaling does not require a new sourcing cycle, a new onboarding period, or a renegotiated accountability structure.</p>
           </div>
-
         </div>
       </div>
     </div>
@@ -3369,8 +3345,7 @@
       <img class="cta-band-logo"
         src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
         alt="Celsior" />
-      <h2 class="cta-band-text" data-text="Most modernization efforts begin with understanding the environment.">Most
-        managed program engagements begin with a platform health assessment.</h2>
+      <h2 class="cta-band-text" data-text="Most Teams-as-a-Service engagements begin with a structured assessment of program requirements and delivery capability alignment.">Most Teams-as-a-Service engagements begin with a structured assessment of program requirements and delivery capability alignment.</h2>
       <a href="#contact" class="cta-btn cta-band-btn">Start the conversation</a>
     </div>
   </section>

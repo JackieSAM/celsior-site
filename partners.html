@@ -72,7 +72,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1779300744/DIGITAL-EXPERIENCE_an0cyj.jpg') center/cover no-repeat;
+      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1780638295/415697ab0fcde09feab9a2f1d3d32009bff56c54_ugryzh.jpg') center/cover no-repeat;
       transform: scale(1.06);
       transform-origin: center;
     }
@@ -121,6 +121,20 @@
       max-width: min(94vw, 1400px);
       width: 100%;
       white-space: nowrap;
+    }
+
+    .hero-eyebrow {
+      font-size: clamp(20px, 3.6vw, 20px);
+      font-weight: 300;
+      color: #fff;
+      text-align: center;
+      line-height: 1.1 !important;
+      letter-spacing: -0.03em !important;
+      max-width: min(94vw, 1400px);
+      width: 100%;
+      white-space: nowrap;
+      font-family: 'Courier New', Courier, monospace;
+      padding-bottom: 20px;
     }
 
     @media (max-width: 900px) {
@@ -183,6 +197,8 @@
       grid-template-columns: repeat(4, 1fr);
       border-bottom: 1px solid var(--border);
       margin-bottom: 28px;
+      align-items: flex-start;
+      justify-content: flex-start;
     }
 
     .stat-col {
@@ -245,7 +261,9 @@
     .sec-border {
       border-top: 1px solid rgba(13, 17, 39, 0.08);
     }
-
+    .sec-border-2 {
+      border-bottom: 1px solid rgba(13, 17, 39, 0.08);
+    }
     /* ============================================================
        === COST Q×Q ===
        Quarter-by-quarter narrative + cost-category accordion.
@@ -402,7 +420,7 @@
     }
 
     .explore h2 {
-
+      max-width: 1100px;
       margin: 0 auto 56px;
       color: #0d1127;
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
@@ -416,7 +434,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-
+      max-width: 1100px;
       margin: 0 auto;
       border: 1.5px solid rgba(13, 17, 39, 0.12);
       border-radius: 16px;
@@ -1459,13 +1477,20 @@
     }
 
     .faq__body {
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+      opacity: 0;
     }
 
     .faq__item.is-open .faq__body {
-      max-height: 400px;
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+
+    .faq__body-wrap {
+      min-height: 0;
+      overflow: hidden;
     }
 
     .faq__body p {
@@ -2364,7 +2389,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: top center;
       filter: saturate(0.88) contrast(0.96);
       opacity: 0.85;
       transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
@@ -2646,7 +2670,8 @@
       gap: 14px;
       background: #fff;
       border-left: 3px solid transparent;
-      transition: background .3s ease, border-left-color .3s ease
+      transition: background .3s ease, border-left-color .3s ease;
+      min-height: calc(100vh / 3)
     }
 
     .em-card:first-child {
@@ -3281,6 +3306,306 @@
       display: block;
       margin-bottom: 16px;
     }
+
+    /* ============================================================
+       === APPROACH BAND ===
+       Full-bleed section wrapping a dark image-overlay card.
+       Centered eyebrow / heading / body / white CTA button.
+
+       ── MANUAL ADJUSTMENT GUIDE ─────────────────────────────────
+       CARD HEIGHT     change min-height on .approach-card
+                       Current: 420px. More height -> 520px / 560px
+
+       TOP+BTM PADDING change the first value on .approach-card padding
+                       Current: 120px. Taller feel -> 140px / 160px
+
+       DARK OVERLAY    change alpha on .approach-card-overlay rgba()
+                       Current: 0.50. Darker -> 0.65. Lighter -> 0.35
+
+       BG IMAGE        swap url() inside .approach-card-bg background
+
+       HEADING WIDTH   max-width on .approach-card h2  (current 820px)
+
+       BODY WIDTH      max-width on .approach-card p   (current 620px)
+
+       BUTTON FILL     background on .approach-btn     (current #ffffff)
+       BUTTON TEXT     color on .approach-btn           (current #0d4f45)
+       Ghost variant   background: transparent; color: #fff;
+                       border: 1.5px solid rgba(255,255,255,0.55);
+       ──────────────────────────────────────────────────────────── */
+
+    .approach-band {
+      padding: var(--section-pad-v) var(--section-pad-h); /* outer section rhythm — matches all other sections */
+      background: #fff;
+      border-top: 1px solid rgba(13, 17, 39, 0.08);
+    }
+
+    .approach-card {
+      position: relative;
+      border-radius: 16px;           /* corner radius */
+      overflow: hidden;
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 420px;             /* minimum card height — raise to 520px for taller card */
+      padding: 60px clamp(24px, 8vw, 140px); /* top/bottom 60px | left/right scales with viewport */
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    /* BG IMAGE — swap url() to change image */
+    .approach-card-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://res.cloudinary.com/dden4hawr/image/upload/v1779868480/Div_hq0syu.png') center / cover no-repeat;
+      z-index: 0;
+    }
+
+    /* DARK OVERLAY — adjust 0.50 alpha to darken or lighten */
+    .approach-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.80);
+      z-index: 1;
+    }
+
+    /* Subtle white sheen — keeps text contrast crisp */
+    .approach-card-sheen {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.002);
+      z-index: 2;
+    }
+
+    /* All content sits above the three bg layers */
+    .approach-card > *:not(.approach-card-bg):not(.approach-card-overlay):not(.approach-card-sheen) {
+      position: relative;
+      z-index: 3;
+    }
+
+    /* EYEBROW — opacity 0.6 = subtle, raise to 1.0 for full white */
+    .approach-card .eyebrow {
+      color: rgba(255, 255, 255, 0.6) !important;
+      margin-bottom: 20px;
+    }
+
+    /* HEADING — max-width controls where the line breaks */
+    .approach-card h2 {
+      color: #fff !important;
+      max-width: 820px;              /* heading text block width */
+      margin: 0 auto 24px;           /* gap below heading */
+    }
+
+    /* BODY TEXT — opacity 0.78 = slightly muted white */
+    .approach-card p {
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 620px;              /* body text block width */
+      margin: 0 auto 40px;           /* gap below body before button */
+      font-size: 16px;
+      line-height: 23px;
+    }
+
+    /* BUTTON — solid white fill, teal text
+       To switch to ghost: background: transparent; color: #fff;
+                           border: 1.5px solid rgba(255,255,255,0.55); */
+    .approach-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;                  /* button height */
+      padding: 0 40px;               /* button side padding */
+      border-radius: 8px;            /* button corner radius */
+      border: none;
+      background: #ffffff;           /* button fill */
+      color: #0d4f45;                /* button text colour (site teal) */
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: background 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+    }
+
+    .approach-btn:hover {
+      background: rgba(255, 255, 255, 0.88); /* hover: slightly dimmed white */
+      transform: translateY(-2px);
+    }
+
+    /* MOBILE — reduce padding so card stays proportional */
+    @media (max-width: 640px) {
+      .approach-card {
+        min-height: 320px;           /* mobile min height */
+        padding: 48px 24px;          /* mobile top/bottom padding */
+      }
+    }
+
+    /* ============================================================
+       === IMAGE ACCORDION (HOW WE THINK DIFFERENTLY) ===
+       Transplanted from digital-operations.html — scoped to
+       #dl-acc-section to avoid any collision with other components.
+       ============================================================ */
+    #dl-acc-section {
+      background: #fff;
+      border-top: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb;
+      overflow: hidden;
+      width: 100%;
+      margin-top: 0;
+    }
+    #dl-acc-section .acc-row {
+      position: relative;
+      border-bottom: 1px solid #e5e7eb;
+      cursor: pointer;
+      background: #fff;
+      outline: none;
+    }
+    #dl-acc-section .acc-row:last-child { border-bottom: none; }
+    #dl-acc-section .acc-header {
+      display: flex;
+      align-items: center;
+      padding: 26px clamp(28px, 4vw, 56px);
+      gap: 22px;
+      position: relative;
+      z-index: 2;
+      user-select: none;
+    }
+    #dl-acc-section .acc-icon {
+      width: 26px; height: 26px;
+      border-radius: 6px;
+      background: #fff;
+      border: 1.5px solid #d4d4d8;
+      flex-shrink: 0;
+      position: relative;
+      transition: background .25s ease, border-color .25s ease;
+    }
+    #dl-acc-section .acc-row.active .acc-icon {
+      background: #111;
+      border-color: #111;
+    }
+    #dl-acc-section .acc-row.active .acc-icon::after {
+      content: '';
+      position: absolute;
+      left: 8px; top: 3px;
+      width: 7px; height: 12px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    #dl-acc-section .acc-title {
+      font-size: clamp(20px, 1.7vw, 24px);
+      font-weight: 700;
+      color: #09090b;
+      letter-spacing: -0.3px;
+      line-height: 1.25;
+      flex: 1;
+      transition: opacity .2s ease;
+    }
+    #dl-acc-section .acc-row.active .acc-header .acc-title {
+      opacity: 0; height: 0; overflow: hidden; pointer-events: none;
+    }
+    /* collapsed-row icon on the right (arrow) */
+    #dl-acc-section .acc-header-arrow {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #09090b;
+      flex-shrink: 0;
+      margin-left: auto;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    #dl-acc-section .acc-row:hover .acc-header-arrow { border-color: #374151; }
+    #dl-acc-section .acc-row.active .acc-header-arrow { display: none; }
+    /* active row outline (matches Figma yellow accent) */
+    #dl-acc-section .acc-row.active {
+      border: 1.5px solid #f5b942;
+      border-radius: 14px;
+      margin: 14px clamp(16px, 2.5vw, 28px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+    }
+    #dl-acc-section .acc-row.active + .acc-row { border-top: 1px solid #e5e7eb; }
+    /* BODY — two-column: text left, image right */
+    #dl-acc-section .acc-body { overflow: hidden; height: 0; }
+    #dl-acc-section .acc-body-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: clamp(32px, 5vw, 80px);
+      padding: 0 clamp(28px, 4vw, 56px) clamp(40px, 5vw, 72px);
+      align-items: stretch;
+    }
+    #dl-acc-section .acc-body-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding-right: 8px;
+    }
+    #dl-acc-section .acc-brand-logo {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+      object-position: left center;
+      margin: 0 0 28px;
+      display: block;
+      max-width: 240px;
+    }
+    #dl-acc-section .acc-para {
+      font-size: 15px;
+      line-height: 1.55;
+      color: #3f3f46;
+      margin: 0 0 18px;
+      max-width: 520px;
+      font-weight: 400;
+    }
+    #dl-acc-section .acc-para strong {
+      font-weight: 700;
+      color: #09090b;
+    }
+    #dl-acc-section .acc-readmore {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 12px;
+      padding: 14px 22px;
+      border: 1.5px solid #d4d4d8;
+      border-radius: 10px;
+      font-size: 14px; font-weight: 700;
+      color: #09090b;
+      cursor: pointer;
+      background: #fff;
+      font-family: inherit;
+      align-self: flex-start;
+      margin-top: 14px;
+      transition: border-color .2s ease, transform .2s ease;
+      text-decoration: none;
+    }
+    #dl-acc-section .acc-readmore:hover { border-color: #374151; transform: translateY(-1px); }
+    #dl-acc-section .acc-img2 {
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 5 / 4;
+      background: #f3f4f6;
+    }
+    #dl-acc-section .acc-img2 img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      will-change: transform;
+    }
+    #dl-acc-section .acc-row.active .acc-img2 img {
+      animation: dl-acc-ken 18s ease-in-out infinite alternate;
+    }
+    @keyframes dl-acc-ken {
+      from { transform: scale(1.00); }
+      to   { transform: scale(1.04); }
+    }
+    @media (max-width: 860px) {
+      #dl-acc-section .acc-body-grid { grid-template-columns: 1fr; gap: 24px; }
+      #dl-acc-section .acc-img2 { aspect-ratio: 16 / 11; }
+      #dl-acc-section .acc-row.active { margin: 10px 8px; }
+      #dl-acc-section .acc-header { padding: 20px 18px; gap: 14px; }
+      #dl-acc-section .acc-title { font-size: 17px; }
+      #dl-acc-section .acc-header-arrow { width: 36px; height: 36px; border-radius: 8px; }
+      #dl-acc-section .acc-brand-logo { height: 32px; margin-bottom: 22px; }
+    }
   </style>
 </head>
 
@@ -3300,17 +3625,18 @@
     <div class="hero-gl"></div>
     <div class="hero-gb"></div>
     <div class="hero-content">
-      <h1 class="hero-heading">Experience the difference.<br>Engineered for your customer.
+
+      <h1 class="hero-heading">Your Platform Investment Performs Better <br>With a Certified Practice Behind It. 
       </h1>
       <div class="hero-btns">
         <button class="btn-ghost">
-          Assess Your Control Environment
+          Explore Our Partner Practices
           <svg width="17" height="17" fill="none" viewBox="0 0 17 17">
             <path d="M3.5 8.5h10M9.5 5l4 3.5L9.5 12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"
               stroke-linejoin="round" />
           </svg>
         </button>
-        <button class="btn-white">Schedule a Conversation </button>
+        <button class="btn-white">Talk to a Practice Lead</button>
       </div>
     </div>
   </section>
@@ -3323,327 +3649,625 @@
   <div class="stats-wrap">
     <div class="stats-grid">
       <div class="stat-col">
-        <div class="stat-num">5.7X</div>
-        <div class="stat-desc">More revenue generated by companies that prioritize customer experience over those that don't.</div>
+        <div class="stat-num">30+</div>
+        <div class="stat-desc">Years of BFSI Technology Delivery </div>
       </div>
       <div class="stat-col">
-        <div class="stat-num">89%</div>
-        <div class="stat-desc">Customer retention rate for organizations with a proven omnichannel delivery strategy.</div>
+        <div class="stat-num">50%</div>
+        <div class="stat-desc">Financial Institutions Served </div>
       </div>
       <div class="stat-col">
-        <div class="stat-num">15-20%</div>
-        <div class="stat-desc">Lower service costs for top-quartile customer experience organizations.</div>
+        <div class="stat-num">500+</div>
+        <div class="stat-desc">Consultants Supporting BFSI Clients </div>
       </div>
       <div class="stat-col">
-        <div class="stat-num">65pts</div>
-        <div class="stat-desc">Total shareholder return advantage for CX leaders in P&C insurance over a five-year period.</div>
+        <div class="stat-num">25+</div>
+        <div class="stat-desc">Countries in Global Delivery Network </div>
       </div>
     </div>
     <div class="stat-note">
       <div class="stat-note-lbl"> </div>
-      <div class="stat-note-txt">Behind every percentage above is a business that stopped treating digital experience as a cost center. Retention improves when journeys are seamless. Revenue grows when every channel delivers. We design, build, and optimize experiences that move all of them.
+      <div class="stat-note-txt">Celsior brings financial services depth across insurance, community banks, regional financial institutions, and enterprise banking organizations. Our teams have a working understanding of the regulatory constraints, data governance obligations, and operational pressures. Our global consultant network spanning the United States, Mexico, and India gives financial institutions access to a delivery model that scales without sacrificing platform knowledge.   
       </div>
     </div>
   </div>
 
 
+
+  
   <!-- ============================================================
-       SECTION: PLATFORM OPS COST
-       Purpose : Two-column comparison (unmanaged vs managed) with
-                 stat tiles. Pixel-mirror of Figma Desktop-31.
-       CSS tag : /* === PLATFORM OPS COST === */
+       PARTNERSHIP RAIL — SHARED STYLES + CAROUSEL
        ============================================================ -->
+  <style>
+    /* ══════════════════════════════════════════
+       Partnership Rail — shared card styles
+       ══════════════════════════════════════════ */
+    .pr-section {
+      padding: 72px 112px;
+      border-top: 1px solid rgba(13,17,39,0.08);
+    }
+
+    /* ── Carousel wrapper ── */
+    .pr-carousel-outer {
+      position: relative;
+    }
+
+    .pr-carousel-viewport {
+      overflow: hidden;
+      border-radius: 18px; /* clips the sliding strip */
+    }
+
+    .pr-carousel-track {
+      display: flex;
+      gap: 24px;
+      transition: transform 0.52s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
+    }
+
+    /* ── Individual card ── */
+    .pr-card {
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      /* width set by JS; height fixed */
+      min-height: 514px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      cursor: pointer;
+    }
+
+    .pr-card-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .pr-card:hover .pr-card-bg,
+    .pr-card.is-open .pr-card-bg {
+      transform: scale(1.04);
+    }
+
+    .pr-card-overlay {
+      position: absolute;
+      inset: 0;
+      transition: filter 0.42s ease;
+    }
+
+    .pr-card:hover .pr-card-overlay,
+    .pr-card.is-open .pr-card-overlay {
+      filter: brightness(1.18);
+    }
+
+    .pr-card-body {
+      position: relative;
+      z-index: 2;
+      padding: 28px 28px 32px;
+    }
+
+    .pr-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 10px;
+    }
+
+    .pr-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      max-height: calc(24px * 1.25 * 2 + 2px);
+      transition: max-height 0.38s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .pr-card:hover .pr-title,
+    .pr-card.is-open .pr-title {
+      -webkit-line-clamp: unset;
+      max-height: 200px;
+    }
+
+    .pr-subtitle {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .pr-desc-wrap {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition:
+        max-height 0.42s cubic-bezier(0.16,1,0.3,1),
+        opacity    0.35s ease 0.07s;
+    }
+
+    .pr-card:hover .pr-desc-wrap,
+    .pr-card.is-open .pr-desc-wrap {
+      max-height: 200px;
+      opacity: 1;
+    }
+
+    .pr-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.55;
+    }
+
+    .pr-hint {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      transition: opacity 0.28s ease;
+    }
+
+    .pr-card:hover .pr-hint,
+    .pr-card.is-open .pr-hint {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ── Nav arrows ── */
+    .pr-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pr-arrow {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(13,17,39,0.15);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.22s ease, border-color 0.22s ease, opacity 0.22s ease;
+      flex-shrink: 0;
+    }
+
+    .pr-arrow:hover {
+      background: #09090b;
+      border-color: #09090b;
+    }
+
+    .pr-arrow:hover svg path {
+      stroke: #fff;
+    }
+
+    .pr-arrow:disabled,
+    .pr-arrow[disabled] {
+      opacity: 0.28;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .pr-arrow svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .pr-arrow svg path {
+      stroke: #09090b;
+      transition: stroke 0.22s ease;
+    }
+
+    /* ── Dots ── */
+    .pr-dots {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+
+    .pr-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(13,17,39,0.18);
+      transition: background 0.28s ease, transform 0.28s ease;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .pr-dot.active {
+      background: #09090b;
+      transform: scale(1.3);
+    }
+
+    /* ── Header row (title + nav) ── */
+    .pr-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 36px;
+      gap: 24px;
+    }
+
+    .pr-header-left {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .pr-header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ── "The Celsior Difference" light-bg variant card ── */
+    .pr-card--light {
+      background: #f6f7f9;
+      border: 1px solid rgba(13,17,39,0.08);
+      min-height: 380px;
+    }
+
+    .pr-card--light .pr-card-body {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: flex-start;
+    }
+
+    .pr-card--light .pr-eyebrow {
+      color: rgba(13,17,39,0.45);
+    }
+
+    .pr-card--light .pr-title {
+      font-size: 20px;
+      color: #09090b;
+      max-height: none;
+      -webkit-line-clamp: unset;
+    }
+
+    .pr-card--light .pr-subtitle {
+      color: #09090b;
+    }
+
+    .pr-card--light .pr-desc {
+      color: #3f3f46;
+      font-size: 14px;
+    }
+
+    .pr-card--light .pr-desc-wrap {
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    .pr-card--light .pr-hint {
+      display: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1280px) {
+      .pr-section {
+        padding: 72px 72px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .pr-section {
+        padding: 60px 48px;
+      }
+      .pr-card { min-height: 460px; }
+      .pr-card--light { min-height: 320px; }
+    }
+
+    @media (max-width: 768px) {
+      .pr-section {
+        padding: 52px 24px;
+      }
+      .pr-header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 28px;
+      }
+      .pr-card { min-height: 400px; }
+      .pr-card--light { min-height: 300px; }
+      /* mobile tap-to-expand */
+      .pr-card:not(.pr-card--light) .pr-desc-wrap {
+        max-height: 0;
+        opacity: 0;
+      }
+      .pr-card:not(.pr-card--light).is-open .pr-desc-wrap {
+        max-height: 300px;
+        opacity: 1;
+      }
+      .pr-hint {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
+      .pr-card.is-open .pr-hint {
+        opacity: 0 !important;
+      }
+    }
+  </style>
+
+  <!-- ── PARTNERSHIP RAIL SECTION 1 ── -->
+  <section class="pr-section sec-border" id="partnershipRail1">
+    <div class="pr-header">
+      <div class="pr-header-left">
+        <p class="eyebrow" style="margin-bottom:12px;">Partnership Rail</p>
+        <h2 style="font-size:clamp(32px,3.8vw,55px);font-weight:700;line-height:1.08;letter-spacing:-1px;color:#09090b;max-width:860px;margin-bottom:16px;">
+          Certified Across the Platforms That Run Your Business
+        </h2>
+        <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:860px;margin:0;">
+          Celsior holds certified partnerships with four of the most consequential platforms in insurance, banking, and enterprise technology. Each partnership is structured around a dedicated Center of Excellence, not a general practice area, giving clients the assurance that the team behind their program has been formally validated by the platform vendor itself.
+        </p>
+      </div>
+      <div class="pr-header-right">
+        <div class="pr-dots" id="pr1-dots"></div>
+        <button class="pr-arrow" id="pr1-prev" aria-label="Previous">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="pr-arrow" id="pr1-next" aria-label="Next">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="pr-carousel-outer" id="pr1-outer">
+      <div class="pr-carousel-viewport" id="pr1-viewport">
+        <div class="pr-carousel-track" id="pr1-track">
+
+          <!-- Card 1 — Guidewire -->
+          <div class="pr-card" role="button" tabindex="0" aria-expanded="false">
+            <img class="pr-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1780645641/31_jqsapw.png" alt="Guidewire Partnership" />
+            <div class="pr-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 0%,#0c1b3b 67%);"></div>
+            <div class="pr-card-body">
+              <div class="pr-eyebrow">Guidewire Partnership</div>
+              <div class="pr-title">Guidewire Technology<br>Partner</div>
+              <div class="pr-subtitle">Guidewire CoE</div>
+              <div class="pr-desc-wrap"><div class="pr-desc">10 years of delivery across PolicyCenter, BillingCenter, and ClaimsCenter with 8+ Fortune 500 carriers </div></div>
+            </div>
+          </div>
+
+          <!-- Card 2 — Jack Henry -->
+          <div class="pr-card" role="button" tabindex="0" aria-expanded="false">
+            <img class="pr-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1780645641/30_bgt6k7.png" alt="Jack Henry Partnership" />
+            <div class="pr-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 0%,#060606 67%);"></div>
+            <div class="pr-card-body">
+              <div class="pr-eyebrow">Jack Henry Partnership</div>
+              <div class="pr-title">Fintech Integration Network Member</div>
+              <div class="pr-subtitle">Jack Henry CoE</div>
+              <div class="pr-desc-wrap"><div class="pr-desc">Jack Henry CoE Anchor: jXchange API-integrated delivery for community and regional financial institutions pursuing core modernization </div></div>
+            </div>
+          </div>
+
+          <!-- Card 3 — ServiceNow -->
+          <div class="pr-card" role="button" tabindex="0" aria-expanded="false">
+            <img class="pr-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1780645641/29_bazoum.png" alt="ServiceNow Partnership" />
+            <div class="pr-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 0%,#060606 67%);"></div>
+            <div class="pr-card-body">
+              <div class="pr-eyebrow">ServiceNow Partnership</div>
+              <div class="pr-title">ServiceNow FinTech Network Partner</div>
+              <div class="pr-subtitle">ServiceNow CoE</div>
+              <div class="pr-desc-wrap"><div class="pr-desc">ITSM, Change Management, and managed SNOW operations for financial services and insurance organizations </div></div>
+            </div>
+          </div>
+
+
+
+        </div><!-- /track -->
+      </div><!-- /viewport -->
+    </div><!-- /outer -->
+  </section>
+
+  
   <section id="platform-ops-cost" style="background:#fff;border-top:1px solid rgba(13,17,39,0.08);">
 
     <!-- Heading -->
-    <p class="eyebrow">Consequenses</p>
+    <p class="eyebrow">Our Certified Partnerships </p>
     <h2
       style="font-size:55px;font-weight:700;letter-spacing:-1px;line-height:55px;color:#09090b;max-width:1048px;margin-bottom:32px;">
-      The compounding cost of 
-disconnected experience.</h2>
+      The Partnerships Behind Every Engagement </h2>
 
     <!-- Body -->
-    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">Customer journeys built on separate systems, built by  separate teams, at separate points in time, were never designed to feel like one product.  Today, customers across banking, insurance, and healthcare encounter that friction daily.  And they leave because of it.</p>
+    <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:1195px;margin-bottom:36px;">Each practice is built around a formal Center of Excellence, a certified partnership, and a delivery team with demonstrated platform depth. Select a practice to see what Celsior delivers within that ecosystem. </p>
 
-    <!-- ── Card frame — exact Figma Desktop-31 styles ── -->
-    <!--
-    Figma:
-      border: 3px solid #f1be56
-      border-radius: 7px
-      background: linear-gradient(157.85deg, #f8f8f8 5.73%, #fcfafa 26.77%)
-      box-shadow: 14px 9px 36px 0px rgba(0,0,0,0.10),
-                  55px 35px 65px 0px rgba(0,0,0,0.09),
-                  123px 78px 87px 0px rgba(0,0,0,0.05),
-                  219px 138px 104px 0px rgba(0,0,0,0.01),
-                  342px 216px 113px 0px rgba(0,0,0,0)
-  -->
-    <div class="ops-cost-cards" style="
-    border: 3px solid transparent;
-    border-radius: 7px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    min-height: 345px;
-    position: relative;
-  ">
+  <!-- IMAGE ACCORDION — transplanted from digital-operations.html -->
+  <section class="acc-section" id="dl-acc-section" aria-label="Our certified partnerships">
 
-      <!-- Vertical divider 1 (between col 1 & 2) -->
-      <div style="position:absolute;top:0;bottom:0;left:33.37%;width:1px;background:#e5e7eb;"></div>
-      <!-- Vertical divider 2 (between col 2 & 3) -->
-      <div style="position:absolute;top:0;bottom:0;left:66.73%;width:1px;background:#e5e7eb;"></div>
-
-      <!-- ── Card 1: Slower product cycles ── -->
-      <div style="padding: 58px 38px 48px;">
-        <!--
-        Icon btn:
-          size: 50.1px
-          bg: #0d0d0f
-          border-radius: 6.26px
-          drop-shadow: 1.044px 1.044px 0px rgba(255,255,255,0.08)
-          inset-shadow: inset 2.088px 2.088px 6.263px rgba(0,0,0,0.9),
-                        inset -1.044px -1.044px 2.088px rgba(0,0,0,0.4)
-      -->
-        <div style="
-        width: 50.1px; height: 50.1px;
-        background: #0d0d0f;
-        border-radius: 6.26px;
-        display: flex; align-items: center; justify-content: center;
-        box-shadow:
-          1.044px 1.044px 0px rgba(255,255,255,0.08),
-          inset 2.088px 2.088px 6.263px rgba(0,0,0,0.9),
-          inset -1.044px -1.044px 2.088px rgba(0,0,0,0.4);
-        margin-bottom: 50px;
-        flex-shrink: 0;
-      ">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779333813/21_kfyexy.png" alt=""
-            style="width:35.875px;height:35.875px;display:block;" />
-        </div>
-        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Fragmented Journeys</h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">Every handoff between legacy systems and modern interfaces is a friction point your  customer notices; even when your teams don't.</p>
+    <!-- ROW 1 — Guidewire (default active) -->
+    <div class="acc-row active" data-index="0" tabindex="0">
+      <div class="acc-header">
+        <div class="acc-icon" aria-hidden="true"></div>
+        <span class="acc-title">Guidewire Positioning</span>
+        <span class="acc-header-arrow" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
       </div>
-
-      <!-- ── Card 2: Compounding security exposure ── -->
-      <div style="padding: 58px 38px 48px;">
-        <div style="
-        width: 50.1px; height: 50.1px;
-        background: #0d0d0f;
-        border-radius: 6.26px;
-        display: flex; align-items: center; justify-content: center;
-        box-shadow:
-          1.044px 1.044px 0px rgba(255,255,255,0.08),
-          inset 2.088px 2.088px 6.263px rgba(0,0,0,0.9),
-          inset -1.044px -1.044px 2.088px rgba(0,0,0,0.4);
-        margin-bottom: 50px;
-        flex-shrink: 0;
-      ">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779333814/22_bivfvo.png" alt=""
-            style="width:35.875px;height:35.875px;display:block;" />
+      <div class="acc-body">
+        <div class="acc-body-grid">
+          <div class="acc-body-text">
+            <img class="acc-brand-logo" src="https://res.cloudinary.com/dden4hawr/image/upload/v1772534736/cel/6_ufufyx.png" alt="Guidewire">
+            <p class="acc-para"><strong>Positioning:</strong> A decade of delivery across the full InsuranceSuite, with 8+ Fortune 500 carriers and a Guidewire Center of Excellence behind every engagement.</p>
+            <p class="acc-para"><strong>Capabilities:</strong> Implementation, configuration, and cloud upgrade support across PolicyCenter, BillingCenter, and ClaimsCenter.</p>
+            <p class="acc-para"><strong>Proprietary QA</strong> automation accelerators purpose-built for Guidewire Cloud's quarterly release cycle. Production support, data services, and AI-assisted test script generation for mid-to-large P&amp;C carriers.</p>
+            <a class="acc-readmore" href="https://dev.celsiortech.us/partners/guidewire">Explore Guidewire Practice</a>
+          </div>
+          <div class="acc-img2">
+            <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780646424/202eaa4eb1b7ce8d31a6beb424ac18602955c813_qrtqna.jpg" alt="Guidewire practice">
+          </div>
         </div>
-        <h3 style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;margin-bottom:16px;">Slow Time-to-Market</h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">When delivery is slowed by legacy constraints, your competitors ship the experiences  your customers are still waiting for and retention suffers.</p>
       </div>
+    </div>
 
-      <!-- ── Card 3: Engineering talent attrition ── -->
-      <div style="padding: 58px 38px 48px;">
-        <div style="
-        width: 50.1px; height: 50.1px;
-        background: #0d0d0f;
-        border-radius: 6.26px;
-        display: flex; align-items: center; justify-content: center;
-        box-shadow:
-          1.044px 1.044px 0px rgba(255,255,255,0.08),
-          inset 2.088px 2.088px 6.263px rgba(0,0,0,0.9),
-          inset -1.044px -1.044px 2.088px rgba(0,0,0,0.4);
-        margin-bottom: 50px;
-        flex-shrink: 0;
-      ">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779333813/23_qjsf2c.png" alt=""
-            style="width:35.875px;height:35.875px;display:block;" />
+    <!-- ROW 2 — Jack Henry -->
+    <div class="acc-row" data-index="1" tabindex="0">
+      <div class="acc-header">
+        <div class="acc-icon" aria-hidden="true"></div>
+        <span class="acc-title">Jack Henry Positioning</span>
+        <span class="acc-header-arrow" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+      <div class="acc-body">
+        <div class="acc-body-grid">
+          <div class="acc-body-text">
+            <img class="acc-brand-logo" src="https://res.cloudinary.com/dden4hawr/image/upload/v1772534799/cel/Untitled_design_33_htf6nu.png" alt="Jack Henry">
+            <p class="acc-para"><strong>Positioning:</strong> Direct jXchange API access as a Fintech Integration Network member, backed by a team with former Jack Henry Banking leadership on staff.</p>
+            <p class="acc-para"><strong>Capabilities:</strong> Core banking modernization with fintech extensions covering CRM, fraud detection, payments, and compliance workflows. KYC, AML, and regulatory reporting automation built into every layer of the transformation. Unified, real-time customer data across apps and financial institutions to support BI, analytics, and personalized digital services.</p>
+            <a class="acc-readmore" href="https://dev.celsiortech.us/partners/jack-henry ">Explore Jack Henry Practice</a>
+          </div>
+          <div class="acc-img2">
+            <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780646424/202eaa4eb1b7ce8d31a6beb424ac18602955c813_qrtqna.jpg" alt="Jack Henry practice">
+          </div>
         </div>
-        <h3
-          style="font-size:24px;font-weight:600;letter-spacing:-0.2088px;color:#000;white-space:nowrap;margin-bottom:16px;">
-          Channel Inconsistency</h3>
-        <p style="font-size:16px;font-weight:400;color:#000;line-height:23px;">90% of customers expect consistency across every channel. Most organizations can't  deliver it. Not for lack of intent, but for lack of architecture.</p>
       </div>
+    </div>
 
-    </div><!-- /card-frame -->
+    <!-- ROW 3 — ServiceNow -->
+    <div class="acc-row" data-index="2" tabindex="0">
+      <div class="acc-header">
+        <div class="acc-icon" aria-hidden="true"></div>
+        <span class="acc-title">ServiceNow Positioning</span>
+        <span class="acc-header-arrow" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+      <div class="acc-body">
+        <div class="acc-body-grid">
+          <div class="acc-body-text">
+            <img class="acc-brand-logo" src="https://res.cloudinary.com/dden4hawr/image/upload/v1772534735/cel/5_nipjvi.png" alt="ServiceNow">
+            <p class="acc-para"><strong>Positioning:</strong> A ServiceNow FinTech Network Partner with a dedicated CoE covering ITSM, managed operations, and compliance automation for financial services organizations.</p>
+            <p class="acc-para"><strong>Capabilities:</strong> ITSM implementation and ongoing managed SNOW operations for financial services and insurance. Incident and change management with structured governance cadences and audit-ready reporting. Workflow automation that removes manual hand-offs across IT operations, risk, and compliance functions.</p>
+            <a class="acc-readmore" href="https://dev.celsiortech.us/partners/servicenow ">Explore ServiceNow Practice</a>
+          </div>
+          <div class="acc-img2">
+            <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780646424/202eaa4eb1b7ce8d31a6beb424ac18602955c813_qrtqna.jpg" alt="ServiceNow practice">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- /IMAGE ACCORDION -->
+
+  </section>
+
+  <!-- ── CELSIOR DIFFERENCE SECTION (after accordion) ── -->
+  <section class="pr-section sec-border" id="partnershipRail2">
+    <div class="pr-header">
+      <div class="pr-header-left">
+        <p class="eyebrow" style="margin-bottom:12px;">The Celsior Difference</p>
+        <h2 style="font-size:clamp(32px,3.8vw,55px);font-weight:700;line-height:1.08;letter-spacing:-1px;color:#09090b;max-width:860px;margin-bottom:16px;">
+          Certified at the Platform Level. Accountable at the Program Level
+        </h2>
+        <p style="font-size:16px;color:#3f3f46;line-height:23px;max-width:860px;margin:0;">
+          Most organizations working with platform vendors choose between two options: a large system integrator with broad coverage and limited platform depth, or a boutique specialist with deep platform knowledge and a constrained delivery capacity. Celsior is structured to remove that trade-off.<br><br>
+          <strong style="font-size:15px;color:#09090b;">Four principles govern how Celsior operates across every partner practice.</strong>
+        </p>
+      </div>
+      <div class="pr-header-right">
+        <div class="pr-dots" id="pr2-dots"></div>
+        <button class="pr-arrow" id="pr2-prev" aria-label="Previous">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="pr-arrow" id="pr2-next" aria-label="Next">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="pr-carousel-outer" id="pr2-outer">
+      <div class="pr-carousel-viewport" id="pr2-viewport">
+        <div class="pr-carousel-track" id="pr2-track">
+
+          <!-- Card 1 — Certified Centers of Excellence -->
+          <div class="pr-card" role="button" tabindex="0" aria-expanded="false">
+            <img class="pr-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1780645641/33_yiosj1.png" alt="Certified Centers of Excellence" />
+            <div class="pr-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 20%,rgba(8,18,40,0.92) 80%);"></div>
+            <div class="pr-card-body">
+              <div class="pr-eyebrow"> </div>
+              <div class="pr-title">Certified Centers of Excellence</div>
+              <div class="pr-desc-wrap"><div class="pr-desc">Celsior's four partner practices operate as a Center of Excellence with dedicated engineering teams, structured training programs, and platform-specific delivery frameworks.</div></div>
+            </div>
+          </div>
+
+          <!-- Card 2 — Do-It-Together Delivery Model -->
+          <div class="pr-card" role="button" tabindex="0" aria-expanded="false">
+            <img class="pr-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1780645642/34_gyb2fp.png" alt="Do-It-Together Delivery" />
+            <div class="pr-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 20%,rgba(6,6,6,0.92) 80%);"></div>
+            <div class="pr-card-body">
+              <div class="pr-eyebrow"> </div>
+              <div class="pr-title">Do-It-Together Delivery Model</div>
+              <div class="pr-desc-wrap"><div class="pr-desc">Every engagement operates on a do-it-together model: joint solution development, knowledge transfer built into the program structure, and a deliberate handoff that leaves the client's internal team stronger.</div></div>
+            </div>
+          </div>
+
+          <!-- Card 3 — Bestshoring Without Compromise -->
+          <div class="pr-card" role="button" tabindex="0" aria-expanded="false">
+            <img class="pr-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1780645643/35_q68g4n.png" alt="Bestshoring Without Compromise" />
+            <div class="pr-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 20%,rgba(6,6,6,0.92) 80%);"></div>
+            <div class="pr-card-body">
+              <div class="pr-eyebrow"> </div>
+              <div class="pr-title">Bestshoring Without Compromise</div>
+              <div class="pr-desc-wrap"><div class="pr-desc">Celsior's global delivery model spans the United States, Mexico, and India. Resourcing decisions are made based on skill availability, time-zone alignment, and program requirements, not cost optimization alone.</div></div>
+            </div>
+          </div>
+
+          <!-- Card 4 — Outcome Accountability -->
+          <div class="pr-card" role="button" tabindex="0" aria-expanded="false">
+            <img class="pr-card-bg" src="https://res.cloudinary.com/dden4hawr/image/upload/v1780645643/36_fsqo6v.png" alt="Outcome Accountability" />
+            <div class="pr-card-overlay" style="background:linear-gradient(180deg,rgba(11,11,11,0) 20%,rgba(12,6,26,0.92) 80%);"></div>
+            <div class="pr-card-body">
+              <div class="pr-eyebrow"> </div>
+              <div class="pr-title">Outcome Accountability</div>
+              <div class="pr-desc-wrap"><div class="pr-desc">Celsior structures every partner engagement around measurable outcomes agreed at the outset: testing effort reduction, deployment frequency, incident resolution time, or migration timeline.</div></div>
+            </div>
+          </div>
+
+        </div><!-- /track -->
+      </div><!-- /viewport -->
+    </div><!-- /outer -->
   </section>
 
   <!-- ============================================================
-       SECTION: TESTIMONIAL
-       Purpose : Pull-quote with author + result chips on dark panel.
-       CSS tag : /* === TESTIMONIAL === */
+       SECTION: OUTCOMES ACROSS PARTNER PRACTICES (em-section + particles)
        ============================================================ -->
-  <section id="testimonial-sec" class="sec-border">
-    <p class="eyebrow">Testimonial</p>
-    <h2
-      style="font-size:clamp(28px, 4.5vw, 58px);font-weight:700;color:#111827;letter-spacing:-0.6px;line-height:1.05;margin-bottom:clamp(20px, 2.4vw, 32px);">
-      Delivered at enterprise scale</h2>
-    <div class="test-card">
-      <div class="test-left">
-        <svg width="32" height="32" fill="none" viewBox="0 0 32 32" style="opacity:0.3;margin-bottom:16px;">
-          <path
-            d="M8 20c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H8v-8zm12 0c0-4.4 2.4-8 6-10l1.5 2c-2.5 1.5-4 4-4 8h4v8H20v-8z"
-            fill="#fff" />
-        </svg>
-        <p class="test-quote">““We deployed responsible AI across an insurance carrier's claims lifecycle—from FNOL intake through SIU investigation. ClaimX delivers composite fraud risk scoring in under 0.1 seconds with SHAP-powered explainability for every flag. The system acts as intelligence layer, not decision layer, maintaining human accountability while accelerating legitimate claims processing.””</p>
-        <div class="test-author">
-          <div class="test-avatar">CIO</div>
-          <div>
-            <div style="font-size:14px;font-weight:600;color:#fff;">Major life insurance company</div>
-            <div style="font-size:12px;color:#93c5fd;margin-top:2px;">Agent Portal Modernisation</div>
-          </div>
-        </div>
-      </div>
-      <div class="test-right">
-        <div class="test-res-label">Delivery Approach</div>
-        <div class="test-res-item">
-          <div class="test-dot"></div><span class="test-res-text">Build, run, and govern as one engagement  Our delivery model integrates strategy consulting with platform deployment and managed operations. Readiness assessments identify priority use cases. CAFE builds agents in weeks, not quarters. PACE manages runtime governance across your agent estate. HALO ensures human oversight meets regulatory requirements. One partner, one accountability model. </span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-
-
-
-
-
-  <!-- ===== Retained from Our Focus: Analysis ===== -->
-  <section class="analysis section-frame">
-    <div>
-      <p class="eyebrow">OUR AI-FIRST SOLUTION</p>
-      <h2>Purposeful design. 
-Engineered to <span
-          style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; display:inline;">perform</span></h2>
-    </div>
-    <div class="analysis__copy">
-      <p>Celsior builds digital products and customer journeys that close the gap  between what organizations intend and what customers experience. We work across  strategy, design, and engineering; so the product your customers use reflects the same  precision as the technology that powers it. For Banking, Insurance, and Healthcare  organizations, that means digital experiences your customers trust and return to.</p>
-    </div>
-    <div class="solution-cards">
-      <article>
-        <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779334925/4_oskntq.png" alt="" />
-        <div class="solution-card-inner">
-          <span class="solution-index">01</span>
-          <div class="solution-card-spacer"></div>
-          <div class="solution-card-body">
-            <h3>Customer Experience Modernization</h3>
-            <p class="solution-card-text">We modernize the underlying architecture and the customer-facing layer together,  replacing fragmented touchpoints with end-to-end journeys that behave consistently  whether a customer is on web, mobile, or speaking with an advisor.</p>
-            <a class="solution-link" href="https://dev.celsiortech.us/ai-innovation/celsior-ai-lab">Explore Further →</a>
-          </div>
-        </div>
-      </article>
-      <article>
-        <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779334925/5_detght.png" alt="" />
-        <div class="solution-card-inner">
-          <span class="solution-index">02</span>
-          <div class="solution-card-spacer"></div>
-          <div class="solution-card-body">
-            <h3>Digital Product 
-Engineering</h3>
-            <p class="solution-card-text">We build digital products from the ground up and extend existing ones using a do-it together model that keeps intellectual property with your team while bringing Celsior's  engineering depth to the work.</p>
-            <a class="solution-link" href="https://dev.celsiortech.us/capabilities/ai-led-engineering">Explore Further →</a>
-          </div>
-        </div>
-      </article>
-      <article>
-        <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779334926/6_b6mwba.png" alt="" />
-        <div class="solution-card-inner">
-          <span class="solution-index">03</span>
-          <div class="solution-card-spacer"></div>
-          <div class="solution-card-body">
-            <h3>Design Strategy and Omnichannel Delivery</h3>
-            <p class="solution-card-text">We combine human-centered design with omnichannel delivery discipline; so, the  experience your customers expect on day one remains consistent over the years. Strong  omnichannel strategies retain 89% of customers.</p>
-            <a class="solution-link" href="https://dev.celsiortech.us/ai-innovation/design-lab">Explore Further →</a>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION: OUTCOMES
-       Purpose : Heading on the left, three colored outcome stat cards
-                 on the right. Pixel-exact Figma Desktop-30 (1433×894).
-       CSS tag : /* === OUTCOMES === */
-       ============================================================ -->
-  <section class="outcomes-section">
-    <section class="outcomes" aria-label="Outcomes">
-      <div class="outcomes__heading">
-        <p class="eyebrow">WHY AI-FIRST ENGINEERING?</p>
-        <h2>Outcomes we're accountable to</h2>
-        <p>Organizations that lead on digital experience in Banking, Insurance, and Healthcare carry measurable financial advantages over those that lag. These are the benchmarks our engagements are structured to reach. </p>
-      </div>
-      <div class="outcome-cards">
-        <article class="outcome-card outcome-card--green" data-stat-card>
-          <strong><span class="stat-num" data-target="2" data-suffix="X">0X</span></strong>
-          <p>CX leaders achieved more than double the revenue growth of CX laggards between 2016 and 2021 Source: McKinsey </p>
-          <div class="outcome-card-arrow">
-            <svg viewBox="0 0 18 18" fill="none">
-              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </div>
-        </article>
-        <article class="outcome-card outcome-card--blue" data-stat-card>
-          <strong><span class="stat-num" data-target="7">0</span><span>-10%</span></strong>
-          <p>Increase in total shareholder return for organizations that improve customer experience
-Source: McKinsey </p>
-          <div class="outcome-card-arrow">
-            <svg viewBox="0 0 18 18" fill="none">
-              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </div>
-        </article>
-        <article class="outcome-card outcome-card--gold" data-stat-card>
-          <strong><span class="stat-num" data-target="65">0</span><span>%</span></strong>
-          <p>TSR advantage for CX-leading P&C insurers over peers across a five-year period (2017–2022) Source: McKinsey </p>
-          <div class="outcome-card-arrow">
-            <svg viewBox="0 0 18 18" fill="none">
-              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#000" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </div>
-        </article>
-        <article class="outcome-card outcome-card--dark" data-stat-card>
-          <strong><span class="stat-num" data-target="50">0</span><span>%</span></strong>
-          <p>Reduction in compliance operations costs achievable through control automation</p>
-          <div class="outcome-card-arrow">
-            <svg viewBox="0 0 18 18" fill="none">
-              <path d="M3.5 9h11M10 5l4.5 4L10 13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </div>
-        </article>
-      </div>
-    </section>
-  </section>
-
-
-  <!-- ===== Retained from Our Focus: Partners (logos removed, spacer kept) ===== -->
-  <div aria-hidden="true" style="height:86px;background:#fff;border-bottom:1px solid rgba(13,17,39,0.08);"></div>
-
-
-  <!-- ===== Retained from Our Focus: Capabilities (em-section) ===== -->
-  <!-- ===== CAPABILITIES (em-section style ported from home) ===== -->
-  <section class="em-section" id="emSection">
+  <section class="em-section" id="outcomesPartnerSection">
     <div class="em-left">
       <canvas id="emParticleCanvas"></canvas>
       <div class="em-left-inner">
-        <span class="em-pill">Our Engineering Stack</span>
-        <h2 class="em-heading">Capabilities built for 
-enterprise-scale 
-experience.</h2>
-        <p class="em-desc">Our platform tools accelerate digital product delivery without sacrificing the  quality or governance that enterprise environments require. Each one is designed to reduce  time-to-market while maintaining the engineering discipline that customer-facing systems  demand.</p>
-        <a href="https://dev.celsiortech.us/solutions/technology-consulting" class="em-cta">Get Started
-          <svg viewBox="0 0 16 16" fill="none">
-            <line x1="2" y1="14" x2="14" y2="2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-            <polyline points="6,2 14,2 14,10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-        </a>
+        <span class="em-pill">OUTCOMES ACROSS PARTNER PRACTICES</span>
+        <h2 class="em-heading">
+          What Certified Practice<br>
+          Depth Produces in<br>
+          Production
+        </h2>
+        <p class="em-desc">Celsior invests in platform-specific accelerators, certified delivery frameworks, and dedicated Centers of Excellence because the quality of a program foundation determines the quality of its outcomes. Behind every outcome is a practice built on certified platform knowledge, proprietary tooling, and a delivery model designed to transfer capability to the client team.</p>
       </div>
     </div>
 
@@ -3651,247 +4275,35 @@ experience.</h2>
       <div class="em-card" data-index="01">
         <div class="em-bracket em-bracket--tl"></div>
         <div class="em-bracket em-bracket--br"></div>
-        <div class="em-icon-wrap">
-          <svg class="em-icon" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg" overflow="hidden">
-            <g style="transform-origin:45px 45px; animation: emGlobeRotate 12s linear infinite;">
-              <ellipse cx="45" cy="45" rx="30" ry="30" stroke="currentColor" stroke-width="1.2" opacity="0.4" />
-              <ellipse cx="45" cy="45" rx="18" ry="30" stroke="currentColor" stroke-width="1.2" opacity="0.65" />
-              <ellipse cx="45" cy="45" rx="6" ry="30" stroke="currentColor" stroke-width="1.2" opacity="0.85" />
-              <ellipse cx="45" cy="45" rx="30" ry="10" stroke="currentColor" stroke-width="1.2" opacity="0.6" />
-              <ellipse cx="45" cy="45" rx="30" ry="20" stroke="currentColor" stroke-width="1.2" opacity="0.5" />
-              <line x1="15" y1="45" x2="75" y2="45" stroke="currentColor" stroke-width="1.2" opacity="0.4" />
-              <line x1="45" y1="15" x2="45" y2="75" stroke="currentColor" stroke-width="1.2" opacity="0.4" />
-            </g>
-          </svg>
-        </div>
-        <span class="em-num">01</span>
-        <h3 class="em-card-title">AI-First Digital Engineering Platform</h3>
-        <p class="em-card-desc">AI-first digital engineering platform powers the full software delivery lifecycle from discovery and requirements  through to build, testing, and handover. For digital experience programs, this means faster  product delivery with end-to-end traceability: every design decision, code change, and  deployment documented and attributable. Teams ship better products in less time, with  less rework.</p>
+        <h3 class="em-card-title">Guidewire</h3>
+        <p class="em-card-desc">96 percent automated test coverage on Policy workstreams and 97 percent on Claims, across 35 integrations spanning PolicyCenter, BillingCenter, and ClaimsCenter.</p>
+        <p class="em-card-desc">50 to 70 percent reduction in automation script maintenance effort through auto-healing frameworks that update locators and workflow mappings dynamically when Guidewire Cloud metadata changes.</p>
       </div>
 
       <div class="em-card" data-index="02">
         <div class="em-bracket em-bracket--tl"></div>
         <div class="em-bracket em-bracket--br"></div>
-        <div class="em-icon-wrap">
-          <svg class="em-icon" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g class="em-bars-group">
-              <rect class="em-bar" x="10" y="25" width="6" height="40" rx="1" fill="currentColor" opacity="0.9" />
-              <rect class="em-bar" x="20" y="35" width="6" height="30" rx="1" fill="currentColor" opacity="0.8" />
-              <rect class="em-bar" x="30" y="18" width="6" height="47" rx="1" fill="currentColor" opacity="0.9" />
-              <rect class="em-bar" x="40" y="30" width="6" height="35" rx="1" fill="currentColor" opacity="0.7" />
-              <rect class="em-bar" x="50" y="22" width="6" height="43" rx="1" fill="currentColor" opacity="0.9" />
-              <rect class="em-bar" x="60" y="32" width="6" height="28" rx="1" fill="currentColor" opacity="0.8" />
-              <rect class="em-bar" x="70" y="20" width="6" height="45" rx="1" fill="currentColor" opacity="0.75" />
-            </g>
-          </svg>
-        </div>
-        <span class="em-num">02</span>
-        <h3 class="em-card-title">CAFE<sup style="font-size:0.55em;vertical-align:super;line-height:0;">™</sup> — Agent Framework for Enterprises</h3>
-        <p class="em-card-desc">CAFE™ brings blueprint-driven agent capability to digital product teams enabling LLM agnostic, tool-use and RAG-based agents that accelerate development workflows,  automate testing cycles, and surface engineering decisions faster. For organizations  building the next generation of customer-facing products, CAFE™ compresses the distance  between prototype and production.</p>
+        <h3 class="em-card-title">Jack Henry</h3>
+        <p class="em-card-desc">35 to 45 percent typical reduction in cloud infrastructure costs through FinOps-aligned Google Cloud optimization for Jack Henry environments, with performance improvements delivered concurrently.</p>
+        <p class="em-card-desc">Financial institutions served through Celsior's Jack Henry practice report shorter time to production on fintech integrations, with reduced complexity at the integration layer through direct jXchange API access.</p>
       </div>
 
       <div class="em-card" data-index="03">
         <div class="em-bracket em-bracket--tl"></div>
         <div class="em-bracket em-bracket--br"></div>
-        <div class="em-icon-wrap">
-          <svg class="em-icon" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g class="em-chevron-group">
-              <path d="M28 25 L14 45 L28 65" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" fill="none" opacity="0.9" />
-              <path d="M42 25 L28 45 L42 65" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" fill="none" opacity="0.6" />
-              <path d="M52 35 L62 45 L52 55" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" fill="none" opacity="0.9" />
-              <path d="M64 30 L76 45 L64 60" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" fill="none" opacity="0.55" />
-            </g>
-          </svg>
-        </div>
-        <span class="em-num">03</span>
-        <h3 class="em-card-title">HALO<sup style="font-size:0.55em;vertical-align:super;line-height:0;">™</sup> — Human-AI Loop Orchestration</h3>
-        <p class="em-card-desc">Customer-facing systems require human judgment at critical points in every  workflow. HALO™ governs the boundary between automated process and human decision  with HITL governance, SLA-based accountability, and full audit traceability. For Banking,  Insurance, and Healthcare organizations, this means digital products that meet regulatory  expectations without sacrificing the responsiveness customers expect.</p>
+        <h3 class="em-card-title">ServiceNow</h3>
+        <p class="em-card-desc">Organizations on Celsior-managed ServiceNow programs report measurable reductions in repeat incident volume, lower support overhead, and improved consistency in issue tracking and resolution across IT operations.</p>
+        <p class="em-card-desc">Structured governance cadences, centralized knowledge repositories, and standardized workflows deliver transparent performance reporting and a documented improvement trajectory across the engagement lifecycle.</p>
       </div>
+
     </div>
   </section>
 
 
 
-  <!-- ============================================================
-       SECTION: PLATFORMS STRIP
-       Purpose : Headline + horizontally scrolling partner-logo strip.
-       CSS tag : /* === PARTNERS / PLATFORMS === */
-       ============================================================ -->
-  <div class="platforms" style="background:#FFFFFF;">
-
-    <h3>Delivered on the platforms your enterprise already <span
-        style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; display:inline;">trusts</span>
-    </h3>
-    <section class="partners" aria-label="Partner ecosystem">
-      <div class="partners__track">
-        <div class="partners__group">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/Dynatrace_1_t3ayxc.png"
-            alt="Dynatrace" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/ServiceNow_1_plissc.png"
-            alt="ServiceNow" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Boomi_1_kvrpcd.png" alt="Boomi"
-            loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/GuideWire_logo_color_1_whi7lu.png"
-            alt="GuideWire" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/RingCentral_1_zjcj4f.png"
-            alt="RingCentral" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Informatica_1_gkhjs0.png"
-            alt="Informatica" loading="lazy" />
-        </div>
-        <div class="partners__group" aria-hidden="true">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/Dynatrace_1_t3ayxc.png" alt=""
-            loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/ServiceNow_1_plissc.png" alt=""
-            loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Boomi_1_kvrpcd.png" alt=""
-            loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869311/GuideWire_logo_color_1_whi7lu.png"
-            alt="" loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/RingCentral_1_zjcj4f.png" alt=""
-            loading="lazy" />
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1777869312/Informatica_1_gkhjs0.png" alt=""
-            loading="lazy" />
-        </div>
-      </div>
-    </section>
-  </div>
 
 
 
-  <!-- ============================================================
-       SECTION: EXPLORE
-       Purpose : Cross-link grid pointing to other focus areas.
-                 Ported from the Our_Focus page.
-       CSS tag : /* === EXPLORE === */
-       ============================================================ -->
-  <section class="explore">
-    <h2>Continue exploring Celsior's capabilities</h2>
-    <div class="explore__links">
-      <a href="https://dev.celsiortech.us/ai-innovation/frameworks-accelerators/synthetix">
-        <span class="explore__row-left">
-          <span class="explore__label">Modernization Hub</span>
-          <span class="explore__text">Core &amp; Legacy Modernization</span>
-        </span>
-        <span class="explore__row-right">
-          <span class="explore__arrow" aria-hidden="true">
-            <svg viewBox="0 0 18 18" fill="none">
-              <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-              <polyline points="7,3 15,3 15,11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </span>
-        </span>
-      </a>
-      <a href="https://dev.celsiortech.us/capabilities/cloud-and-infrastructure-engineering">
-        <span class="explore__row-left">
-          <span class="explore__label">Cloud CoE</span>
-          <span class="explore__text">Cloud Transformation &amp; Continuous Modernization</span>
-        </span>
-        <span class="explore__row-right">
-          <span class="explore__arrow" aria-hidden="true">
-            <svg viewBox="0 0 18 18" fill="none">
-              <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-              <polyline points="7,3 15,3 15,11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </span>
-        </span>
-      </a>
-      <a href="https://dev.celsiortech.us/ai-innovation/celsior-ai-lab">
-        <span class="explore__row-left">
-          <span class="explore__label">AI Accelerators</span>
-          <span class="explore__text">Enterprise AI Enablement</span>
-        </span>
-        <span class="explore__row-right">
-          <span class="explore__arrow" aria-hidden="true">
-            <svg viewBox="0 0 18 18" fill="none">
-              <line x1="3" y1="15" x2="15" y2="3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-              <polyline points="7,3 15,3 15,11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
-          </span>
-        </span>
-      </a>
-      
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION: INSIGHTS
-       Purpose : Three-column thought-leadership card grid with tag
-                 chip, image, headline, and excerpt.
-       CSS tag : /* === INSIGHTS === */
-       ============================================================ -->
-  <section id="insights-sec" style="border-top:1px solid #f3f4f6;">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;">
-      <div>
-        <p class="eyebrow">INSIGHTS</p>
-        <h2
-          style="font-size:40px;font-weight:700;color:#111827;line-height:50px;max-width:900px;letter-spacing:-0.24px;">
-          Thinking on digital product engineering and customer experience</h2>
-      </div>
-      <a href="#"
-        style="font-size:14px;font-weight:600;color:var(--teal);display:flex;align-items:center;gap:6px;white-space:nowrap;margin-left:24px;padding-bottom:4px;">All
-        insights <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
-          <path d="M2 7h10M8 4l4 3-4 3" stroke="#0d4f45" stroke-width="1.4" stroke-linecap="round"
-            stroke-linejoin="round" />
-        </svg></a>
-    </div>
-    <div class="insight-cards">
-      <div class="insight-card">
-        <div class="insight-img">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779344436/10_itipga.png" alt="" />
-          <div class="insight-img-grad"></div>
-          <span class="insight-tag">CUSTOMER EXPERIENCE</span>
-        </div>
-        <div class="insight-body">
-          <h4 class="insight-title">Why omnichannel experience is an architecture problem, not a design problem</h4>
-          <p class="insight-desc">Most organizations approach channel inconsistency as a design challenge. The  evidence points elsewhere. When customers encounter friction moving between web,  mobile, and advisor channels, the root cause is almost always structural — and the fix  requires engineering, not reskinning.</p>
-          <div class="insight-foot"><span>6 min read</span><a href="#" class="insight-readlink">Read <svg width="12"
-                height="12" fill="none" viewBox="0 0 12 12">
-                <path d="M2 6h8M7 4l3 2-3 2" stroke="#0d4f45" stroke-width="1.3" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></a></div>
-        </div>
-      </div>
-      <div class="insight-card">
-        <div class="insight-img">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779344432/11_sc8d1p.png" alt="" />
-          <div class="insight-img-grad"></div>
-          <span class="insight-tag">DIGITAL PRODUCT ENGINEERING</span>
-        </div>
-        <div class="insight-body">
-          <h4 class="insight-title">The real cost of slow time-to-market in financial services digital products</h4>
-          <p class="insight-desc">Every quarter a digital product release slips, a competitor ships. In Banking and  Insurance, the compounding effect of delayed delivery on customer acquisition and  retention is measurable — and largely avoidable with the right engineering model.</p>
-          <div class="insight-foot"><span>8 min read</span><a href="#" class="insight-readlink">Read <svg width="12"
-                height="12" fill="none" viewBox="0 0 12 12">
-                <path d="M2 6h8M7 4l3 2-3 2" stroke="#0d4f45" stroke-width="1.3" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></a></div>
-        </div>
-      </div>
-      <div class="insight-card">
-        <div class="insight-img">
-          <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1779344433/12_sen1lr.png" alt="" style="top:0;" />
-          <div class="insight-img-grad"></div>
-          <span class="insight-tag">Engineering Leadership</span>
-        </div>
-        <div class="insight-body">
-          <h4 class="insight-title">Modernizing the customer journey without rebuilding everything at once</h4>
-          <p class="insight-desc">The organizations making the most progress on customer experience  modernization are not replacing their entire stack. They are identifying the highest-friction  touchpoints and systematically re-engineering from there — delivering visible improvement  inside the first delivery cycle.</p>
-          <div class="insight-foot"><span>5 min read</span><a href="#" class="insight-readlink">Read <svg width="12"
-                height="12" fill="none" viewBox="0 0 12 12">
-                <path d="M2 6h8M7 4l3 2-3 2" stroke="#0d4f45" stroke-width="1.3" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></a></div>
-        </div>
-      </div>
-    </div>
-  </section>
 
 
   <!-- ============================================================
@@ -3900,79 +4312,110 @@ experience.</h2>
                  questions on the right, separated by vertical rule.
        CSS tag : /* === FAQ === */
        ============================================================ -->
+  <style>
+    /* === FAQ layout override: full-width heading + image/accordion flex row === */
+    .faq { padding: 0 52px 120px !important; }
+    .faq__inner { display: block !important; max-width: 1200px; margin: 0 auto; border-top: 0 !important; }
+    .faq__inner::after { display: none !important; }
+    .faq__head { padding: 80px 0 48px; }
+    .faq__head .eyebrow { margin: 0 0 20px; color: #9aa3b2; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 600; }
+    .faq__head h2 { margin: 0; color: #0d1127; font-family: 'Inter', system-ui, sans-serif; font-size: clamp(1.9rem, 4vw, 3.4rem); line-height: 1.08; letter-spacing: -0.036em; font-weight: 800; }
+    .faq__row { display: flex; align-items: stretch; gap: 40px; }
+    .faq__media { flex: 0 0 38%; max-width: 38%; }
+    .faq__media img { width: 100%; height: 100%; min-height: 460px; max-height: 620px; object-fit: cover; border-radius: 14px; display: block; }
+    .faq__items { flex: 1 1 0; padding-left: 0 !important; padding-top: 0 !important; min-width: 0; }
+    @media (max-width: 1024px) {
+      .faq { padding: 0 32px 80px !important; }
+      .faq__row { flex-direction: column; gap: 32px; }
+      .faq__media, .faq__items { flex: 1 1 auto; max-width: 100%; }
+      .faq__media img { min-height: 280px; max-height: 420px; }
+      .faq__head { padding: 56px 0 32px; }
+    }
+    @media (max-width: 640px) {
+      .faq { padding: 0 20px 64px !important; }
+      .faq__head { padding: 40px 0 24px; }
+      .faq__media img { min-height: 220px; max-height: 320px; }
+    }
+  </style>
   <section class="faq">
     <div class="faq__inner">
-      <div class="faq__intro">
-        <p class="eyebrow">FAQ</p>
-        <h2>Questions product and technology leaders ask about Digital Experience  Engineering</h2>
-        <p>We have built digital products and modernized customer  journeys across Banking, Insurance, and Healthcare. These are the questions that shape  every first conversation.</p>
-        <a href="https://dev.celsiortech.us/contact-us">Speak with our Digital Experience practice <span aria-hidden="true">→</span></a>
+      <div class="faq__head">
+        <p class="eyebrow">FREQUENTLY ASKED QUESTIONS</p>
+        <h2>Questions We Hear From Enterprise Buyers, Platform Vendors, and System Integrators</h2>
+      </div>
+      <div class="faq__row">
+      <div class="faq__media">
+        <img src="https://res.cloudinary.com/dden4hawr/image/upload/v1780646352/New_Project_yzww8o.avif" alt="Two business professionals collaborating over a laptop in a modern office" loading="lazy" />
       </div>
       <div class="faq__items">
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How is Celsior's approach different from a digital agency or a pure UX consultancy? </span>
-            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></span>
+            <span class="faq__q">What does it mean for Celsior to be a Guidewire Technical Partner?</span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
           </button>
           <div class="faq__body">
-            <p>We design and engineer — under the same roof, in the same engagement. A digital agency typically hands off to an engineering team once design is complete. We do not have that handoff, because the same team carries the product from strategy through to production. The result is a digital experience where the design intent survives the build process, rather than being compromised by it. </p>
+            <div class="faq__body-wrap">
+            <p>Guidewire Technical Partnership is a formal designation within the Guidewire PartnerConnect program. It confirms that Celsior has met Guidewire's standards for technical competency, delivery capability, and customer reference requirements. It is the basis on which Celsior's teams receive access to platform resources, certification programs, and Guidewire's internal support channels during client engagements.</p>
+            </div>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">We have significant legacy infrastructure. Can Celsior improve our customer experience without a full re-platform? </span>
-            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></span>
+            <span class="faq__q">How is Celsior's Jack Henry engagement different from a standard system integrator relationship?</span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
           </button>
           <div class="faq__body">
-            <p>Yes — and in most cases, that is the right starting point. Full re-platforming carries delivery risk and timeline pressure that most organizations cannot absorb without disruption. We identify the customer journey touchpoints generating the most friction, modernize those first, and build toward broader architectural change on a timeline that your business can sustain. Visible improvement does not require a complete rebuild. </p>
+            <div class="faq__body-wrap">
+            <p>Celsior is a member of the Jack Henry Fintech Integration Network, which provides direct integration access to Jack Henry's core platforms through jXchange APIs. This is an engineering-level integration credential, not a referral or reseller arrangement. It allows Celsior to develop solutions that connect directly to the Jack Henry core with a standardized, secure integration layer, a capability that fewer than 8 percent of U.S. fintechs hold.</p>
+            </div>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How do you approach omnichannel delivery when our channels are owned by different internal teams? </span>
-            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></span>
+            <span class="faq__q">What industries does the Partner Ecosystem practice serve?</span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
           </button>
           <div class="faq__body">
-            <p>Channel fragmentation is often an organizational challenge before it is a technical one. We work across your internal teams to establish shared data models, design systems, and delivery standards that make consistent cross-channel experience achievable — regardless of which team owns which channel. The architecture does the coordination work that organizational boundaries otherwise prevent. </p>
+            <div class="faq__body-wrap">
+            <p>Celsior's partner practices serve organizations across insurance, banking and financial services, healthcare, and enterprise technology. The Guidewire practice is focused on P&amp;C insurance carriers. The Jack Henry practice serves community and regional financial institutions. The ServiceNow and Dynatrace practices operate across all verticals Celsior serves.</p>
+            </div>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">What does "do-it-together" mean for digital product engagements? </span>
-            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></span>
+            <span class="faq__q">Does Celsior offer managed operations, or only implementation?</span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
           </button>
           <div class="faq__body">
-            <p>It means your team retains full ownership of the intellectual property, the codebase, and the product decisions throughout the engagement. Celsior provides engineering depth, platform tooling, and delivery acceleration — but we build alongside your team, not instead of it. When the engagement ends, your engineers understand the product as well as ours do. That is a deliberate design choice, not a byproduct. </p>
+            <div class="faq__body-wrap">
+            <p>Both. Celsior's delivery model covers the full program lifecycle: strategy, implementation, production support, and ongoing managed operations. The ServiceNow CoE includes managed SNOW operations as a standing service line. The Guidewire practice covers production support, upgrade cycles, and application maintenance alongside initial implementation work.</p>
+            </div>
           </div>
         </div>
         <div class="faq__item">
           <button class="faq__trigger" type="button" aria-expanded="false">
-            <span class="faq__q">How quickly can we expect to see measurable improvement in customer experience outcomes? </span>
-            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none">
-                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg></span>
+            <span class="faq__q">Can Celsior work alongside an existing system integrator already on a platform program?</span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
           </button>
           <div class="faq__body">
-            <p>Most clients see measurable improvement in the first delivery cycle — typically within 90 days for targeted journey modernization work. Broader omnichannel programs operate on longer timelines, but we structure every engagement to produce visible, demonstrable progress before the full program is complete. Customer experience improvement is not a deferred outcome; it is a design requirement from day one. </p>
+            <div class="faq__body-wrap">
+            <p>Yes. Celsior regularly operates in co-delivery and augmentation arrangements alongside other system integrators. The CoE structure and platform certifications allow Celsior to step into specific workstreams, such as QA automation, integrations, or managed operations, without requiring program ownership across the board.</p>
+            </div>
           </div>
         </div>
-
-
+        <div class="faq__item">
+          <button class="faq__trigger" type="button" aria-expanded="false">
+            <span class="faq__q">How do we begin a conversation about a specific partner practice?</span>
+            <span class="faq__arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+          </button>
+          <div class="faq__body">
+            <div class="faq__body-wrap">
+            <p>The most direct path is through the individual partner practice pages for Guidewire, Jack Henry, and ServiceNow, each of which includes a practice-specific contact route. For Dynatrace engagements or cross-practice programs, the contact form on this page routes directly to the relevant practice lead.</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+      </div>
     </div>
   </section>
 
@@ -3981,115 +4424,162 @@ experience.</h2>
        Purpose : Closing call-to-action band with pull-quote + button.
        CSS tag : /* === CTA BANNER === */
        ============================================================ -->
-<section class="cta-banner" id="ctaBand">
-
-<style>
-
-#ctaBand .cta-banner-inner{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-}
-
-/* BUTTON ROW */
-#ctaBand .cta-btn-group{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:12px;
-    margin-top:22px;
-}
-
-/* BUTTON BASE */
-#ctaBand .cta-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-
-    height:38px;                 /* fixed smaller height */
-    padding:0 18px;              /* compact */
-
-    font-size:12px;              /* smaller like figma */
-    font-weight:600;
-
-    border-radius:4px;           /* less rounded */
-
-    text-decoration:none;
-
-    line-height:1;
-    white-space:nowrap;
-
-    transition:.2s;
-}
-
-/* BLACK */
-#ctaBand .cta-band-btn{
-    background:#000;
-    color:#fff;
-    border:1px solid #000;
-}
-
-/* WHITE */
-#ctaBand .cta-band-btn-white{
-    background:#fff;
-    color:#081327;
-    border:1px solid #081327;
-}
-
-/* hover */
-#ctaBand .cta-btn:hover{
-    transform:translateY(-1px);
-}
-
-@media(max-width:768px){
-
-    #ctaBand .cta-btn-group{
-        flex-direction:column;
-        gap:10px;
+  <style>
+    /* ── Pre-footer CTA Band (Figma Desktop-38 match) ── */
+    .cta-banner {
+      background: #fff !important;
+      border-top: 1px solid rgba(13,17,39,0.08) !important;
+      padding: clamp(56px, 6vw, 100px) clamp(24px, 7.8vw, 112px) !important;
+      text-align: center !important;
+      position: relative;
+      z-index: 2;
     }
 
-    #ctaBand .cta-btn{
-        width:280px;
+    .cta-banner-inner {
+      max-width: 780px !important;
+      margin: 0 auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 0 !important;
     }
 
-}
+    .cta-band-logo {
+      height: 46px !important;
+      width: auto !important;
+      margin: 0 0 20px !important;
+      display: block !important;
+      filter: brightness(0) !important;
+      opacity: 1 !important;
+    }
 
-</style>
+    .cta-band-eyebrow {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin: 0 0 22px;
+    }
 
-<div class="cta-banner-inner">
+    .cta-banner h2.cta-band-text {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif !important;
+      font-size: clamp(1.55rem, 3.2vw, 2.6rem) !important;
+      font-weight: 700 !important;
+      color: #0d1127 !important;
+      line-height: 1.18 !important;
+      letter-spacing: -0.032em !important;
+      max-width: 700px !important;
+      margin: 0 auto 20px !important;
+      position: relative;
+      display: inline-block !important;
+    }
 
-<img
-class="cta-band-logo"
-src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
-alt="Celsior">
+ 
 
-<h2
-class="cta-band-text"
-data-text="Most digital transformations begin with the roadmap.">
+    .cta-band-sub {
+      font-size: clamp(14px, 1.1vw, 16px);
+      color: #52525b;
+      line-height: 1.65;
+      max-width: 560px;
+      margin: 36px auto 36px;
+      font-weight: 700;
+    }
 
-Most digital transformations begin with the roadmap.<br>
-The successful ones begin with the customer journey.
+    .cta-band-btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
 
-</h2>
+    .cta-band-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      padding: 0 28px;
+      background: #0d1127;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.22s cubic-bezier(0.16,1,0.3,1), box-shadow 0.22s;
+      white-space: nowrap;
+    }
 
-<div class="cta-btn-group">
+    .cta-band-btn-primary:hover {
+      background: #1e293b;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(13,17,39,0.28);
+    }
 
-<a href="https://dev.celsiortech.us/contact-us"
-class="cta-btn cta-band-btn">
-Speak with Our Digital Experience Practice →
-</a>
+    .cta-band-btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      padding: 0 28px;
+      background: transparent;
+      color: #0d1127;
+      border: 1.5px solid rgba(13,17,39,0.22);
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.22s cubic-bezier(0.16,1,0.3,1);
+      white-space: nowrap;
+    }
 
-<a href="https://dev.celsiortech.us/ai-innovation/design-lab"
-class="cta-btn cta-band-btn-white">
-Explore Our Capabilities →
-</a>
+    .cta-band-btn-outline:hover {
+      border-color: rgba(13,17,39,0.5);
+      background: rgba(13,17,39,0.04);
+      transform: translateY(-2px);
+    }
 
-</div>
+    @media (max-width: 640px) {
+      .cta-band-btns {
+        flex-direction: column;
+        width: 100%;
+      }
+      .cta-band-btn-primary,
+      .cta-band-btn-outline {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
 
-</div>
+  <section class="cta-banner" id="ctaBand">
+    <div class="cta-banner-inner">
+      <img class="cta-band-logo"
+        src="https://cdn.fastpixel.io/fp/ret_img+v_80dc+q_lossy+to_webp/celsiortech.com%2Fwp-content%2Fuploads%2F2024%2F11%2FCelsior.svg"
+        alt="Celsior" />
+      <span class="cta-band-eyebrow">START A CONVERSATION</span>
+      <h2 class="cta-band-text" data-text="Every Platform Program Starts With the 
+Right Practice Behind It. ">
+        <span class="cta-band-underline">Every Platform Program Starts With the 
+Right Practice Behind It. 
+      </h2>
+      <div class="cta-band-btns">
+        <a href="https://dev.celsiortech.us/contact-us" class="cta-band-btn-primary cta-band-btn">Talk to a Practice Lead</a>
+        <a href="https://dev.celsiortech.us/contact-us" class="cta-band-btn-outline"> Explore Our Work</a>
+      </div>
+      <p class="cta-band-sub">3 Certified Partner CoEs | Global Delivery Across the US, Mexico, and India | 25+ Years Serving Regulated Industries </p>
+    </div>
+  </section>
 
-</section>
   <script>
     /* ═══════════════════════════════════════════════════
        GSAP Accordion — gaccToggle()
@@ -4430,7 +4920,530 @@ Explore Our Capabilities →
       });
     });
   </script>
-  <script src="shared.js" defer></script>
+  <!-- ============================================================
+       PARTNERSHIP RAIL CAROUSEL ENGINE — physics drag (mouse + touch)
+       ============================================================ -->
+  <style>
+    /* Grab cursor on the carousel viewport */
+    .pr-carousel-viewport {
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .pr-carousel-viewport.is-dragging {
+      cursor: grabbing;
+    }
+    /* Prevent text/img selection while dragging */
+    .pr-carousel-viewport.is-dragging * {
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    /* Progress bar under the carousel */
+    .pr-progress-wrap {
+      position: relative;
+      height: 2px;
+      background: rgba(13,17,39,0.08);
+      border-radius: 2px;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+    .pr-progress-bar {
+      position: absolute;
+      left: 0; top: 0; height: 100%;
+      background: #09090b;
+      border-radius: 2px;
+      transition: width 0.45s cubic-bezier(0.16,1,0.3,1),
+                  left  0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+  </style>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* ═══════════════════════════════════════════════════════════
+       Physics helpers
+       ═══════════════════════════════════════════════════════════ */
+    var RAF = window.requestAnimationFrame;
+
+    /* Spring settle — brings x toward target with configurable stiffness */
+    function spring(current, target, velocity, stiffness, damping, dt) {
+      var force = -(current - target) * stiffness - velocity * damping;
+      velocity  = velocity + force * dt;
+      current   = current  + velocity * dt;
+      return { x: current, v: velocity };
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       makeCarousel
+       ═══════════════════════════════════════════════════════════ */
+    function makeCarousel(cfg) {
+      var track       = document.getElementById(cfg.trackId);
+      var viewport    = document.getElementById(cfg.viewportId);
+      var btnPrev     = document.getElementById(cfg.prevId);
+      var btnNext     = document.getElementById(cfg.nextId);
+      var dotsWrap    = document.getElementById(cfg.dotsId);
+      var progressBar = document.getElementById(cfg.progressBarId);
+
+      if (!track || !viewport) return;
+
+      var cards    = Array.from(track.children);
+      var total    = cards.length;
+      var gap      = 24;
+      var visCount = 3;
+      var cardW    = 0;
+      var maxIndex = 0;
+      var current  = 0;
+
+      /* ── Physics state ── */
+      var posX     = 0;   // current rendered x (negative = shifted left)
+      var velX     = 0;   // pixels per second
+      var targetX  = 0;   // snapped resting position
+      var rafId    = null;
+      var lastTime = null;
+
+      /* ── Drag state ── */
+      var dragging    = false;
+      var dragStartX  = 0;
+      var dragStartY  = 0;
+      var dragOriginX = 0;   // posX at drag start
+      var pointerIsTouch = false;
+      var prevDragX   = 0;
+      var prevDragT   = 0;
+      var swipeDx     = 0;
+      var axisLocked  = false;  // true once we know it's a horizontal drag
+
+      /* ────────────────────────────────────────────────
+         LAYOUT
+         ──────────────────────────────────────────────── */
+      function layout() {
+        var vw = viewport.offsetWidth;
+        visCount = vw < 540 ? 1 : vw < 860 ? 2 : 3;
+        cardW    = (vw - gap * (visCount - 1)) / visCount;
+        maxIndex = Math.max(0, total - visCount);
+        if (current > maxIndex) current = maxIndex;
+
+        cards.forEach(function (c) {
+          c.style.width    = cardW + 'px';
+          c.style.minWidth = cardW + 'px';
+        });
+
+        buildDots();
+        snapTo(current, false);
+      }
+
+      /* ────────────────────────────────────────────────
+         TARGET
+         ──────────────────────────────────────────────── */
+      function indexToX(idx) {
+        return idx * (cardW + gap);
+      }
+
+      function xToIndex(x) {
+        return Math.round(x / (cardW + gap));
+      }
+
+      /* Rubber-band: resistance beyond edges */
+      function rubberClamp(x) {
+        var maxX = indexToX(maxIndex);
+        if (x < 0) {
+          return x * 0.22;          // overshoot left
+        } else if (x > maxX) {
+          return maxX + (x - maxX) * 0.22;   // overshoot right
+        }
+        return x;
+      }
+
+      /* ────────────────────────────────────────────────
+         SNAP / NAVIGATE
+         ──────────────────────────────────────────────── */
+      function snapTo(idx, withMomentum) {
+        current = Math.max(0, Math.min(idx, maxIndex));
+        targetX = indexToX(current);
+        if (!withMomentum) {
+          /* Hard-jump then spring settle — still feels smooth */
+          velX = 0;
+        }
+        updateDots();
+        updateArrows();
+        updateProgress();
+        startPhysicsLoop();
+      }
+
+      function goTo(idx) { snapTo(idx, false); }
+
+      /* ────────────────────────────────────────────────
+         PHYSICS LOOP  (rAF-driven spring)
+         ──────────────────────────────────────────────── */
+      function startPhysicsLoop() {
+        if (rafId) return;
+        lastTime = null;
+        rafId = RAF(tick);
+      }
+
+      function tick(ts) {
+        if (!lastTime) lastTime = ts;
+        var dt = Math.min((ts - lastTime) / 1000, 0.064); // cap at 64ms
+        lastTime = ts;
+
+        if (dragging) {
+          /* During drag: track finger/mouse with light damping */
+          var s = spring(posX, targetX, velX, 180, 14, dt);
+          posX = s.x;
+          velX = s.v;
+        } else {
+          /* Released: spring snap to nearest card */
+          var s = spring(posX, targetX, velX, 260, 22, dt);
+          posX = s.x;
+          velX = s.v;
+        }
+
+        applyTransform(posX);
+
+        /* Keep looping until settled */
+        var settled = !dragging
+          && Math.abs(posX - targetX) < 0.15
+          && Math.abs(velX) < 0.5;
+
+        if (settled) {
+          posX = targetX;
+          velX = 0;
+          applyTransform(posX);
+          rafId = null;
+        } else {
+          rafId = RAF(tick);
+        }
+      }
+
+      function applyTransform(x) {
+        track.style.transition = 'none';
+        track.style.transform  = 'translateX(' + (-x) + 'px)';
+      }
+
+      /* ────────────────────────────────────────────────
+         DRAG START  (pointer-unified: mouse + touch)
+         ──────────────────────────────────────────────── */
+      function onDragStart(clientX, clientY, isTouch) {
+        dragging       = true;
+        axisLocked     = false;
+        pointerIsTouch = isTouch;
+        dragStartX     = clientX;
+        dragStartY     = clientY;
+        dragOriginX    = posX;
+        prevDragX      = clientX;
+        prevDragT      = performance.now();
+        swipeDx        = 0;
+        velX           = 0;   // kill existing momentum
+
+        viewport.classList.add('is-dragging');
+        if (!rafId) startPhysicsLoop();
+      }
+
+      function onDragMove(clientX, clientY) {
+        if (!dragging) return;
+
+        var dx = clientX - dragStartX;
+        var dy = clientY - dragStartY;
+
+        /* Axis lock — only commit to horizontal if dx > dy early on */
+        if (!axisLocked) {
+          if (Math.abs(dy) > Math.abs(dx) + 4) {
+            /* User is scrolling vertically — bail */
+            onDragEnd(clientX);
+            return;
+          }
+          if (Math.abs(dx) > 6) axisLocked = true;
+          else return; /* wait for clear direction */
+        }
+
+        /* Velocity tracking (px/s) */
+        var now = performance.now();
+        var dtMs = Math.max(1, now - prevDragT);
+        velX = -(clientX - prevDragX) / (dtMs / 1000);
+        prevDragX = clientX;
+        prevDragT = now;
+        swipeDx   = dx;
+
+        /* Set targetX to follow finger with rubber-band at edges */
+        var rawX = dragOriginX - dx;
+        targetX  = rubberClamp(rawX);
+      }
+
+      function onDragEnd(clientX) {
+        if (!dragging) return;
+        dragging = false;
+        viewport.classList.remove('is-dragging');
+
+        /* Momentum: project where we'd land, pick nearest card */
+        var FRICTION  = 0.84;   /* decay per frame  */
+        var projectedX = posX + (velX * FRICTION * 0.22); /* ~220ms lookahead */
+
+        var targetIdx = xToIndex(projectedX);
+
+        /* Enforce min 1-card advance if swipe was fast */
+        var swipeSpeed = Math.abs(velX);
+        if (swipeSpeed > 400) {
+          var dir = velX > 0 ? 1 : -1;
+          targetIdx = current + dir;
+        }
+
+        current = Math.max(0, Math.min(targetIdx, maxIndex));
+        targetX = indexToX(current);
+
+        /* Keep some velocity for the spring to consume — feels natural */
+        velX = velX * 0.18;
+
+        updateDots();
+        updateArrows();
+        updateProgress();
+
+        if (!rafId) startPhysicsLoop();
+      }
+
+      /* ────────────────────────────────────────────────
+         MOUSE EVENTS
+         ──────────────────────────────────────────────── */
+      viewport.addEventListener('mousedown', function (e) {
+        if (e.button !== 0) return;
+        e.preventDefault();
+        onDragStart(e.clientX, e.clientY, false);
+      });
+
+      document.addEventListener('mousemove', function (e) {
+        if (!dragging || pointerIsTouch) return;
+        onDragMove(e.clientX, e.clientY);
+      });
+
+      document.addEventListener('mouseup', function (e) {
+        if (!dragging || pointerIsTouch) return;
+        onDragEnd(e.clientX);
+      });
+
+      /* Cancel if mouse leaves window */
+      document.addEventListener('mouseleave', function () {
+        if (dragging && !pointerIsTouch) onDragEnd(dragStartX);
+      });
+
+      /* ────────────────────────────────────────────────
+         TOUCH EVENTS
+         ──────────────────────────────────────────────── */
+      viewport.addEventListener('touchstart', function (e) {
+        var t = e.touches[0];
+        onDragStart(t.clientX, t.clientY, true);
+      }, { passive: true });
+
+      viewport.addEventListener('touchmove', function (e) {
+        if (!dragging) return;
+        var t = e.touches[0];
+        onDragMove(t.clientX, t.clientY);
+        /* Prevent page scroll only if committed to horizontal */
+        if (axisLocked) e.preventDefault();
+      }, { passive: false });
+
+      viewport.addEventListener('touchend', function (e) {
+        var t = e.changedTouches[0];
+        onDragEnd(t.clientX);
+      });
+
+      viewport.addEventListener('touchcancel', function () {
+        if (dragging) onDragEnd(dragStartX);
+      });
+
+      /* ────────────────────────────────────────────────
+         CLICK-TO-EXPAND  (only fires if drag distance < threshold)
+         ──────────────────────────────────────────────── */
+      cards.forEach(function (card) {
+        if (card.classList.contains('pr-card--light')) return;
+        var pointerDownX = 0;
+        card.addEventListener('pointerdown', function (e) {
+          pointerDownX = e.clientX;
+        });
+        card.addEventListener('click', function (e) {
+          if (Math.abs(e.clientX - pointerDownX) > 8) return; // was a drag
+          var open = card.classList.toggle('is-open');
+          card.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            var open = card.classList.toggle('is-open');
+            card.setAttribute('aria-expanded', open ? 'true' : 'false');
+          }
+        });
+      });
+
+      /* ────────────────────────────────────────────────
+         ARROW BUTTONS
+         ──────────────────────────────────────────────── */
+      if (btnPrev) btnPrev.addEventListener('click', function () { goTo(current - 1); });
+      if (btnNext) btnNext.addEventListener('click', function () { goTo(current + 1); });
+
+      /* ────────────────────────────────────────────────
+         DOTS
+         ──────────────────────────────────────────────── */
+      function buildDots() {
+        if (!dotsWrap) return;
+        dotsWrap.innerHTML = '';
+        for (var i = 0; i <= maxIndex; i++) {
+          var d = document.createElement('button');
+          d.className = 'pr-dot' + (i === current ? ' active' : '');
+          d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+          (function (idx) {
+            d.addEventListener('click', function () { goTo(idx); });
+          })(i);
+          dotsWrap.appendChild(d);
+        }
+      }
+
+      function updateDots() {
+        if (!dotsWrap) return;
+        Array.from(dotsWrap.children).forEach(function (d, i) {
+          d.classList.toggle('active', i === current);
+        });
+      }
+
+      function updateArrows() {
+        if (btnPrev) btnPrev.disabled = current <= 0;
+        if (btnNext) btnNext.disabled = current >= maxIndex;
+      }
+
+      /* ────────────────────────────────────────────────
+         PROGRESS BAR
+         ──────────────────────────────────────────────── */
+      function updateProgress() {
+        if (!progressBar) return;
+        var pages = maxIndex + 1;
+        var barW  = (1 / pages) * 100;
+        var barL  = (current / pages) * 100;
+        progressBar.style.width = barW + '%';
+        progressBar.style.left  = barL + '%';
+      }
+
+      /* ────────────────────────────────────────────────
+         INIT + RESIZE
+         ──────────────────────────────────────────────── */
+      layout();
+      var ro = new ResizeObserver(function () { layout(); });
+      ro.observe(viewport);
+    }
+
+    /* ── Boot both carousels ── */
+    makeCarousel({
+      trackId:      'pr1-track',
+      viewportId:   'pr1-viewport',
+      prevId:       'pr1-prev',
+      nextId:       'pr1-next',
+      dotsId:       'pr1-dots',
+      progressBarId:'pr1-bar'
+    });
+
+    makeCarousel({
+      trackId:      'pr2-track',
+      viewportId:   'pr2-viewport',
+      prevId:       'pr2-prev',
+      nextId:       'pr2-next',
+      dotsId:       'pr2-dots',
+      progressBarId:'pr2-bar'
+    });
+
+    /* ── Auto-loop: advance each carousel every 5 s unless user is dragging ── */
+    function startAutoLoop(trackId, viewportId, prevId, nextId, dotsId, progressBarId) {
+      var viewport = document.getElementById(viewportId);
+      var nextBtn  = document.getElementById(nextId);
+      if (!viewport || !nextBtn) return;
+      var paused = false;
+      viewport.addEventListener('mouseenter', function () { paused = true; });
+      viewport.addEventListener('mouseleave', function () { paused = false; });
+      viewport.addEventListener('touchstart', function () { paused = true; }, { passive: true });
+      viewport.addEventListener('touchend',   function () { setTimeout(function () { paused = false; }, 1200); }, { passive: true });
+      setInterval(function () {
+        if (paused) return;
+        /* If next is disabled (last slide), click prev to wrap to start */
+        if (nextBtn.disabled) {
+          var prevBtn = document.getElementById(prevId);
+          /* Click prev repeatedly until we reach the first slide */
+          var maxClicks = 20, i = 0;
+          var backTo0 = setInterval(function () {
+            var prevBtn2 = document.getElementById(prevId);
+            if (!prevBtn2 || prevBtn2.disabled || ++i > maxClicks) {
+              clearInterval(backTo0);
+              return;
+            }
+            prevBtn2.click();
+          }, 80);
+        } else {
+          nextBtn.click();
+        }
+      }, 5000);
+    }
+
+    startAutoLoop('pr1-track', 'pr1-viewport', 'pr1-prev', 'pr1-next', 'pr1-dots', 'pr1-bar');
+    startAutoLoop('pr2-track', 'pr2-viewport', 'pr2-prev', 'pr2-next', 'pr2-dots', 'pr2-bar');
+
+  })();
+  </script>
+
+  <!-- IMAGE ACCORDION JS — scoped to #dl-acc-section -->
+  <script>
+  (function () {
+    if (typeof gsap === 'undefined') return;
+    var activeIndex = 0, busy = false;
+    var rows = Array.from(document.querySelectorAll('#dl-acc-section .acc-row'));
+    if (!rows.length) return;
+
+    // Set initial heights: first row open, rest collapsed
+    rows.forEach(function (row, i) {
+      var body = row.querySelector('.acc-body');
+      if (!body) return;
+      gsap.set(body, { height: i === 0 ? 'auto' : 0 });
+    });
+
+    function openRow(idx) {
+      if (idx === activeIndex || busy) return;
+      busy = true;
+      var prev = rows[activeIndex];
+      var next = rows[idx];
+      var pB = prev.querySelector('.acc-body');
+      var nB = next.querySelector('.acc-body');
+      var nImg = next.querySelector('.acc-img2 img');
+
+      // Measure target height before animating
+      gsap.set(nB, { height: 'auto' });
+      var targetH = nB.offsetHeight;
+      gsap.set(nB, { height: 0 });
+
+      // Lock prev to numeric height before collapsing
+      var prevH = pB.offsetHeight;
+      gsap.set(pB, { height: prevH });
+
+      prev.classList.remove('active');
+      next.classList.add('active');
+
+      var tl = gsap.timeline({
+        onComplete: function () {
+          activeIndex = idx;
+          busy = false;
+          gsap.set(nB, { height: 'auto' });
+        }
+      });
+      tl.to(pB, { height: 0, duration: 0.55, ease: 'power3.inOut' }, 0)
+        .to(nB, { height: targetH, duration: 0.65, ease: 'power3.out' }, 0.08);
+      if (nImg) tl.fromTo(nImg, { scale: 1.06 }, { scale: 1, duration: 0.85, ease: 'power2.out' }, 0.08);
+    }
+
+    rows.forEach(function (row, i) {
+      row.querySelector('.acc-header').addEventListener('click', function (e) {
+        if (!e.target.closest('.acc-readmore')) openRow(i);
+      });
+      row.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openRow(i); }
+        if (e.key === 'ArrowDown' && i < rows.length - 1) openRow(i + 1);
+        if (e.key === 'ArrowUp' && i > 0) openRow(i - 1);
+      });
+    });
+  })();
+  </script>
 </body>
 
 </html>
