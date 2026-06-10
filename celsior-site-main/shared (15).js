@@ -353,27 +353,32 @@ a.nav-link{text-decoration:none;}
 .mz-item svg{width:14px;height:14px;color:var(--muted);transition:transform .3s var(--ease-expo),color .2s;flex-shrink:0;}
 .mz-item:hover svg{color:var(--accent);transform:translateX(3px);}
 .mz-pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
-.mz-pill{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:8px;border:1px solid var(--border);font-size:.74rem;font-weight:600;color:var(--ink-mid);background:#fff;}
+.mz-pill{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:8px;border:1px solid var(--border);font-size:.74rem;font-weight:600;color:var(--ink-mid);background:#fff;transition:border-color .2s,color .2s,transform .25s var(--ease-expo);}
+.mz-pill:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
 .mz-pill .p-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;}
 
 /* — center feature zone — */
 .mz-feature-card{display:block;border-radius:14px;overflow:hidden;border:1px solid var(--border);box-shadow:0 14px 38px rgba(15,20,80,.12);background:#0b1020;position:relative;aspect-ratio:16/8;}
-.mz-feature-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04);}
-.mz-feature-card:hover .mz-feature-img{}
+.mz-feature-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform .9s var(--ease-expo);}
+.mz-feature-card:hover .mz-feature-img{transform:scale(1.12);}
 .mz-feature-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(7,11,26,.82),rgba(7,11,26,.12) 62%,transparent);}
 .mz-feature-cap{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;color:#fff;font-family:var(--font-head);font-size:.94rem;font-weight:700;line-height:1.3;}
 .mz-feature-cap em{color:#3ddc97;font-style:normal;}
 .mz-feature-body{margin-top:18px;}
 .mz-feature-title{font-family:var(--font-head);font-size:1.06rem;font-weight:700;color:var(--ink);margin-bottom:8px;}
 .mz-feature-desc{font-size:.82rem;line-height:1.62;color:var(--muted);margin-bottom:18px;}
-.mz-explore{display:inline-flex;align-items:center;gap:9px;padding:11px 22px;background:var(--accent);color:#fff;font-size:.8rem;font-weight:700;border-radius:8px;}
-.mz-explore svg{}
+.mz-explore{display:inline-flex;align-items:center;gap:9px;padding:11px 22px;background:var(--accent);color:#fff;font-size:.8rem;font-weight:700;border-radius:8px;transition:transform .3s var(--ease-expo),box-shadow .3s,background .2s;}
+.mz-explore svg{transition:transform .3s var(--ease-expo);}
+.mz-explore:hover{background:#1b46d8;transform:translateY(-2px);box-shadow:0 12px 28px rgba(34,84,244,.34);}
+.mz-explore:hover svg{transform:translateX(4px);}
 
 /* — right assessment zone — */
 .mz-assess-label{font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;}
 .mz-assess-cards{display:flex;flex-direction:column;gap:14px;}
-.mz-assess-card{display:flex;gap:14px;padding:18px;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 2px rgba(15,20,80,.03);cursor:pointer;}
-.mz-assess-icon{width:42px;height:42px;flex-shrink:0;border-radius:10px;background:var(--accent-lt);display:grid;place-items:center;color:var(--accent);}
+.mz-assess-card{display:flex;gap:14px;padding:18px;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 2px rgba(15,20,80,.03);cursor:pointer;transition:border-color .3s var(--ease-expo),transform .3s var(--ease-expo),box-shadow .3s;}
+.mz-assess-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 16px 36px rgba(34,84,244,.15);}
+.mz-assess-icon{width:42px;height:42px;flex-shrink:0;border-radius:10px;background:var(--accent-lt);display:grid;place-items:center;color:var(--accent);transition:background .25s,color .25s;}
+.mz-assess-card:hover .mz-assess-icon{background:var(--accent);color:#fff;}
 .mz-assess-icon svg{width:20px;height:20px;}
 .mz-assess-title{font-family:var(--font-head);font-size:.92rem;font-weight:700;color:var(--ink);margin-bottom:5px;line-height:1.25;}
 .mz-assess-desc{font-size:.78rem;line-height:1.55;color:var(--muted);}
@@ -511,7 +516,6 @@ a.nav-link{text-decoration:none;}
     'about.html':        'about',
     'blogs.html':        'blog',
     'blog.html':         'blog',
-    'contact.html':      'contact',
   };
   let activePage = (document.body.dataset.page || '').toLowerCase();
   if (!activePage) {
@@ -684,95 +688,6 @@ a.nav-link{text-decoration:none;}
 `;
 
   const FEATURE_IMG = 'https://res.cloudinary.com/dden4hawr/image/upload/v1780833974/fd85d9f6b205b835d020b87cf50dfc5490c63510_ntepey.png';
-
-  /* ─── MEGA MENU IMAGES (manual config) ───────────────────────────────
-     Hover an item in the mega menu and the right-side image swaps to
-     match. Fully manual — edit the maps below to change images.
-
-     Resolution order:
-       1) MEGA_IMAGES.items[href]       ← per-item image on hover
-       2) MEGA_IMAGES.defaults[panelId] ← per-panel default (no item hovered)
-       3) FEATURE_IMG                   ← global fallback
-
-     You can also override from any page BEFORE shared.js loads:
-       <script>window.MEGA_IMAGES = {
-         items:    { 'ai-adoption.html': 'https://your-cdn/ai.jpg' },
-         defaults: { solve: 'https://your-cdn/solve.jpg' }
-       };</script>
-  ──────────────────────────────────────────────────────────────────── */
-  const U = (id, w = 1200) =>
-    `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
-
-  const MEGA_IMAGES = (window.MEGA_IMAGES = Object.assign({
-    // Per-panel default image shown when no item is hovered.
-    defaults: {
-      solve:      U('1620712943543-bcc4688e7485'),   // abstract AI / neural
-      how:        U('1518770660439-4636190af475'),   // circuit board
-      deliver:    U('1521737604893-d14cc237f11d'),   // global team collab
-      ai:         U('1677442136019-21780ecad995'),   // AI futuristic
-      industries: U('1486406146926-c627a92ad1ab'),   // skyscrapers / enterprise
-      partners:   U('1556761175-5973dc0f32e7'),      // partnership handshake
-      about:      U('1522071820081-009f0129c71c'),   // team / culture
-    },
-    // Per-item override keyed by the item href (exact match).
-    // Highest priority — wins over panel default.
-    items: {
-      /* ── Our Focus ─────────────────────────────────────── */
-      'ai-adoption.html':                  U('1677442136019-21780ecad995'),
-      'risk-compliance.html':              U('1450101499163-c8848c66ca85'),
-      'cost-efficiency.html':              U('1554224155-6726b3ff858f'),
-      'digital-experience.html':           U('1559028012-481c04fa702d'),
-      'ai-first-digital-engineering.html': U('1551288049-bebda4e38f71'),
-
-      /* ── Capabilities ──────────────────────────────────── */
-      'ai-led-engineering.html':                 U('1555066931-4365d14bab8c'),
-      'cloud-infrastructure-engineering.html':   U('1451187580459-43490279c0fa'),
-      'ai-and-data.html':                        U('1551288049-bebda4e38f71'),
-      'digital-operations.html':                 U('1581091226825-a6a2a5aee158'),
-      'security-governance.html':                U('1563013544-824ae1b704d3'),
-
-      /* ── Solutions ─────────────────────────────────────── */
-      'managed-programs.html':      U('1552664730-d307ca884978'),
-      'technology-consulting.html': U('1542744173-8e7e53415bb0'),
-      'ai-upskilling.html':         U('1503676260728-1c00da094a0b'),
-      'gcc-nearshore.html':         U('1526778548025-fa2f459cd5c1'),
-      'teams-as-a-service.html':    U('1522071820081-009f0129c71c'),
-      'hire-train-deploy.html':     U('1517245386807-bb43f82c33c4'),
-
-      /* ── AI & Innovation ───────────────────────────────── */
-      'synthetix.html':                 U('1620712943543-bcc4688e7485'),
-      'celsior-ai-lab.html':            U('1532187863486-abf9dbad1b69'),
-      'design-lab.html':                U('1561070791-2526d30994b8'),
-      'centers-of-excellence.html':     U('1497366216548-37526070297c'),
-      'frameworks-accelerators.html':   U('1518770660439-4636190af475'),
-
-      /* ── Industries ────────────────────────────────────── */
-      'banking-financial-services.html': U('1554224155-8d04cb21cd6c'),
-      'insurance.html':                  U('1556742049-0cfed4f6a45d'),
-      'healthcare.html':                 U('1576091160399-112ba8d25d1d'),
-
-      /* ── Partners ──────────────────────────────────────── */
-      'partners.html': U('1556761175-5973dc0f32e7'),
-
-      /* ── About ─────────────────────────────────────────── */
-      'about-leadership.html':    U('1573496359142-b8d87734a5a2'),
-      'ai-first-philosophy.html': U('1499209974431-9dddcece7f88'),
-      'success-stories.html':     U('1552581234-26160f608093'),
-      'blogs.html':               U('1499750310107-5fef28a66643'),
-      'careers.html':             U('1521737711867-e3b97375f902'),
-      'events-news.html':         U('1505373877841-8d25f7d46678'),
-    },
-  }, window.MEGA_IMAGES || {}));
-
-  function resolvePanelDefault(panelId) {
-    return (MEGA_IMAGES.defaults && MEGA_IMAGES.defaults[panelId]) || FEATURE_IMG;
-  }
-
-  function resolveItemImage(panelId, href) {
-    if (MEGA_IMAGES.items && MEGA_IMAGES.items[href]) return MEGA_IMAGES.items[href];
-    return resolvePanelDefault(panelId);
-  }
-
   const ITEM_CHEV = `<svg viewBox="0 0 12 12" fill="none"><path d="M4 2.5L7.5 6L4 9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   const IC_DOC = `<svg viewBox="0 0 24 24" fill="none"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 3v5h5M9 13h6M9 16.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   const IC_CHART = `<svg viewBox="0 0 24 24" fill="none"><path d="M5 4v15a1 1 0 0 0 1 1h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 14l3-3 2.5 2.5L19 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -906,7 +821,7 @@ a.nav-link{text-decoration:none;}
   ];
 
   function buildMegaPanel(d) {
-    const items = d.items.map(it => `<a class="mz-item" href="${it.href}" data-href="${it.href}" data-panel="${d.id}">${it.label} ${ITEM_CHEV}</a>`).join('');
+    const items = d.items.map(it => `<a class="mz-item" href="${it.href}">${it.label} ${ITEM_CHEV}</a>`).join('');
     const pills = d.pills ? `<div class="mz-pills">${d.pills.map(p => `<a class="mz-pill" href="${d.items[0].href}"><span class="p-dot"></span>${p}</a>`).join('')}</div>` : '';
     const assess = d.assess.map((a,i) => `
         <a class="mz-assess-card" href="${d.explore.href}">
@@ -925,7 +840,7 @@ a.nav-link{text-decoration:none;}
       </div>
       <div class="mega-zone">
         <a class="mz-feature-card" href="${d.explore.href}">
-          <img class="mz-feature-img" data-default-img="${resolvePanelDefault(d.id)}" src="${resolvePanelDefault(d.id)}" alt="${d.feature.title}" loading="lazy"/>
+          <img class="mz-feature-img" src="${FEATURE_IMG}" alt="${d.feature.title}" loading="lazy"/>
           <div class="mz-feature-cap">${d.feature.cap}</div>
         </a>
         <div class="mz-feature-body">
@@ -1024,18 +939,24 @@ a.nav-link{text-decoration:none;}
       const pillsHTML = data.pills
         ? `<div class="drawer-mega-pills">${data.pills.map(function(p){ return `<a href="${data.items[0].href}"><span class="p-dot"></span>${p}</a>`; }).join('')}</div>`
         : '';
-      // Note: assessment cards intentionally omitted in the mobile drawer.
+      const assessHTML = (data.assess || []).map(function(a,i){
+        return `<a class="drawer-mega-card" href="${data.explore.href}">
+          <div class="ic">${ASSESS_ICONS[i % ASSESS_ICONS.length]}</div>
+          <div class="bd"><div class="t">${a.title}</div><div class="d">${a.desc}</div></div>
+        </a>`;
+      }).join('');
       const mega = document.createElement('div');
       mega.className = 'drawer-mega';
       mega.innerHTML = `
         <a class="drawer-mega-feature" href="${data.explore.href}" aria-label="${data.feature.title}">
-          <img src="${resolvePanelDefault(data.id)}" alt="${data.feature.title}" loading="lazy"/>
+          <img src="${FEATURE_IMG}" alt="${data.feature.title}" loading="lazy"/>
           <div class="drawer-mega-cap">${data.feature.cap}</div>
         </a>
         <a class="drawer-mega-explore" href="${data.explore.href}">${data.explore.label} ${ARROW_SVG}</a>
         ${pillsHTML}
+        ${data.assessTag ? `<div class="drawer-mega-assess-label">${data.assessTag}</div>` : ''}
+        <div class="drawer-mega-assess">${assessHTML}</div>
       `;
-
       sub.appendChild(mega);
     });
   }
@@ -1206,10 +1127,10 @@ a.nav-link{text-decoration:none;}
   if (!shouldInjectNav) return;
 
   /* ─── 5.  NAV JAVASCRIPT ──────────────────────────────────────────── */
-  // Blog + Contact pages: always show the "scrolled" (light) nav styling because
-  // both pages have a white background from the very top — the transparent dark
-  // nav would be invisible against it.
-  const forceScrolled = activePage === 'blog' || activePage === 'contact';
+  // Scroll state
+  // Blog page: always show the "scrolled" (light) nav styling because the
+  // page background is white from the top.
+  const forceScrolled = activePage === 'blog';
   if (forceScrolled) {
     navEl.classList.add('scrolled', 'force-scrolled');
   }
@@ -1268,117 +1189,8 @@ a.nav-link{text-decoration:none;}
   });
   megaRoot.addEventListener('mouseenter', cancel);
   megaRoot.addEventListener('mouseleave', sched);
-
-  /* ─── DYNAMIC MEGA IMAGE SWAP ON ITEM HOVER ─────────────────────── */
-  megaRoot.querySelectorAll('.mega-panel').forEach(panel => {
-    const panelId = panel.id.replace(/^menu-/, '');
-    const imgEl = panel.querySelector('.mz-feature-img');
-    if (!imgEl) return;
-    const defaultSrc = imgEl.getAttribute('data-default-img') || FEATURE_IMG;
-
-    const setSrc = (url) => {
-      if (!url || imgEl.src === url) return;
-      if (typeof gsap !== 'undefined') {
-        gsap.to(imgEl, { opacity: 0, duration: 0.22, ease: 'power2.in', onComplete: () => {
-          const next = new Image();
-          next.onload = () => { imgEl.src = url; gsap.to(imgEl, { opacity: 1, duration: 0.38, ease: 'power2.out' }); };
-          next.onerror = () => gsap.set(imgEl, { opacity: 1 });
-          next.src = url;
-        }});
-      } else {
-        imgEl.style.opacity = '0';
-        const next = new Image();
-        next.onload = () => { imgEl.src = url; imgEl.style.opacity = ''; };
-        next.onerror = () => { imgEl.style.opacity = ''; };
-        next.src = url;
-      }
-    };
-
-    panel.querySelectorAll('.mz-item').forEach(item => {
-      const href = item.getAttribute('data-href') || item.getAttribute('href');
-      item.addEventListener('mouseenter', () => {
-        setSrc(resolveItemImage(panelId, href));
-      });
-      item.addEventListener('mouseleave', () => setSrc(defaultSrc));
-    });
-  });
-
   bdEl.addEventListener('click', () => { if (active) killPanel(active); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && active) killPanel(active); });
-
-  /* ─── GSAP MEGA CARD HOVER INTERACTIONS ────────────────────────────
-     Rich spring-physics hover effects for .mz-assess-card, .mz-item,
-     .mz-pill, .mz-explore, and .mz-feature-card. Falls back silently
-     if GSAP is not loaded.
-  ─────────────────────────────────────────────────────────────────── */
-  (function bindGsapCardHovers() {
-    if (typeof gsap === 'undefined') return;
-    const SPRING = { ease: 'elastic.out(1, 0.55)', duration: 0.7 };
-    const SPRING_FAST = { ease: 'elastic.out(1.2, 0.6)', duration: 0.65 };
-    const OUT = { ease: 'power3.out', duration: 0.45 };
-
-    /* — Assessment cards (right zone) — */
-    megaRoot.querySelectorAll('.mz-assess-card').forEach(card => {
-      const icon = card.querySelector('.mz-assess-icon');
-      gsap.set(card, { transformOrigin: 'center bottom' });
-      card.addEventListener('mouseenter', () => {
-        gsap.killTweensOf([card, icon]);
-        gsap.to(card, { y: -5, scale: 1.018, boxShadow: '0 20px 44px rgba(34,84,244,.18)', borderColor: 'var(--accent)', duration: SPRING.duration, ease: SPRING.ease });
-        if (icon) {
-          gsap.to(icon, { backgroundColor: 'var(--accent)', color: '#fff', scale: 1.12, rotate: -6, duration: SPRING_FAST.duration, ease: SPRING_FAST.ease });
-        }
-      });
-      card.addEventListener('mouseleave', () => {
-        gsap.killTweensOf([card, icon]);
-        gsap.to(card, { y: 0, scale: 1, boxShadow: '0 1px 2px rgba(15,20,80,.03)', borderColor: 'var(--border)', duration: OUT.duration, ease: OUT.ease });
-        if (icon) {
-          gsap.to(icon, { backgroundColor: 'var(--accent-lt)', color: 'var(--accent)', scale: 1, rotate: 0, duration: OUT.duration, ease: OUT.ease });
-        }
-      });
-    });
-
-    /* — Pill links (.mz-pill) — */
-    megaRoot.querySelectorAll('.mz-pill').forEach(pill => {
-      pill.addEventListener('mouseenter', () => {
-        gsap.killTweensOf(pill);
-        gsap.to(pill, { y: -3, scale: 1.04, borderColor: 'var(--accent)', color: 'var(--accent)', boxShadow: '0 8px 20px rgba(34,84,244,.12)', duration: SPRING.duration, ease: SPRING.ease });
-      });
-      pill.addEventListener('mouseleave', () => {
-        gsap.killTweensOf(pill);
-        gsap.to(pill, { y: 0, scale: 1, borderColor: 'var(--border)', color: 'var(--ink-mid)', boxShadow: 'none', duration: OUT.duration, ease: OUT.ease });
-      });
-    });
-
-    /* — Feature card image pan (.mz-feature-card) — */
-    megaRoot.querySelectorAll('.mz-feature-card').forEach(card => {
-      const img = card.querySelector('.mz-feature-img');
-      if (!img) return;
-      gsap.set(img, { scale: 1.04 });
-      card.addEventListener('mouseenter', () => {
-        gsap.killTweensOf(img);
-        gsap.to(img, { scale: 1.13, duration: 1.1, ease: 'power2.out' });
-      });
-      card.addEventListener('mouseleave', () => {
-        gsap.killTweensOf(img);
-        gsap.to(img, { scale: 1.04, duration: 0.9, ease: 'power3.out' });
-      });
-    });
-
-    /* — Explore CTA button (.mz-explore) — */
-    megaRoot.querySelectorAll('.mz-explore').forEach(btn => {
-      const arrow = btn.querySelector('svg');
-      btn.addEventListener('mouseenter', () => {
-        gsap.killTweensOf([btn, arrow]);
-        gsap.to(btn, { y: -3, boxShadow: '0 14px 32px rgba(34,84,244,.38)', backgroundColor: '#1b46d8', duration: SPRING.duration, ease: SPRING.ease });
-        if (arrow) gsap.to(arrow, { x: 5, duration: SPRING_FAST.duration, ease: SPRING_FAST.ease });
-      });
-      btn.addEventListener('mouseleave', () => {
-        gsap.killTweensOf([btn, arrow]);
-        gsap.to(btn, { y: 0, boxShadow: 'none', backgroundColor: 'var(--accent)', duration: OUT.duration, ease: OUT.ease });
-        if (arrow) gsap.to(arrow, { x: 0, duration: OUT.duration, ease: OUT.ease });
-      });
-    });
-  })();
 
   // Mobile drawer
   const hamburger = document.getElementById('hamburger');

@@ -402,7 +402,7 @@
     }
 
     .explore h2 {
-      max-width: 1100px;
+
       margin: 0 auto 56px;
       color: #0d1127;
       font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif;
@@ -416,7 +416,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      max-width: 1100px;
+
       margin: 0 auto;
       border: 1.5px solid rgba(13, 17, 39, 0.12);
       border-radius: 16px;
@@ -680,7 +680,7 @@
        ============================================================ */
     .platforms {
       background: #fff;
-      padding: 32px 112px 0;
+      /*padding: 32px 112px 32px;*/
       border-top: 1px solid rgba(13, 17, 39, 0.08);
     }
 
@@ -788,11 +788,10 @@
 
     .outcomes {
       position: relative;
-      max-width: 1440px;
-      margin: 0 auto;
+      width: 100%;
       /* height = tallest card; heading floats in whitespace above short cards */
       min-height: clamp(500px, 88vh, 900px);
-      padding: 0 clamp(24px, 5.5vw, 80px);
+      padding: var(--section-pad-v) var(--section-pad-h);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -802,9 +801,9 @@
     /* ── Heading: absolutely positioned over top-left whitespace ── */
     .outcomes__heading {
       position: absolute;
-      top: clamp(32px, 7%, 112px);
-      left: clamp(24px, 5.5vw, 80px);
-      width: clamp(280px, 32%, 460px);
+      top: var(--section-pad-v);
+      left: var(--section-pad-h);
+      width: clamp(280px, 38%, 520px);
       z-index: 2;
     }
 
@@ -1054,7 +1053,7 @@
       .outcomes {
         min-height: 0;
         display: block;
-        padding-top: clamp(40px, 5vw, 64px);
+        padding: var(--section-pad-v) var(--section-pad-h);
       }
 
       .outcomes__heading {
@@ -1646,10 +1645,10 @@
       margin-bottom: clamp(16px, 1.6vw, 24px) !important;
     }
 
-    /* Platforms logo bar — compact vertical, same horizontal gutter */
+    /* Platforms logo bar — compact vertical, same horizontal gutter 
     .platforms {
-      padding: 28px var(--section-pad-h) 0 !important;
-    }
+      padding: 28px var(--section-pad-h) 28px !important;
+    }*/
 
     /* Cost Q×Q */
     #cost-qxq {
@@ -3301,16 +3300,24 @@
     <div class="hero-content">
       <h1 class="hero-heading">Regulated by design.<br>Resilient by architecture.
       </h1>
-      <div class="hero-btns">
-        <button class="btn-ghost">
-          Assess Your Control Environment
-          <svg width="17" height="17" fill="none" viewBox="0 0 17 17">
-            <path d="M3.5 8.5h10M9.5 5l4 3.5L9.5 12" stroke="#fff" stroke-width="1.4" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-        </button>
-        <button class="btn-white">Schedule a Conversation </button>
-      </div>
+<div class="hero-btns">
+  <button class="btn-ghost"
+    onclick="window.location.href='https://celsior-assessment-tools.netlify.app/grc-assessment/'">
+    Assess Your Control Environment
+    <svg width="17" height="17" fill="none" viewBox="0 0 17 17">
+      <path d="M3.5 8.5h10M9.5 5l4 3.5L9.5 12"
+        stroke="#fff"
+        stroke-width="1.4"
+        stroke-linecap="round"
+        stroke-linejoin="round" />
+    </svg>
+  </button>
+
+  <button class="btn-white"
+    onclick="window.location.href='https://dev.celsiortech.us/contact-us'">
+    Schedule a Conversation
+  </button>
+</div>
     </div>
   </section>
 
@@ -3529,7 +3536,7 @@ Continuous<span
           <div class="solution-card-body">
             <h3>OPERATIONAL RESILIENCE</h3>
             <p class="solution-card-text">We design resilience into the architecture from the outset by covering business continuity frameworks, regulatory reporting pipelines, third-party risk controls, and the operational processes required to demonstrate readiness to examiners, auditors, and boards. </p>
-            <a class="solution-link" href="#">Explore Further →</a>
+            <a class="solution-link" href="https://dev.celsiortech.us/contact-us">Learn More →</a>
           </div>
         </div>
       </article>
@@ -3541,7 +3548,7 @@ Continuous<span
           <div class="solution-card-body">
             <h3>Risk & Controls Modernization </h3>
             <p class="solution-card-text">We retire spreadsheet-based control programs and replace them with continuously monitored, automatically documented control frameworks. The result is a control environment that produces clean evidence trails as a function of normal operations. </p>
-            <a class="solution-link" href="#">Explore Further →</a>
+            <a class="solution-link" href="https://dev.celsiortech.us/contact-us">Learn More →</a>
           </div>
         </div>
       </article>
@@ -3553,7 +3560,7 @@ Continuous<span
           <div class="solution-card-body">
             <h3>Audit Acceleration & Regulatory Reporting </h3>
             <p class="solution-card-text">Our control automation and audit-trail engineering compress evidence collection from weeks to days and eliminate the last-minute scramble that precedes most regulatory reviews.  </p>
-            <a class="solution-link" href="#">Explore Further →</a>
+            <a class="solution-link" href="https://dev.celsiortech.us/contact-us">Learn More →</a>
           </div>
         </div>
       </article>
@@ -3634,7 +3641,7 @@ Continuous<span
 enterprise-scale 
 experience.</h2>
         <p class="em-desc">Our platform tools are designed with regulated industries in mind. Each one carries the audit-trail, traceability, and governance features that compliance-sensitive environments require as standard. </p>
-        <a href="#consultation" class="em-cta">Get Started
+        <a href="https://dev.celsiortech.us/solutions/technology-consulting" class="em-cta">Get Started
           <svg viewBox="0 0 16 16" fill="none">
             <line x1="2" y1="14" x2="14" y2="2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
             <polyline points="6,2 14,2 14,10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
@@ -3720,9 +3727,7 @@ experience.</h2>
        ============================================================ -->
   <div class="platforms" style="background:#FFFFFF;">
 
-    <h3>Delivered on the platforms your enterprise already <span
-        style="background: linear-gradient(135deg, #1a3a8f 0%, #2254f4 40%, #0f2d6b 70%, #1641c4 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; display:inline;">trusts</span>
-    </h3>
+    
     <section class="partners" aria-label="Partner ecosystem">
       <div class="partners__track">
         <div class="partners__group">
@@ -3768,7 +3773,7 @@ experience.</h2>
   <section class="explore">
     <h2>Continue exploring Celsior's capabilities</h2>
     <div class="explore__links">
-      <a href="#">
+      <a href="https://dev.celsiortech.us/ai-innovation/frameworks-accelerators/synthetix">
         <span class="explore__row-left">
           <span class="explore__label">Modernization Hub</span>
           <span class="explore__text">Core &amp; Legacy Modernization</span>
@@ -3783,7 +3788,7 @@ experience.</h2>
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://dev.celsiortech.us/capabilities/cloud-and-infrastructure-engineering">
         <span class="explore__row-left">
           <span class="explore__label">Cloud CoE</span>
           <span class="explore__text">Cloud Transformation &amp; Continuous Modernization</span>
@@ -3798,7 +3803,7 @@ experience.</h2>
           </span>
         </span>
       </a>
-      <a href="#">
+      <a href="https://dev.celsiortech.us/ai-innovation/celsior-ai-lab">
         <span class="explore__row-left">
           <span class="explore__label">AI Accelerators</span>
           <span class="explore__text">Enterprise AI Enablement</span>
@@ -4072,14 +4077,14 @@ The strongest ones begin with the architecture.
 
 <div class="cta-btn-group">
 
-<a href="#contact"
+<a href="https://dev.celsiortech.us/contact-us"
 class="cta-btn cta-band-btn">
 Speak with Our R&C Practice →
 </a>
 
-<a href="#assessment"
+<a href="https://celsior-assessment-tools.netlify.app/grc-assessment/"
 class="cta-btn cta-band-btn-white">
-Assess Your Control Environment →
+Assess Your Readiness →
 </a>
 
 </div>

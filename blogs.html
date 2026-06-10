@@ -1,0 +1,2572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Celsior | Blog — Insights & Engineering Intelligence</title>
+  <meta name="description" content="Perspectives on AI-first engineering, cloud modernization, and digital transformation from the Celsior team." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal: #0d4f45;
+      --border: #f3f4f6;
+      --text-dark: #111827;
+      --text-muted: #6b7280;
+      --section-pad-v: clamp(36px, 3.4vw, 48px);
+      --section-pad-h: clamp(24px, 7.8vw, 112px);
+    }
+
+    @media (max-width: 1280px) {
+      :root {
+        --section-pad-v: clamp(28px, 3.4vw, 40px);
+        --section-pad-h: clamp(20px, 5.5vw, 80px);
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    .eyebrow {
+      display: block;
+      margin: 0 0 16px;
+      color: #6b7280 !important;
+      font-family: 'Inter', system-ui, sans-serif !important;
+      font-size: 0.72rem !important;
+      line-height: 1 !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase !important;
+    }
+
+    p, li { font-size: 16px; line-height: 23px; }
+
+    /* =============================================
+       HERO ACCENT — blue
+    ============================================= */
+    :root {
+      --blue: #2563eb;
+      --blue-hover: #1d4ed8;
+      --blue-light: rgba(37, 99, 235, 0.08);
+      --blue-border: rgba(37, 99, 235, 0.2);
+    }
+
+    /* =============================================
+       BLOG HERO — clean centered, Webflow-style
+    ============================================= */
+    .blog-hero {
+      padding: clamp(80px, 10vw, 140px) var(--section-pad-h) clamp(64px, 7vw, 100px);
+      text-align: center;
+      border-bottom: 1px solid rgba(13, 17, 39, 0.08);
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* No grid texture — clean white per screenshot */
+    .blog-hero::before { display: none; }
+
+    .blog-hero-inner {
+      position: relative;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* Plain "Customers" label — exactly like screenshot */
+    .blog-hero-eyebrow {
+      display: block;
+      background: none;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+      color: #374151;
+      margin-bottom: 16px;
+    }
+
+    /* dot hidden in plain-label mode */
+    .blog-hero-eyebrow-dot { display: none; }
+
+    .blog-hero h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(34px, 5.5vw, 68px);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      color: #09090b;
+      margin-bottom: 24px;
+    }
+
+    .blog-hero p {
+      font-size: clamp(14px, 1.2vw, 16px);
+      color: #374151;
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+
+    /* Blue CTA button */
+    .hero-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 50px;
+      padding: 0 28px;
+      border-radius: 0;
+      background: var(--blue);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s ease, transform 0.22s cubic-bezier(0.16,1,0.3,1), box-shadow 0.22s ease;
+      white-space: nowrap;
+    }
+
+    .hero-cta-btn:hover {
+      background: var(--blue-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(37, 99, 235, 0.32);
+    }
+
+    .hero-cta-btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    /* ── Filters — below CTA, blue active state ── */
+    /* =============================================
+       FILTER BAR — sticky Enterprise / Agency tabs
+       + dropdown pills + reset + showing count
+    ============================================= */
+    .filter-bar {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      background: #fff;
+      border-bottom: 1px solid rgba(13, 17, 39, 0.09);
+      padding: 0 var(--section-pad-h);
+      /* smooth shadow materialises on scroll via JS */
+      transition: box-shadow 0.25s ease;
+    }
+
+    .filter-bar.is-stuck {
+      box-shadow: 0 2px 16px rgba(13, 17, 39, 0.07);
+    }
+
+    .filter-bar-inner {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      height: 52px;
+    }
+
+    /* ── Left: type tabs ── */
+    .fbar-type-tabs {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      margin-right: 32px;
+      flex-shrink: 0;
+    }
+
+    .fbar-type-tab {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      height: 52px;
+      padding: 0 4px;
+      margin-right: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      background: none;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.18s ease;
+      user-select: none;
+    }
+
+    .fbar-type-tab::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--text-dark);
+      border-radius: 2px 2px 0 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fbar-type-tab.is-active {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .fbar-type-tab.is-active::after {
+      transform: scaleX(1);
+    }
+
+    .fbar-type-tab:not(.is-active):hover {
+      color: #374151;
+    }
+
+    /* ── Divider between type tabs and dropdowns ── */
+    .fbar-divider {
+      width: 1px;
+      height: 22px;
+      background: rgba(13, 17, 39, 0.1);
+      flex-shrink: 0;
+      margin-right: 24px;
+    }
+
+    /* ── Centre: dropdown pills ── */
+    .fbar-dropdowns {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .fbar-dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 34px;
+      padding: 0 14px;
+      border-radius: 7px;
+      border: 1.5px solid rgba(13, 17, 39, 0.13);
+      background: #fff;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #111827;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+      user-select: none;
+    }
+
+    .fbar-dropdown:hover {
+      border-color: rgba(13, 17, 39, 0.28);
+      background: #fafafa;
+    }
+
+    .fbar-dropdown.is-open {
+      border-color: rgba(13, 17, 39, 0.32);
+      box-shadow: 0 0 0 3px rgba(13, 17, 39, 0.05);
+    }
+
+    .fbar-dropdown svg {
+      flex-shrink: 0;
+      color: #6b7280;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fbar-dropdown.is-open svg {
+      transform: rotate(180deg);
+    }
+
+    /* dropdown panel */
+    .fbar-dropdown-panel {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 180px;
+      background: #fff;
+      border: 1.5px solid rgba(13, 17, 39, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(13, 17, 39, 0.12);
+      padding: 6px;
+      z-index: 200;
+      opacity: 0;
+      transform: translateY(-6px) scale(0.98);
+      transform-origin: top left;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fbar-dropdown.is-open .fbar-dropdown-panel {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .fbar-dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #374151;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+
+    .fbar-dropdown-item:hover {
+      background: rgba(13, 17, 39, 0.05);
+      color: #111827;
+    }
+
+    .fbar-dropdown-item.is-selected {
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    .fbar-dropdown-item.is-selected::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+    }
+
+    /* ── Reset link ── */
+    .fbar-reset {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #6b7280;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0 6px;
+      transition: color 0.18s;
+      white-space: nowrap;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: transparent;
+      transition: color 0.18s, text-decoration-color 0.18s;
+    }
+
+    .fbar-reset:hover {
+      color: #374151;
+      text-decoration-color: rgba(55, 65, 81, 0.4);
+    }
+
+    /* ── Right: showing count ── */
+    .fbar-count {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: auto;
+      flex-shrink: 0;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #374151;
+      white-space: nowrap;
+    }
+
+    .fbar-count-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 26px;
+      height: 22px;
+      padding: 0 6px;
+      border-radius: 5px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .fbar-dropdowns { gap: 7px; }
+      .fbar-dropdown { height: 32px; padding: 0 11px; font-size: 12.5px; }
+      .fbar-count { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .filter-bar { padding: 0 16px; overflow-x: auto; }
+      .filter-bar-inner { min-width: max-content; }
+      .fbar-type-tabs { margin-right: 16px; }
+      .fbar-divider { margin-right: 14px; }
+    }
+
+    /* =============================================
+       CUSTOMER GRID — exact screenshot match
+    ============================================= */
+    .blog-grid-section {
+      padding: clamp(32px, 4vw, 56px) var(--section-pad-h) clamp(24px, 3vw, 40px);
+    }
+
+    .blog-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* ── Card shell — single outer border wrapping everything ── */
+    .blog-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      will-change: transform, box-shadow;
+    }
+
+    /* ── Image: flush top, no border of its own ── */
+    .card-img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #f3f4f6;
+      /* No border, no margin — sits flush inside the card border */
+    }
+
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transform-origin: center top;
+    }
+
+    .card-img-grad { display: none; }
+    .card-img-tag  { display: none; }
+
+    .card-body {
+      padding: 22px 24px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-company {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-company-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .card-badge {
+      display: inline-flex;
+      align-items: center;
+      height: 20px;
+      padding: 0 7px;
+      border-radius: 3px;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .card-badge--localization {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .card-badge--optimize {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .card-desc {
+      font-size: 14.5px;
+      line-height: 22px;
+      color: #374151;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* divider sits between desc and stat — matches the screenshot hairline */
+    .card-divider {
+      height: 1px;
+      background: #e5e7eb;
+      margin: 20px 0 18px;
+      flex-shrink: 0;
+    }
+
+    .card-stat-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .card-stat-left { flex: 1; min-width: 0; }
+
+    /* Big stat number — matches screenshot weight/size */
+    .card-stat-value {
+      font-family: 'Inter', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1;
+      color: #0f172a;
+      letter-spacing: -0.04em;
+    }
+
+    .card-stat-label {
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.5;
+      margin-top: 6px;
+    }
+
+    /* "Read story →" — bold, right-aligned, bottom baseline */
+    .card-read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      white-space: nowrap;
+      flex-shrink: 0;
+      padding-bottom: 2px;
+      position: relative;
+      text-decoration: none;
+    }
+
+    .card-read-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: #0f172a;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .blog-card:hover .card-read-link::after { transform: scaleX(1); }
+
+    .card-read-link .arrow {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .blog-card:hover .card-read-link .arrow { transform: translateX(4px); }
+
+    /* =============================================
+       SHOW MORE BUTTON
+    ============================================= */
+    .show-more-wrap {
+      display: flex;
+      justify-content: center;
+      padding: clamp(28px, 3vw, 48px) var(--section-pad-h) clamp(48px, 5vw, 80px);
+    }
+
+    .show-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 44px;
+      padding: 0 28px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .show-more-btn:hover {
+      border-color: #9ca3af;
+      background: #fafafa;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    @media (max-width: 1024px) {
+      .blog-cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .blog-cards-grid { grid-template-columns: 1fr; gap: 16px; }
+      .card-company-name { font-size: 18px; }
+    }
+
+    /* =============================================
+       OLD — featured card (removed)
+    ============================================= */
+    .blog-featured {
+      padding: clamp(40px, 4vw, 64px) var(--section-pad-h);
+      border-bottom: 1px solid rgba(13, 17, 39, 0.06);
+    }
+
+    .featured-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(13, 17, 39, 0.08);
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(15,23,42,0.04), 0 8px 24px -4px rgba(15,23,42,0.08);
+      transition: box-shadow 0.45s cubic-bezier(0.22,1,0.36,1), transform 0.45s cubic-bezier(0.22,1,0.36,1);
+      will-change: transform, box-shadow;
+    }
+
+    .featured-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 8px rgba(15,23,42,0.06), 0 20px 48px -8px rgba(15,23,42,0.16);
+    }
+
+    .featured-img {
+      position: relative;
+      overflow: hidden;
+      min-height: 440px;
+    }
+
+    .featured-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      position: absolute;
+      inset: 0;
+      transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    .featured-card:hover .featured-img img {
+      transform: scale(1.04);
+    }
+
+    .featured-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 50%, rgba(0,0,0,0.06) 100%);
+      pointer-events: none;
+    }
+
+    .featured-tag {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(13,79,69,0.92);
+      color: #fff;
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      backdrop-filter: blur(6px);
+    }
+
+    .featured-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(32px, 4vw, 60px);
+    }
+
+    .featured-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .featured-category {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .featured-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #d1d5db;
+    }
+
+    .featured-date {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .featured-body h2 {
+      font-family: 'DM Sans', 'Inter', sans-serif;
+      font-size: clamp(22px, 2.2vw, 32px);
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      color: #09090b;
+      margin-bottom: 16px;
+    }
+
+    .featured-body p {
+      font-size: 15.5px;
+      line-height: 1.65;
+      color: #4b5563;
+      margin-bottom: 32px;
+    }
+
+    .featured-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .author-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0d4f45, #12baa0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .author-role {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+
+    .read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 42px;
+      padding: 0 20px;
+      border-radius: 8px;
+      background: #09090b;
+      color: #fff;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: background 0.22s, transform 0.22s cubic-bezier(0.16,1,0.3,1), box-shadow 0.22s;
+      white-space: nowrap;
+    }
+
+    .read-more-btn:hover {
+      background: #1a1a1a;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+
+    .read-more-btn svg {
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .read-more-btn:hover svg {
+      transform: translate(3px, -3px);
+    }
+
+    .read-time {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    /* =============================================
+       MAIN GRID — customer story cards
+    ============================================= */
+    .blog-grid-section {
+      padding: var(--section-pad-v) var(--section-pad-h);
+    }
+
+    .blog-grid-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .blog-grid-header h2 {
+      font-family: 'DM Sans', 'Inter', sans-serif;
+      font-size: clamp(18px, 1.8vw, 24px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #09090b;
+    }
+
+    .showing-count {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .showing-count strong {
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    .blog-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* Individual blog card */
+    .blog-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(0);
+      box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+      transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s cubic-bezier(0.22,1,0.36,1), border-color 0.45s ease;
+      will-change: transform, box-shadow;
+      cursor: pointer;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(15,23,42,0.12);
+      box-shadow: 0 2px 4px rgba(15,23,42,0.04), 0 12px 24px -8px rgba(15,23,42,0.12), 0 30px 60px -20px rgba(15,23,42,0.18);
+    }
+
+    /* Stat card variant — big number card (like Maven 18%, Olympia 10M) */
+    .blog-card--stat .card-img {
+      height: 200px;
+    }
+
+    .card-img {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .card-img img {
+      width: 100%;
+      height: 130%;
+      object-fit: cover;
+      object-position: top;
+      position: absolute;
+      top: -15%;
+      transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    .blog-card:hover .card-img img {
+      transform: scale(1.05) translateY(2%);
+    }
+
+    .card-img-grad {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.22), transparent 60%);
+    }
+
+    .card-img-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Optimize badge */
+    .badge-optimize {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(13,79,69,0.9);
+      color: #fff;
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      backdrop-filter: blur(4px);
+    }
+
+    .card-body {
+      padding: 20px 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Company name */
+    .card-company {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.015em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-company svg {
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      line-height: 20px;
+      color: #4b5563;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* =============================================
+       SHOW MORE BUTTON
+    ============================================= */
+    .show-more-wrap {
+      display: flex;
+      justify-content: center;
+      padding: clamp(24px, 3vw, 40px) var(--section-pad-h) clamp(40px, 4vw, 64px);
+    }
+
+    .show-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      height: 48px;
+      padding: 0 32px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(13,17,39,0.14);
+      background: #fff;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #111827;
+      cursor: pointer;
+      transition: border-color 0.22s, background 0.22s, transform 0.22s cubic-bezier(0.16,1,0.3,1), box-shadow 0.22s;
+    }
+
+    .show-more-btn:hover {
+      border-color: rgba(13,17,39,0.3);
+      background: #fafafa;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    .show-more-btn svg {
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .show-more-btn:hover svg {
+      transform: rotate(180deg);
+    }
+
+    /* =============================================
+       CTA BAND — exact screenshot match
+    ============================================= */
+    .cta-band {
+      background: #fff;
+      border-top: none;
+      padding: clamp(64px, 9vw, 120px) var(--section-pad-h);
+    }
+
+    .cta-band-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .cta-band-left {
+      min-width: 0;
+    }
+
+    .cta-band-left h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(40px, 5.5vw, 68px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      color: #0f172a;
+      margin-bottom: 28px;
+      white-space: nowrap;
+    }
+
+    .cta-band-btns {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Blue primary — no border-radius */
+    .btn-primary-dark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      padding: 0 24px;
+      border-radius: 0;
+      background: var(--blue);
+      color: #fff;
+      font-size: 14.5px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      border: none;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.22s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s;
+    }
+
+    .btn-primary-dark:hover {
+      background: var(--blue-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37,99,235,0.3);
+    }
+
+    /* Grey ghost — no border-radius */
+    .btn-ghost-dark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      padding: 0 24px;
+      border-radius: 0;
+      border: none;
+      background: #f1f5f9;
+      color: #0f172a;
+      font-size: 14.5px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.22s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .btn-ghost-dark:hover {
+      background: #e2e8f0;
+      transform: translateY(-2px);
+    }
+
+    .cta-band-right {
+      min-width: 0;
+      max-width: 560px;
+      justify-self: end;
+    }
+
+    .cta-band-right p {
+      font-size: clamp(17px, 1.6vw, 22px);
+      line-height: 1.6;
+      color: #475569;
+      font-weight: 400;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .cta-band-inner {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        justify-content: start;
+      }
+      .cta-band-left h2 { white-space: normal; }
+      .cta-band-right { justify-self: start; max-width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      .cta-band-btns { flex-direction: column; align-items: stretch; }
+      .btn-primary-dark, .btn-ghost-dark { width: 100%; justify-content: center; }
+    }
+    }
+
+    /* =============================================
+       RESPONSIVE BREAKPOINTS
+    ============================================= */
+    @media (max-width: 1024px) {
+      .blog-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .featured-card {
+        grid-template-columns: 1fr;
+      }
+      .featured-img {
+        min-height: 300px;
+      }
+      .cta-band-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .blog-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .blog-grid-header {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .blog-hero h1 {
+        font-size: clamp(26px, 8vw, 40px);
+      }
+      .blog-filters {
+        gap: 6px;
+      }
+      .filter-tab {
+        height: 32px;
+        padding: 0 12px;
+        font-size: 12px;
+      }
+      .featured-img {
+        min-height: 220px;
+      }
+      .featured-body {
+        padding: 24px 20px;
+      }
+      .featured-body h2 {
+        font-size: 20px;
+      }
+      .cta-band-left h2 {
+        font-size: clamp(28px, 8vw, 40px);
+      }
+      .cta-band-btns {
+        flex-direction: column;
+      }
+      .btn-primary-dark, .btn-ghost-dark {
+        justify-content: center;
+      }
+      .featured-foot {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .blog-cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .showing-count { display: none; }
+    }
+
+    /* =============================================
+       GSAP INIT STATES — hide until animated
+    ============================================= */
+    [data-gsap-fade] { opacity: 0; transform: translateY(28px); }
+    [data-gsap-fade-left] { opacity: 0; transform: translateX(-28px); }
+    [data-gsap-fade-right] { opacity: 0; transform: translateX(28px); }
+    [data-gsap-scale] { opacity: 0; transform: scale(0.95); }
+
+    /* =============================================
+       SKELETON LOADER STATE (JS toggles .loading)
+    ============================================= */
+    .blog-cards-grid.loading .blog-card {
+      pointer-events: none;
+    }
+
+    /* card stagger reveal class */
+    .blog-card { opacity: 0; transform: translateY(32px); }
+
+  
+    /* ── Card stat unit (smaller suffix) ── */
+    .card-stat-unit { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+
+    /* ── Card company name: blog title style ── */
+    .card-company-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* ── Card divider ── */
+    .card-divider {
+      height: 1px;
+      background: #f3f4f6;
+      margin: 16px 0 14px;
+      flex-shrink: 0;
+    }
+
+    /* ── Card stat row ── */
+    .card-stat-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .card-stat-left { flex: 1; min-width: 0; }
+
+    .card-stat-value {
+      font-family: 'Inter', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1;
+      color: #0f172a;
+      letter-spacing: -0.04em;
+    }
+
+    .card-stat-label {
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.5;
+      margin-top: 5px;
+    }
+
+    /* ── Read story link ── */
+    .card-read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      white-space: nowrap;
+      flex-shrink: 0;
+      padding-bottom: 2px;
+      position: relative;
+    }
+
+    .card-read-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 1.5px;
+      background: #0f172a;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .blog-card:hover .card-read-link::after { transform: scaleX(1); }
+
+    .card-read-link .arrow {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .blog-card:hover .card-read-link .arrow { transform: translateX(4px); }
+
+    /* ── No-results state ── */
+    .no-results-msg {
+      display: none;
+      grid-column: 1/-1;
+      padding: 80px 20px;
+      text-align: center;
+      color: #6b7280;
+      font-size: 16px;
+    }
+    .no-results-msg.visible { display: block; }
+    .no-results-msg strong { display: block; font-size: 20px; font-weight: 700; color: #374151; margin-bottom: 8px; }
+  </style>
+</head>
+
+<body>
+  <!-- Header injected by shared.js -->
+
+  <!-- ===================== HERO ===================== -->
+  <section class="blog-hero">
+    <div class="blog-hero-inner">
+      <span class="blog-hero-eyebrow" data-gsap-fade>Insights</span>
+      <h1 data-gsap-fade>Insights &amp; Engineering<br>Intelligence</h1>
+      <p data-gsap-fade>Perspectives on AI-first engineering, cloud modernization, insurance technology, and digital transformation from the Celsior team.</p>
+      <a href="https://celsiortech.com/contact" class="hero-cta-btn" data-gsap-fade>Get started — it's free</a>
+    </div>
+  </section>
+
+  <!-- ===================== FILTER BAR ===================== -->
+  <div class="filter-bar" id="filterBar">
+    <div class="filter-bar-inner">
+
+      <!-- Left: type tabs (mapped to Topic buckets) -->
+      <div class="fbar-type-tabs">
+        <button class="fbar-type-tab is-active" data-topic="all">All posts</button>
+        <button class="fbar-type-tab" data-topic="artificial-intelligence">AI</button>
+        <button class="fbar-type-tab" data-topic="insurance">Insurance</button>
+        <button class="fbar-type-tab" data-topic="banking-financial-services">Banking</button>
+        <button class="fbar-type-tab" data-topic="technology">Technology</button>
+      </div>
+
+      <!-- Divider -->
+      <div class="fbar-divider"></div>
+
+      <!-- Centre: dropdown pills -->
+      <div class="fbar-dropdowns">
+
+        <div class="fbar-dropdown" id="ddIndustry">
+          Industry
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          <div class="fbar-dropdown-panel">
+            <div class="fbar-dropdown-item is-selected" data-value="all">All industries</div>
+<div class="fbar-dropdown-item" data-value="artificial-intelligence">AI & Innovation</div>
+<div class="fbar-dropdown-item" data-value="banking-financial-services">Banking & Finance</div>
+<div class="fbar-dropdown-item" data-value="devops">DevOps</div>
+<div class="fbar-dropdown-item" data-value="insurance">Insurance</div>
+<div class="fbar-dropdown-item" data-value="modernization">Modernization</div>
+<div class="fbar-dropdown-item" data-value="quality-engineering">Quality Engineering</div>
+<div class="fbar-dropdown-item" data-value="site-reliability-engineering">Site Reliability</div>
+<div class="fbar-dropdown-item" data-value="software-development">Software Development</div>
+<div class="fbar-dropdown-item" data-value="technology">Technology</div>
+<div class="fbar-dropdown-item" data-value="test-automation">Test Automation</div>
+          </div>
+        </div>
+
+        <div class="fbar-dropdown" id="ddAuthor">
+          Author
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          <div class="fbar-dropdown-panel">
+            <div class="fbar-dropdown-item is-selected" data-value="all">All authors</div>
+<div class="fbar-dropdown-item" data-value="nitin-sinha">Nitin Sinha</div>
+<div class="fbar-dropdown-item" data-value="shobhit">Shobhit</div>
+<div class="fbar-dropdown-item" data-value="celsior">celsior</div>
+<div class="fbar-dropdown-item" data-value="muskan">muskan</div>
+          </div>
+        </div>
+
+        <div class="fbar-dropdown" id="ddYear">
+          Year
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          <div class="fbar-dropdown-panel">
+            <div class="fbar-dropdown-item is-selected" data-value="all">All years</div>
+<div class="fbar-dropdown-item" data-value="2026">2026</div>
+<div class="fbar-dropdown-item" data-value="2025">2025</div>
+<div class="fbar-dropdown-item" data-value="2024">2024</div>
+          </div>
+        </div>
+
+        <button class="fbar-reset" id="fbarReset">Reset filters</button>
+
+      </div>
+
+      <!-- Right: showing count -->
+      <div class="fbar-count">
+        Showing <span class="fbar-count-badge" id="fbarShowing">36</span> of <span class="fbar-count-badge" id="fbarTotal">36</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== CARD GRID ===================== -->
+  <section class="blog-grid-section">
+    <div class="blog-cards-grid" id="cardGrid">
+
+      <a href="https://celsiortech.com/from-legacy-infrastructure-to-competitive-advantage-a-technology-guide-for-small-insurance-carriers" class="blog-card"
+         data-categories="insurance"
+         data-author="nitin-sinha"
+         data-year="2026"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/04/pexels-mikhail-nilov-7736036.jpg" alt="From Legacy Infrastructure to Competitive Advantage: A Technology Guide for Small Insurance Carriers" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Insurance</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">From Legacy Infrastructure to Competitive Advantage: A Technology Guide for Small Insurance Carriers</span>
+          </div>
+          <p class="card-desc">Most insurtech was built for enterprise carriers. Here&#x27;s the practical guide for small insurance carriers who need modern technology — without the enterprise complexity.</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">8<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Apr 21, 2026</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/breaking-down-silos-bringing-underwriting-claims-and-it-operations-together" class="blog-card"
+         data-categories="banking-financial-services insurance"
+         data-author="nitin-sinha"
+         data-year="2026"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/pexels-artempodrez-5716014-scaled.jpg" alt="A group of four professionals in a modern office meeting, with one man actively presenting to the others while gesturing." loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Banking & Finance</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Breaking Down Silos: Bringing Underwriting, Claims, and IT Operations Together</span>
+          </div>
+          <p class="card-desc">Most insurers run underwriting, claims, and IT in silos. This post explains why that&#x27;s become unsustainable and how a unified platform layer solves it.</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">9<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Apr 16, 2026</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/the-new-standard-for-guidewire-delivery-solving-for-velocity-in-a-continuous-release-world" class="blog-card"
+         data-categories="insurance"
+         data-author="nitin-sinha"
+         data-year="2026"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/04/pexels-divinetechygirl-1181357-scaled.jpg" alt="The New Standard for Guidewire Delivery: Solving for Velocity in a Continuous Release World" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Insurance</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">The New Standard for Guidewire Delivery: Solving for Velocity in a Continuous Release World</span>
+          </div>
+          <p class="card-desc">As Guidewire programs shift to cloud and continuous delivery, traditional staffing models fall short. Explore how AI-driven quality engineering and automation bridge the gap between strategy and execution to ensure long-term velocity and success.</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">8<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Apr 13, 2026</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/servicenow-for-financial-services" class="blog-card"
+         data-categories="banking-financial-services insurance"
+         data-author="nitin-sinha"
+         data-year="2026"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/pexels-kampus-8441864-scaled.jpg" alt="A younger male professional in a blue shirt and tie pointing at a laptop screen while explaining something to two older colleagues in an office setting." loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Banking & Finance</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">ServiceNow: One Platform to Streamline Compliance, Risk, and Service Delivery</span>
+          </div>
+          <p class="card-desc">Discover how ServiceNow helps financial institutions automate compliance, strengthen IT resilience, and unify service delivery. Learn how Celsior&#x27;s implementation approach brings it all together.</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">5<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Apr 10, 2026</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/modernizing-banking-and-unlocking-growth-with-jack-henry" class="blog-card"
+         data-categories="banking-financial-services"
+         data-author="muskan"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_102025_Jack_Henry_Blog_25_Banner-scaled.jpg" alt="Jack henry platform" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Banking & Finance</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Modernizing Banking and Unlocking Growth with Jack Henry </span>
+          </div>
+          <p class="card-desc">Building a modernization path that works for you</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">3<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Oct 29, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/what-you-need-to-know-about-california-sb-53-the-frontier-ai-transparency-act" class="blog-card"
+         data-categories="artificial-intelligence technology"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_102025_Ai_Compliance_Banner-scaled.jpg" alt="California SB 53 law" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">AI & Innovation</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">What you need to know about California SB 53: The Frontier AI Transparency Act</span>
+          </div>
+          <p class="card-desc">Advancing compliance through transparency, safety, and accountability</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">5<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Oct 09, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/the-role-of-quality-engineering-in-testing-generative-ai-applications" class="blog-card"
+         data-categories="artificial-intelligence quality-engineering technology"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/Image-02-scaled.jpg" alt="Generative AI testing" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">AI & Innovation</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">The Role of Quality Engineering in Testing Generative AI Applications</span>
+          </div>
+          <p class="card-desc">Safeguarding trust in AI-driven outcomes</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Sep 23, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/the-triumvirate-of-modernization-ai-data-and-cloud" class="blog-card"
+         data-categories="artificial-intelligence modernization"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/1-02-6-scaled.jpg" alt="AI cloud" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">AI & Innovation</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">The Triumvirate of Modernization: AI, Data, and Cloud</span>
+          </div>
+          <p class="card-desc">Modernizing IT infrastructure with data, AI, and cloud</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">6<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Jul 21, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/the-limitations-of-ai-and-how-hybrid-ai-can-help" class="blog-card"
+         data-categories="artificial-intelligence"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/1-02-7-scaled.jpg" alt="Hybrid AI" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">AI & Innovation</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">The Limitations of AI and How Hybrid AI Can Help</span>
+          </div>
+          <p class="card-desc">Exploring the &#x27;next big thing&#x27; in artificial intelligence</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">6<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Jul 07, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/the-future-of-test-automation-trends-and-predictions" class="blog-card"
+         data-categories="quality-engineering test-automation"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/G_062025_Blog_Test_Automation_Banner-scaled.jpg" alt="test automation" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Quality Engineering</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">The Future of Test Automation: Trends and Predictions</span>
+          </div>
+          <p class="card-desc">Is your test automation strategy ready for what&#x27;s next?</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Jul 01, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/importance-of-site-reliability-engineering-sre-in-software-development" class="blog-card"
+         data-categories="technology"
+         data-author="muskan"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_062025_Blog_SRE_Banner-scaled.jpg" alt="Site Reliability Engineering" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Technology</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Importance of Site Reliability Engineering (SRE) in Software Development</span>
+          </div>
+          <p class="card-desc">Automating operations for scalable systems</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">5<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Jun 24, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/creating-ux-for-enterprise-software-going-beyond-pretty-interfaces" class="blog-card"
+         data-categories="software-development technology"
+         data-author="muskan"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_062025_Blog_UX-for-Enterprise_Banner-scaled.jpg" alt="UX for Enterprise Software" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Software Development</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Creating UX for Enterprise Software: Going Beyond Pretty Interfaces </span>
+          </div>
+          <p class="card-desc">Designing UX that drives enterprise impact</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">5<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Jun 17, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/optimizing-performance-with-application-monitoring-and-site-reliability-engineering" class="blog-card"
+         data-categories="site-reliability-engineering software-development"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/Blog_Image-02-scaled.jpg" alt="Site Reliability Engineering" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Site Reliability</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Optimizing Performance with Application Monitoring and SRE</span>
+          </div>
+          <p class="card-desc">Enhancing performance and system reliability</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Jun 10, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/maximizing-the-value-of-open-source-in-test-automation" class="blog-card"
+         data-categories="quality-engineering test-automation"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2025/06/1-02-2-scaled-1.jpg" alt="Maximizing the Value of Open-source in Test Automation" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Quality Engineering</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Maximizing the Value of Open-source in Test Automation</span>
+          </div>
+          <p class="card-desc">Aligning tools and frameworks for long-term success</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Jun 03, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/strengthening-data-confidence-through-etl-test-automation" class="blog-card"
+         data-categories="test-automation"
+         data-author="muskan"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/1-02-2-scaled.jpg" alt="ETL test automation" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Test Automation</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Strengthening Data Confidence Through ETL Test Automation </span>
+          </div>
+          <p class="card-desc">Streamlined ETL for trusted insights</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · May 27, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/enhancing-ai-governance" class="blog-card"
+         data-categories="artificial-intelligence"
+         data-author="muskan"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/1-02-1-scaled.jpg" alt="Enhancing AI Governance" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">AI & Innovation</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Enhancing AI Governance</span>
+          </div>
+          <p class="card-desc">Guiding AI toward trusted outcomes</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">11<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · May 22, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/how-to-maximize-roi-through-smarter-mobile-test-automation" class="blog-card"
+         data-categories="test-automation"
+         data-author="muskan"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2025/05/1-02-scaled-1.jpg" alt="How to Maximize ROI Through Smarter Mobile Test Automation " loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Test Automation</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">How to Maximize ROI Through Smarter Mobile Test Automation </span>
+          </div>
+          <p class="card-desc">Scaling mobile testing with smart automation</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · May 20, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/explainable-ai-a-key-to-the-practical-success-of-ai-and-ml" class="blog-card"
+         data-categories="artificial-intelligence"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_042025_Blog_AI_ML_web_Page_Banner-scaled.png" alt="Explainable AI" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">AI & Innovation</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Explainable AI – A Key to the Practical Success of AI and ML</span>
+          </div>
+          <p class="card-desc">Building trust with explainable AI</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · May 08, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/how-ai-powered-qe-transforms-devops-and-decision-making" class="blog-card"
+         data-categories="artificial-intelligence quality-engineering"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/Q2-02-scaled.jpg" alt="How AI-Powered QE Transforms DevOps and Decision-Making" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">AI & Innovation</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">How AI-Powered QE Transforms DevOps and Decision-Making</span>
+          </div>
+          <p class="card-desc">Enabling smarter testing and faster releases</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · May 06, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/transitioning-from-quality-assurance-to-quality-engineering" class="blog-card"
+         data-categories="quality-engineering"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/QE_series-02-scaled.jpg" alt="An engineer working on a quality engineering strategy" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Quality Engineering</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Transitioning from Quality Assurance to Quality Engineering</span>
+          </div>
+          <p class="card-desc">Driving digital transformation and improving customer experience</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">3<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Apr 29, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/digital-transformation-with-togaf-10" class="blog-card"
+         data-categories="modernization"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/Image-resize-02-3-scaled.jpg" alt="Digital Transformation with TOGAF 10" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Modernization</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Digital Transformation with TOGAF 10</span>
+          </div>
+          <p class="card-desc">TOGAF 10 as a pivotal guide for successful digital transformation</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Apr 02, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/technology-trends-2025-trend-9-sustainability-becomes-a-priority" class="blog-card"
+         data-categories="technology"
+         data-author="muskan"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_012025_Tech-trends-2025-imagery_Tech-sustainability-web-2-scaled.png" alt="Technology Trends 2025 | Trend 9 - Sustainability Becomes a Priority" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Technology</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Technology Trends 2025 | Trend 9 - Sustainability Becomes a Priority</span>
+          </div>
+          <p class="card-desc">Technology Trends 2025 | Trend 9</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">3<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Mar 25, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/technology-trends-2025-trend-8-improved-focus-on-cyber-resilience" class="blog-card"
+         data-categories="technology"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_012025_Tech-trends-2025-imagery_Improved-focus-on-cyber-resilience-web-scaled.png" alt="Technology Trends 2025 | Trend 8 - Improved Focus on Cyber Resilience" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Technology</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Technology Trends 2025 | Trend 8 - Improved Focus on Cyber Resilience</span>
+          </div>
+          <p class="card-desc">Technology Trends 2025 | Trend 8</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">3<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Mar 18, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/technology-trends-2025-trend-7-the-emergence-of-smart-environments-powered-by-iot-devices" class="blog-card"
+         data-categories="technology"
+         data-author="muskan"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_012025_Tech-trends-2025-imagery_IoT-devices-and-smart-environments-web-2-scaled.png" alt="Technology Trends 2025 | Trend 7 - The Emergence of Smart Environments Powered by IoT Devices " loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Technology</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Technology Trends 2025 | Trend 7 - The Emergence of Smart Environments Powered by IoT Devices </span>
+          </div>
+          <p class="card-desc">Technology Trends 2025 | Trend 7</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">3<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Mar 11, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/technology-trends-2025-trend-6-edge-computing-becomes-more-prominent-powered-by-5g" class="blog-card"
+         data-categories="technology"
+         data-author="muskan"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_012025_Tech-trends-2025-imagery_Edge-computing-web-1-scaled.png" alt="Technology Trends 2025 | Trend 6 - Edge Computing Becomes More Prominent, Powered by 5G" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Technology</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Technology Trends 2025 | Trend 6 - Edge Computing Becomes More Prominent, Powered by 5G</span>
+          </div>
+          <p class="card-desc">Technology Trends 2025 | Trend 6</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">3<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Mar 04, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/is-serverless-architecture-really-the-future-of-enterprise-it" class="blog-card"
+         data-categories="software-development"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/Digital-Solutions-Blogs-Serverless-Architechture-scaled.jpg" alt="Serverless Architecture" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Software Development</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Is Serverless Architecture Really the Future of Enterprise IT? </span>
+          </div>
+          <p class="card-desc">Boosting efficiency and lowering costs with serverless architecture</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">5<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Mar 03, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/accelerate-test-automation-through-auto-healing-using-power-of-ai" class="blog-card"
+         data-categories="artificial-intelligence test-automation"
+         data-author="celsior"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_022025_Blog-Accelerate-Test-Automation_Blog-scaled.png" alt="Accelerate Test Automation Through Auto-healing Using Power of AI" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">AI & Innovation</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Accelerate Test Automation Through Auto-healing Using Power of AI</span>
+          </div>
+          <p class="card-desc">Accelerate Test Automation Through Auto-healing Using Power of AI</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">3<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Feb 25, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/technology-trends-2025-trend-5-the-rise-of-no-copy-data-architectures" class="blog-card"
+         data-categories="technology"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_012025_Tech-trends-2025-imagery_Decentralized-and-composable-architectures-web-scaled.png" alt="Technology Trends 2025 | Trend 5 – The Rise of No-copy Data Architectures" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Technology</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Technology Trends 2025 | Trend 5 – The Rise of No-copy Data Architectures</span>
+          </div>
+          <p class="card-desc">Technology Trends 2025 | Trend 5</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">3<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Feb 24, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/technology-trends-2025-trend-4-industry-specific-clouds-and-verticalized-solutions" class="blog-card"
+         data-categories="technology"
+         data-author="muskan"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_012025_Tech-trends-2025-imagery_Industry-specific-clouds-web-2-scaled.png" alt="Technology Trends 2025 | Trend 4 – Industry-specific Clouds and Verticalized Solutions " loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Technology</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Technology Trends 2025 | Trend 4 – Industry-specific Clouds and Verticalized Solutions </span>
+          </div>
+          <p class="card-desc">Technology Trends 2025 | Trend 4</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Feb 17, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/technology-trends-2025-trend-3-the-rise-of-the-ai-augmented-workforce-and-hyperautomation" class="blog-card"
+         data-categories="technology"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_012025_Tech-trends-2025-imagery_AI-augmented-workforce-web-scaled.png" alt="Technology Trends 2025 | Trend 3 - The Rise of the AI-augmented Workforce and Hyperautomation" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Technology</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Technology Trends 2025 | Trend 3 - The Rise of the AI-augmented Workforce and Hyperautomation</span>
+          </div>
+          <p class="card-desc">Technology Trends 2025 | Trend 3</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Feb 11, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/technology-trends-2025-trend-2-the-emergence-of-autonomous-and-self-healing-systems" class="blog-card"
+         data-categories="technology"
+         data-author="muskan"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_012025_Tech-trends-2025-imagery_Autonomous-systems-web-1-scaled.png" alt="Technology Trends 2025 | Trend 2 - The Emergence of Autonomous and Self-healing Systems  " loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Technology</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Technology Trends 2025 | Trend 2 - The Emergence of Autonomous and Self-healing Systems  </span>
+          </div>
+          <p class="card-desc">Technology Trends 2025 | Trend 2</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Feb 04, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/technology-trends-2025-trend-1-artificial-intelligence-will-become-mainstream-and-a-strategic-enabler" class="blog-card"
+         data-categories="technology"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_012025_Tech-trends-2025-imagery_AI-web-scaled.png" alt="Technology Trends 2025 | Trend 1 - Artificial Intelligence Will Become Mainstream and a Strategic Enabler" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Technology</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Technology Trends 2025 | Trend 1 - Artificial Intelligence Will Become Mainstream and a Strategic Enabler</span>
+          </div>
+          <p class="card-desc">Technology Trends 2025 | Trend 1</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Jan 28, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/9-technology-trends-that-will-reshape-the-world-in-2025" class="blog-card"
+         data-categories="technology"
+         data-author="shobhit"
+         data-year="2025"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_012025_Tech-trends-2025-imagery_Main-image-web-scaled.png" alt="9 Technology Trends That Will Reshape the World in 2025" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Technology</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">9 Technology Trends That Will Reshape the World in 2025</span>
+          </div>
+          <p class="card-desc">Top Technology Trends to Watch Out for in 2025</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">5<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Jan 21, 2025</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/4-reasons-why-your-devops-program-may-be-failing" class="blog-card"
+         data-categories="devops software-development"
+         data-author="celsior"
+         data-year="2024"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/C_102024_DevOps_Blog_YS_Page_Banner-scaled.png" alt="Four Reasons Why Your DevOps Program May Be Failing" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">DevOps</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Four Reasons Why Your DevOps Program May Be Failing</span>
+          </div>
+          <p class="card-desc">The popularity of DevOps is driven by the ability to enable leaner and agile processes with high-quality releases and faster time-to-market.</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Oct 29, 2024</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/bots-as-the-future-digital-workforce-a-sector-specific-outlook" class="blog-card"
+         data-categories="technology"
+         data-author="celsior"
+         data-year="2024"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/PCI_082024_YS_Blog-Bots-future-workforce.jpg" alt="Bots as the Future Digital Workforce" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Technology</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Bots as the Future Digital Workforce</span>
+          </div>
+          <p class="card-desc">How are bots revolutionizing digital workflows and setting new benchmarks for operational excellence?</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">4<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Jul 16, 2024</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <a href="https://celsiortech.com/digital-elevation-the-new-frontier-in-transforming-insurance-customer-experiences" class="blog-card"
+         data-categories="banking-financial-services insurance"
+         data-author="celsior"
+         data-year="2024"
+         target="_blank" rel="noopener">
+        <div class="card-img">
+          <img src="https://celsiortech.com/wp-content/uploads/2026/03/PCI_082024_YS_Blog-Insurance-client-experience.jpg" alt="Digital Elevation: The New Frontier in Transforming Insurance Client Experiences" loading="lazy" />
+          <div class="card-img-grad"></div>
+          <div class="card-img-tag">Banking & Finance</div>
+        </div>
+        <div class="card-body">
+          <div class="card-company">
+            <span class="card-company-name">Digital Elevation: The New Frontier in Transforming Insurance Client Experiences</span>
+          </div>
+          <p class="card-desc">How digital elevation can help embrace client experience?</p>
+          <div class="card-divider"></div>
+          <div class="card-stat-row">
+            <div class="card-stat-left">
+              <div class="card-stat-value">3<span class="card-stat-unit"> min</span></div>
+              <div class="card-stat-label">read · Jul 16, 2024</div>
+            </div>
+            <span class="card-read-link">Read story <span class="arrow">→</span></span>
+          </div>
+        </div>
+      </a>
+      <div class="no-results-msg" id="noResultsMsg">
+        <strong>No posts found</strong>
+        Try adjusting your filters or selecting a different topic.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SHOW MORE ===================== -->
+  <div class="show-more-wrap" id="showMoreWrap">
+    <button class="show-more-btn" id="showMoreBtn" aria-label="Load more posts">
+      Show more
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+  </div>
+
+  <!-- ===================== CTA BAND ===================== -->
+  <section class="cta-band">
+    <div class="cta-band-inner">
+      <div class="cta-band-left" data-gsap-fade-left>
+        <h2>Get started<br>for free</h2>
+        <div class="cta-band-btns">
+          <a href="https://celsiortech.com/contact" class="btn-primary-dark">Get started — it's free</a>
+          <a href="https://celsiortech.com" class="btn-ghost-dark">Watch demo</a>
+        </div>
+      </div>
+      <div class="cta-band-right" data-gsap-fade-right>
+        <p>Celsior partners with regulated-industry enterprises to modernize technology, accelerate delivery, and adopt AI with confidence. Read our insights — then let's talk about yours.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer injected by shared.js -->
+  <script src="shared.js" defer></script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    // =====================================================
+    // STATE
+    // =====================================================
+    const state = { topic: 'all', industry: 'all', author: 'all', year: 'all' };
+
+    const CARDS_PER_PAGE = 9;
+    let page = 1;
+    let visibleCards = [];
+
+    const allCards = Array.from(document.querySelectorAll('.blog-card'));
+    document.getElementById('fbarTotal').textContent = allCards.length;
+
+    // =====================================================
+    // FILTER
+    // =====================================================
+    function matchCard(card) {
+      const cats = (card.dataset.categories || '').split(' ');
+      const author = card.dataset.author || '';
+      const year = card.dataset.year || '';
+
+      if (state.topic !== 'all' && !cats.includes(state.topic)) return false;
+      if (state.industry !== 'all' && !cats.includes(state.industry)) return false;
+      if (state.author !== 'all' && author !== state.author) return false;
+      if (state.year !== 'all' && year !== state.year) return false;
+      return true;
+    }
+
+    function applyFilters() {
+      visibleCards = allCards.filter(matchCard);
+      page = 1;
+      renderPage();
+    }
+
+    function renderPage() {
+      const shown = visibleCards.slice(0, page * CARDS_PER_PAGE);
+      const shownSet = new Set(shown);
+
+      allCards.forEach(c => { c.style.display = shownSet.has(c) ? '' : 'none'; });
+
+      document.getElementById('noResultsMsg').classList.toggle('visible', visibleCards.length === 0);
+      document.getElementById('fbarShowing').textContent = shown.length;
+
+      const hasMore = visibleCards.length > page * CARDS_PER_PAGE;
+      document.getElementById('showMoreWrap').style.display = hasMore ? '' : 'none';
+    }
+
+    // =====================================================
+    // TOPIC TABS
+    // =====================================================
+    document.querySelectorAll('.fbar-type-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.fbar-type-tab').forEach(t => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        state.topic = tab.dataset.topic;
+        if (window.gsap) gsap.fromTo(tab, { scale: 0.94 }, { scale: 1, duration: 0.45, ease: 'elastic.out(1, 0.5)' });
+        applyFilters();
+      });
+    });
+
+    // =====================================================
+    // DROPDOWNS
+    // =====================================================
+    const dropdowns = document.querySelectorAll('.fbar-dropdown');
+
+    dropdowns.forEach(dd => {
+      dd.addEventListener('click', e => {
+        e.stopPropagation();
+        const isOpen = dd.classList.contains('is-open');
+        dropdowns.forEach(d => d.classList.remove('is-open'));
+        if (!isOpen) dd.classList.add('is-open');
+      });
+
+      dd.querySelectorAll('.fbar-dropdown-item').forEach(item => {
+        item.addEventListener('click', e => {
+          e.stopPropagation();
+          dd.querySelectorAll('.fbar-dropdown-item').forEach(i => i.classList.remove('is-selected'));
+          item.classList.add('is-selected');
+
+          const val = item.dataset.value;
+          const label = item.textContent.trim();
+          const defaults = { ddIndustry: 'Industry', ddAuthor: 'Author', ddYear: 'Year' };
+          const textNode = Array.from(dd.childNodes).find(n => n.nodeType === 3);
+          if (textNode) textNode.textContent = (val === 'all') ? defaults[dd.id] + ' ' : label + ' ';
+
+          if (dd.id === 'ddIndustry') state.industry = val;
+          if (dd.id === 'ddAuthor') state.author = val;
+          if (dd.id === 'ddYear') state.year = val;
+
+          dd.classList.remove('is-open');
+          applyFilters();
+        });
+      });
+    });
+
+    document.addEventListener('click', () => dropdowns.forEach(d => d.classList.remove('is-open')));
+
+    // =====================================================
+    // RESET
+    // =====================================================
+    function resetDropdown(id, label) {
+      const dd = document.getElementById(id);
+      if (!dd) return;
+      dd.querySelectorAll('.fbar-dropdown-item').forEach((i, idx) => i.classList.toggle('is-selected', idx === 0));
+      const textNode = Array.from(dd.childNodes).find(n => n.nodeType === 3);
+      if (textNode) textNode.textContent = label + ' ';
+    }
+
+    document.getElementById('fbarReset').addEventListener('click', () => {
+      state.topic = 'all'; state.industry = 'all'; state.author = 'all'; state.year = 'all';
+      document.querySelectorAll('.fbar-type-tab').forEach((t, i) => t.classList.toggle('is-active', i === 0));
+      resetDropdown('ddIndustry', 'Industry');
+      resetDropdown('ddAuthor', 'Author');
+      resetDropdown('ddYear', 'Year');
+      applyFilters();
+    });
+
+    // =====================================================
+    // SHOW MORE
+    // =====================================================
+    document.getElementById('showMoreBtn').addEventListener('click', () => {
+      page++;
+      renderPage();
+      if (window.gsap) {
+        const newCards = visibleCards.slice((page-1)*CARDS_PER_PAGE, page*CARDS_PER_PAGE);
+        newCards.forEach((card, i) => {
+          gsap.fromTo(card, { opacity:0, y:36 }, { opacity:1, y:0, duration:0.75, ease:'expo.out', delay:i*0.08 });
+        });
+      }
+    });
+
+    // =====================================================
+    // STICKY SHADOW
+    // =====================================================
+    const filterBar = document.getElementById('filterBar');
+    new IntersectionObserver(([e]) => filterBar.classList.toggle('is-stuck', e.intersectionRatio < 1), { threshold:[1] }).observe(filterBar);
+
+    // =====================================================
+    // GSAP
+    // =====================================================
+    (function() {
+      if (!window.gsap || !window.ScrollTrigger) return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.utils.toArray('[data-gsap-fade]').forEach((el, i) => {
+        gsap.fromTo(el, { opacity:0, y:24 }, {
+          opacity:1, y:0, duration:0.85, ease:'expo.out', delay:i*0.1,
+          scrollTrigger: { trigger:el, start:'top 90%', once:true }
+        });
+      });
+
+      gsap.utils.toArray('[data-gsap-fade-left]').forEach(el => {
+        gsap.fromTo(el, { opacity:0, x:-32 }, {
+          opacity:1, x:0, duration:1, ease:'expo.out',
+          scrollTrigger: { trigger:el, start:'top 82%', once:true }
+        });
+      });
+      gsap.utils.toArray('[data-gsap-fade-right]').forEach(el => {
+        gsap.fromTo(el, { opacity:0, x:32 }, {
+          opacity:1, x:0, duration:1, ease:'expo.out', delay:0.15,
+          scrollTrigger: { trigger:el, start:'top 82%', once:true }
+        });
+      });
+
+      function attachCardHover(card) {
+        const img = card.querySelector('.card-img img');
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, { y:-6, boxShadow:'0 2px 4px rgba(15,23,42,0.04), 0 16px 32px -8px rgba(15,23,42,0.14)', duration:0.45, ease:'expo.out' });
+          if (img) gsap.to(img, { scale:1.05, duration:0.7, ease:'expo.out', transformOrigin:'center top' });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, { y:0, boxShadow:'0 1px 2px rgba(15,23,42,0.04)', duration:0.55, ease:'expo.out' });
+          if (img) gsap.to(img, { scale:1, duration:0.7, ease:'expo.out' });
+        });
+      }
+
+      gsap.utils.toArray('.blog-card').forEach((card, i) => {
+        gsap.fromTo(card, { opacity:0, y:36 }, {
+          opacity:1, y:0, duration:0.8, ease:'expo.out',
+          delay:(i % 3)*0.1,
+          scrollTrigger: { trigger:card, start:'top 90%', once:true }
+        });
+        attachCardHover(card);
+      });
+
+      gsap.fromTo('.show-more-btn', { opacity:0, y:14 }, {
+        opacity:1, y:0, duration:0.65, ease:'expo.out',
+        scrollTrigger: { trigger:'.show-more-wrap', start:'top 92%', once:true }
+      });
+
+      document.querySelectorAll('.hero-cta-btn, .btn-primary-dark, .btn-ghost-dark').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+          const r = btn.getBoundingClientRect();
+          gsap.to(btn, { x:(e.clientX-r.left-r.width/2)*0.25, y:(e.clientY-r.top-r.height/2)*0.25, duration:0.3, ease:'power2.out' });
+        });
+        btn.addEventListener('mouseleave', () => gsap.to(btn, { x:0, y:0, duration:0.6, ease:'elastic.out(1, 0.5)' }));
+      });
+
+      document.querySelectorAll('.fbar-type-tab').forEach(tab => {
+        tab.addEventListener('click', () => gsap.fromTo(tab, { scale:0.93 }, { scale:1, duration:0.5, ease:'elastic.out(1, 0.5)' }));
+      });
+
+    })();
+
+    // Initial render
+    applyFilters();
+  </script>
+</body>
+</html>
